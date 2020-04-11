@@ -1,0 +1,40 @@
+<%- include("partials/header")%>
+<div style="margin-left :10% ;margin-right: 10%">
+    <div class="row justify-content-between" >
+        <div class="col-md-5 col-sm-12" style=" margin-top: 10%;" align="center">
+            <div class="jumbotron"  >
+                
+            </div>
+        </div> 
+        <div class="col-md-2 col-sm-0" style=" margin-top: 10%;" align="center">
+
+        </div> 
+        <div class="col-md-5 col-sm-12" style=" margin-top: 10%;" >
+            <div class="jumbotron" >
+                <h1 style="text-align: center;">Sign up</h1>
+                    <form action="/index" method="POST">
+                        <div class="form-group">
+                            <label for="name" style="text-align: left;" >E-mail Address</label>
+                            <input type="email" class="form-control" name="mail">
+                        </div>
+                        <div class="form-group">
+                            <label for="name" style="text-align: left;">Username</label>
+                            <input type="text" class="form-control" name="username">
+                        </div>
+                        <div class="form-group">
+                            <label for="name" style="text-align: left;">Password</label>
+                            <input type="password" class="form-control" name="password">
+                        </div>
+                        <div class="form-group">
+                            <label for="name" style="text-align: left;">Confirm password</label>
+                            <input type="password" class="form-control" name="confirm-password">
+                        </div>
+                        
+                        <br><br>
+                            <button type="submit" class="btn btn-primary">Sign up</button>
+                    </form>
+            </div>
+        </div>
+    </div>
+</div> 
+<%- include("partials/footer")%>

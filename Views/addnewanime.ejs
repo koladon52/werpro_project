@@ -1,0 +1,21 @@
+<%- include("partials/header")%>
+<div class="container" style="width: 35%;margin: 25px auto;">
+    <h1 style="text-align: center;">Create a new anime</h1>
+        <form action="/index" method="POST">
+            <div class="form-group">
+                <label for="name">Anime name</label>
+                <input type="text" class="form-control" name="name" placeholder="Name of anime">
+            </div>
+            <div class="form-group">
+                <label for="exampleURL">Image URL</label>
+                <input type="text" class="form-control" name="imgurl" placeholder="URL Image">
+            </div>
+            <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+            </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+<%- include("partials/footer")%>

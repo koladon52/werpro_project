@@ -1,0 +1,19 @@
+{
+  "name": "project_web",
+  "version": "1.0.0",
+  "main": "test.js",
+  "dependencies": {
+    "bootstrap": "^4.4.1",
+    "ejs": "^3.0.2",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.7",
+    "nodemon": "^2.0.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

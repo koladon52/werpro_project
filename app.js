@@ -3,8 +3,10 @@ const path = require("path");
 const bodyparser =  require("body-parser");
 const app = express();
 const mongoose = require("mongoose");
+var bodyParser = require('body-parser');
+var urlencodedParser = bodyParser.urlencoded({extended:false});
 
-// mongoose.connect('mongodb://localhost:27017/myanime', {useNewUrlParser: true});
+mongoose.connect('mongodb://localhost:27017/myanime', {useNewUrlParser: true});
 app.set("view engine","ejs");
 app.use(bodyparser.urlencoded({extended : true}));
 app.use(express.static("public"));
@@ -108,6 +110,9 @@ app.get("/register", function(req, res){
 //         }
 //     })
 // })
+
+
+
 
 app.listen(3000, function(res,req){
     console.log("MY COLLECTION")

@@ -3,7 +3,7 @@ const express = require("express"),
       bodyParser =  require("body-parser"),
       mongoose = require("mongoose"),
       passport = require('passport'),
-      passportlocal = require('passport-local')
+      passportlocal = require('passport-local');
       passportlocalMongoose = require('passport-local-mongoose')
       User = require('./models/user') 
       ;
@@ -53,6 +53,14 @@ app.get("/Liked",isloggedIn, function(req, res){
     res.render("Liked");
 })
 
+app.get("/profile",function(req, res){
+    res.render("Autherization/profile");
+})
+
+app.get("/profile/editprofile",function(req, res){
+    res.render("Autherization/editprofile");
+})
+
 // ---------Authen--------------
 
 app.get('/login', function(req, res){
@@ -61,12 +69,9 @@ app.get('/login', function(req, res){
 
 app.post('/login', passport.authenticate('local',{
     successRedirect: '/',
-    failureRedirect: 'Autherization/login'
+    failureRedirect: '/login'
 }),function(req, res){
-
 });
-
-
 
 function isloggedIn(req, res, next){
     if(req.isAuthenticated()){
@@ -80,7 +85,7 @@ app.get('/signup', function(req, res){
 });
 
 app.post('/signup', function(req, res){
-    User.register(new User({username: req.body.username, email:req.body.email, type:req.body.Type}), req.body.password, function(err, user){
+    User.register(new User({username: req.body.username, email: req.body.email, type: req.body.Type}), req.body.password, function(err, user){
         if(err){
             console.log(err);
             return res.render('Autherization/signup');
@@ -97,5 +102,5 @@ app.get('/logout',isloggedIn ,function(req, res){
 });
 
 app.listen(3000, function(res,req){
-    console.log("MY COLLECTION")
+    console.log("SERVER STARTED")
 })

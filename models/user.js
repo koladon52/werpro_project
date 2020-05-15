@@ -13,14 +13,14 @@ UserSchema.plugin(passportlocalMongoose);
 
 module.exports = mongoose.model('User', UserSchema);
 
-module.exports.getUserById=function(id,callback){
-    User.findById(id,callback);
-}
+// module.exports.getUserById=function(id,callback){
+//     User.findById(id,callback);
+// }
 
-module.exports.getUserByName=function(id,callback){
-    var query = {
-        username : username,
-        type : Type
-    };
-    User.findOne(query,callback);
-}
+// module.exports.getUserByName=function(id,callback){
+//     var query = {
+//         username : username,
+//         type : Type
+//     };
+//     User.findOne(query,callback);
+// }

@@ -1,4 +1,4 @@
-<%- include("partials/header")%>
+<%- include("../partials/header")%>
 <div style="margin-left :10% ;margin-right: 10%">
     <div class="row justify-content-between" >
         <div class="col-md-5 col-sm-12" style=" margin-top: 10%;" align="center">
@@ -7,33 +7,44 @@
             </div>
         </div>   
         <div class="col-md-2 col-sm-0" style=" margin-top: 10%;" align="center">
-
         </div> 
-
         <div class="col-md-5 col-sm-12" style="margin-top: 10%; " align="center">
             <div class="jumbotron"  >
                 <h1 style="text-align: center;">Login</h1>
-                    <form action="/index" method="POST">
+                    <form action="/login" method="POST">
                         <div style="text-align: left;" class="form-group">
                             <label for="name">Username</label>
-                            <input type="text" class="form-control" name="username" id="name">
+                            <input type="text" class="form-control" name="username" >
                         </div>
                         <div style="text-align: left;" class="form-group">
                             <label for="password">Password</label>
-                            <input type="password" class="form-control" name="password" id="pass">
+                            <input type="password" class="form-control" name="password" >
                         </div>
+                        <div>
+                            <h3>Login Type</h3>
+                            <label>
+                              <input type="checkbox" class="radio" value="operator" name="Type" />Operator</label>
+                            <label>
+                              <input type="checkbox" class="radio" value="worker" name="Type" />Worker</label>
+                          </div>
+                          <script>
+                            $(document).ready(function(){
+                                $('input:checkbox').click(function() {
+                                    $('input:checkbox').not(this).prop('checked', false);
+                                });
+                            });
+                            </script>
+
                         <div align="left">
                             <button  type="submit" class="btn btn-primary">Login</button> 
                         </div>
                         <br>
                         <div align="left">
-                            <a  href="/register" class="btn btn-primary">Sign up?</a> 
+                            <a  href="/signup" class="btn btn-primary">Sign up?</a> 
                         </div>
-                                    
                     </form>
             </div>
         </div>     
     </div>    
 </div>
-<%- include("partials/footer")%>
-
+<%- include("../partials/footer")%>

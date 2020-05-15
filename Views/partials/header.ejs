@@ -5,6 +5,7 @@
         <title>MY ANIME</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <link rel="stylesheet" href="/app.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     </head>
@@ -13,33 +14,27 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand" href="/app.js">
+        <a class="navbar-brand" href="/">
     <img href="/" src="" width="30" height="30" class="d-inline-block align-top" alt="">
     ชื่อเว็บ
   </a>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03" >
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item active">
-              <a class="nav-link" href="/">หน้าแรก <span class="sr-only">(current)</span></a>
-            </li>
             <li class="nav-item">
               <a class="nav-link" href="/Resume">ฝากประวัติ</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/Find_a_job">หางาน</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/History">ประวัติของฉัน</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/Liked">งานที่สนใจ</a>
-            </li>
-           
+
           </ul>
-          <form class="form-inline my-2 my-lg-0" >
-            <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" >
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
+          <form class="form-inline my-2 my-lg-0" > 
+          <% if(!currentUser){ %>
             <a href="/login" class="btn btn-outline-success my-2 my-sm-0" type="submit">Sign in</a>
+          <% } else { %>
+             Welcome <%= currentUser.username %> 
+             <a href='/logout'>Log out</a>
+          <% } %>
           </form>
           
         </div>

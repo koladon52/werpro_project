@@ -8,9 +8,15 @@
     "ejs": "^3.0.2",
     "express": "^4.17.1",
     "express-fileupload": "^1.1.7-alpha.3",
-    "mongoose": "^5.9.7",
+    "express-session": "^1.17.1",
+    "mongoose": "^5.9.14",
     "nodemon": "^2.0.3",
-    "req-flash": "0.0.3"
+    "passport": "^0.4.1",
+    "passport-http": "^0.3.0",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^6.0.1",
+    "req-flash": "0.0.3",
+    "session": "^0.1.0"
   },
   "devDependencies": {},
   "scripts": {

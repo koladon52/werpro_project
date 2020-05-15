@@ -1,4 +1,4 @@
-<%- include("partials/header")%>
+<%- include("../partials/header")%>
 <div style="margin-left :10% ;margin-right: 10%">
     <div class="row justify-content-between" >
         <div class="col-md-5 col-sm-12" style=" margin-top: 10%;" align="center">
@@ -12,10 +12,10 @@
         <div class="col-md-5 col-sm-12" style=" margin-top: 10%;" >
             <div class="jumbotron" >
                 <h1 style="text-align: center;">Sign up</h1>
-                    <form action="/index" method="POST">
+                    <form action="/signup" method="POST">
                         <div class="form-group">
                             <label for="name" style="text-align: left;" >E-mail Address</label>
-                            <input type="email" class="form-control" name="mail">
+                            <input type="email" class="form-control" name="email">
                         </div>
                         <div class="form-group">
                             <label for="name" style="text-align: left;">Username</label>
@@ -25,11 +25,20 @@
                             <label for="name" style="text-align: left;">Password</label>
                             <input type="password" class="form-control" name="password">
                         </div>
-                        <div class="form-group">
-                            <label for="name" style="text-align: left;">Confirm password</label>
-                            <input type="password" class="form-control" name="confirm-password">
-                        </div>
-                        
+                        <div>
+                            <h3>Please select user type</h3>
+                            <label>
+                              <input type="checkbox" class="radio" value="operator" name="Type" />Operator</label>
+                            <label>
+                              <input type="checkbox" class="radio" value="worker" name="Type" />Worker</label>
+                          </div>
+                          <script>
+                            $(document).ready(function(){
+                                $('input:checkbox').click(function() {
+                                    $('input:checkbox').not(this).prop('checked', false);
+                                });
+                            });
+                            </script>
                         <br><br>
                             <button type="submit" class="btn btn-primary">Sign up</button>
                     </form>
@@ -37,4 +46,4 @@
         </div>
     </div>
 </div> 
-<%- include("partials/footer")%>
+<%- include("../partials/footer")%>

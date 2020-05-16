@@ -1,5 +1,66 @@
 <%- include("../partials/header")%>
-
-
-
+<div class="container">
+    <div class="jumbotron">
+    <div style="margin-left :10% ;margin-right: 10%">
+    <div class="form">
+        <h1 style="text-align: center;"> job appiction form</h1>
+        <div>
+            <form style="text-align: left;">
+                    <div class="form-row">
+                        <div class="col">
+                            <label for="inputFirstname">ชื่อจริง</label>
+                            <input type="text" class="form-control" placeholder="First name" required>
+                        </div>
+                        <div lass="col">
+                            <label for="inputLastname">นามสกุล</label>
+                            <input type="text" class="form-control" placeholder="Last name" required>
+                        </div>
+                    </div><br>
+                    <div class="form-select">
+                    <label for="selectTypejob">ประเภทงานที่ต้องการสมัคร</label>
+                        <select class="form-control" required>
+                            <option>ประเภทงานที่ต้องการสมัคร</option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                        </select><br>
+                    <label for="selectEmployment">ลักษณะการว่าจ้าง</label>
+                        <select class="form-control" required>
+                            <option>ลักษณะการว่าจ้าง</option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                        </select>
+                    </div><br>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-5">
+                            <label for="inputDate">วันที่สามารถเริ่มงานได้</label><br>
+                            <input type="date" id="date" name="date" required>
+                        </div>
+                        <div class="col-md-6 mb-5">
+                            <label for="inputTime">เวลาที่สามารถทำงานได้</label><br>
+                            <input type="time" id="time" name="time" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputAbout">ข้อมูลเพิ่มเติมเกี่ยวกับผู้สมัครงาน</label>
+                        <input type="text" class="form-control" id="About" placeholder="พูดได้กี่ภาษา, พิมพ์ได้กี่คำต่อนาที เป็นต้น">
+                    </div>
+                    <div class="form-group">
+                        <label for="udloadRerume">อัพโหลดเรซูเม่</label>
+                        <input type="file" class="form-control-file" id="uploadRerume">
+                    </div>       
+            </form>
+        </div>
+        <div class="button">
+            <button type="submit" class="btn btn-primary mb-2">SUBMIT</button>
+        </div>
+    </div>
+    </div>
+    </div>
+</div>
 <%- include("../partials/footer")%>

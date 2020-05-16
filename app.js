@@ -37,10 +37,6 @@ app.get("/", function(req, res){
     res.render("landing");
 })
 
-app.get("/Resume",isloggedIn, function(req, res){
-    res.render("Resume");
-})
-
 app.get("/Find_a_job", isloggedIn, function(req, res){
     res.render("Find_a_job");
 })
@@ -53,12 +49,16 @@ app.get("/Liked",isloggedIn, function(req, res){
     res.render("Liked");
 })
 
-app.get("/profile",function(req, res){
+app.get("/profile",isloggedIn,function(req, res){
     res.render("Autherization/profile");
 })
 
-app.get("/profile/editprofile",function(req, res){
+app.get("/profile/editprofile",isloggedIn,function(req, res){
     res.render("Autherization/editprofile");
+})
+
+app.get("/resume",isloggedIn,function(req, res){
+    res.render("findjob/resume");
 })
 
 // ---------Authen--------------

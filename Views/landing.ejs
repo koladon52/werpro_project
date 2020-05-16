@@ -1,7 +1,11 @@
 <%- include("partials/header")%>
 <div class ="container">
     <div class ="jumbotron" style ="text-align: center;">
-       hi from nampun 
+       <% if(!currentUser){ %>
+           Welcome to our website
+        <% } else { %>
+           Hello Welcome <%= currentUser.username %>
+        <% } %>
     </div>
 </div>
 <%-include("partials/footer")%>

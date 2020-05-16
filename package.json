@@ -19,7 +19,8 @@
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^6.0.1",
     "req-flash": "0.0.3",
-    "session": "^0.1.0"
+    "session": "^0.1.0",
+    "multer": "*"
   },
   "devDependencies": {},
   "scripts": {

@@ -7,6 +7,8 @@ const express = require("express"),
       passportlocal = require('passport-local'),
       passportlocalMongoose = require('passport-local-mongoose'),
       User = require('./models/user') 
+      multer  = require('multer')
+      upload = multer({ dest: 'uploads/' })
       ;
 
 let app = express();
@@ -35,6 +37,8 @@ passport.use(new passportlocal(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+
+
 app.use(express.static("public"));
 
 app.get("/", function(req, res){
@@ -57,13 +61,7 @@ app.get("/Liked",isloggedIn, function(req, res){
     res.render("Liked");
 })
 
-app.get("/profile",isloggedIn,function(req, res){
-    res.render("Autherization/profile");
-})
 
-app.get("/profile/editprofile",isloggedIn,function(req, res){
-    res.render("Autherization/editprofile");
-})
 
 app.get("/resume",isloggedIn,function(req, res){
     res.render("findjob/resume");
@@ -77,7 +75,63 @@ app.get("/findworkerlist",isloggedIn,function(req, res){
     res.render("findworker/findworkerlist");
 })
 
+//................profile..............
 
+app.get("/profile",isloggedIn,function(req, res){
+    res.render("Autherization/profile");
+})
+
+app.get("/profile/edit",isloggedIn,function(req, res){
+    res.render("Autherization/editprofile");
+})
+
+app.post("/profile/edit" , isloggedIn, function(req,res){
+    let id = req.body.id;
+    let firstname = req.body.firstname;
+    let lastname = req.body.lastname;
+    let phone = req.body.phone;
+    let address = req.body.address;
+    let img = req.body.img;
+    let profile = {firstname:firstname, lastname:lastname , phone:phone, address:address, img:img};
+    console.log(id);
+    console.log(profile);
+    User.update({_id:id},{$set:{firstname : req.body.firstname,lastname : req.body.lastname,phone : req.body.phone, address : req.body.address,img : req.body.img}}, function(error,profile){
+        if(error){
+            console.log("error"); 
+        } else {
+            console.log(profile);
+            res.redirect("/profile");
+        }
+    });
+});
+// app.post('editprofile', upload.single('image'), function(req, res, next){
+//     var profile = db.get('user');
+//     //มีการแก้ไข profile
+//     if(req.file){
+//         var profileimage = req.file.filename;
+//         profile.update({
+//             _id:req.currentUser._id
+//         },{
+//             $set:{
+//                 firstname:req.body.firstname,
+//                 lastname :req.body.lastname,
+//                 address  :req.body.address,
+//                 phone    :req.body.phone,
+//                 image    :profileimage
+//             }
+//         },function(err,success){
+//             if(err){
+
+//             }else{
+//                 res.location('/profile');
+//                 res.redirect('/profile');
+//             }
+//         })
+//     } else {
+//         var profileimage = "No image";
+//     }
+    
+// });
 
 // ---------Authen--------------
 
@@ -87,6 +141,7 @@ app.get('/login', function(req, res){
 
 app.post('/login', passport.authenticate('local',{
     successRedirect: '/',
+    failureFlash : "fucku",
     failureRedirect: '/login'
 }),function(req, res){
 });

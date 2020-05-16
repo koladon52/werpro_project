@@ -21,15 +21,40 @@
     ชื่อเว็บ
   </a>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03" >
+          <% if(!currentUser){ %>
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="/Resume">ฝากประวัติ</a>
+              <a class="nav-link" href="/findjob">Find JOB</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/Find_a_job">หางาน</a>
+              <a class="nav-link" href="/findworker">Find Worker</a>
             </li>
-
           </ul>
+        <% } else if (currentUser.type === 'operator') { %>
+          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="/findworkerlist">LIST</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/Liked">Liked</a>
+            </li>
+          </ul>
+          <% } else if (currentUser.type === 'worker') { %>
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="/findjoblist">LIST</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/resume">RESUME</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/liked">Liked</a>
+              </li>
+            </ul>
+          <% } %>
+        
+          
+         
           <form class="form-inline my-2 my-lg-0" > 
           <% if(!currentUser){ %>
             <a href="/login" class="btn btn-outline-success my-2 my-sm-0" type="submit">Sign in</a>

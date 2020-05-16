@@ -37,8 +37,12 @@ app.get("/", function(req, res){
     res.render("landing");
 })
 
-app.get("/Find_a_job", isloggedIn, function(req, res){
-    res.render("Find_a_job");
+app.get("/findjob", isloggedIn, function(req, res){
+    res.render("findjob/findjoblist");
+})
+
+app.get("/findworker", isloggedIn, function(req, res){
+    res.render("findworker/findworkerlist");
 })
 
 app.get("/History",isloggedIn, function(req, res){

@@ -11,7 +11,13 @@ let UserSchema = new mongoose.Schema({
     lastname : String,
     address  : String,
     phone    : String,
-    img      : String
+    img      : String,
+    resume: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Resume'
+        }
+    ]
 })
 
 UserSchema.plugin(passportlocalMongoose);

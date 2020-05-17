@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="https://unpkg.com/bootstrap@4.3.1/dist/css/bootstrap.min.css" >
         <link rel="stylesheet" href="/form.css">
     </head>
-    <body >
+    <body>
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -23,17 +23,17 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03" >
           <% if(!currentUser){ %>
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item" style="">
+            <li class="nav-item" >
               <a class="nav-link" href="/findjob">Find-JOB</a>
             </li>
-            <li class="nav-item" style="">
+            <li class="nav-item" >
               <a class="nav-link" href="/findworker">Find-Worker</a>
             </li>
           </ul>
         <% } else if (currentUser.type === 'operator') { %>
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="/findworkerlist">LIST</a>
+              <a class="nav-link" href="/workerlist">LIST</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/Liked">Liked</a>

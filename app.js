@@ -36,42 +36,41 @@ passport.use(new passportlocal(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-
-
 app.use(express.static("public"));
 
 app.get("/", function(req, res){
     res.render("landing");
 })
 
-app.get("/findjob", isloggedIn, function(req, res){
-    res.render("findjob/findjoblist");
-})
+//.....................WORKER.................
 
-app.get("/findworker", isloggedIn, function(req, res){
-    res.render("findworker/findworkerlist");
-})
-
-app.get("/History",isloggedIn, function(req, res){
-    res.render("History");
-})
-
-app.get("/Liked",isloggedIn, function(req, res){
-    res.render("Liked");
-})
-
-
-
-app.get("/resume",isloggedIn,function(req, res){
+app.get("/resume", isloggedIn,function(req, res){
     res.render("findjob/resume");
 })
 
-app.get("/findjoblist",isloggedIn,function(req, res){
+// app.get("/History",isloggedIn, function(req, res){
+//     res.render("History");
+// })
+
+app.get("/Liked", isloggedIn, function(req, res){
+    res.render("Liked");
+})
+
+app.get("/findjoblist", isloggedIn,function(req, res){
     res.render("findjob/findjoblist");
 })
 
+
+//.....................OPERATOR.................
+
+
+
 app.get("/findworkerlist",isloggedIn,function(req, res){
     res.render("findworker/findworkerlist");
+})
+
+app.get("/Liked", isloggedIn, function(req, res){
+    res.render("Liked");
 })
 
 //................profile..............
@@ -112,7 +111,30 @@ app.post("/profile/edit" ,upload.single("img") ,isloggedIn, function(req,res){
         }
     });
 });
+//..............middleware...........
 
+
+function isloggedIn(req, res, next){
+    if(req.isAuthenticated()){
+        return next();
+    }
+    req.flash('error','Please Login first');
+    res.redirect('/login');
+}
+
+// function stateOperator(req, res, next){
+//     if(User.type === "operator"){
+//         return next();
+//     }
+//     req.flash('error','You are logged as Worker');
+// }
+
+// function stateWorker(req, res, next){
+//     if(User.type === "worker"){
+//         return next();
+//     }
+//     req.flash('error','You are logged as Operator'); 
+// }
 
 // ---------Authen--------------
 
@@ -127,13 +149,6 @@ app.post('/login', passport.authenticate('local',{
 }),function(req, res){
 });
 
-function isloggedIn(req, res, next){
-    if(req.isAuthenticated()){
-        return next();
-    }
-    req.flash('error','Please Login first');
-    res.redirect('/login');
-}
 
 app.get('/signup', function(req, res){
     res.render('Autherization/signup');

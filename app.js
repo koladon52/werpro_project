@@ -7,8 +7,7 @@ const express = require("express"),
       passportlocal = require('passport-local'),
       passportlocalMongoose = require('passport-local-mongoose'),
       User = require('./models/user') 
-      multer  = require('multer')
-      upload = multer({ dest: 'uploads/' })
+
       ;
 
 let app = express();
@@ -77,6 +76,18 @@ app.get("/findworkerlist",isloggedIn,function(req, res){
 
 //................profile..............
 
+multer  = require('multer')
+var storage = multer.diskStorage({
+    destination : function(req,gile,cb){
+        cb(null,'./public/images/');
+    },
+    filename : function(req,gile,cb){
+        cb(null,Date.now()+".jpg");
+    },
+})
+
+upload = multer({ storage : storage})
+
 app.get("/profile",isloggedIn,function(req, res){
     res.render("Autherization/profile");
 })
@@ -85,53 +96,23 @@ app.get("/profile/edit",isloggedIn,function(req, res){
     res.render("Autherization/editprofile");
 })
 
-app.post("/profile/edit" , isloggedIn, function(req,res){
+app.post("/profile/edit" ,upload.single("img") ,isloggedIn, function(req,res){
     let id = req.body.id;
-    let firstname = req.body.firstname;
-    let lastname = req.body.lastname;
-    let phone = req.body.phone;
-    let address = req.body.address;
-    let img = req.body.img;
-    let profile = {firstname:firstname, lastname:lastname , phone:phone, address:address, img:img};
     console.log(id);
-    console.log(profile);
-    User.update({_id:id},{$set:{firstname : req.body.firstname,lastname : req.body.lastname,phone : req.body.phone, address : req.body.address,img : req.body.img}}, function(error,profile){
+    if(req.file){
+        var profileimage = req.file.filename;
+    } else {
+        var profileimage = "No Image";
+        }    
+        User.update({_id:id},{$set:{firstname : req.body.firstname,lastname : req.body.lastname,phone : req.body.phone, address : req.body.address, img : profileimage}}, function(error,profile){
         if(error){
             console.log("error"); 
         } else {
-            console.log(profile);
             res.redirect("/profile");
         }
     });
 });
-// app.post('editprofile', upload.single('image'), function(req, res, next){
-//     var profile = db.get('user');
-//     //มีการแก้ไข profile
-//     if(req.file){
-//         var profileimage = req.file.filename;
-//         profile.update({
-//             _id:req.currentUser._id
-//         },{
-//             $set:{
-//                 firstname:req.body.firstname,
-//                 lastname :req.body.lastname,
-//                 address  :req.body.address,
-//                 phone    :req.body.phone,
-//                 image    :profileimage
-//             }
-//         },function(err,success){
-//             if(err){
 
-//             }else{
-//                 res.location('/profile');
-//                 res.redirect('/profile');
-//             }
-//         })
-//     } else {
-//         var profileimage = "No image";
-//     }
-    
-// });
 
 // ---------Authen--------------
 
@@ -176,6 +157,23 @@ app.get('/logout',isloggedIn ,function(req, res){
     req.flash('success','Logout Successfully!');
     res.redirect('/');
 });
+
+/////////////////find job//////////////////////
+
+// app.post("/resume", isLoggedIn, function(req,res){
+//     let n_name = req.body.name;
+//     let n_image = req.body.image;
+//     let n_desc = req.body.desc;
+//     let n_card = {name:n_name,image:n_image,desc:n_desc};
+//     resume.create(n_card, function(error,newCard){
+//         if(error){
+//             console.log("error"); 
+//         } else {
+//             console.log("New card added.");
+//             res.redirect("../tarot/list");
+//         }
+//     });
+// });
 
 app.listen(3000, function(res,req){
     console.log("SERVER STARTED")

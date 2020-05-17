@@ -3,15 +3,15 @@
         <div class="row justify-content-between" >
             <div class="col-md-5 col-sm-12" style=" margin-top: 10%;" align="center">
                 <div class="jumbotron"  >
-                    <input type="file" " name="img" accept="image/* value="currentUser.img"">
+                    
                 </div>
             </div>   
             <div class="col-md-2 col-sm-0" style=" margin-top: 10%;" align="center">
             </div> 
             <div class="col-md-5 col-sm-12" style="margin-top: 10%; " align="center">
                 <div class="jumbotron"  >
-                    <h1 style="text-align: center;">Profile <%= currentUser.username %></h1>
-                        <form action="/profile/edit" method="POST">
+                    <h1 style="text-align: center;">Profile</h1>
+                        <form action="/profile/edit" method="POST" enctype="multipart/form-data">
                             <input type="hidden" name="id" value="<%= currentUser._id %>" ></input>
                             <div style="text-align: left;" class="form-group">
                                 <label for="name">First name</label>
@@ -28,7 +28,10 @@
                             <div style="text-align: left;" class="form-group">
                                 <label for="name">Tel number</label>
                                 <input type="text" class="form-control" name="phone" value="<%= currentUser.phone %>">
-                            </div>                  
+                            </div> 
+                              <br>
+                            <input type="file" " name="img" accept="image/* ">    
+                                <br>
                             <div align="left">
                                 <button  type="submit" class="btn btn-primary">confirm</button> 
                             </div>

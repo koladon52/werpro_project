@@ -5,26 +5,26 @@
     <div class="form">
         <h1 style="text-align: center;"> job appiction form</h1>
         <div>
-            <form style="text-align: left;">
+            <form style="text-align: left;" action="/resume" method="POST">
                     <div class="form-row">
                         <div class="col">
                             <label for="inputFirstname">ชื่อจริง</label>
-                            <input type="text" class="form-control" placeholder="First name" required>
+                            <input type="text" class="form-control" placeholder="First name" name="firstname" value="<%= currentUser.firstname %>" required>
                         </div>
                         <div lass="col">
                             <label for="inputLastname">นามสกุล</label>
-                            <input type="text" class="form-control" placeholder="Last name" required>
+                            <input type="text" class="form-control" placeholder="Last name" name="lastname"value="<%= currentUser.lastname %>"required>
                         </div>
                     </div><br>
                     <div class="form-select">
                     <label for="selectTypejob">ประเภทงานที่ต้องการสมัคร</label>
                         <select class="form-control" required>
                             <option>ประเภทงานที่ต้องการสมัคร</option>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
                         </select><br>
                     <label for="selectEmployment">ลักษณะการว่าจ้าง</label>
                         <select class="form-control" required>

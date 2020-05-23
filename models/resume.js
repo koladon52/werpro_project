@@ -3,7 +3,6 @@ const mongoose = require('mongoose')
       ;
 
 let ResumeSchema = new mongoose.Schema({
-    username       : String,
     firstname      : String,
     lastname       : String,
     jobtype        : String,
@@ -11,7 +10,8 @@ let ResumeSchema = new mongoose.Schema({
     worktime       : String,
     description    : String,
     date           : String,
-    contact        : String
+    contact        : String,
+    file           : String
 })
 
 // ResumeSchema.plugin(passportlocalMongoose);

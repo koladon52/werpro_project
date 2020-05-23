@@ -71,21 +71,38 @@ app.post("/resume",upload.single("pdf"), isloggedIn,function(req, res){
         let jobtype        = req.body.jobtype;
         let date           = req.body.date;
         let time           = req.body.time;
-        let resume = {username:username,firstname:firstname,lastname:lastname,jobtype:jobtype,employmenttype:employmenttype,worktime:time,description:description,file:file,date:date};
+        let resume = {firstname:firstname,lastname:lastname,jobtype:jobtype,employmenttype:employmenttype,worktime:time,description:description,file:file,date:date};
         console.log(resume);
-        if(req.file){
-            var profileimage = req.file.filename;
+        // if(req.file){
+        //     var profileimage = req.file.filename;
+        // } else {
+        //     var profileimage = "No File";
+        //     } 
+        Resume.create(resume, function(err,newResume){
+        if(err){
+            console.log(err); 
         } else {
-            var profileimage = "No Image";
-            } 
-        Resume.create(resume, function(error,newResume){
-        if(error){
-            console.log("error"); 
-        } else {
-            res.redirect("/");
+            User.findOne({username : username},function(err, foundUser){
+                if(err){
+                    console.log(err);
+                } else {
+                    foundUser.resumes.push(newResume);
+                    foundUser.save(function(err, data){
+                        if(err){
+                            console.log(err)
+                        } else {
+                            console.log(data);
+                            res.redirect("/");
+                        }
+                    })
+                }
+            })
+            
         }
     });
 })
+
+
 
 // app.post("/resume", isLoggedIn, function(req,res){
 //     let n_name = req.body.name;

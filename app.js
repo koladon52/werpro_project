@@ -6,17 +6,18 @@ const express = require("express"),
       flash = require('connect-flash'),
       passportlocal = require('passport-local'),
       passportlocalMongoose = require('passport-local-mongoose'),
+      methodOverride = require('method-override'),
       User = require('./models/user'),
       Resume = require('./models/resume')
 
       ;
-//test
 let app = express();
 
 mongoose.connect('mongodb://localhost:27017/projectweb');
 app.set('view engine','ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(flash());
+app.use(methodOverride("_method"));
 
 app.use(require('express-session')({
     secret: 'CSS227',
@@ -62,6 +63,10 @@ var resume = multer.diskStorage({
 upload = multer({ storage : resume})
 
 app.post("/resume",upload.single("pdf"), isloggedIn,function(req, res){
+        let user           = {
+            id : req.user._id,
+            username : req.user.username
+        }
         let username       = req.body.username;
         let firstname      = req.body.firstname;
         let lastname       = req.body.lastname;
@@ -71,8 +76,7 @@ app.post("/resume",upload.single("pdf"), isloggedIn,function(req, res){
         let jobtype        = req.body.jobtype;
         let date           = req.body.date;
         let time           = req.body.time;
-        let resume = {firstname:firstname,lastname:lastname,jobtype:jobtype,employmenttype:employmenttype,worktime:time,description:description,file:file,date:date};
-        console.log(resume);
+        let resume = {user : user,firstname : firstname,lastname : lastname,jobtype:jobtype,employmenttype:employmenttype,worktime:time,description:description,file:file,date:date};
         // if(req.file){
         //     var profileimage = req.file.filename;
         // } else {
@@ -102,23 +106,46 @@ app.post("/resume",upload.single("pdf"), isloggedIn,function(req, res){
     });
 })
 
+app.get("/My_resume",isloggedIn,function(req, res){
+    Resume.find({} ,function(error, myResume){
+        if(error){
+            console.log(error);
+        } else
+        {
+            res.render("findjob/My_resume",{Resume:myResume});
+        }
+    })
+});
 
+app.get("/My_resume/:id",isloggedIn,function(req, res){
+    Resume.findById(req.params.id, function(error, idResume){
+        if(error){
+            console.log("Error");
+        } else {
+            res.render("findjob/My_resumedetail",{resume:idResume});
+        }
+    });
+});
 
-// app.post("/resume", isLoggedIn, function(req,res){
-//     let n_name = req.body.name;
-//     let n_image = req.body.image;
-//     let n_desc = req.body.desc;
-//     let n_card = {name:n_name,image:n_image,desc:n_desc};
-//     resume.create(n_card, function(error,newCard){
-//         if(error){
-//             console.log("error"); 
-//         } else {
-//             console.log("New card added.");
-//             res.redirect("../tarot/list");
-//         }
-//     });
-// });
+app.put("/My_resume/:id/edit", function(req,res){
+    Resume.findByIdAndUpdate(req.params.id, req.body.resume, function(err, updated){
+        if(err){
+            res.redirect('/');
+        } else {
+            res.redirect('/My_resume/' + req.params.id);
+        }
+    })
+})
 
+app.get("/My_resume/:id/edit",isloggedIn,function(req, res){
+    Resume.findById(req.params.id, function(error, idResume){
+        if(error){
+            console.log("Error");
+        } else {
+            res.render("findjob/editResume",{resume:idResume});
+        }
+    });
+})
 
 app.get("/Liked", isloggedIn, function(req, res){
     res.render("Liked");
@@ -127,6 +154,8 @@ app.get("/Liked", isloggedIn, function(req, res){
 app.get("/findjoblist", isloggedIn,function(req, res){
     res.render("findjob/findjoblist");
 })
+
+
 
 
 //.....................OPERATOR.................
@@ -226,7 +255,11 @@ app.get('/login', function(req, res){
 
 app.post('/login', passport.authenticate('local',{
     successRedirect: '/',
-    failureRedirect: '/login'
+    failureRedirect: '/login',
+    successFlash : true,
+    failureFlash : true,
+    successFlash : "Welcome to FindJob",
+    failureFlash : "Invalid username or password"
 }),function(req, res){
 });
 
@@ -253,22 +286,6 @@ app.get('/logout',isloggedIn ,function(req, res){
     req.flash('success','Logout Successfully!');
     res.redirect('/');
 });
-
-
-// app.post("/resume", isLoggedIn, function(req,res){
-//     let n_name = req.body.name;
-//     let n_image = req.body.image;
-//     let n_desc = req.body.desc;
-//     let n_card = {name:n_name,image:n_image,desc:n_desc};
-//     resume.create(n_card, function(error,newCard){
-//         if(error){
-//             console.log("error"); 
-//         } else {
-//             console.log("New card added.");
-//             res.redirect("../tarot/list");
-//         }
-//     });
-// });
 
 app.listen(3000, function(res,req){
     console.log("SERVER STARTED")

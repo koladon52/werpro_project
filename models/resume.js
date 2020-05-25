@@ -11,7 +11,14 @@ let ResumeSchema = new mongoose.Schema({
     description    : String,
     date           : String,
     contact        : String,
-    file           : String
+    file           : String,
+    user : {
+        id:{
+            type: mongoose.Schema.Types.ObjectId,
+            ref : 'User'
+        },
+        username : String
+    }
 })
 
 // ResumeSchema.plugin(passportlocalMongoose);

@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "test.js",
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.13.0",
     "body-parser": "^1.19.0",
     "bootstrap": "^4.4.1",
     "connect-flash": "^0.1.1",

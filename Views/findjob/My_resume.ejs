@@ -3,6 +3,7 @@
 <div class="container">
     <ul class="list-unstyled" style="margin-top: 10%;margin-bottom: 10%;">
       <% Resume.forEach(function(resume){ %>
+        <% if(resume.user.username === currentUser.username){%>
         <div class="jumbotron"  >
           <div>
           <li class="media" >
@@ -15,10 +16,8 @@
             </div>
           </li>
           </div>
-          </div>
-
-        
-      <% }); %>
+          </div>  
+      <% }}); %>
       </ul>
     </div>
 

@@ -8,7 +8,8 @@ const express = require("express"),
       passportlocalMongoose = require('passport-local-mongoose'),
       methodOverride = require('method-override'),
       User = require('./models/user'),
-      Resume = require('./models/resume')
+      Resume = require('./models/resume'),
+      middleware = require('./middleware');
 
       ;
 let app = express();
@@ -46,7 +47,7 @@ app.get("/", function(req, res){
 
 //.....................WORKER.................
 
-app.get("/resume", isloggedIn,function(req, res){
+app.get("/resume", middleware.isloggedIn,function(req, res){
     res.render("findjob/resume");
 })
 
@@ -62,7 +63,7 @@ var resume = multer.diskStorage({
 
 upload = multer({ storage : resume})
 
-app.post("/resume",upload.single("pdf"), isloggedIn,function(req, res){
+app.post("/resume",upload.single("pdf"), middleware.isloggedIn,function(req, res){
         let user           = {
             id : req.user._id,
             username : req.user.username
@@ -106,7 +107,7 @@ app.post("/resume",upload.single("pdf"), isloggedIn,function(req, res){
     });
 })
 
-app.get("/My_resume",isloggedIn,function(req, res){
+app.get("/My_resume",middleware.isloggedIn,function(req, res){
     Resume.find({} ,function(error, myResume){
         if(error){
             console.log(error);
@@ -117,7 +118,8 @@ app.get("/My_resume",isloggedIn,function(req, res){
     })
 });
 
-app.get("/My_resume/:id",isloggedIn,function(req, res){
+
+app.get("/My_resume/:id",middleware.isloggedIn,function(req, res){
     Resume.findById(req.params.id, function(error, idResume){
         if(error){
             console.log("Error");
@@ -127,7 +129,7 @@ app.get("/My_resume/:id",isloggedIn,function(req, res){
     });
 });
 
-app.put("/My_resume/:id/edit", function(req,res){
+app.put("/My_resume/:id/edit",middleware.isloggedIn ,function(req,res){
     Resume.findByIdAndUpdate(req.params.id, req.body.resume, function(err, updated){
         if(err){
             res.redirect('/');
@@ -137,7 +139,7 @@ app.put("/My_resume/:id/edit", function(req,res){
     })
 })
 
-app.get("/My_resume/:id/edit",isloggedIn,function(req, res){
+app.get("/My_resume/:id/edit",middleware.isloggedIn,function(req, res){
     Resume.findById(req.params.id, function(error, idResume){
         if(error){
             console.log("Error");
@@ -147,11 +149,21 @@ app.get("/My_resume/:id/edit",isloggedIn,function(req, res){
     });
 })
 
-app.get("/Liked", isloggedIn, function(req, res){
+app.delete("/My_resume/:id/edit",middleware.isloggedIn, function(req,res){
+    Resume.findByIdAndRemove(req.params.id, function(err){
+        if(err){
+            res.redirect('/My_resume');
+        } else {
+            res.redirect('/My_resume');
+        }
+    });
+})
+
+app.get("/Liked", middleware.isloggedIn, function(req, res){
     res.render("Liked");
 })
 
-app.get("/findjoblist", isloggedIn,function(req, res){
+app.get("/findjoblist", middleware.isloggedIn,function(req, res){
     res.render("findjob/findjoblist");
 })
 
@@ -160,7 +172,7 @@ app.get("/findjoblist", isloggedIn,function(req, res){
 
 //.....................OPERATOR.................
 
-app.get("/workerlist",isloggedIn,function(req, res){
+app.get("/workerlist",middleware.isloggedIn,function(req, res){
     Resume.find({},function(error, allResume){
         if(error){
             console.log('Error!');
@@ -171,7 +183,7 @@ app.get("/workerlist",isloggedIn,function(req, res){
     })
 });
 
-app.get("/workerlist/:id",isloggedIn,function(req, res){
+app.get("/workerlist/:id",middleware.isloggedIn,function(req, res){
     Resume.findById(req.params.id, function(error, idResume){
         if(error){
             console.log("Error");
@@ -181,7 +193,7 @@ app.get("/workerlist/:id",isloggedIn,function(req, res){
     });
 })
 
-app.get("/Liked", isloggedIn, function(req, res){
+app.get("/Liked", middleware.isloggedIn, function(req, res){
     res.render("Liked");
 })
 
@@ -199,15 +211,15 @@ var storage = multer.diskStorage({
 
 upload = multer({ storage : storage})
 
-app.get("/profile",isloggedIn,function(req, res){
+app.get("/profile",middleware.isloggedIn,function(req, res){
     res.render("Autherization/profile");
 })
 
-app.get("/profile/edit",isloggedIn,function(req, res){
+app.get("/profile/edit",middleware.isloggedIn,function(req, res){
     res.render("Autherization/editprofile");
 })
 
-app.post("/profile/edit" ,upload.single("img") ,isloggedIn, function(req,res){
+app.post("/profile/edit" ,upload.single("img") ,middleware.isloggedIn, function(req,res){
     let id = req.body.id;
     if(req.file){
         var profileimage = req.file.filename;
@@ -224,28 +236,6 @@ app.post("/profile/edit" ,upload.single("img") ,isloggedIn, function(req,res){
 });
 //..............middleware...........
 
-
-function isloggedIn(req, res, next){
-    if(req.isAuthenticated()){
-        return next();
-    }
-    req.flash('error','Please Login first');
-    res.redirect('/login');
-}
-
-// function stateOperator(req, res, next){
-//     if(User.type === "operator"){
-//         return next();
-//     }
-//     req.flash('error','You are logged as Worker');
-// }
-
-// function stateWorker(req, res, next){
-//     if(User.type === "worker"){
-//         return next();
-//     }
-//     req.flash('error','You are logged as Operator'); 
-// }
 
 // ---------Authen--------------
 
@@ -281,7 +271,7 @@ app.post('/signup', function(req, res){
     });
 });
 
-app.get('/logout',isloggedIn ,function(req, res){
+app.get('/logout',middleware.isloggedIn ,function(req, res){
     req.logout();
     req.flash('success','Logout Successfully!');
     res.redirect('/');

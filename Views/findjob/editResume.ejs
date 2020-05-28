@@ -53,15 +53,17 @@
                         <label for="udloadRerume">อัพโหลดเรซูเม่</label>
                         <input type="file" class="form-control-file" id="resume[uploadResume]" value="<%= resume.file %>"name="file">
                     </div>  
-                    <div align="right">
+                    <div id="button" align="right">
                         <button type="submit" class="btn btn-primary mb-2"> Confirm </button> 
-                        <a  href="/" type="reset" class="btn btn-primary"> Cancel </a>  
+                        <a  href="/My_resume/<%= resume._id%>" type="reset" class="btn btn-danger"> Cancel </a>  
                     </div>     
             </form>
         </div>
-        
     </div>
     </div>
     </div>
 </div>
 <%- include("../partials/footer")%>
+
+<style>
+

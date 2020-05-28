@@ -9,10 +9,14 @@
         <P>ประเภทสัญญาจ้าง  : <%= resume.jobtype %></P>
         <p>ประเภทงานที่สนใจ  : <%= resume.employmenttype %></p>
         <p>วันเวลา  <%= resume.date %></p>
-        <div align="left">
-            <button  type="submit" class="btn btn-primary"> Edit </button> 
+        <div align="right">
+            <button  type="submit" class="btn btn-warning"> Edit </button> 
         </div>
-        
+        </form>
+        <form  action="/My_resume/<%= resume._id %>/edit?_method=DELETE" method="POST">
+        <div align="right">
+            <button  type="submit" class="btn btn-danger"> Delete </button> 
+        </div>
         </form>
     </div>
 </div>

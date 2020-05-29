@@ -48,6 +48,10 @@ app.get("/", function(req, res){
 
 //.....................WORKER.................
 
+app.get("/findjob", middleware.isloggedIn, function(req, res){
+    res.redirect("/login");
+})
+
 app.get("/resume", middleware.isloggedIn,function(req, res){
     res.render("findjob/resume");
 })
@@ -67,7 +71,8 @@ upload = multer({ storage : resume})
 app.post("/resume",upload.single("pdf"), middleware.isloggedIn,function(req, res){
         let user           = {
             id : req.user._id,
-            username : req.user.username
+            username : req.user.username,
+            img : req.user.img
         }
         let username       = req.body.username;
         let firstname      = req.body.firstname;
@@ -188,6 +193,10 @@ app.get("/joblist/:id",middleware.isloggedIn,function(req, res){
 
 
 //.....................OPERATOR.................
+
+app.get("/findworker", middleware.isloggedIn, function(req, res){
+    res.redirect("/login");
+})
 
 app.get("/My_post",middleware.isloggedIn,function(req, res){
     Jobdetail.find({} ,function(error, myJob){
@@ -341,11 +350,12 @@ app.get("/profile/edit",middleware.isloggedIn,function(req, res){
 
 app.post("/profile/edit" ,upload.single("img") ,middleware.isloggedIn, function(req,res){
     let id = req.body.id;
+    let img = req.body.oldimg;
     if(req.file){
         var profileimage = req.file.filename;
     } else {
-        var profileimage = "No Image";
-        }    
+        var profileimage = img;
+    }
         User.update({_id:id},{$set:{firstname : req.body.firstname,lastname : req.body.lastname,phone : req.body.phone, address : req.body.address, img : profileimage}}, function(error,profile){
         if(error){
             console.log("error"); 
@@ -354,7 +364,6 @@ app.post("/profile/edit" ,upload.single("img") ,middleware.isloggedIn, function(
         }
     });
 });
-//..............middleware...........
 
 
 // ---------Authen--------------

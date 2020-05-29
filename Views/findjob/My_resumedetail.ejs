@@ -3,7 +3,7 @@
     <div class="jumbotron">
         <form style="text-align: left;" action="/My_resume/<%= resume._id %>/edit " method="GET">
         <h1><%= resume.name %></h1>
-        <img src='<%= resume.img %>' class="img-fluid">
+        <img src='/images/<%= resume.user.img %>' class="img-fluid">
         <p>ชื่อ : <%= resume.firstname %> นามสกุล : <%= resume.lastname %></p>
         <p>รายละเอียด : <%= resume.description %></p>
         <P>ประเภทสัญญาจ้าง  : <%= resume.jobtype %></P>

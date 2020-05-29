@@ -1,8 +1,10 @@
 <%- include("../partials/header")%>
+<% var count = 0%>
 <div class="container">
-<ul class="list-unstyled" style="margin-top: 10%;margin-bottom: 10%;">
-  <% Job.forEach(function(job){ %>
-    <div class="jumbotron"  >
+<ul class="list-unstyled" style="margin-top: 5%;margin-bottom: 5%;">
+    <% Job.forEach(function(job){ %>
+      <% if(job.user.username === currentUser.username){%>
+    <div class="jumbotron">
       <div>
       <li class="media" >
         <img src="/models/resume<%= job.img %>" class="mr-3">
@@ -17,8 +19,13 @@
         </div>
       </li>
       </div>
-      </div>
-  <% }); %>
+      </div>   
+    <% count++ } %>
+    <% })  %>
+    <% if(count === 0){ %>
+      <h1><center>ไม่พบข้อมูล</center></h1>
+      <% } %>
+  
   
   </ul>
 </div>

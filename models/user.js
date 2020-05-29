@@ -17,6 +17,12 @@ let UserSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: "Resume"
         }
+    ],
+    jobs:     [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Jobdetail"
+        }
     ]
 });
 

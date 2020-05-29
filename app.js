@@ -9,6 +9,7 @@ const express = require("express"),
       methodOverride = require('method-override'),
       User = require('./models/user'),
       Resume = require('./models/resume'),
+      Jobdetail = require('./models/jobdetail'),
       middleware = require('./middleware');
 
       ;
@@ -163,14 +164,82 @@ app.get("/Liked", middleware.isloggedIn, function(req, res){
     res.render("Liked");
 })
 
-app.get("/findjoblist", middleware.isloggedIn,function(req, res){
-    res.render("findjob/findjoblist");
+app.get("/joblist",middleware.isloggedIn,function(req, res){
+    Jobdetail.find({},function(error, allJob){
+        if(error){
+            console.log(error);
+        } else
+        {
+            res.render("findjob/joblist",{Job:allJob});
+        }
+    })
+});
+
+app.get("/joblist/:id",middleware.isloggedIn,function(req, res){
+    Jobdetail.findById(req.params.id, function(error, idJob){
+        if(error){
+            console.log(error);
+        } else {
+            res.render("findjob/jobdetail",{job:idJob});
+        }
+    });
 })
 
 
 
-
 //.....................OPERATOR.................
+
+app.get("/My_post",middleware.isloggedIn,function(req, res){
+    Jobdetail.find({} ,function(error, myJob){
+        if(error){
+            console.log(error);
+        } else
+        {
+            res.render("findworker/My_post",{Job:myJob});
+        }
+    })
+});
+
+
+app.get("/My_post/:id",middleware.isloggedIn,function(req, res){
+    Jobdetail.findById(req.params.id, function(error, idjob){
+        if(error){
+            console.log("Error");
+        } else {
+            res.render("findworker/My_jobdetail",{job:idjob});
+        }
+    });
+});
+
+app.put("/My_post/:id/edit",middleware.isloggedIn ,function(req,res){
+    Jobdetail.findByIdAndUpdate(req.params.id, req.body.job, function(err, updated){
+        if(err){
+            res.redirect('/');
+        } else {
+            res.redirect('/My_post/' + req.params.id);
+        }
+    })
+})
+
+app.get("/My_post/:id/edit",middleware.isloggedIn,function(req, res){
+    Jobdetail.findById(req.params.id, function(error, idJob){
+        if(error){
+            console.log("Error");
+        } else {
+            res.render("findworker/editJob",{job:idJob});
+        }
+    });
+})
+
+app.delete("/My_post/:id/edit",middleware.isloggedIn, function(req,res){
+    Jobdetail.findByIdAndRemove(req.params.id, function(err){
+        if(err){
+            res.redirect('/My_post');
+        } else {
+            res.redirect('/My_post');
+        }
+    });
+})
 
 app.get("/workerlist",middleware.isloggedIn,function(req, res){
     Resume.find({},function(error, allResume){
@@ -191,6 +260,57 @@ app.get("/workerlist/:id",middleware.isloggedIn,function(req, res){
             res.render("findworker/workdetail",{resume:idResume});
         }
     });
+})
+
+app.get("/postjob", middleware.isloggedIn, function(req, res){
+    res.render("findworker/postjob");
+})
+
+
+app.post("/postjob",upload.single("pdf"), middleware.isloggedIn,function(req, res){
+    let user           = {
+        id : req.user._id,
+        username : req.user.username
+    }
+    let username          = req.body.username;
+    let companyname       = req.body.companyname;
+    let salary            = req.body.salary;
+    let qualti            = req.body.qualti;
+    let file              = req.body.file;
+    let employmenttype    = req.body.employmenttype;
+    let jobtype           = req.body.jobtype;
+    let jobpos            = req.body.jobpos;
+    let date              = req.body.date;
+    let time              = req.body.time;
+    let contact           = req.body.contact;
+    let job = {user : user, companyname : companyname,salary : salary,jobtype:jobtype,employmenttype:employmenttype,worktime:time,qualti:qualti,file:file,date:date,contact : contact, jobpos : jobpos};
+    // if(req.file){
+    //     var profileimage = req.file.filename;
+    // } else {
+    //     var profileimage = "No File";
+    //     } 
+    Jobdetail.create(job, function(err,newJob){
+    if(err){
+        console.log(err); 
+    } else {
+        User.findOne({username : username},function(err, foundUser){
+            if(err){
+                console.log(err);
+            } else {
+                foundUser.jobs.push(newJob);
+                foundUser.save(function(err, data){
+                    if(err){
+                        console.log(err)
+                    } else {
+                        console.log(data);
+                        res.redirect("/");
+                    }
+                })
+            }
+        })
+        
+    }
+});
 })
 
 app.get("/Liked", middleware.isloggedIn, function(req, res){

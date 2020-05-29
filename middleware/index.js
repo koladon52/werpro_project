@@ -1,4 +1,5 @@
  const Resume = require('../models/resume');
+ const User   = require('../models/user');
 
 let middlewareObj = {};
 
@@ -31,12 +32,12 @@ middlewareObj.isloggedIn = function(req, res, next){
 
 module.exports = middlewareObj;
 
-// function stateOperator(req, res, next){
-//     if(req.user.type === "operator"){
-//         return next();
-//     }
-//     req.flash('error','You are logged as Worker');
-// }
+function stateOperator(req, res, next){
+    if(req.user.type === "operator"){
+        return next();
+    }
+    req.flash('error','You are logged as Worker');
+}
 
 // function stateWorker(req, res, next){
 //     if(req.user.type === "worker"){

@@ -1,0 +1,25 @@
+<%- include("../partials/header")%>
+<div class="container">
+<ul class="list-unstyled" style="margin-top: 10%;margin-bottom: 10%;">
+  <% Job.forEach(function(job){ %>
+    <div class="jumbotron"  >
+      <div>
+      <li class="media" >
+        <img src="/models/resume<%= job.img %>" class="mr-3">
+        <div class="media-body">
+          <h3 class="mt-0 mb-1"><%= job.companyname %></h3><br>
+          <h4> <%= job.jobtype %> </h4>
+          <h4> <%= job.employmenttype %> </h4>
+          <h5> <%= job.worktime %> </h5>
+          <h5> <%= job.date %> </h5>
+          <h5> <%= job.salary %> </h5>
+          <a action="GET" href="/My_post/<%= job._id %>">See more</a>
+        </div>
+      </li>
+      </div>
+      </div>
+  <% }); %>
+  
+  </ul>
+</div>
+<%- include("../partials/footer")%>

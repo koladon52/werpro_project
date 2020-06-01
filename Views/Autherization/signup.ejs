@@ -1,9 +1,36 @@
 <%- include("../partials/header")%>
+<head>
+    <link rel="stylesheet" href="/css/signu.css">
+
+</head>
 <div style="margin-left :10% ;margin-right: 10%">
     <div class="row justify-content-between" >
         <div class="col-md-5 col-sm-12" style=" margin-top: 10%;" align="center">
-            <div class="jumbotron"  >
+            <!-- <div class="jumbotron"  >
                 
+                <div class="w3-content w3-section" style="max-width:500px">
+                    <img class="mySlides" src="https://asset.jobthai.com/static/images/postresume/customize-privacy-setting.svg" style="width:110%">
+                    <img class="mySlides" src="https://asset.jobthai.com/static/images/postresume/apply-now-via-jobthai.svg" style="width:100%">
+                    <img class="mySlides" src="https://asset.jobthai.com/static/images/postresume/my-jobs.svg" style="width:80%">
+                  </div>
+                  
+                  <script>
+                  var myIndex = 0;
+                  carousel();
+                  
+                  function carousel() {
+                    var i;
+                    var x = document.getElementsByClassName("mySlides");
+                    for (i = 0; i < x.length; i++) {
+                      x[i].style.display = "none";  
+                    }
+                    myIndex++;
+                    if (myIndex > x.length) {myIndex = 1}    
+                    x[myIndex-1].style.display = "block";  
+                    setTimeout(carousel, 2000); 
+                  }
+                </script> -->
+
             </div>
         </div> 
         <div class="col-md-2 col-sm-0" style=" margin-top: 10%;" align="center">
@@ -27,9 +54,11 @@
                         </div>
                         <div>
                             <h3>Please select user type</h3>
+                            
                             <label>
-                              <input type="checkbox" class="radio" value="operator" name="Type" />Operator</label>
+                                <input type="checkbox" class="radio" value="operator" name="Type" />Operator</label>
                             <label>
+                            
                               <input type="checkbox" class="radio" value="worker" name="Type" />Worker</label>
                           </div>
                           <script>

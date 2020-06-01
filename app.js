@@ -146,7 +146,7 @@ app.post('/signup', function(req, res){
             return res.render('Autherization/signup');
         }
         passport.authenticate('local')(req,res,function(){
-            req.flash('success','Welcome to FindJob' + user+username);
+            req.flash('success','Welcome to FindJob' + user.username);
             res.redirect('/');
         });
     });

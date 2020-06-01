@@ -1,0 +1,18 @@
+body {
+    background-image : url(../images/back_login.png);
+    background-repeat : no-repeat;
+    background-position: center;
+    background-size: 1800px;
+}
+
+@media screen and (max-width: 1085px) { 	
+    background-image { 		
+        width: 50%; 	
+    } 
+}
+
+@media screen and (max-width: 600px) 
+{ 	background-image { 		
+    width: 100%; 	
+    } 
+}

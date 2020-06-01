@@ -1,0 +1,31 @@
+body{
+    background-image : url(../images/back_login.png);
+    background-repeat : no-repeat;
+    background-position: center;
+    background-size: 1800px;
+}
+
+/* For mobile */
+@media (max-width: 480px) {
+    body {
+        background-image : url(../images/back_login.png);
+        width: 100%;
+        height: 50%;
+    }
+}
+
+/* For tablets */
+@media (min-width: 481px) and (max-width: 1024px) {
+    body {
+        background-image : url(../images/back_login.png);
+        width: 100%;
+    }
+}
+
+/* For desktop devices */
+@media (min-width: 1025px) {
+    body {
+        background-image : url(../images/back_login.png);
+        width: 100%;
+    }
+}

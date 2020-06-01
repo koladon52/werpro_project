@@ -2,38 +2,40 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>MY ANIME</title>
+        <title>FJ:FIND-JOB</title>
         <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <link rel="stylesheet" href="/app.css">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1"> 
+        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+        <!-- <link rel="stylesheet" href="/app.css"> -->
+        <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"> -->
         <link rel="stylesheet" href="https://unpkg.com/bootstrap@4.3.1/dist/css/bootstrap.min.css" >
-        <link rel="stylesheet" href="/form.css">
+        
+         <link rel="stylesheet" href="/header.css"> 
     </head>
-    <body >
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <body>
+      <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+        <a class="navbar-brand" href="/">
+          <img href="/" src="images/logo.png" width="250" height="75" class="d-inline-block align-top " alt="">
+          
+        </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand" href="/">
-    <img href="/" src="" width="30" height="30" class="d-inline-block align-top" alt="">
-    ชื่อเว็บ
-  </a>
+        
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03" >
           <% if(!currentUser){ %>
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item">
-              <a class="nav-link" href="/findjob">Find JOB</a>
+            <li class="nav-item" >
+              <a class="nav-link" href="/findjob">Find-JOB</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/findworker">Find Worker</a>
+            <li class="nav-item" >
+              <a class="nav-link" href="/findworker">Find-Worker</a>
             </li>
           </ul>
         <% } else if (currentUser.type === 'operator') { %>
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="/findworkerlist">LIST</a>
+              <a class="nav-link" href="/workerlist">LIST</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/Liked">Liked</a>
@@ -50,21 +52,36 @@
               <li class="nav-item">
                 <a class="nav-link" href="/liked">Liked</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/My_resume">My resume</a>
+              </li>
             </ul>
           <% } %>
-
+          <div>
+            <form class="form-inline">
+              <i class="fa fa-search" aria-hidden="true">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">ค้นหา</button>
+              </i>
+            </form>
+          </div> 
           <form class="form-inline my-2 my-lg-0" > 
-          <% if(!currentUser){ %>
-            <a href="/login" class="btn btn-outline-success my-2 my-sm-0" type="submit">Sign in</a>
-          <% } else { %>
-            <div class="dropdown">
-              <button class="dropbtn"><%= currentUser.username %></button>
-              <div class="dropdown-content">
-                <a href="/profile">Profile</a>
-                <a href="/logout">Logout</a>
-              </div>
-            </div>
-          <% } %>
+            <% if(!currentUser){ %>
+              <a href="/login" class="btn btn-outline-success my-2 my-sm-0" type="submit">Sign in</a>
+            <% } else { %>
+              <div class="dropdown">
+                <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= currentUser.username %></button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="/profile">Profile</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="/logout">Logout</a>
+                </div>
+                 <div class="dropdown-content">
+                  <a href=""></a>
+                  <a href=""></a>
+                </div> -->
+         </div>
+            <% } %>
           </form>
           
         </div>
@@ -81,40 +98,4 @@
         <%=  success  %>
       </div>
     <% } %>
-
-      <style>
-        .dropbtn {
-          background-color: #4CAF50;
-          color: white;
-          padding: 16px;
-          font-size: 16px;
-          border: none;
-        }
-        
-        .dropdown {
-          position: relative;
-          display: inline-block;
-        }
-        
-        .dropdown-content {
-          display: none;
-          position: absolute;
-          background-color: #f1f1f1;
-          min-width: 160px;
-          box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-          z-index: 1;
-        }
-        
-        .dropdown-content a {
-          color: black;
-          padding: 12px 16px;
-          text-decoration: none;
-          display: block;
-        }
-        
-        .dropdown-content a:hover {background-color: #ddd;}
-        
-        .dropdown:hover .dropdown-content {display: block;}
-        
-        .dropdown:hover .dropbtn {background-color: #3e8e41;}
-        </style>
+  </body>

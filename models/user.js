@@ -11,21 +11,22 @@ let UserSchema = new mongoose.Schema({
     lastname : String,
     address  : String,
     phone    : String,
-    img      : String
-})
+    img      : String,
+    resumes: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Resume"
+        }
+    ],
+    jobs:     [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Jobdetail"
+        }
+    ]
+});
 
 UserSchema.plugin(passportlocalMongoose);
 
 module.exports = mongoose.model('User', UserSchema);
 
-// module.exports.getUserById=function(id,callback){
-//     User.findById(id,callback);
-// }
-
-// module.exports.getUserByName=function(id,callback){
-//     var query = {
-//         username : username,
-//         type : Type
-//     };
-//     User.findOne(query,callback);
-// }

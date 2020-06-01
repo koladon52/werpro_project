@@ -1,0 +1,32 @@
+<%- include("../partials/header")%>
+<% var count = 0%>
+<div class="container">
+<ul class="list-unstyled" style="margin-top: 5%;margin-bottom: 5%;">
+    <% Job.forEach(function(job){ %>
+      <% if(job.user.username === currentUser.username){%>
+    <div class="jumbotron">
+      <div>
+      <li class="media" >
+        <img src="/models/resume<%= job.img %>" class="mr-3">
+        <div class="media-body">
+          <h3 class="mt-0 mb-1"><%= job.companyname %></h3><br>
+          <h4> <%= job.jobtype %> </h4>
+          <h4> <%= job.employmenttype %> </h4>
+          <h5> <%= job.worktime %> </h5>
+          <h5> <%= job.date %> </h5>
+          <h5> <%= job.salary %> </h5>
+          <a action="GET" href="/My_post/<%= job._id %>">See more</a>
+        </div>
+      </li>
+      </div>
+      </div>   
+    <% count++ } %>
+    <% })  %>
+    <% if(count === 0){ %>
+      <h1><center>ไม่พบข้อมูล</center></h1>
+      <% } %>
+  
+  
+  </ul>
+</div>
+<%- include("../partials/footer")%>

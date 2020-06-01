@@ -6,16 +6,20 @@ const express = require("express"),
       flash = require('connect-flash'),
       passportlocal = require('passport-local'),
       passportlocalMongoose = require('passport-local-mongoose'),
-      User = require('./models/user') 
+      methodOverride = require('method-override'),
+      User = require('./models/user'),
+      Resume = require('./models/resume'),
+      Jobdetail = require('./models/jobdetail'),
+      middleware = require('./middleware');
 
       ;
-//test
 let app = express();
 
 mongoose.connect('mongodb://localhost:27017/projectweb');
 app.set('view engine','ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(flash());
+app.use(methodOverride("_method"));
 
 app.use(require('express-session')({
     secret: 'CSS227',
@@ -36,42 +40,290 @@ passport.use(new passportlocal(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-
-
 app.use(express.static("public"));
 
 app.get("/", function(req, res){
     res.render("landing");
 })
 
-app.get("/findjob", isloggedIn, function(req, res){
-    res.render("findjob/findjoblist");
+//.....................WORKER.................
+
+app.get("/findjob", middleware.isloggedIn, function(req, res){
+    res.redirect("/login");
 })
 
-app.get("/findworker", isloggedIn, function(req, res){
-    res.render("findworker/findworkerlist");
-})
-
-app.get("/History",isloggedIn, function(req, res){
-    res.render("History");
-})
-
-app.get("/Liked",isloggedIn, function(req, res){
-    res.render("Liked");
-})
-
-
-
-app.get("/resume",isloggedIn,function(req, res){
+app.get("/resume", middleware.isloggedIn,function(req, res){
     res.render("findjob/resume");
 })
 
-app.get("/findjoblist",isloggedIn,function(req, res){
-    res.render("findjob/findjoblist");
+multer  = require('multer')
+var resume = multer.diskStorage({
+    destination : function(req,gile,cb){
+        cb(null,'./public/resume/');
+    },
+    filename : function(req,gile,cb){
+        cb(null,Date.now()+".pdf");
+    },
 })
 
-app.get("/findworkerlist",isloggedIn,function(req, res){
-    res.render("findworker/findworkerlist");
+upload = multer({ storage : resume})
+
+app.post("/resume",upload.single("pdf"), middleware.isloggedIn,function(req, res){
+        let user           = {
+            id : req.user._id,
+            username : req.user.username,
+            img : req.user.img
+        }
+        let username       = req.body.username;
+        let firstname      = req.body.firstname;
+        let lastname       = req.body.lastname;
+        let description    = req.body.desc;
+        let file           = req.body.file;
+        let employmenttype = req.body.employmenttype;
+        let jobtype        = req.body.jobtype;
+        let date           = req.body.date;
+        let time           = req.body.time;
+        let resume = {user : user,firstname : firstname,lastname : lastname,jobtype:jobtype,employmenttype:employmenttype,worktime:time,description:description,file:file,date:date};
+        // if(req.file){
+        //     var profileimage = req.file.filename;
+        // } else {
+        //     var profileimage = "No File";
+        //     } 
+        Resume.create(resume, function(err,newResume){
+        if(err){
+            console.log(err); 
+        } else {
+            User.findOne({username : username},function(err, foundUser){
+                if(err){
+                    console.log(err);
+                } else {
+                    foundUser.resumes.push(newResume);
+                    foundUser.save(function(err, data){
+                        if(err){
+                            console.log(err)
+                        } else {
+                            console.log(data);
+                            res.redirect("/");
+                        }
+                    })
+                }
+            })
+            
+        }
+    });
+})
+
+app.get("/My_resume",middleware.isloggedIn,function(req, res){
+    Resume.find({} ,function(error, myResume){
+        if(error){
+            console.log(error);
+        } else
+        {
+            res.render("findjob/My_resume",{Resume:myResume});
+        }
+    })
+});
+
+
+app.get("/My_resume/:id",middleware.isloggedIn,function(req, res){
+    Resume.findById(req.params.id, function(error, idResume){
+        if(error){
+            console.log("Error");
+        } else {
+            res.render("findjob/My_resumedetail",{resume:idResume});
+        }
+    });
+});
+
+app.put("/My_resume/:id/edit",middleware.isloggedIn ,function(req,res){
+    Resume.findByIdAndUpdate(req.params.id, req.body.resume, function(err, updated){
+        if(err){
+            res.redirect('/');
+        } else {
+            res.redirect('/My_resume/' + req.params.id);
+        }
+    })
+})
+
+app.get("/My_resume/:id/edit",middleware.isloggedIn,function(req, res){
+    Resume.findById(req.params.id, function(error, idResume){
+        if(error){
+            console.log("Error");
+        } else {
+            res.render("findjob/editResume",{resume:idResume});
+        }
+    });
+})
+
+app.delete("/My_resume/:id/edit",middleware.isloggedIn, function(req,res){
+    Resume.findByIdAndRemove(req.params.id, function(err){
+        if(err){
+            res.redirect('/My_resume');
+        } else {
+            res.redirect('/My_resume');
+        }
+    });
+})
+
+app.get("/Liked", middleware.isloggedIn, function(req, res){
+    res.render("Liked");
+})
+
+app.get("/joblist",middleware.isloggedIn,function(req, res){
+    Jobdetail.find({},function(error, allJob){
+        if(error){
+            console.log(error);
+        } else
+        {
+            res.render("findjob/joblist",{Job:allJob});
+        }
+    })
+});
+
+app.get("/joblist/:id",middleware.isloggedIn,function(req, res){
+    Jobdetail.findById(req.params.id, function(error, idJob){
+        if(error){
+            console.log(error);
+        } else {
+            res.render("findjob/jobdetail",{job:idJob});
+        }
+    });
+})
+
+
+
+//.....................OPERATOR.................
+
+app.get("/findworker", middleware.isloggedIn, function(req, res){
+    res.redirect("/login");
+})
+
+app.get("/My_post",middleware.isloggedIn,function(req, res){
+    Jobdetail.find({} ,function(error, myJob){
+        if(error){
+            console.log(error);
+        } else
+        {
+            res.render("findworker/My_post",{Job:myJob});
+        }
+    })
+});
+
+
+app.get("/My_post/:id",middleware.isloggedIn,function(req, res){
+    Jobdetail.findById(req.params.id, function(error, idjob){
+        if(error){
+            console.log("Error");
+        } else {
+            res.render("findworker/My_jobdetail",{job:idjob});
+        }
+    });
+});
+
+app.put("/My_post/:id/edit",middleware.isloggedIn ,function(req,res){
+    Jobdetail.findByIdAndUpdate(req.params.id, req.body.job, function(err, updated){
+        if(err){
+            res.redirect('/');
+        } else {
+            res.redirect('/My_post/' + req.params.id);
+        }
+    })
+})
+
+app.get("/My_post/:id/edit",middleware.isloggedIn,function(req, res){
+    Jobdetail.findById(req.params.id, function(error, idJob){
+        if(error){
+            console.log("Error");
+        } else {
+            res.render("findworker/editJob",{job:idJob});
+        }
+    });
+})
+
+app.delete("/My_post/:id/edit",middleware.isloggedIn, function(req,res){
+    Jobdetail.findByIdAndRemove(req.params.id, function(err){
+        if(err){
+            res.redirect('/My_post');
+        } else {
+            res.redirect('/My_post');
+        }
+    });
+})
+
+app.get("/workerlist",middleware.isloggedIn,function(req, res){
+    Resume.find({},function(error, allResume){
+        if(error){
+            console.log('Error!');
+        } else
+        {
+            res.render("findworker/findworkerlist",{Resume:allResume});
+        }
+    })
+});
+
+app.get("/workerlist/:id",middleware.isloggedIn,function(req, res){
+    Resume.findById(req.params.id, function(error, idResume){
+        if(error){
+            console.log("Error");
+        } else {
+            res.render("findworker/workdetail",{resume:idResume});
+        }
+    });
+})
+
+app.get("/postjob", middleware.isloggedIn, function(req, res){
+    res.render("findworker/postjob");
+})
+
+
+app.post("/postjob",upload.single("pdf"), middleware.isloggedIn,function(req, res){
+    let user           = {
+        id : req.user._id,
+        username : req.user.username
+    }
+    let username          = req.body.username;
+    let companyname       = req.body.companyname;
+    let salary            = req.body.salary;
+    let qualti            = req.body.qualti;
+    let file              = req.body.file;
+    let employmenttype    = req.body.employmenttype;
+    let jobtype           = req.body.jobtype;
+    let jobpos            = req.body.jobpos;
+    let date              = req.body.date;
+    let time              = req.body.time;
+    let contact           = req.body.contact;
+    let job = {user : user, companyname : companyname,salary : salary,jobtype:jobtype,employmenttype:employmenttype,worktime:time,qualti:qualti,file:file,date:date,contact : contact, jobpos : jobpos};
+    // if(req.file){
+    //     var profileimage = req.file.filename;
+    // } else {
+    //     var profileimage = "No File";
+    //     } 
+    Jobdetail.create(job, function(err,newJob){
+    if(err){
+        console.log(err); 
+    } else {
+        User.findOne({username : username},function(err, foundUser){
+            if(err){
+                console.log(err);
+            } else {
+                foundUser.jobs.push(newJob);
+                foundUser.save(function(err, data){
+                    if(err){
+                        console.log(err)
+                    } else {
+                        console.log(data);
+                        res.redirect("/");
+                    }
+                })
+            }
+        })
+        
+    }
+});
+})
+
+app.get("/Liked", middleware.isloggedIn, function(req, res){
+    res.render("Liked");
 })
 
 //................profile..............
@@ -88,22 +340,22 @@ var storage = multer.diskStorage({
 
 upload = multer({ storage : storage})
 
-app.get("/profile",isloggedIn,function(req, res){
+app.get("/profile",middleware.isloggedIn,function(req, res){
     res.render("Autherization/profile");
 })
 
-app.get("/profile/edit",isloggedIn,function(req, res){
+app.get("/profile/edit",middleware.isloggedIn,function(req, res){
     res.render("Autherization/editprofile");
 })
 
-app.post("/profile/edit" ,upload.single("img") ,isloggedIn, function(req,res){
+app.post("/profile/edit" ,upload.single("img") ,middleware.isloggedIn, function(req,res){
     let id = req.body.id;
-    console.log(id);
+    let img = req.body.oldimg;
     if(req.file){
         var profileimage = req.file.filename;
     } else {
-        var profileimage = "No Image";
-        }    
+        var profileimage = img;
+    }
         User.update({_id:id},{$set:{firstname : req.body.firstname,lastname : req.body.lastname,phone : req.body.phone, address : req.body.address, img : profileimage}}, function(error,profile){
         if(error){
             console.log("error"); 
@@ -122,18 +374,14 @@ app.get('/login', function(req, res){
 
 app.post('/login', passport.authenticate('local',{
     successRedirect: '/',
-    failureFlash : "fucku",
-    failureRedirect: '/login'
+    failureRedirect: '/login',
+    successFlash : true,
+    failureFlash : true,
+    successFlash : "Welcome to FindJob",
+    failureFlash : "Invalid username or password"
 }),function(req, res){
 });
 
-function isloggedIn(req, res, next){
-    if(req.isAuthenticated()){
-        return next();
-    }
-    req.flash('error','Please Login first');
-    res.redirect('/login');
-}
 
 app.get('/signup', function(req, res){
     res.render('Autherization/signup');
@@ -152,28 +400,11 @@ app.post('/signup', function(req, res){
     });
 });
 
-app.get('/logout',isloggedIn ,function(req, res){
+app.get('/logout',middleware.isloggedIn ,function(req, res){
     req.logout();
     req.flash('success','Logout Successfully!');
     res.redirect('/');
 });
-
-/////////////////find job//////////////////////
-
-// app.post("/resume", isLoggedIn, function(req,res){
-//     let n_name = req.body.name;
-//     let n_image = req.body.image;
-//     let n_desc = req.body.desc;
-//     let n_card = {name:n_name,image:n_image,desc:n_desc};
-//     resume.create(n_card, function(error,newCard){
-//         if(error){
-//             console.log("error"); 
-//         } else {
-//             console.log("New card added.");
-//             res.redirect("../tarot/list");
-//         }
-//     });
-// });
 
 app.listen(3000, function(res,req){
     console.log("SERVER STARTED")

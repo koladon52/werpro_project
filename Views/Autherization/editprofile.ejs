@@ -2,8 +2,7 @@
     <div style="margin-left :10% ;margin-right: 10%">
         <div class="row justify-content-between" >
             <div class="col-md-5 col-sm-12" style=" margin-top: 10%;" align="center">
-                <div class="jumbotron"  >
-                    
+                <div class="jumbotron">
                 </div>
             </div>   
             <div class="col-md-2 col-sm-0" style=" margin-top: 10%;" align="center">
@@ -30,14 +29,15 @@
                                 <input type="text" class="form-control" name="phone" value="<%= currentUser.phone %>">
                             </div> 
                               <br>
-                            <input type="file" " name="img" accept="image/* ">    
+                            <input type="file" name="img" accept="image/*" value="<%= currentUser.img %>">  
+                            <input type="hidden" name="oldimg" value="<%= currentUser.img %>">  
                                 <br>
                             <div align="left">
                                 <button  type="submit" class="btn btn-primary">confirm</button> 
                             </div>
                             <br>
                             <div align="left">
-                                <button  href="/profile" type="reset" class="btn btn-primary">cancel</button> 
+                                <a  href="/profile" type="reset" class="btn btn-primary">cancel</a> 
                             </div>
                         </form>
                 </div>

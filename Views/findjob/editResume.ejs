@@ -3,24 +3,24 @@
     <div class="jumbotron" style="margin-top: 5%;margin-bottom: 5%">
     <div style="margin-left :10% ;margin-right: 10%">
     <div class="form" >
-        <h1 style="text-align: center;"> job appiction form</h1>
+        <h1 style="text-align: center;">Edit Your Resume</h1>
         <div>
-            <form style="text-align: left;" action="/resume" method="POST">
+            <form style="text-align: left;" action="/My_resume/<%= resume._id %>/edit?_method=PUT" method="POST">
                     <input type="hidden" name="username" value="<%= currentUser.username %>">
                     <div class="form-row" >
                         <div class="col">
                             <label for="inputFirstname">ชื่อจริง</label>
-                            <input type="text" class="form-control" placeholder="First name" name="firstname" value="<%= currentUser.firstname %>" required>
+                            <input type="text" class="form-control" name="resume[username]" value="<%= resume.firstname %>" required>
                         </div>
                         <div lass="col">
                             <label for="inputLastname">นามสกุล</label>
-                            <input type="text" class="form-control" placeholder="Last name" name="lastname"value="<%= currentUser.lastname %>"required>
+                            <input type="text" class="form-control" name="resume[lastname]"value="<%= resume.lastname %>"required>
                         </div>
                     </div><br>
                     <div class="form-select">
                     <label for="selectTypejob">ประเภทงานที่ต้องการสมัคร</label>
-                        <select class="form-control" name="jobtype" required>
-                            <option>ประเภทงานที่ต้องการสมัคร</option>
+                        <select class="form-control" name="resuem[jobtype]"  required>
+                            <option value="<%= resume.jobtype %>"><%= resume.jobtype %></option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -28,39 +28,42 @@
                                 <option value="5">5</option>
                         </select><br>
                     <label for="selectEmployment">ลักษณะการว่าจ้าง</label>
-                        <select class="form-control" name="employmenttype" required>
-                            <option>ลักษณะการว่าจ้าง</option>
-                            <option value="Part time">Part time</option>
-                            <option value="Full time">Full time</option>
-                            <option value="Event">Event</option>
+                        <select class="form-control" name="resume[employmenttype]" required>
+                            <option value="<%= resume.employmenttype %>" ><%= resume.employmenttype %></option>
+                                <option value="Part time">Part time</option>
+                                <option value="Full time">Full time</option>
+                                <option value="Event">Event</option>
                         </select>
                     </div><br>
                     <div class="form-row">
                         <div class="col-md-6 mb-5">
                             <label for="inputDate">วันที่สามารถเริ่มงานได้</label><br>
-                            <input type="date" id="date" name="date" required>
+                            <input type="date" id="date" name="resume[date]" value="<%= resume.date %>" required>
                         </div>
                         <div class="col-md-6 mb-5">
                             <label for="inputTime">เวลาที่สามารถทำงานได้</label><br>
-                            <input type="time" id="time" name="time" required>
+                            <input type="time" id="time" name="resume[worktime]" value="<%= resume.worktime %>"required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputAbout">ข้อมูลเพิ่มเติมเกี่ยวกับผู้สมัครงาน</label>
-                        <input type="text" class="form-control" name="desc" placeholder="พูดได้กี่ภาษา, พิมพ์ได้กี่คำต่อนาที เป็นต้น">
+                        <input type="text" class="form-control" name="resume[description]" value="<%= resume.description %>"">
                     </div>
                     <div class="form-group">
                         <label for="udloadRerume">อัพโหลดเรซูเม่</label>
-                        <input type="file" class="form-control-file" id="uploadResume" name="file">
+                        <input type="file" class="form-control-file" id="resume[uploadResume]" value="<%= resume.file %>"name="file">
                     </div>  
-                    <div align="right">
-                        <button type="submit" class="btn btn-primary mb-2">SUBMIT</button> 
+                    <div id="button" align="right">
+                        <button type="submit" class="btn btn-primary mb-2"> Confirm </button> 
+                        <a  href="/My_resume/<%= resume._id%>" type="reset" class="btn btn-danger"> Cancel </a>  
                     </div>     
             </form>
         </div>
-        
     </div>
     </div>
     </div>
 </div>
 <%- include("../partials/footer")%>
+
+<style>
+

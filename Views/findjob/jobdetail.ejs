@@ -1,0 +1,16 @@
+<%- include("../partials/header")%>
+<div class="container" style="margin-top: 10%; margin-bottom: 10%;">
+    <div class="jumbotron">
+        <img src='<%= job.img %>' class="img-fluid">
+        <h1>ชื่อ : <%= job.companyname %><h1>
+        <p>รายละเอียด : <%= job.qualti %></p>
+        <P>ประเภทสัญญาจ้าง  : <%= job.jobtype %></P>
+        <p>ตำแหน่งงาน   : <%= job.jobpos%></p>
+        <p>เงินเดือน   :  <%= job.salary%></p>
+        <p>ประเภทงานที่สนใจ  : <%= job.employmenttype %></p>
+        <p>วันเวลา  <%= job.date %></p>
+        <p>ระยะเวลาทำงาน <%= job.worktime%></p>
+        <p>ช่องทางการติดต่อ : <%= job.contact%></p>
+    </div>
+</div>
+<%- include("../partials/footer")%>

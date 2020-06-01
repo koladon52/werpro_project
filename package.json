@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "test.js",
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.13.0",
     "body-parser": "^1.19.0",
     "bootstrap": "^4.4.1",
     "connect-flash": "^0.1.1",
@@ -12,6 +13,7 @@
     "express-message": "^1.2.3",
     "express-messages": "^1.0.1",
     "express-session": "^1.17.1",
+    "method-override": "^3.0.0",
     "mongoose": "^5.9.14",
     "multer": "*",
     "nodemon": "^2.0.4",

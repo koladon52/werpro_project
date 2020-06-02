@@ -1,8 +1,9 @@
 body{
-    background-image : url(../images/back_login.png);
+    overflow-x: hidden;
+    background-image : url(../images/back_login.png) ;
     background-repeat : no-repeat;
     background-position: center;
-    background-size: 1800px;
+    background-size: cover;
 }
 
 /* For mobile */

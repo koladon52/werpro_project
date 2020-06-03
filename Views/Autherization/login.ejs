@@ -1,10 +1,11 @@
-<%- include ("../partials/header") %>
+<%- include("../partials/header")%>
+
 <head>
-    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="css/login.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" rel="stylesheet"> 
 
 </head>
-<body>
-<div style="margin-left :10% ;margin-right: 10% ;margin-bottom:10%">
+<!-- <div style="margin-left :10% ;margin-right: 10% ;margin-bottom:10%">
     <div class="row justify-content-between \" >
         <div class="col-md-5 col-sm-12 " style=" margin-top: 10%";>
             <div class="box1 col-sm-12 ">
@@ -24,7 +25,7 @@
                         <div style="text-align: left;" class="form-group">
                             <label for="password">Password</label>
                             <input type="password" class="form-control" name="password" >
-                        </div>
+                        </div> -->
                         <!-- <div>
                             <h3>Login Type</h3>
                             <label>
@@ -32,7 +33,7 @@
                             <label>
                               <input type="checkbox" class="radio" value="worker" name="Type" />Worker</label>
                         </div> -->
-                          <script>
+                          <!-- <script>
                             $(document).ready(function(){
                                 $('input:checkbox').click(function() {
                                     $('input:checkbox').not(this).prop('checked', false);
@@ -51,6 +52,41 @@
             </div>
         </div>     
     </div>    
-</div>
+</div> -->
 <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-10 col-xl-9 mx-auto">
+          <div class="card card-login flex-row my-5">
+            <div class="card-img-left d-none d-md-flex">
+            </div>
+            <div class="card-body">
+              <h5 class="card-title text-center">LOG IN</h5>
+              <form action="/login" method="POST">
+                <div class="form-label-group">
+                    <input type="text" id="inputUserame" class="form-control" placeholder="Username" required autofocus>
+                    <label for="inputUserame">Username</label>
+                </div>
+  
+                <div class="form-label-group">
+                  <input type="password" id="inputpassword" class="form-control" placeholder="Password" required>
+                  <label for="password">Password</label>
+                </div>
+                <div class="gap">
+                  <hr class="my-2">
+                </div>
+                
+                <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Log in</button>
+                <br>
+                <div align="center">
+                        <span>Don't have an account ?</span>
+                        <a  href="/signup" >Sign up</a> 
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 <%- include("../partials/footer")%>

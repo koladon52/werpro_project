@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Calistoga&display=swap');
+
 body{
     overflow-x: hidden;
     background-image : url(../images/back_login2.png) ;
@@ -34,7 +36,13 @@ body{
     --input-padding-x: 1.5rem;
     --input-padding-y: .75rem;
 }
-  
+
+ 
+.card-body{
+    margin-top: 10%;
+    margin-bottom: 10%;
+}
+
 .card-login {
     border: 0;
     border-radius: 1rem;
@@ -61,6 +69,7 @@ body{
   
 .form-login {
     width: 10%;
+    font-family: 'Calistoga', cursive;
 }
   
 .form-login .btn {
@@ -141,4 +150,11 @@ body{
 
 .btn{
     margin-top: 10%;
+    text-transform: uppercase;
 }
+
+h5{
+    font-family: 'Calistoga', cursive;
+    font-size: 50px;
+    text-transform: uppercase;
+  }

@@ -1,4 +1,10 @@
 <%- include("../partials/header")%>
+<head> 	
+    <link rel="stylesheet" type="text/css" href="css/footer.css"> 	
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> 
+  
+  </head> 
+
 <div class="container" style="margin-top: 10%; margin-bottom: 10%;">
     <div class="jumbotron">
         <img src='<%= job.img %>' class="img-fluid">
@@ -14,3 +20,150 @@
     </div>
 </div>
 <%- include("../partials/footer")%>
+
+<style>
+    * { 	
+    margin: 0; 	
+    padding: 0; 	
+    font-family: sans-serif;
+} 
+
+.footer { 	
+    width: 100%; 	
+    background: #2b2d42; 	
+    display: block;
+} 
+
+.inner-footer { 	
+    width: 95%; 	
+    margin: auto; 	
+    padding: 10px 10px; 	
+    display: flex; 	
+    flex-wrap: wrap; 	
+    box-sizing: border-box; 	
+    justify-content: center; 
+} 
+
+.footer-items { 	
+    width: 100%; 	
+    padding: 10px 20px; 	
+    box-sizing: border-box; 
+} 
+
+/* h1 { 	
+    padding: 10px 0; 	
+    font-size: 25px; 	
+    color: #FFD700	; 	
+    text-transform: uppercase; 
+}  */
+
+.footer-items p { 	
+    color:#fff; 	
+    font-size: 16px; 	
+    text-align: justify; 	
+    line-height: 25px; 
+} 
+.footer_contact{
+    width: 180%;
+}
+
+h2 { 	
+    margin: 10px 0; 	
+    color: #FFD700	; 	
+    font-size: 16px; 	
+    font-weight: lighter; 	
+    text-transform: uppercase; 
+} 
+
+h3 {
+    font-size: 15px;
+    margin-left: 30px;
+    font-size: 100%;
+}
+
+.border { 	
+    height: 2px; 	
+    width: 40px; 	
+    background: #FFD700	; 
+} 
+
+ul { 	
+    list-style: none; 	
+    color: #fff	; 	
+    font-size: 15px; 	
+    letter-spacing: 0.5px; 
+} 
+
+ul a { 	
+    text-decoration: none; 	
+    outline: none; 	
+    color:  #fff; 	
+    transition: 0.3s;
+    font-size: 100%;   
+} 
+
+ul a:hover { 	
+    color: #FFD700	; 
+}
+
+ul li { 	
+    margin: 10px 0; 	
+    height: 25px;
+    font-size: 100%;
+    
+    padding: 2% 0%; 
+}
+
+li i {   
+    margin-right: 20px;
+}
+
+
+.social-media { 	
+    width: 100%; 	
+    color: #fff; 	
+    text-align: center; 
+}
+
+.social-media a { 	
+    text-decoration: none; 
+}
+
+.social-media i { 	
+    height: 50px; 	
+    width: 50px; 	
+    margin: 10px 4px;
+    margin-right: 19px; 	
+    padding: 15px; 	
+    color: #fff; 	
+    border-radius: 50%;	
+    border: 1px solid #fff; 	
+    transition: 0.3s; 
+}
+
+.social-media i:hover { 	
+    background: grey; 
+}
+
+.footer-bottom { 	
+    padding: 10px; 	
+    background: #2b2d42; 	
+    color: grey; 	
+    font-size: 12px;
+    text-align: center; 
+}
+
+/* @media screen and (max-width: 1085px) { 	
+    .footer-items { 		
+        width: 50%; 	
+    }
+}
+
+@media screen and (max-width: 600px) 
+{ 	.footer-items { 		
+    width: 100%; 	
+    } 
+} */
+
+
+</style>

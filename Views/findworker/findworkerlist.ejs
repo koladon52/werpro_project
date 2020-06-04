@@ -1,25 +1,27 @@
 <%- include("../partials/header")%>
 
 <div class="container">
-    <ul class="list-unstyled" style="margin-top: 10%;margin-bottom: 10%;">
+      <h1 class="my-4">WORKER LIST
+        <!-- <small>find your job</small> -->
+      </h1>
       <% Resume.forEach(function(resume){ %>
-        <div class="jumbotron"  >
-          <div>
-          <li class="media" >
-            <img src="/images/<%= resume.user.img%>" class="mr-3">
-            <div class="media-body">
-              <h3 class="mt-0 mb-1"><%= resume.firstname %> <%= resume.lastname %></h3><br>
+      <!-- Project One -->
+      <div class="row">
+        <div class="col-md-7">
+          <a href="#">
+            <img class="img-fluid rounded mb-3 mb-md-0" src="/images/<%= resume.user.img %>" width="300" height="300"  alt="">
+          </a>
+        </div>
+        <div class="col-md-5">
+          <h3 class="mt-0 mb-1"><%= resume.firstname %> <%= resume.lastname %></h3><br>
               <h4> <%= resume.description %> </h4>
               <h5> <%= resume.date %> </h5>
-              <a action="GET" href="/workerlist/<%= resume._id %>">See more</a>
-            </div>
-          </li>
-          </div>
-          </div>
-
-        
+          <a action="GET" class="btn btn-primary" href="/joblist/<%= resume._id %>">see more detail</a>
+        </div>
+      </div>
+      <!-- /.row -->
+      <hr>
       <% }); %>
-      </ul>
     </div>
 
 <%- include("../partials/footer")%>

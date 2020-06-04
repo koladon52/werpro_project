@@ -13,6 +13,7 @@ let jobSchema = new mongoose.Schema({
     date             : String,
     contact          : String,
     file             : String,
+    editdate         : String,
     user : {
         id:{
             type: mongoose.Schema.Types.ObjectId,

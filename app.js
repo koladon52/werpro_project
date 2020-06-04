@@ -69,6 +69,12 @@ var resume = multer.diskStorage({
 upload = multer({ storage : resume})
 
 app.post("/resume",upload.single("pdf"), middleware.isloggedIn,function(req, res){
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); 
+        var yyyy = today.getFullYear();
+
+        today = mm + '/' + dd + '/' + yyyy;
         let user           = {
             id : req.user._id,
             username : req.user.username,
@@ -83,7 +89,7 @@ app.post("/resume",upload.single("pdf"), middleware.isloggedIn,function(req, res
         let jobtype        = req.body.jobtype;
         let date           = req.body.date;
         let time           = req.body.time;
-        let resume = {user : user,firstname : firstname,lastname : lastname,jobtype:jobtype,employmenttype:employmenttype,worktime:time,description:description,file:file,date:date};
+        let resume = {user : user,firstname : firstname,lastname : lastname,jobtype:jobtype,employmenttype:employmenttype,worktime:time,description:description,file:file,date:date,editdate : today};
         // if(req.file){
         //     var profileimage = req.file.filename;
         // } else {
@@ -277,9 +283,16 @@ app.get("/postjob", middleware.isloggedIn, function(req, res){
 
 
 app.post("/postjob",upload.single("pdf"), middleware.isloggedIn,function(req, res){
+    let today = new Date();
+    let dd = String(today.getDate()).padStart(2, '0');
+    let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    let yyyy = today.getFullYear();
+
+    today = mm + '/' + dd + '/' + yyyy;
     let user           = {
         id : req.user._id,
-        username : req.user.username
+        username : req.user.username,
+        img : req.user.img
     }
     let username          = req.body.username;
     let companyname       = req.body.companyname;
@@ -292,7 +305,7 @@ app.post("/postjob",upload.single("pdf"), middleware.isloggedIn,function(req, re
     let date              = req.body.date;
     let time              = req.body.time;
     let contact           = req.body.contact;
-    let job = {user : user, companyname : companyname,salary : salary,jobtype:jobtype,employmenttype:employmenttype,worktime:time,qualti:qualti,file:file,date:date,contact : contact, jobpos : jobpos};
+    let job = {user : user, companyname : companyname,salary : salary,jobtype:jobtype,employmenttype:employmenttype,worktime:time,qualti:qualti,file:file,date:date,contact : contact, jobpos : jobpos , editdate : today};
     // if(req.file){
     //     var profileimage = req.file.filename;
     // } else {
@@ -356,7 +369,13 @@ app.post("/profile/edit" ,upload.single("img") ,middleware.isloggedIn, function(
     } else {
         var profileimage = img;
     }
-        User.update({_id:id},{$set:{firstname : req.body.firstname,lastname : req.body.lastname,phone : req.body.phone, address : req.body.address, img : profileimage}}, function(error,profile){
+    let today = new Date();
+    let dd = String(today.getDate()).padStart(2, '0');
+    let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    let yyyy = today.getFullYear();
+
+    today = mm + '/' + dd + '/' + yyyy;
+        User.update({_id:id},{$set:{firstname : req.body.firstname,lastname : req.body.lastname,phone : req.body.phone, address : req.body.address, img : profileimage , editdate : today}}, function(error,profile){
         if(error){
             console.log("error"); 
         } else {

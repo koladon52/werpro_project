@@ -65,13 +65,12 @@
               <h5 class="card-title text-center">sign in</h5>
               <form action="/login" method="POST">
                 <div class="form-label-group">
-                    <input type="text" id="inputUserame" class="form-control" placeholder="Username" required autofocus>
+                    <input type="text" id="inputUserame" class="form-control" placeholder="Username" name="username"required autofocus>
                     <label for="inputUserame">Username</label>
                 </div>
-  
                 <div class="form-label-group">
-                  <input type="password" id="inputpassword" class="form-control" placeholder="Password" required>
-                  <label for="password">Password</label>
+                  <input type="password" id="inputpassword" class="form-control" placeholder="Password" name="password" required>
+                  <label for="inputpassword">Password</label>
                 </div>
                 <div class="gap">
                   <hr class="my-2">

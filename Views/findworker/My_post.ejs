@@ -1,26 +1,31 @@
 <%- include("../partials/header")%>
 <% var count = 0%>
 <div class="container">
-<ul class="list-unstyled" style="margin-top: 5%;margin-bottom: 5%;">
+  <h1 class="my-4">My Post
+    <!-- <small>find your job</small> -->
+  </h1>
     <% Job.forEach(function(job){ %>
       <% if(job.user.username === currentUser.username){%>
-    <div class="jumbotron">
-      <div>
-      <li class="media" >
-        <img src="/models/resume<%= job.img %>" class="mr-3">
-        <div class="media-body">
+      <!-- Project One -->
+      <div class="row">
+        <div class="col-md-7">
+          <a href="#">
+            <img class="img-fluid rounded mb-3 mb-md-0" src="/images/<%= job.user.img %>" width="300" height="300"  alt="">
+          </a>
+        </div>
+        <div class="col-md-5">
           <h3 class="mt-0 mb-1"><%= job.companyname %></h3><br>
           <h4> <%= job.jobtype %> </h4>
           <h4> <%= job.employmenttype %> </h4>
           <h5> <%= job.worktime %> </h5>
           <h5> <%= job.date %> </h5>
           <h5> <%= job.salary %> </h5>
-          <a action="GET" href="/My_post/<%= job._id %>">See more</a>
+          <a action="GET" class="btn btn-primary" href="/joblist/<%= job._id %>">see more detail</a>
         </div>
-      </li>
       </div>
-      </div>   
-    <% count++ } %>
+      <!-- /.row -->
+      <hr>
+      <% count++ } %>
     <% })  %>
     <% if(count === 0){ %>
       <h1><center>ไม่พบข้อมูล</center></h1>

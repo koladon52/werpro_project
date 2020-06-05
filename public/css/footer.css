@@ -81,9 +81,9 @@ ul a {
     font-size: 100%;   
 } 
 
-ul a:hover { 	
+/* ul a:hover { 	
     color: #FFD700	; 
-}
+} */
 
 ul li { 	
     margin: 10px 0; 	

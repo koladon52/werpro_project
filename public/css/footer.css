@@ -1,13 +1,15 @@
-* { 	
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@200&display=swap');* 
+
+*{
     margin: 0; 	
     padding: 0; 	
-    font-family: sans-serif;
 } 
 
 .footer { 	
     width: 100%; 	
     background: #2b2d42; 	
     display: block;
+    font-family: 'Sarabun', sans-serif;
 } 
 
 .inner-footer { 	
@@ -43,7 +45,8 @@
     width: 180%;
 }
 
-h2 { 	
+h2 {
+    font-size: 50px; 	
     margin: 10px 0; 	
     color: #FFD700	; 	
     font-size: 16px; 	
@@ -52,7 +55,7 @@ h2 {
 } 
 
 h3 {
-    font-size: 15px;
+    font-size: 25px;
     margin-left: 30px;
     font-size: 100%;
 }
@@ -78,9 +81,9 @@ ul a {
     font-size: 100%;   
 } 
 
-ul a:hover { 	
+/* ul a:hover { 	
     color: #FFD700	; 
-}
+} */
 
 ul li { 	
     margin: 10px 0; 	
@@ -89,11 +92,14 @@ ul li {
     
     padding: 2% 0%; 
 }
-
+/*  */
 li i {   
     margin-right: 20px;
 }
 
+li p{
+    margin-left: 30px;
+}
 
 .social-media { 	
     width: 100%; 	

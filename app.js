@@ -15,7 +15,11 @@ const express = require("express"),
       ;
 let app = express();
 
-mongoose.connect('mongodb://localhost:27017/projectweb');
+mongoose.set('useUnifiedTopology',true);
+mongoose.set('useCreateIndex',true);
+mongoose.set('useFindAndModify',false);
+
+mongoose.connect('mongodb://localhost:27017/projectweb',{ useNewUrlParser: true })
 app.set('view engine','ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(flash());
@@ -58,13 +62,13 @@ app.get("/resume", middleware.isloggedIn,function(req, res){
 
 multer  = require('multer')
 var resume = multer.diskStorage({
-    destination : function(req,gile,cb){
-        cb(null,'./public/resume/');
-    },
-    filename : function(req,gile,cb){
-        cb(null,Date.now()+".pdf");
-    },
+    destination : './public/resume/',
+    filename : function(req, file ,cb) {
+        cb(null,file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+    }
 })
+
+
 
 upload = multer({ storage : resume})
 
@@ -342,6 +346,7 @@ app.get("/Liked", middleware.isloggedIn, function(req, res){
 //................profile..............
 
 multer  = require('multer')
+
 var storage = multer.diskStorage({
     destination : function(req,gile,cb){
         cb(null,'./public/images/');

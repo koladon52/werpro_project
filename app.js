@@ -7,10 +7,12 @@ const express = require("express"),
       passportlocal = require('passport-local'),
       passportlocalMongoose = require('passport-local-mongoose'),
       methodOverride = require('method-override'),
+      fs = require('fs'),
       User = require('./models/user'),
       Resume = require('./models/resume'),
       Jobdetail = require('./models/jobdetail'),
-      middleware = require('./middleware');
+      middleware = require('./middleware'),
+      multer = require('multer')
 
       ;
 let app = express();
@@ -46,6 +48,12 @@ passport.deserializeUser(User.deserializeUser());
 
 app.use(express.static("public"));
 
+var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); 
+        var yyyy = today.getFullYear();
+
+
 app.get("/", function(req, res){
     res.render("landing");
 })
@@ -60,22 +68,19 @@ app.get("/resume", middleware.isloggedIn,function(req, res){
     res.render("findjob/resume");
 })
 
-multer  = require('multer')
-var resume = multer.diskStorage({
-    destination : './public/resume/',
-    filename : function(req, file ,cb) {
-        cb(null,file.fieldname + '-' + Date.now() + path.extname(file.originalname));
-    }
+var resumefile = multer.diskStorage({
+    destination : function(req,gile,cb){
+        cb(null,'./public/resume/');
+    },
+    filename : function(req,gile,cb){
+        cb(null,Date.now()+".pdf");
+    },
 })
 
-upload = multer({ storage : resume})
+uploadresume = multer({ storage : resumefile})
 
-app.post("/resume",upload.single("pdf"), middleware.isloggedIn,function(req, res){
-        var today = new Date();
-        var dd = String(today.getDate()).padStart(2, '0');
-        var mm = String(today.getMonth() + 1).padStart(2, '0'); 
-        var yyyy = today.getFullYear();
-
+app.post("/resume",uploadresume.single("file"), middleware.isloggedIn,function(req, res){
+        
         today = mm + '/' + dd + '/' + yyyy;
         let user           = {
             id : req.user._id,
@@ -86,17 +91,13 @@ app.post("/resume",upload.single("pdf"), middleware.isloggedIn,function(req, res
         let firstname      = req.body.firstname;
         let lastname       = req.body.lastname;
         let description    = req.body.desc;
-        let file           = req.body.file;
+        let file           = req.file.filename;
         let employmenttype = req.body.employmenttype;
         let jobtype        = req.body.jobtype;
         let date           = req.body.date;
         let time           = req.body.time;
         let resume = {user : user,firstname : firstname,lastname : lastname,jobtype:jobtype,employmenttype:employmenttype,worktime:time,description:description,file:file,date:date,editdate : today};
-        // if(req.file){
-        //     var profileimage = req.file.filename;
-        // } else {
-        //     var profileimage = "No File";
-        //     } 
+
         Resume.create(resume, function(err,newResume){
         if(err){
             console.log(err); 
@@ -143,8 +144,36 @@ app.get("/My_resume/:id",middleware.isloggedIn,function(req, res){
     });
 });
 
-app.put("/My_resume/:id/edit",middleware.isloggedIn ,function(req,res){
-    Resume.findByIdAndUpdate(req.params.id, req.body.resume, function(err, updated){
+app.put("/My_resume/:id/edit",uploadresume.single('file'),middleware.isloggedIn ,function(req,res){
+    let id = req.params.id;
+    console.log(1);
+    today = mm + '/' + dd + '/' + yyyy;
+    console.log(2);
+    let firstname      = req.body.firstname;
+    let lastname       = req.body.lastname;
+    let description    = req.body.desc;
+    let employmenttype = req.body.employmenttype;
+    let jobtype        = req.body.jobtype;
+    let date           = req.body.date;
+    let time           = req.body.time;
+    console.log(3);
+    if(req.file){
+        var resume = req.file.filename;
+        Resume.findById(req.params.id, function(err, foundresume){
+            if(err){
+                console.log(err)
+            } else {
+                const resumepath = './public/resume/' + foundresume.file;
+                fs.unlink(resumepath, function(err){
+                    if(err){
+                        console.log(err);
+                    }
+                })
+            }
+        })
+    } 
+    console.log(4);
+    Resume.findByIdAndUpdate({_id:id},{$set:{firstname : firstname,lastname : lastname,jobtype:jobtype,employmenttype:employmenttype,worktime:time,description:description,file:resume,date:date,editdate : today}},function(err, updated){
         if(err){
             res.redirect('/');
         } else {
@@ -228,7 +257,8 @@ app.get("/My_post/:id",middleware.isloggedIn,function(req, res){
     });
 });
 
-app.put("/My_post/:id/edit",middleware.isloggedIn ,function(req,res){
+app.put("/My_post/:id/edit",uploadresume.single("job[file]"),middleware.isloggedIn ,function(req,res){
+
     Jobdetail.findByIdAndUpdate(req.params.id, req.body.job, function(err, updated){
         if(err){
             res.redirect('/');
@@ -261,7 +291,7 @@ app.delete("/My_post/:id/edit",middleware.isloggedIn, function(req,res){
 app.get("/workerlist",middleware.isloggedIn,function(req, res){
     Resume.find({},function(error, allResume){
         if(error){
-            console.log('Error!');
+            console.log(error);
         } else
         {
             res.render("findworker/findworkerlist",{Resume:allResume});
@@ -272,7 +302,7 @@ app.get("/workerlist",middleware.isloggedIn,function(req, res){
 app.get("/workerlist/:id",middleware.isloggedIn,function(req, res){
     Resume.findById(req.params.id, function(error, idResume){
         if(error){
-            console.log("Error");
+            console.log(error);
         } else {
             res.render("findworker/workdetail",{resume:idResume});
         }
@@ -284,7 +314,7 @@ app.get("/postjob", middleware.isloggedIn, function(req, res){
 })
 
 
-app.post("/postjob",upload.single("pdf"), middleware.isloggedIn,function(req, res){
+app.post("/postjob",uploadresume.single("pdf"), middleware.isloggedIn,function(req, res){
     let today = new Date();
     let dd = String(today.getDate()).padStart(2, '0');
     let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -343,7 +373,6 @@ app.get("/Liked", middleware.isloggedIn, function(req, res){
 
 //................profile..............
 
-multer  = require('multer')
 
 var storage = multer.diskStorage({
     destination : function(req,gile,cb){
@@ -364,11 +393,23 @@ app.get("/profile/edit",middleware.isloggedIn,function(req, res){
     res.render("Autherization/editprofile");
 })
 
-app.post("/profile/edit" ,upload.single("img") ,middleware.isloggedIn, function(req,res){
+app.put("/profile/:id/edit" ,upload.single("img") ,middleware.isloggedIn, function(req,res){
     let id = req.body.id;
     let img = req.body.oldimg;
     if(req.file){
         var profileimage = req.file.filename;
+        User.findById(req.params.id, function(err, founduser){
+            if(err){
+                console.log(err)
+            } else {
+                const imagepath = './public/images/' + founduser.img;
+                fs.unlink(imagepath, function(err){
+                    if(err){
+                        console.log(err);
+                    }
+                })
+            }
+        })
     } else {
         var profileimage = img;
     }
@@ -378,7 +419,7 @@ app.post("/profile/edit" ,upload.single("img") ,middleware.isloggedIn, function(
     let yyyy = today.getFullYear();
 
     today = mm + '/' + dd + '/' + yyyy;
-        User.update({_id:id},{$set:{firstname : req.body.firstname,lastname : req.body.lastname,phone : req.body.phone, address : req.body.address, img : profileimage , editdate : today}}, function(error,profile){
+        User.findByIdAndUpdate({_id:id},{$set:{firstname : req.body.firstname,lastname : req.body.lastname,phone : req.body.phone, address : req.body.address, img : profileimage , editdate : today}}, function(error,profile){
         if(error){
             console.log("error"); 
         } else {

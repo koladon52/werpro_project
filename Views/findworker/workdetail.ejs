@@ -2,7 +2,8 @@
 <head> 	
     <link rel="stylesheet" type="text/css" href="css/footer.css"> 	
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> 
-  </head> 
+</head>
+
 <div class="container" style="margin-top: 10%; margin-bottom: 10%;">
     <div class="jumbotron">
         <h1><%= resume.name %></h1>
@@ -12,6 +13,8 @@
         <P>ประเภทสัญญาจ้าง  : <%= resume.jobtype %></P>
         <p>ประเภทงานที่สนใจ  : <%= resume.employmenttype %></p>
         <p>วันเวลา  <%= resume.date %></p>
+        <a href="/resume/<%= resume.file %>" download>Download Resume</a>
     </div>
 </div>
+
 <%- include("../partials/footer")%>

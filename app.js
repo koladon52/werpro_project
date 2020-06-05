@@ -68,8 +68,6 @@ var resume = multer.diskStorage({
     }
 })
 
-
-
 upload = multer({ storage : resume})
 
 app.post("/resume",upload.single("pdf"), middleware.isloggedIn,function(req, res){

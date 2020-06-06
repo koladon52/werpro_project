@@ -5,15 +5,14 @@
     padding: 0; 	
 } 
 
-.footer { 	
-    width: 100%; 	
+.footer { 		
     background: #2b2d42; 	
     display: block;
     font-family: 'Sarabun', sans-serif;
 } 
 
 .inner-footer { 	
-    width: 95%; 	
+    width: 100%; 	
     margin: auto; 	
     padding: 10px 10px; 	
     display: flex; 	
@@ -42,7 +41,7 @@
     line-height: 25px; 
 } 
 .footer_contact{
-    width: 180%;
+    width: 100%;
 }
 
 h2 {
@@ -81,18 +80,17 @@ ul a {
     font-size: 100%;   
 } 
 
-/* ul a:hover { 	
+ul a:hover { 	
     color: #FFD700	; 
-} */
+}
 
 ul li { 	
     margin: 10px 0; 	
     height: 25px;
     font-size: 100%;
-    
     padding: 2% 0%; 
 }
-/*  */
+
 li i {   
     margin-right: 20px;
 }

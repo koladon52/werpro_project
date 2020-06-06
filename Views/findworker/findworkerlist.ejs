@@ -13,9 +13,10 @@
           </a>
         </div>
         <div class="col-md-5">
-          <h3 class="mt-0 mb-1"><%= resume.firstname %> <%= resume.lastname %></h3><br>
-              <h4> <%= resume.description %> </h4>
-              <h5> <%= resume.date %> </h5>
+              <h4>ชื่อ-สกุล           :  <%= resume.firstname %> <%= resume.lastname%> </h4>
+              <h5> ประเภทการจ้างงาน  : <%= resume.employmenttype %></h5>
+              <h5>ประเเภทงาน        : <%= resume.jobtype %> </h5>
+              <h5>วันทีี่แก้ไขล่าสุด      : <%= resume.editdate%></h5>
           <a action="GET" class="btn btn-primary" href="/workerlist/<%= resume._id %>">see more detail</a>
         </div>
       </div>

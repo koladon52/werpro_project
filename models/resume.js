@@ -12,7 +12,7 @@ let ResumeSchema = new mongoose.Schema({
     date           : String,
     contact        : String,
     file           : String,
-    editsate       : String,
+    editdate       : String,
     user : {
         id:{
             type: mongoose.Schema.Types.ObjectId,

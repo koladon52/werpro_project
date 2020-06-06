@@ -7,6 +7,7 @@
         <div>
             <form style="text-align: left;" action="/My_resume/<%= resume._id %>/edit?_method=PUT" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="username" value="<%= currentUser.username %>">
+                    <input type="hidden" name="oldfile" value="<%= resume.file %>">
                     <div class="form-row" >
                         <div class="col">
                             <label for="inputFirstname">ชื่อจริง</label>
@@ -42,12 +43,12 @@
                         </div>
                         <div class="col-md-6 mb-5">
                             <label for="inputTime">เวลาที่สามารถทำงานได้</label><br>
-                            <input type="time" id="time" name="worktime" value="<%= resume.worktime %>"required>
+                            <input type="time" id="time" name="worktime" value="<%= resume.worktime %>" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputAbout">ข้อมูลเพิ่มเติมเกี่ยวกับผู้สมัครงาน</label>
-                        <input type="text" class="form-control" name="description" value="<%= resume.description %>"">
+                        <input type="text" class="form-control" name="description" value="<%= resume.description %>">
                     </div>
                     <div class="form-group">
                         <label for="udloadRerume">อัพโหลดเรซูเม่</label>

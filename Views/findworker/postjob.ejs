@@ -5,7 +5,7 @@
     <div class="form">
         <h1 style="text-align: center;"> job appiction form</h1>
         <div>
-            <form style="text-align: left;" action="/postjob" method="POST">
+            <form style="text-align: left;" action="/postjob" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="username" value="<%= currentUser.username %>">
                     <div class="form-row">
                         <div class="col">
@@ -41,25 +41,28 @@
                             <input type="number" id="salary" name="salary" required>
                         </div>
                     </div>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-5">
+                            <label for="inputDate">วันที่สามารถเริ่มงานได้</label><br>
+                            <input type="date" id="date" name="date" required>
+                        </div>
+                        <div class="col-md-6 mb-5">
+                            <label for="inputTime">เวลาที่สามารถทำงานได้</label><br>
+                            <input type="time" id="time" name="time" required>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label for="inputQualifications">คุณสมบัติของผู้สมัครงาน</label>
-                        <input type="text" class="form-control" name="qualti"  style="height:100px">
+                        <input type="text" class="form-control" name="qualti"  style="height:100px" required>
                     </div>
                     <div class="form-group">
                         <label for="inputContact">ช่องทางการติดต่อบริษัท/ห้างร้าน</label>
-                        <input type="text" class="form-control" name="contact" placeholder="Facebook,Email,line,เบอร์โทรศัพท์" style="height:100px">
+                        <input type="text" class="form-control" name="contact" placeholder="Facebook,Email,line,เบอร์โทรศัพท์" style="height:100px" required>
                     </div>    
+                    
                     <div class="form-group">
-                        <label for="inputContact">วันที่เริ่มทำงาน</label>
-                        <input type="text" class="form-control" name="date" placeholder="Facebook,Email,line,เบอร์โทรศัพท์" style="height:100px">
-                    </div> 
-                    <div class="form-group">
-                        <label for="inputContact">ระยะเวลาการทำงาน</label>
-                        <input type="text" class="form-control" name="time" placeholder="Facebook,Email,line,เบอร์โทรศัพท์" style="height:100px">
-                    </div>
-                    <div class="form-group">
-                        <label for="udloadRerume">อัพโหลดเอกสารประกอบการสมัคร/เอกสารรายละเอียดเกณฑ์การรับสมัคร</label>
-                        <input type="file" class="form-control-file" id="uploadfile" name="file">
+                        <label for="uploadapplication">อัพโหลดเอกสารประกอบการสมัคร/เอกสารรายละเอียดเกณฑ์การรับสมัคร</label>
+                        <input type="file" class="form-control-file" id="fileapp" name="file" require>
                     </div>     
                     <div class="button">
                         <button type="submit" class="btn btn-primary mb-2">SUBMIT</button>

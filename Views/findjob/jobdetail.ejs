@@ -17,6 +17,7 @@
         <p>วันเวลา  <%= job.date %></p>
         <p>ระยะเวลาทำงาน <%= job.worktime%></p>
         <p>ช่องทางการติดต่อ : <%= job.contact%></p>
+        <a href="/application_documents/<%= job.file %>" download>ดาวโหลดเอกสาร</a>
     </div>
 </div>
 <%- include("../partials/footer")%>

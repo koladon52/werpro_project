@@ -48,10 +48,7 @@ passport.deserializeUser(User.deserializeUser());
 
 app.use(express.static("public"));
 
-var today = new Date();
-        var dd = String(today.getDate()).padStart(2, '0');
-        var mm = String(today.getMonth() + 1).padStart(2, '0'); 
-        var yyyy = today.getFullYear();
+
 
 
 app.get("/", function(req, res){
@@ -81,7 +78,11 @@ uploadresume = multer({ storage : resumefile})
 
 app.post("/resume",uploadresume.single("file"), middleware.isloggedIn,function(req, res){
         
-        today = mm + '/' + dd + '/' + yyyy;
+        var today = new Date();
+        var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+        var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+        var dateTime = date+' '+time;
+
         let user           = {
             id : req.user._id,
             username : req.user.username,
@@ -94,9 +95,9 @@ app.post("/resume",uploadresume.single("file"), middleware.isloggedIn,function(r
         let file           = req.file.filename;
         let employmenttype = req.body.employmenttype;
         let jobtype        = req.body.jobtype;
-        let date           = req.body.date;
-        let time           = req.body.time;
-        let resume = {user : user,firstname : firstname,lastname : lastname,jobtype:jobtype,employmenttype:employmenttype,worktime:time,description:description,file:file,date:date,editdate : today};
+        let workdate           = req.body.date;
+        let worktime           = req.body.time;
+        let resume = {user : user,firstname : firstname,lastname : lastname,jobtype:jobtype,employmenttype:employmenttype,worktime:worktime,description:description,file:file,date:workdate,editdate : dateTime};
 
         Resume.create(resume, function(err,newResume){
         if(err){
@@ -146,16 +147,22 @@ app.get("/My_resume/:id",middleware.isloggedIn,function(req, res){
 
 app.put("/My_resume/:id/edit",uploadresume.single('file'),middleware.isloggedIn ,function(req,res){
     let id = req.params.id;
+    let file = req.body.oldfile;
     console.log(1);
-    today = mm + '/' + dd + '/' + yyyy;
+    
+    var today = new Date();
+    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    var dateTime = date+' '+time;
+
     console.log(2);
     let firstname      = req.body.firstname;
     let lastname       = req.body.lastname;
-    let description    = req.body.desc;
+    let description    = req.body.description;
     let employmenttype = req.body.employmenttype;
     let jobtype        = req.body.jobtype;
-    let date           = req.body.date;
-    let time           = req.body.time;
+    let workdate           = req.body.date;
+    let worktime           = req.body.worktime;
     console.log(3);
     if(req.file){
         var resume = req.file.filename;
@@ -171,9 +178,11 @@ app.put("/My_resume/:id/edit",uploadresume.single('file'),middleware.isloggedIn 
                 })
             }
         })
-    } 
+    } else {
+        var resume = file;
+    }
     console.log(4);
-    Resume.findByIdAndUpdate({_id:id},{$set:{firstname : firstname,lastname : lastname,jobtype:jobtype,employmenttype:employmenttype,worktime:time,description:description,file:resume,date:date,editdate : today}},function(err, updated){
+    Resume.findByIdAndUpdate({_id:id},{$set:{firstname : firstname,lastname : lastname,jobtype:jobtype,employmenttype:employmenttype,worktime:worktime,description:description,file:resume,date:workdate,editdate : dateTime}},function(err, updated){
         if(err){
             res.redirect('/');
         } else {
@@ -231,6 +240,18 @@ app.get("/joblist/:id",middleware.isloggedIn,function(req, res){
 
 //.....................OPERATOR.................
 
+var applicationfile = multer.diskStorage({
+    destination : function(req,gile,cb){
+        cb(null,'./public/application_documents/');
+    },
+    filename : function(req,gile,cb){
+        cb(null,Date.now()+".pdf");
+    },
+})
+
+uploadapplication = multer({ storage : applicationfile})
+
+
 app.get("/findworker", middleware.isloggedIn, function(req, res){
     res.redirect("/login");
 })
@@ -252,20 +273,56 @@ app.get("/My_post/:id",middleware.isloggedIn,function(req, res){
         if(error){
             console.log("Error");
         } else {
-            res.render("findworker/My_jobdetail",{job:idjob});
+            res.render("findworker/My_postdetail",{job:idjob});
         }
     });
 });
 
-app.put("/My_post/:id/edit",uploadresume.single("job[file]"),middleware.isloggedIn ,function(req,res){
+app.put("/My_post/:id/edit",uploadapplication.single("file"),middleware.isloggedIn ,function(req,res){
 
-    Jobdetail.findByIdAndUpdate(req.params.id, req.body.job, function(err, updated){
-        if(err){
-            res.redirect('/');
+    var today = new Date();
+    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    var dateTime = date+' '+time;
+
+    let id = req.params.id;
+    let file = req.body.oldfile;
+
+    let companyname       = req.body.companyname;
+    let salary            = req.body.salary;
+    let qualti            = req.body.qualti;
+    let employmenttype    = req.body.employmenttype;
+    let jobtype           = req.body.jobtype;
+    let jobpos            = req.body.jobpos;
+    let workdate              = req.body.date;
+    let worktime              = req.body.time;
+    let contact           = req.body.contact;
+
+    if(req.file){
+        var Applicationfile = req.file.filename;
+        Jobdetail.findById(req.params.id, function(err, foundjob){
+            if(err){
+                console.log(err)
+            } else {
+                const applicationpath  = './public/application_documents/' + foundjob.file;
+                fs.unlink(applicationpath , function(err){
+                    if(err){
+                        console.log(err);
+                    }
+                })
+            }
+        })
+    } else {
+        var Applicationfile = file
+    }
+
+    Jobdetail.findByIdAndUpdate({_id:id},{$set:{companyname : companyname,salary : salary,qualti : qualti, employmenttype : employmenttype, jobtype : jobtype , jobpos : jobpos, date : workdate , time : worktime , contact : contact , file : Applicationfile , editdate : dateTime}}, function(error,profile){
+        if(error){
+            console.log("error"); 
         } else {
-            res.redirect('/My_post/' + req.params.id);
+            res.redirect("/My_post/" + req.params.id);
         }
-    })
+    });
 })
 
 app.get("/My_post/:id/edit",middleware.isloggedIn,function(req, res){
@@ -313,36 +370,34 @@ app.get("/postjob", middleware.isloggedIn, function(req, res){
     res.render("findworker/postjob");
 })
 
+app.post("/postjob",uploadapplication.single("file"), middleware.isloggedIn,function(req, res){
 
-app.post("/postjob",uploadresume.single("pdf"), middleware.isloggedIn,function(req, res){
-    let today = new Date();
-    let dd = String(today.getDate()).padStart(2, '0');
-    let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-    let yyyy = today.getFullYear();
-
-    today = mm + '/' + dd + '/' + yyyy;
+    var today = new Date();
+    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    var dateTime = date+' '+time;
+    
     let user           = {
         id : req.user._id,
         username : req.user.username,
         img : req.user.img
     }
+
+    let Applicationfile   = req.file.filename;
     let username          = req.body.username;
     let companyname       = req.body.companyname;
     let salary            = req.body.salary;
     let qualti            = req.body.qualti;
-    let file              = req.body.file;
     let employmenttype    = req.body.employmenttype;
     let jobtype           = req.body.jobtype;
     let jobpos            = req.body.jobpos;
-    let date              = req.body.date;
-    let time              = req.body.time;
+    let workdate              = req.body.date;
+    let worktime              = req.body.time;
     let contact           = req.body.contact;
-    let job = {user : user, companyname : companyname,salary : salary,jobtype:jobtype,employmenttype:employmenttype,worktime:time,qualti:qualti,file:file,date:date,contact : contact, jobpos : jobpos , editdate : today};
-    // if(req.file){
-    //     var profileimage = req.file.filename;
-    // } else {
-    //     var profileimage = "No File";
-    //     } 
+    let job = {user : user, companyname : companyname,salary : salary , jobtype:jobtype , employmenttype:employmenttype , worktime : worktime , qualti:qualti , file : Applicationfile , date : workdate ,contact : contact, jobpos : jobpos , editdate : dateTime};
+    
+    console.log(job);
+
     Jobdetail.create(job, function(err,newJob){
     if(err){
         console.log(err); 
@@ -394,8 +449,14 @@ app.get("/profile/edit",middleware.isloggedIn,function(req, res){
 })
 
 app.put("/profile/:id/edit" ,upload.single("img") ,middleware.isloggedIn, function(req,res){
+    var today = new Date();
+    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    var dateTime = date+' '+time;
+
     let id = req.body.id;
     let img = req.body.oldimg;
+
     if(req.file){
         var profileimage = req.file.filename;
         User.findById(req.params.id, function(err, founduser){
@@ -413,13 +474,9 @@ app.put("/profile/:id/edit" ,upload.single("img") ,middleware.isloggedIn, functi
     } else {
         var profileimage = img;
     }
-    let today = new Date();
-    let dd = String(today.getDate()).padStart(2, '0');
-    let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-    let yyyy = today.getFullYear();
 
     today = mm + '/' + dd + '/' + yyyy;
-        User.findByIdAndUpdate({_id:id},{$set:{firstname : req.body.firstname,lastname : req.body.lastname,phone : req.body.phone, address : req.body.address, img : profileimage , editdate : today}}, function(error,profile){
+        User.findByIdAndUpdate({_id:id},{$set:{firstname : req.body.firstname,lastname : req.body.lastname,phone : req.body.phone, address : req.body.address, img : profileimage , editdate : dateTime}}, function(error,profile){
         if(error){
             console.log("error"); 
         } else {

@@ -4,49 +4,55 @@
 </head>
 
 <div class="container">
+    <br>
+    <br>
+    <form class="form-row" style="text-align: left;" action="/joblist" method="POST">
+      <div class="col-md-3 mb-4">
+          <label for="inputcompanyname">บริษัท</label><br>
+          <input type="text" id="companyname" name="searchcompanyname" >
+      </div>
+      <div class="col-md-3 mb-4">
+          <label for="inputsalary">เงินเดือน</label><br>
+          <input type="text" id="salary" name="searchsalary">
+      </div>
+      <br>
+      <select class="form-control col-md-3 mb-4" name="searchemploymenttype" > 
+        <option value="">ลักษณะการว่าจ้าง</option>
+          <option value="Part time">Part time</option>
+          <option value="Full time">Full time</option>
+          <option value="Event">Event</option>
+      </select>
+     
+      <br>
+      <div align="right">
+        <button type="submit" class="btn btn-primary mb-2">Search</button> 
+      </div>  
+
+    </form>
+
 
   <h1 class="my-4">JOB LIST
     <!-- <small>find your job</small> -->
-  </h1>
-
-  <% Job.forEach(function(job){ %>
-  <!-- Project One -->
-  <div class="row">
-    <div class="col-md-7">
-      <a href="#">
-        <img class="img-fluid rounded mb-3 mb-md-0" src="/images/<%= job.user.img %>" width="700" height="300" alt="">
-      </a>
-    </div>
-    <div class="col-md-5">
-      <h3><%= job.companyname %></h3>
-      <p><%= job.qualti %></p>
-      <a action="GET" class="btn btn-primary" href="/joblist/<%= job._id %>">View Project</a>
-    </div>
-  </div>
-  <!-- /.row -->
-  <hr>
-  <% }); %>
-  
-  <!-- <% Job.forEach(function(job){ %>
-    <div class="jumbotron"  >
-      <div>
-      <li class="media" >
-        <img src="/models/resume<%= job.img %>" class="mr-3">
-        <div class="media-body">
-          <h3 class="mt-0 mb-1"><%= job.companyname %></h3><br>
-          <h4> <%= job.jobtype %> </h4>
-          <h4> <%= job.employmenttype %> </h4>
-          <h5> <%= job.worktime %> </h5>
-          <h5> <%= job.date %> </h5>
-          <h5> <%= job.salary %> </h5>
-          <a action="GET" href="/joblist/<%= job._id %>">See more</a>
+    </h1>
+        <% Job.forEach(function(job){ %>
+        <!-- Project One -->
+        <div class="row">
+          <div class="col-md-7">
+            <a href="#">
+              <img class="img-fluid rounded mb-3 mb-md-0" src="/images/<%= job.user.img %>" width="700" height="300" alt="">
+            </a>
+          </div>
+          <div class="col-md-5">
+            <h3><%= job.companyname %></h3>
+            <p><%= job.qualti %></p>
+            <p><%= job.employmenttype %></p>
+            <p><%= job.salary %></p>
+            <a action="GET" class="btn btn-primary" href="/joblist/<%= job._id %>">View Project</a>
+          </div>
         </div>
-      </li>
-      </div>
-      </div>
-
-    
-  <% }); %> -->
+        <!-- /.row -->
+      <hr>
+      <% }); %>
   
 </div>
 

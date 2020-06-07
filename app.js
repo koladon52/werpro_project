@@ -13,7 +13,6 @@ const express = require("express"),
       Jobdetail = require('./models/jobdetail'),
       middleware = require('./middleware'),
       multer = require('multer')
-
       ;
 let app = express();
 
@@ -78,10 +77,10 @@ uploadresume = multer({ storage : resumefile})
 
 app.post("/resume",uploadresume.single("file"), middleware.isloggedIn,function(req, res){
         
-        var today = new Date();
-        var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-        var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-        var dateTime = date+' '+time;
+    var today = new Date();
+    var date = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate();
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    var dateTime = time+' '+date;
 
         let user           = {
             id : req.user._id,
@@ -151,9 +150,9 @@ app.put("/My_resume/:id/edit",uploadresume.single('file'),middleware.isloggedIn 
     console.log(1);
     
     var today = new Date();
-    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    var date = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate();
     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    var dateTime = date+' '+time;
+    var dateTime = time+' '+date;
 
     console.log(2);
     let firstname      = req.body.firstname;
@@ -236,6 +235,58 @@ app.get("/joblist/:id",middleware.isloggedIn,function(req, res){
     });
 })
 
+app.post('/joblist',middleware.isloggedIn, function(req , res , next){
+    var fuzzyfiltercompanyname   = req.body.searchcompanyname;
+    var filtersalary             = req.body.searchsalary;
+    var filteremploymenttype     = req.body.searchemploymenttype;
+    var fileterjobtype           = req.body.searchjobtype;
+    
+    const filtercompanyname = new RegExp(escapeRegex(fuzzyfiltercompanyname), 'gi');
+
+    // if(filtercompanyname != " " && filtersalary != " " && filteremploymenttype != " "){
+    //     var filterParemater = { $and:[{ companyname:filtercompanyname},{$and:[{salary : filtersalary},{employmenttype : filteremploymenttype}]}]}
+    // } else if (filtercompanyname != " " && filtersalary == " " && filteremploymenttype != " "){
+    //     var filterParemater = { $and:[{ companyname : filtercompanyname},{employmenttype : filteremploymenttype}]}
+    // } else if (filtercompanyname == " " && filtersalary != " " && filteremploymenttype != " "){
+    //     var filterParemater = { $and:[{ salary : filtersalary},{employmenttype : filteremploymenttype}]}
+    // } else {
+    //     var filterParemater = {};
+    // }
+
+    if(filtercompanyname !== '' && filtersalary !== '' && filteremploymenttype !== ''){
+        var filterParemater={ $and :[{ companyname : filtercompanyname},{salary : filtersalary},{employmenttype : filteremploymenttype}]};
+    } else if(filtercompanyname === '' && filtersalary !== '' && filteremploymenttype !== ''){
+        var filterParemater={ $and :[{salary : filtersalary},{employmenttype : filteremploymenttype}]};
+    } else if(filtercompanyname !== '' && filtersalary === '' && filteremploymenttype !== ''){
+        var filterParemater={ $and :[{ companyname : filtercompanyname},{employmenttype : filteremploymenttype}]};
+    } else if(filtercompanyname !== '' && filtersalary !== '' && filtyeremploymenttype === ''){
+        var filterParemater={ $and :[{ companyname : filtercompanyname},{salary : filtersalary}]};
+    } else if(filtercompanyname !== '' && filtersalary === '' && filteremploymenttype === ''){
+        var filterParemater={ $and :[{ companyname : filtercompanyname}]};
+    } else if(filtercompanyname === '' && filtersalary !== '' && filteremploymenttype === ''){
+        var filterParemater={ $and :[{ salary : filtersalary}]};
+    } else if(filtercompanyname === '' && filtersalary === '' && filteremploymenttype !== ''){
+        var filterParemater={ $and :[{ employmenttype : filteremploymenttype}]};
+    } else {
+        var filterParemater = {};
+    }
+
+    console.log(filterParemater);
+
+    var jobfilter = Jobdetail.find(filterParemater);
+    jobfilter.exec(function(err,data){
+        if(err){
+            console.log(err);
+        } else {
+            console.log(data);
+            res.render("findjob/joblist",{Job:data});
+        }
+    })
+});
+
+function escapeRegex(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+};
 
 
 //.....................OPERATOR.................
@@ -281,9 +332,9 @@ app.get("/My_post/:id",middleware.isloggedIn,function(req, res){
 app.put("/My_post/:id/edit",uploadapplication.single("file"),middleware.isloggedIn ,function(req,res){
 
     var today = new Date();
-    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    var date = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate();
     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    var dateTime = date+' '+time;
+    var dateTime = time+' '+date;
 
     let id = req.params.id;
     let file = req.body.oldfile;
@@ -373,9 +424,9 @@ app.get("/postjob", middleware.isloggedIn, function(req, res){
 app.post("/postjob",uploadapplication.single("file"), middleware.isloggedIn,function(req, res){
 
     var today = new Date();
-    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    var date = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate();
     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    var dateTime = date+' '+time;
+    var dateTime = time+' '+date;
     
     let user           = {
         id : req.user._id,
@@ -450,9 +501,9 @@ app.get("/profile/edit",middleware.isloggedIn,function(req, res){
 
 app.put("/profile/:id/edit" ,upload.single("img") ,middleware.isloggedIn, function(req,res){
     var today = new Date();
-    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    var date = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate();
     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    var dateTime = date+' '+time;
+    var dateTime = time+' '+date;
 
     let id = req.body.id;
     let img = req.body.oldimg;

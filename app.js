@@ -16,6 +16,8 @@ const express = require("express"),
       ;
 let app = express();
 
+app.use(express.static(path.join(__dirname, 'public')));
+
 mongoose.set('useUnifiedTopology',true);
 mongoose.set('useCreateIndex',true);
 mongoose.set('useFindAndModify',false);
@@ -205,6 +207,7 @@ app.delete("/My_resume/:id/edit",middleware.isloggedIn, function(req,res){
         if(err){
             res.redirect('/My_resume');
         } else {
+            
             res.redirect('/My_resume');
         }
     });
@@ -335,7 +338,7 @@ app.put("/My_post/:id/edit",uploadapplication.single("file"),middleware.islogged
     var date = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate();
     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
     var dateTime = time+' '+date;
-
+    
     let id = req.params.id;
     let file = req.body.oldfile;
 
@@ -391,6 +394,23 @@ app.delete("/My_post/:id/edit",middleware.isloggedIn, function(req,res){
         if(err){
             res.redirect('/My_post');
         } else {
+            if(req.file){
+                var Applicationfile = req.file.filename;
+                Jobdetail.findById(req.params.id, function(err, foundjob){
+                    if(err){
+                        console.log(err)
+                    } else {
+                        const applicationpath  = './public/application_documents/' + foundjob.file;
+                        fs.unlink(applicationpath , function(err){
+                            if(err){
+                                console.log(err);
+                            }
+                        })
+                    }
+                })
+            } else {
+                var Applicationfile = file
+            }
             res.redirect('/My_post');
         }
     });
@@ -427,7 +447,7 @@ app.post("/postjob",uploadapplication.single("file"), middleware.isloggedIn,func
     var date = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate();
     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
     var dateTime = time+' '+date;
-    
+
     let user           = {
         id : req.user._id,
         username : req.user.username,
@@ -442,10 +462,21 @@ app.post("/postjob",uploadapplication.single("file"), middleware.isloggedIn,func
     let employmenttype    = req.body.employmenttype;
     let jobtype           = req.body.jobtype;
     let jobpos            = req.body.jobpos;
-    let workdate              = req.body.date;
-    let worktime              = req.body.time;
+    let workdate          = req.body.date;
+    let worktime          = req.body.time;
     let contact           = req.body.contact;
-    let job = {user : user, companyname : companyname,salary : salary , jobtype:jobtype , employmenttype:employmenttype , worktime : worktime , qualti:qualti , file : Applicationfile , date : workdate ,contact : contact, jobpos : jobpos , editdate : dateTime};
+    let location          = req.body.location;
+    let lon               = req.body.lon; 
+    let lat               = req.body.lat;
+    let country           = req.body.country;
+    let district          = req.body.district;
+    let postcode          = req.body.postcode;
+    let province          = req.body.province;
+    let subdistrict       = req.body.subdistrict;
+    let aoi               = req.body.aoi;
+    console.log(country);
+    let job = {user : user, companyname : companyname,salary : salary , jobtype:jobtype , employmenttype:employmenttype , worktime : worktime , qualti:qualti , file : Applicationfile , date : workdate ,contact : contact, jobpos : jobpos , editdate : dateTime,
+    lon : lon, lat : lat , location : location , district : district , subdistrint : subdistrict , postcode : postcode , province : province , aoi : aoi , country : country};
     
     console.log(job);
 
@@ -526,7 +557,7 @@ app.put("/profile/:id/edit" ,upload.single("img") ,middleware.isloggedIn, functi
         var profileimage = img;
     }
 
-    today = mm + '/' + dd + '/' + yyyy;
+    
         User.findByIdAndUpdate({_id:id},{$set:{firstname : req.body.firstname,lastname : req.body.lastname,phone : req.body.phone, address : req.body.address, img : profileimage , editdate : dateTime}}, function(error,profile){
         if(error){
             console.log("error"); 

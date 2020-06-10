@@ -1,4 +1,121 @@
 <%- include("../partials/header")%>
+    
+<head>
+    <% var lon %>
+    <% var lat %>
+    <% var country %>
+    <% var district %>
+    <% var postcode %>
+    <% var province %>
+    <% var subdistrict %>
+    <% var aoi %>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="https://api.longdo.com/map/?key=e655c57b1010fe433aa7d6e1a0aeb9e2"></script>
+        <script>
+           var map;  
+           var search;
+           var suggest;
+          function init() {
+              map = new longdo.Map({
+              placeholder: document.getElementById('map'),
+              ui: longdo.UiComponent.Mobile 
+            });
+            search = document.getElementById('search');
+            suggest = document.getElementById('suggest');
+            finalresult = document.getElementById('finalresult');
+            map.Search.placeholder(
+                document.getElementById('result')
+            );
+            //When user press an Enter button #search
+            search.onkeyup = function(event) {
+              if((event || window.event).keyCode != 13)
+                return;
+                doSearch();
+            }
+            search.oninput = function() {
+                if (search.value.length < 3) {
+                    suggest.style.display = 'none';
+                    return;
+                }
+                
+                map.Search.suggest(search.value, {
+                });
+            };
+            map.Event.bind('suggest', function(result) {
+                if (result.meta.keyword != search.value) return;
+                
+                suggest.innerHTML = '';
+                for (var i = 0, item; item = result.data[i]; ++i) {
+                    longdo.Util.append(suggest, 'a', {
+                    innerHTML: item.d,
+                    href: 'javascript:doSuggest(\'' + item.w + '\')'
+                    });
+                }
+                suggest.style.display = 'flex';
+            });
+          }
+            function rerverseGeocoding() { 
+            $.ajax({ 
+                    url: "https://api.longdo.com/map/services/address?", 
+                    dataType: "json", 
+                    type: "GET", 
+                    contentType: "application/json", 
+                    data: {
+                        key: "e655c57b1010fe433aa7d6e1a0aeb9e2",
+                        lon: lon,
+                        lat: lat
+                },
+                success: function (results)
+                {
+                    console.log(results);
+                    console.log(results.country);
+                    console.log(results.district);
+                    console.log(results.postcode);
+                    console.log(results.province);
+                    console.log(results.subdistrict);
+                    console.log(results.aoi);
+                    country = results.country;
+                    district = results.district;
+                    postcode =results.postcode; 
+                    province = results.province;
+                    subdistrict = results.subdistrict;
+                    aoi = results.aoi;
+                    document.getElementById("locate").innerHTML = country+' '+district+' '+subdistrict+' '+province+' '+postcode;
+                    document.getElementById("country").value = country;
+                    document.getElementById("district").value = district;
+                    document.getElementById("postcode").value = postcode;
+                    document.getElementById("province").value = province;
+                    document.getElementById("subdistrict").value = subdistrict;
+                    document.getElementById("aoi").value = aoi;
+                    document.getElementById("lon").value = lon;
+                    document.getElementById("lat").value = lat;
+                    
+                },
+                error: function (response)
+                {
+                    console.log(response);
+                }
+            });
+          }
+
+          function doSearch() {
+          map.Search.search(search.value, { 
+          });
+             suggest.style.display = 'none';
+             result = map.location();
+             lon    = result.lon;
+             lat    = result.lat;
+             rerverseGeocoding();
+          }
+
+          function doSuggest(value) {
+            search.value = value;
+            doSearch();
+          }   
+          
+        </script>
+
+</head>
 <div class="container">
     <div class="jumbotron" style="margin-top: 5%;margin-bottom: 5%">
     <div style="margin-left :10% ;margin-right: 10%">
@@ -58,20 +175,89 @@
                     <div class="form-group">
                         <label for="inputContact">ช่องทางการติดต่อบริษัท/ห้างร้าน</label>
                         <input type="text" class="form-control" name="contact" placeholder="Facebook,Email,line,เบอร์โทรศัพท์" style="height:100px" required>
-                    </div>    
+                    </div>   
+                    
+                    <div class="form-group">
+                        <label for="inputContact">ที่ตั้งบริษัท/ร้านค้า</label>
+                        <input type="text" class="form-control" name="location" placeholder="" style="height:100px" required>
+                    </div>
                     
                     <div class="form-group">
                         <label for="uploadapplication">อัพโหลดเอกสารประกอบการสมัคร/เอกสารรายละเอียดเกณฑ์การรับสมัคร</label>
-                        <input type="file" class="form-control-file" id="fileapp" name="file" require>
-                    </div>     
+                        <input type="file" class="form-control-file" id="fileapp" name="file" required>
+                    </div> 
+
+                    <div class="mapbody">
+                        <div id="map"></div>
+                        <div id="searchplace">
+                          <input id ="search">
+                          <div id ="suggest"></div>
+                          <a class="btn btn-primary mb-2" onclick="doSearch()"></a>
+                          <div id="result"></div>
+                        </div>
+                        </div>
+                    <div>
+                        <label  >สถานที่ตั้งบริษัท/ร้านตามแผนที่   : </label>
+                        <label id="locate"> </locate>
+                            <a id="test"></a>
+                    </div>
+                    
+                    <div>
+                        <input type="hidden"  id="lon" name="lon" value="">
+                        <input type="hidden"  id="lat" name="lat" value="">
+                        <input type="hidden"  id="country" name="country" value="">
+                        <input type="hidden"  id="district" name="district" value="">
+                        <input type="hidden"  id="subdistrict" name="subdistrict" value="">
+                        <input type="hidden"  id="province" name="province" value="">
+                        <input type="hidden"  id="postcode" name="postcode" value="">
+                        <input type="hidden"  id="aoi" name="aoi" value="">
+                        
+                    </div>                    
+                    
                     <div class="button">
                         <button type="submit" class="btn btn-primary mb-2">SUBMIT</button>
                     </div>
-                    
             </form>
+           
         </div>
     </div>
     </div>
     </div>
 </div>
+
+<style>
+    html {
+      height: 100%;
+    }
+    body {
+      margin: 0px;
+      height: 100%;
+    }
+    .mapbody {
+        margin: 0px;
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+    }
+    #map {
+      height: 400px;
+      flex: 4;
+    }
+    #searchplace{
+        flex : 2
+    }
+
+    #result {
+        height: 400px;
+        overflow-y: scroll;
+    }
+    #suggest {
+        position: absolute;
+        display: none;
+        background-color: white;
+        border: 1px solid #000000;
+        padding: 4px;
+        flex-direction: column;
+    }
+    </style>
 <%- include("../partials/footer")%>

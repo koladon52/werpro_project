@@ -20,6 +20,7 @@
               placeholder: document.getElementById('map'),
               ui: longdo.UiComponent.Mobile 
             });
+            map.zoom(16, true);
             search = document.getElementById('search');
             suggest = document.getElementById('suggest');
             finalresult = document.getElementById('finalresult');
@@ -211,7 +212,6 @@
                         <input type="hidden"  id="province" name="province" value="">
                         <input type="hidden"  id="postcode" name="postcode" value="">
                         <input type="hidden"  id="aoi" name="aoi" value="">
-                        
                     </div>                    
                     
                     <div class="button">

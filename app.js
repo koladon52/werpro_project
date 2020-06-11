@@ -348,9 +348,18 @@ app.put("/My_post/:id/edit",uploadapplication.single("file"),middleware.islogged
     let employmenttype    = req.body.employmenttype;
     let jobtype           = req.body.jobtype;
     let jobpos            = req.body.jobpos;
-    let workdate              = req.body.date;
-    let worktime              = req.body.time;
+    let workdate          = req.body.date;
+    let worktime          = req.body.time;
     let contact           = req.body.contact;
+    let lon               = req.body.lon; 
+    let lat               = req.body.lat;
+    let country           = req.body.country;
+    let district          = req.body.district;
+    let postcode          = req.body.postcode;
+    let province          = req.body.province;
+    let subdistrict       = req.body.subdistrict;
+    let aoi               = req.body.aoi;
+    let location          = req.body.location
 
     if(req.file){
         var Applicationfile = req.file.filename;
@@ -370,7 +379,7 @@ app.put("/My_post/:id/edit",uploadapplication.single("file"),middleware.islogged
         var Applicationfile = file
     }
 
-    Jobdetail.findByIdAndUpdate({_id:id},{$set:{companyname : companyname,salary : salary,qualti : qualti, employmenttype : employmenttype, jobtype : jobtype , jobpos : jobpos, date : workdate , time : worktime , contact : contact , file : Applicationfile , editdate : dateTime}}, function(error,profile){
+    Jobdetail.findByIdAndUpdate({_id:id},{$set:{companyname : companyname,salary : salary,qualti : qualti, employmenttype : employmenttype, jobtype : jobtype , jobpos : jobpos, date : workdate , time : worktime , contact : contact , file : Applicationfile , editdate : dateTime ,lon : lon, lat : lat , location : location , district : district , subdistrint : subdistrict , postcode : postcode , province : province , aoi : aoi , country : country}}, function(error,profile){
         if(error){
             console.log("error"); 
         } else {
@@ -390,12 +399,11 @@ app.get("/My_post/:id/edit",middleware.isloggedIn,function(req, res){
 })
 
 app.delete("/My_post/:id/edit",middleware.isloggedIn, function(req,res){
+    var file = req.body.file;
     Jobdetail.findByIdAndRemove(req.params.id, function(err){
         if(err){
-            res.redirect('/My_post');
+            console.log(err);
         } else {
-            if(req.file){
-                var Applicationfile = req.file.filename;
                 Jobdetail.findById(req.params.id, function(err, foundjob){
                     if(err){
                         console.log(err)
@@ -407,10 +415,9 @@ app.delete("/My_post/:id/edit",middleware.isloggedIn, function(req,res){
                             }
                         })
                     }
+                    console.log("deleted complete")
                 })
-            } else {
-                var Applicationfile = file
-            }
+            
             res.redirect('/My_post');
         }
     });

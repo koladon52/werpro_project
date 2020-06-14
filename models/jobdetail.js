@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
       ;
 
 let jobSchema = new mongoose.Schema({
+    image            : String,
     companyname      : String,
     salary           : String,
     jobtype          : String,
@@ -14,6 +15,15 @@ let jobSchema = new mongoose.Schema({
     contact          : String,
     file             : String,
     editdate         : String,
+    lon              : String,
+    lat              : String,
+    location         : String,
+    district         : String,
+    subdistrict      : String,  
+    postcode         : String,
+    province         : String,
+    aoi              : String,
+    country          : String,
     user : {
         id:{
             type: mongoose.Schema.Types.ObjectId,

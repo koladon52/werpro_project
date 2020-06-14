@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
       ;
 
 let ResumeSchema = new mongoose.Schema({
+    image          : String,
     firstname      : String,
     lastname       : String,
     jobtype        : String,
@@ -19,7 +20,6 @@ let ResumeSchema = new mongoose.Schema({
             ref : 'User'
         },
         username : String,
-        img : String
     }
 })
 

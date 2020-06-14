@@ -128,12 +128,17 @@
             <form style="text-align: left;" action="/My_post/<%= job._id %>/edit?_method=PUT" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="username" value="<%= currentUser.username %>">
                 <input type="hidden" name="oldfile" value="<%= job.file %>">
+                <input type="hidden" name="oldimage" value="<%= job.image %>">
                     <div class="form-row">
                         <div class="col">
                             <label for="inputname">ชื่อบริษัท/ห้างร้าน</label>
                             <input type="text" class="form-control" placeholder="Company name" name="companyname" value="<%= job.companyname %>" required>
                         </div>
                     </div><br>
+                    <div class="form-group">
+                        <label for="uploadimage">อัพโหลดรูป</label>
+                        <input type="file" class="form-control-file"  name="image">
+                    </div>  
                     <div class="form-select">
                     <label for="selectTypejob">ประเภทงานที่ต้องการรับสมัคร</label>
                         <select class="form-control" name="jobtype" required>

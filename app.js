@@ -67,18 +67,6 @@ app.get("/resume", middleware.isloggedIn,function(req, res){
     res.render("findjob/resume");
 })
 
-var resumefile = multer.diskStorage({
-    destination : function(req,gile,cb){
-        cb(null,'./public/resume/');
-    },
-    filename : function(req,gile,cb){
-        cb(null,Date.now()+".pdf");
-    },
-})
-
-uploadresume = multer({ storage : resumefile})
-
-
     var test = multer.diskStorage({
         destination: function (req, file, cb) {
           if (file.mimetype === 'application/pdf') {
@@ -399,6 +387,36 @@ var applicationfile = multer.diskStorage({
 
 uploadapplication = multer({ storage : applicationfile})
 
+var jobtest = multer.diskStorage({
+    destination: function (req, file, cb) {
+      if (file.mimetype === 'application/pdf') {
+        cb(null, './public/jobapplication/')
+        
+      } else if (file.mimetype === 'image/jpeg') {
+        cb(null, './public/jobimage/')
+        
+      } else {
+        console.log(file.mimetype)
+        cb({ error: 'Mime type not supported' })
+      }
+    },
+    filename : function(req, file ,cb){
+        if (file.mimetype === 'application/pdf') {
+            cb(null,Date.now()+".pdf");
+            
+          } else if (file.mimetype === 'image/jpeg') {
+            cb(null,Date.now()+".jpg");
+            
+          } else {
+            console.log(file.mimetype)
+            cb({ error: 'Mime type not supported' })
+          }
+    },
+  })
+
+
+uploadjob = multer({ storage : jobtest})
+
 
 app.get("/findworker", middleware.isloggedIn, function(req, res){
     res.redirect("/login");
@@ -426,15 +444,18 @@ app.get("/My_post/:id",middleware.isloggedIn,function(req, res){
     });
 });
 
-app.put("/My_post/:id/edit",uploadapplication.single("file"),middleware.isloggedIn ,function(req,res){
+app.put("/My_post/:id/edit",uploadjob.any(),middleware.isloggedIn ,function(req,res){
 
     var today = new Date();
     var date = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate();
     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
     var dateTime = time+' '+date;
     
-    let id = req.params.id;
-    let file = req.body.oldfile;
+    let id                = req.params.id;
+    let file              = req.body.oldfile;
+    let image             = req.body.oldimage;
+    let jobimage          = image;
+    let jobfile           = file;
 
     let companyname       = req.body.companyname;
     let salary            = req.body.salary;
@@ -455,25 +476,62 @@ app.put("/My_post/:id/edit",uploadapplication.single("file"),middleware.islogged
     let aoi               = req.body.aoi;
     let location          = req.body.location
 
-    if(req.file){
-        var Applicationfile = req.file.filename;
+    if(req.files[0] && req.files[1]){
+        jobimage = req.files[0].filename;
+        jobfile  = req.files[1].filename;
         Jobdetail.findById(req.params.id, function(err, foundjob){
             if(err){
                 console.log(err)
             } else {
-                const applicationpath  = './public/application_documents/' + foundjob.file;
-                fs.unlink(applicationpath , function(err){
+                const jobimagepath = './public/jobimage/' + foundjob.image;
+                fs.unlink(jobimagepath, function(err){
+                    if(err){
+                        console.log(err);
+                    }
+                })
+                const jobfilepath = './public/jobapplication/' + foundjob.file;
+                fs.unlink(jobfilepath, function(err){
+                    if(err){
+                        console.log(err);
+                    }
+                })
+                
+            }
+        })
+    } 
+
+    if(req.files[0] && req.files[0].fieldname == "file"){
+        jobfile = req.files[0].filename;
+        Jobdetail.findById(req.params.id, function(err, foundjob){
+            if(err){
+                console.log(err)
+            } else {
+                const jobfilepath = './public/jobapplication/' + foundjob.file;
+                fs.unlink(jobfilepath, function(err){
                     if(err){
                         console.log(err);
                     }
                 })
             }
         })
-    } else {
-        var Applicationfile = file
-    }
+    } 
+    if(req.files[0] && req.files[0].fieldname == "image"){
+        jobimage = req.files[0].filename;
+        Jobdetail.findById(req.params.id, function(err, foundjob){
+            if(err){
+                console.log(err)
+            } else {
+                const jobimagepath = './public/jobimage/' + foundjob.image;
+                fs.unlink(jobimagepath, function(err){
+                    if(err){
+                        console.log(err);
+                    }
+                })
+            }
+        })
+    } 
 
-    Jobdetail.findByIdAndUpdate({_id:id},{$set:{companyname : companyname,salary : salary,qualti : qualti, employmenttype : employmenttype, jobtype : jobtype , jobpos : jobpos, date : workdate , time : worktime , contact : contact , file : Applicationfile , editdate : dateTime ,lon : lon, lat : lat , location : location , district : district , subdistrint : subdistrict , postcode : postcode , province : province , aoi : aoi , country : country}}, function(error,profile){
+    Jobdetail.findByIdAndUpdate({_id:id},{$set:{companyname : companyname,salary : salary,qualti : qualti, employmenttype : employmenttype, jobtype : jobtype , jobpos : jobpos, date : workdate , time : worktime , contact : contact , file : jobfile , image : jobimage , editdate : dateTime ,lon : lon, lat : lat , location : location , district : district , subdistrint : subdistrict , postcode : postcode , province : province , aoi : aoi , country : country}}, function(error,profile){
         if(error){
             console.log("error"); 
         } else {
@@ -502,8 +560,14 @@ app.delete("/My_post/:id/edit",middleware.isloggedIn, function(req,res){
                     if(err){
                         console.log(err)
                     } else {
-                        const applicationpath  = './public/application_documents/' + foundjob.file;
-                        fs.unlink(applicationpath , function(err){
+                        const jobfilepath  = './public/jobapplication/' + foundjob.file;
+                        fs.unlink(jobfilepath , function(err){
+                            if(err){
+                                console.log(err);
+                            }
+                        })
+                        const jobimagepath  = './public/jobimage/' + foundjob.image;
+                        fs.unlink(jobimagepath , function(err){
                             if(err){
                                 console.log(err);
                             }
@@ -542,7 +606,7 @@ app.get("/postjob", middleware.isloggedIn, function(req, res){
     res.render("findworker/postjob");
 })
 
-app.post("/postjob",uploadapplication.single("file"), middleware.isloggedIn,function(req, res){
+app.post("/postjob",uploadjob.any(), middleware.isloggedIn,function(req, res){
 
     var today = new Date();
     var date = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate();
@@ -555,7 +619,8 @@ app.post("/postjob",uploadapplication.single("file"), middleware.isloggedIn,func
         img : req.user.img
     }
 
-    let Applicationfile   = req.file.filename;
+    let jobfile           = req.files[1].filename;
+    let jobimage          = req.files[0].filename;
     let username          = req.body.username;
     let companyname       = req.body.companyname;
     let salary            = req.body.salary;
@@ -576,7 +641,7 @@ app.post("/postjob",uploadapplication.single("file"), middleware.isloggedIn,func
     let subdistrict       = req.body.subdistrict;
     let aoi               = req.body.aoi;
     console.log(country);
-    let job = {user : user, companyname : companyname,salary : salary , jobtype:jobtype , employmenttype:employmenttype , worktime : worktime , qualti:qualti , file : Applicationfile , date : workdate ,contact : contact, jobpos : jobpos , editdate : dateTime,
+    let job = {user : user, companyname : companyname,salary : salary , jobtype:jobtype , employmenttype:employmenttype , worktime : worktime , qualti:qualti , file : jobfile , image : jobimage , date : workdate ,contact : contact, jobpos : jobpos , editdate : dateTime,
     lon : lon, lat : lat , location : location , district : district , subdistrint : subdistrict , postcode : postcode , province : province , aoi : aoi , country : country};
     
     console.log(job);

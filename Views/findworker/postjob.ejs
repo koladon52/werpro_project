@@ -68,13 +68,6 @@
                 },
                 success: function (results)
                 {
-                    console.log(results);
-                    console.log(results.country);
-                    console.log(results.district);
-                    console.log(results.postcode);
-                    console.log(results.province);
-                    console.log(results.subdistrict);
-                    console.log(results.aoi);
                     country = results.country;
                     district = results.district;
                     postcode =results.postcode; 
@@ -131,6 +124,10 @@
                             <input type="text" class="form-control" placeholder="Company name" name="companyname" value="" required>
                         </div>
                     </div><br>
+                    <div class="form-group">
+                        <label for="uploadimage">อัพโหลดรูป</label>
+                        <input type="file" class="form-control-file"  name="image">
+                    </div>  
                     <div class="form-select">
                     <label for="selectTypejob">ประเภทงานที่ต้องการรับสมัคร</label>
                         <select class="form-control" name="jobtype" required>

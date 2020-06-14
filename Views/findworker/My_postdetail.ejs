@@ -31,7 +31,7 @@
 <div class="container" style="margin-top: 10%; margin-bottom: 10%;">
     <form style="text-align: left;" action="/My_post/<%= job._id %>/edit " method="GET">
     <div class="jumbotron">
-        <img src='/images/<%= job.user.img %>' class="img-fluid">
+        <img src='/jobimage/<%= job.image %>' class="img-fluid">
         <h1>ชื่อ : <%= job.companyname %><h1>
         <p>รายละเอียด : <%= job.qualti %></p>
         <P>ประเภทสัญญาจ้าง  : <%= job.jobtype %></P>
@@ -52,7 +52,7 @@
         </div>
         <input type="hidden" id="lon" value="<%= job.lon %>">
         <input type="hidden" id="lat" value="<%= job.lat %>">
-        <a href="/application_documents/<%= job.file %>" download>ดาวโหลดเอกสาร</a>
+        <a href="/jobapplication/<%= job.file %>" download>ดาวโหลดเอกสาร</a>
     </div>
     <div align="right">
         <button  type="submit" class="btn btn-warning"> Edit </button> 

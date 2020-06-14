@@ -1,0 +1,78 @@
+/* * {
+    box-sizing: border-box;
+    margin: 0;
+} */
+  
+body {
+    background-position:
+      bottom  left ,
+      bottom  right;
+    
+    background-size: 22% 100%;
+    background-repeat: no-repeat;
+    
+    background-image:
+      url(../images/bg-left2.jpg),
+      url(../images/bg-right2.jpg);    
+} 
+
+@media all and (max-width: 1500px) {
+    body {
+        background-image: none;
+
+    }
+}
+
+ 
+  
+/* body{
+	background-image: url(../images/thiet-ke-visual.jpg);
+	background-position: fixed;
+    background-repeat:  no-repeat no-repeat;
+    background-size: 100% ;
+} */
+
+/* .multi-bg{
+    background-image:  url(../images/bg-left.jpg);
+    background-repeat: no-repeat,no-repeat;
+    background-position: left, right;
+} */
+
+
+.container{
+    background: white;
+    /* width: 70%; */
+    border-radius: 1rem;
+    box-shadow: 0 1rem 1.5rem 0 rgba(0, 0, 0, 0.1);
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.text-form{
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 5%;
+}
+
+.text-center{
+    margin-top: 5%;
+}
+
+.text-center p{
+    text-transform: uppercase;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+@media screen and (max-width: 600px) {
+    .text-center p {
+    font-size: 18px;
+  }
+}
+
+.push-button button{
+    margin-right: 10%;
+    margin-bottom: 5%; 
+}

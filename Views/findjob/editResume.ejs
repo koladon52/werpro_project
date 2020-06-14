@@ -8,6 +8,7 @@
             <form style="text-align: left;" action="/My_resume/<%= resume._id %>/edit?_method=PUT" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="username" value="<%= currentUser.username %>">
                     <input type="hidden" name="oldfile" value="<%= resume.file %>">
+                    <input type="hidden" name="oldimage" value="<%= resume.image %>">
                     <div class="form-row" >
                         <div class="col">
                             <label for="inputFirstname">ชื่อจริง</label>
@@ -18,6 +19,10 @@
                             <input type="text" class="form-control" name="lastname"value="<%= resume.lastname %>"required>
                         </div>
                     </div><br>
+                    <div class="form-group">
+                        <label for="uploadimage">อัพโหลดรูป</label>
+                        <input type="file" class="form-control-file"  name="image">
+                    </div>  <br>
                     <div class="form-select">
                     <label for="selectTypejob">ประเภทงานที่ต้องการสมัคร</label>
                         <select class="form-control" name="jobtype"  required>
@@ -52,7 +57,7 @@
                     </div>
                     <div class="form-group">
                         <label for="udloadRerume">อัพโหลดเรซูเม่</label>
-                        <input type="file" class="form-control-file" id="file" value="<%= resume.file %>"name="file">
+                        <input type="file" class="form-control-file" id="file" value="" name="file">
                     </div>  
                     <div id="button" align="right">
                         <button type="submit" class="btn btn-primary mb-2"> Confirm </button> 

@@ -1,26 +1,34 @@
 <%- include("../partials/header")%>
 <% var count = 0%>
 <div class="container">
-    <ul class="list-unstyled" style="margin-top: 10%;margin-bottom: 10%;">
-      <% Resume.forEach(function(resume){ %>
-        <% if(resume.user.username === currentUser.username){%>
-        <div class="jumbotron"  >
-          <div>
-          <li class="media" >
-            <img src="/images/<%= resume.user.img%>" class="mr-3">
-            <div class="media-body">
-              <h3 class="mt-0 mb-1"><%= resume.firstname %> <%= resume.lastname %></h3><br>
-              <h4> <%= resume.description %> </h4>
-              <h5> <%= resume.date %> </h5>
-              <a action="GET" href="/My_resume/<%= resume._id %>">See more</a>
-            </div>
-          </li>
-          </div>
-          </div>  
-      <% count++ }}); %>
+  <h1 class="my-4">My Resume
+    <!-- <small>find your job</small> -->
+  </h1>
+  <% Resume.forEach(function(resume){ %>
+    <% if(resume.user.username === currentUser.username){%>
+    <!-- Project One -->
+    <div class="row">
+      <div class="col-md-7">
+        <a href="#">
+          <img class="img-fluid rounded mb-3 mb-md-0" src="/resumeimage/<%= resume.image %>" width="300" height="300"  alt="">
+        </a>
+      </div>
+      <div class="col-md-5">
+            <h4>ชื่อ-สกุล           :  <%= resume.firstname %> <%= resume.lastname%> </h4>
+            <h5> ประเภทการจ้างงาน  : <%= resume.employmenttype %></h5>
+            <h5>ประเเภทงาน        : <%= resume.jobtype %> </h5>
+            <h5>วันทีี่แก้ไขล่าสุด      : <%= resume.editdate%></h5>
+        <a action="GET" class="btn btn-primary" href="/My_resume/<%= resume._id %>">see more detail</a>
+      </div>
+    </div>
+    <!-- /.row -->
+    <hr>
+    <% count++ } %>
+  <% })  %>
       <% if(count === 0){ %>
         <h1><center>ไม่พบข้อมูล</center></h1>
         <% } %>
       </ul>
     </div>
+    
 <%- include("../partials/footer")%>

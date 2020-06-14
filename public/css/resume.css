@@ -3,7 +3,7 @@
     margin: 0;
 } */
   
-body {
+/* body {
     background-position:
       bottom  left ,
       bottom  right;
@@ -21,10 +21,8 @@ body {
         background-image: none;
 
     }
-}
+} */
 
- 
-  
 /* body{
 	background-image: url(../images/thiet-ke-visual.jpg);
 	background-position: fixed;
@@ -46,6 +44,8 @@ body {
     box-shadow: 0 1rem 1.5rem 0 rgba(0, 0, 0, 0.1);
     margin-top: 5%;
     margin-bottom: 5%;
+    font-family: 'Prompt', sans-serif;
+
 }
 
 .text-form{
@@ -72,7 +72,24 @@ body {
   }
 }
 
-.push-button button{
+.submit-button button{
     margin-right: 10%;
     margin-bottom: 5%; 
+}
+
+
+.topic{
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.topic .line{
+    border: 0;
+    height: 3px;
+    background-color: #f57e3a;
+    width: 166px;
+}
+
+.topic p{
+    font-size: large;
 }

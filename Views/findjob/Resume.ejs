@@ -1,72 +1,92 @@
 <%- include("../partials/header")%>
-<div class="container">
-    <div class="jumbotron" style="margin-top: 5%;margin-bottom: 5%">
-    <div style="margin-left :10% ;margin-right: 10%">
-    <div class="form" >
-        <h1 style="text-align: center;"> job appiction form</h1>
-        <div>
-            <form style="text-align: left;" action="/resume" method="POST" enctype="multipart/form-data">
+<head>
+    <link rel="stylesheet" href="/css/resume.css">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt&display=swap" rel="stylesheet">
+</head>
+<div class="container col-xs-6 col-lg-7">  
+    <div class="findjob-form" >
+        <div class="text-center pt-5">
+            <img src="../images/logo.png" alt="network-logo" width="230" height="70" />
+            <p>
+              find your part-time jobs form
+            </p>
+        </div>
+        <div class="text-form ">
+            <form  style="text-align: left;" action="/resume" method="POST" enctype="multipart/form-data">
+                    <div class="topic">
+                        <p>ส่วนที่ 1 : ข้อมูลส่วนตัว</p>
+                    <div class="line"></div>
+                    </div>
                     <input type="hidden" name="username" value="<%= currentUser.username %>">
-                    <div class="form-row" >
-                        <div class="col">
-                            <label for="inputFirstname">ชื่อจริง</label>
-                            <input type="text" class="form-control" placeholder="First name" name="firstname" value="<%= currentUser.firstname %>" required>
-                        </div>
-                        <div lass="col">
-                            <label for="inputLastname">นามสกุล</label>
-                            <input type="text" class="form-control" placeholder="Last name" name="lastname"value="<%= currentUser.lastname %>"required>
-                        </div>
-                    </div><br>
-                    
-                        <div class="form-group">
+                    <div class="form-row " >
+                        <div class="form-group col-xs-6 col-sm-6 col-md-5 col-lg-4">
                             <label for="uploadimage">อัพโหลดรูป</label>
                             <input type="file" class="form-control-file"  name="image">
-                        </div>  
-                    
-                    <div class="form-select">
-                    <label for="selectTypejob">ประเภทงานที่ต้องการสมัคร</label>
-                        <select class="form-control" name="jobtype" required>
-                            <option>ประเภทงานที่ต้องการสมัคร</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                        </select><br>
-                    <label for="selectEmployment">ลักษณะการว่าจ้าง</label>
-                        <select class="form-control" name="employmenttype" required>
-                            <option>ลักษณะการว่าจ้าง</option>
-                            <option value="Part time">Part time</option>
-                            <option value="Full time">Full time</option>
-                            <option value="Event">Event</option>
-                        </select>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-5 col-lg-4">
+                            <label for="inputFirstname">ชื่อจริง</label>
+                            <input type="text" class="form-control"  name="firstname" value="<%= currentUser.firstname %>" required>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-5 col-lg-4">
+                            <label for="inputLastname">นามสกุล</label>
+                            <input type="text" class="form-control"  name="lastname"value="<%= currentUser.lastname %>"required>
+                        </div>
                     </div><br>
+                    <div class="topic">
+                        <p>ส่วนที่ 2 : ข้อมูลการสมัครงาน</p>
+                    <div class="line"></div> 
+                    </div>
+                    <div class="form-select">
+                        <label for="selectTypejob">ประเภทงานที่ต้องการสมัคร</label>
+                            <select class="form-control" name="jobtype" required>
+                                <!-- <option>ประเภทงานที่ต้องการสมัคร</option> -->
+                                <option></option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                            </select><br>
+                        <label for="selectEmployment">ลักษณะการว่าจ้าง</label>
+                            <select class="form-control" name="employmenttype" required>
+                                <!-- <option>ลักษณะการว่าจ้าง</option> -->
+                                <option></option>
+                                <option value="Part time">Part time</option>
+                                <option value="Event">Event</option>
+                            </select>
+                        </div><br>
                     <div class="form-row">
-                        <div class="col-md-6 mb-5">
-                            <label for="inputDate">วันที่สามารถเริ่มงานได้</label><br>
-                            <input type="date" id="date" name="date" required>
-                        </div>
-                        <div class="col-md-6 mb-5">
-                            <label for="inputTime">เวลาที่สามารถทำงานได้</label><br>
-                            <input type="time" id="time" name="time" required>
-                        </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputDate">วันที่สามารถเริ่มงานได้</label>
+                                <input type="date" class="form-control" id="inputDate" name="date" required/>
+                              </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputTime">เวลาที่สามารถทำงานได้</label>
+                                <input type="time" class="form-control" id="inputTime" name="time" required/>
+                            </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group ">
                         <label for="inputAbout">ข้อมูลเพิ่มเติมเกี่ยวกับผู้สมัครงาน</label>
-                        <input type="text" class="form-control" name="desc" placeholder="พูดได้กี่ภาษา, พิมพ์ได้กี่คำต่อนาที เป็นต้น">
+                        <textarea class="form-control" id="Textarea" rows="4" name="desc" placeholder="พูดได้กี่ภาษา, พิมพ์ได้กี่คำต่อนาที เป็นต้น"></textarea>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group ">
                         <label for="udloadResume">อัพโหลดเรซูเม่</label>
                         <input type="file" class="form-control-file" id="uploadResume" name="file">
-                    </div>  
-                    <div align="right">
-                        <button type="submit" class="btn btn-primary mb-2">SUBMIT</button> 
-                    </div>     
+                    </div><br>
+                    <div class="topic">
+                        <p>ส่วนที่ 3 : ข้อมูลการติดต่อ</p>
+                    <div class="line"></div>
+                    </div>
+                    <div class="form-group ">
+                        <label for="inputContact"></label>
+                        <textarea class="form-control" id="Textarea" rows="4" name="desc" placeholder="หมายเลขโทรศัพท์, อีเมล หรืออื่นๆที่สามารถใช้ติดต่อสื่อสารกับผู้สมัครงานได้โดยตรง"></textarea>
+                    </div> 
+                    <div class="submit-button" align ="right" >
+                        <button type="submit" class="btn btn-success col-xs-1 col-sm-4 col-lg-4">SUBMIT</button>
+                    </div>   
             </form>
         </div>
-        
-    </div>
-    </div>
     </div>
 </div>
+
 <%- include("../partials/footer")%>

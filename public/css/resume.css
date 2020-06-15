@@ -38,10 +38,13 @@
 
 
 .container{
-    background: white;
+    background-image: url(../images/bg-container9.png), url(../images/bg-container10.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: top left, bottom left;
     /* width: 70%; */
-    border-radius: 1rem;
-    box-shadow: 0 1rem 1.5rem 0 rgba(0, 0, 0, 0.1);
+    border-radius: 2rem;
+    box-shadow: 0 1rem 4rem 0 rgba(0, 0, 0, 0.1);
     margin-top: 5%;
     margin-bottom: 5%;
     font-family: 'Prompt', sans-serif;
@@ -53,10 +56,10 @@
     margin-right: 10%;
     margin-top: 5%;
 }
-
+/* 
 .text-center{
     margin-top: 5%;
-}
+} */
 
 .text-center p{
     text-transform: uppercase;
@@ -77,19 +80,67 @@
     margin-bottom: 5%; 
 }
 
-
 .topic{
-    margin-top: 2%;
-    margin-bottom: 2%;
+    margin-top: 5%;
+    margin-bottom: 5%;
 }
 
+p i{
+    margin-right: 1%;
+    color: #f57e3a;
+}
 .topic .line{
     border: 0;
     height: 3px;
     background-color: #f57e3a;
-    width: 166px;
+    width: 250px;
 }
 
 .topic p{
     font-size: large;
+}
+
+.form-check {
+    margin-bottom: 5%;
+}
+
+.form-check .check2 {
+    margin-top: 1%;
+}
+
+#uploadResume{
+    color: #f57e3a;
+    b
+}
+
+/* .roof{
+    margin-top: 2%;
+    text-align: center;
+    z-index: 100;
+    position: relative;
+} */
+
+.wave-container {
+    position: relative;
+    /* background: #09F; */
+    color: #FFF;
+    text-align: center;
+    overflow: hidden;
+    z-index: 100;
+    position: relative;
+}
+
+@keyframes animateWave {
+    0% {
+      transform: scale(1,0);
+    }
+    100% {
+      transform: scale(1,1);
+    }
+}
+
+.wave-container > svg {
+    display: block;
+    transform-origin: bottom;
+    animation: animateWave 1000ms cubic-bezier(0.23, 1, 0.32, 1) forwards;
 }

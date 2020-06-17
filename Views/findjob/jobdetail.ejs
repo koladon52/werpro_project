@@ -54,12 +54,12 @@
             <label id="locate"> </locate>
                 <a id="test"></a>
         </div>
-        <% if(favouriteThisJob == false){ %>
-            <div class="favourite far fa-heart" id="favourite" data="<%= job._id %>" >
+        <% if(favouriteThisJob == true){ %>
+            <div class="favourited fas fa-heart" id="favourite" data="<%= job._id %>" >
                 Added
             </div>
-        <% } else if(favouriteThisJob == true) {%>
-            <div class="favourited fas fa-heart" id="favourited" data="<%= job._id %>" >
+        <% } else if(favouriteThisJob == false) {%>
+            <div class="favourite far fa-heart" id="favourited" data="<%= job._id %>" >
                 Add
             </div>
         <% } %>

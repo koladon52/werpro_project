@@ -13,7 +13,7 @@ $(document).ready(function addfavourite()
             method : "POST",
             success : function(){
                 $('.favourite').removeClass('favourite').addClass('favourited');
-                $('.fas fa-heart').removeClass('far fa-heart').addClass('fas fa-heart');
+                $('.far fa-heart').removeClass('fas fa-heart').addClass('far fa-heart');
                 // $('#text-addfavourite').text("บันทึกแล้ว");
             }
 
@@ -32,7 +32,8 @@ $(document).ready(function removefavourite()
                 method : "delete",
                 success : function(){
                     $('.favourited').removeClass('favourited').addClass('favourite');
-                    $('.far fa-heart').removeClass('fas fa-heart').addClass('far fa-heart');
+                    
+                    $('.fas fa-heart').removeClass('far fa-heart').addClass('fas fa-heart');
                     // $('#text-addfavourite').text("เพิ่มในรายการโปรด");
                 }
             })

@@ -41,24 +41,22 @@
   <h1 class="my-4">LIKED
     <!-- <small>find your job</small> -->
     </h1>
-        <% Job.forEach(function(job){ %>
+        <% favouritejob.favourite.forEach(function(jobliked){ %>
         <!-- Project One -->
+        <% console.log(jobliked) %>
         <div class="row">
           <div class="col-md-7">
             <a href="#">
-              <img class="img-fluid rounded mb-3 mb-md-0" src="/images/<%= job.user.img %>" width="700" height="300" alt="">
+              <img class="img-fluid rounded mb-3 mb-md-0" src="/jobimage/<%= jobliked.image %>" width="700" height="300" alt="">
             </a>
           </div>
           <div class="col-md-5">
-            <h3><%= job.companyname %></h3>
-            <p><%= job.qualti %></p>
-            <p><%= job.employmenttype %></p>
-            <p><%= job.salary %></p>
+            <h3><%= jobliked.companyname %></h3>
+            <p><%= jobliked.qualti %></p>
+            <p><%= jobliked.employmenttype %></p>
+            <p><%= jobliked.salary %></p>
             <br>
-            <p id = "<%= job.id %>"></p>
-            <button class="addfaviorites">Add to faviorite</button>
-            </p>
-            <a action="GET" class="btn btn-primary" href="/joblist/<%= job._id %>">View Project</a>
+            <a action="GET" class="btn btn-primary" href="/joblist/<%= jobliked._id %>">View Project</a>
           </div>
         </div>
         <!-- /.row -->

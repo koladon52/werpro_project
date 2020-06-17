@@ -110,8 +110,6 @@ app.post("/resume", uploadtest.any() , middleware.isloggedIn,function(req, res){
             img : req.user.img
         }
         console.log(req.files, 'files');
-        console.log(req.files);
-        console.log
       
         let username       = req.body.username;
         let firstname      = req.body.firstname;
@@ -187,6 +185,7 @@ app.put("/My_resume/:id/edit",uploadtest.any(),middleware.isloggedIn ,function(r
     let firstname      = req.body.firstname;
     let lastname       = req.body.lastname;
     let description    = req.body.description;
+    let contact        = req.body.contact;
     let employmenttype = req.body.employmenttype;
     let jobtype        = req.body.jobtype;
     let workdate       = req.body.date;
@@ -247,7 +246,7 @@ app.put("/My_resume/:id/edit",uploadtest.any(),middleware.isloggedIn ,function(r
         })
     } 
 
-    Resume.findByIdAndUpdate({_id:id},{$set:{firstname : firstname,lastname : lastname,jobtype:jobtype,employmenttype:employmenttype,worktime:worktime,description:description, file : resumefile , image : resumeimage ,date:workdate,editdate : dateTime}},function(err, updated){
+    Resume.findByIdAndUpdate({_id:id},{$set:{firstname : firstname,lastname : lastname,jobtype:jobtype,employmenttype:employmenttype,worktime:worktime,description:description, file : resumefile , image : resumeimage ,date:workdate,editdate : dateTime , contact : contact}},function(err, updated){
         if(err){
             res.redirect('/');
         } else {
@@ -267,31 +266,36 @@ app.get("/My_resume/:id/edit",middleware.isloggedIn,function(req, res){
 })
 
 app.delete("/My_resume/:id/edit",middleware.isloggedIn, function(req,res){
+    Resume.findById(req.params.id, function(err, foundresume){
+        if(err){
+            console.log(err)
+        } else {
+            const resumepath  = './public/resume/' + foundresume.file;
+            const imagepath  = './public/resumeimage/' + foundresume.image;
+            fs.unlink(resumepath , function(err){
+                if(err){
+                    console.log(err);
+                }
+            })
+            fs.unlink(imagepath , function(err){
+                if(err){
+                    console.log(err);
+                }
+            })
+            User.findById(req.user._id, function(err, founduser){
+                founduser.resumes.pull(foundresume);
+                founduser.save();
+                console.log("remove resume id from user")
+            })
+        }
+        console.log("deleted complete")
+    })
+
     Resume.findByIdAndRemove(req.params.id, function(err){
         if(err){
             console.log(err);
         } else {
-                Resume.findById(req.params.id, function(err, foundresume){
-                    if(err){
-                        console.log(err)
-                    } else {
-                        const resumepath  = './public/resume/' + foundresume.file;
-                        const imagepath  = './public/resumeimage/' + foundresume.image;
-                        fs.unlink(resumepath , function(err){
-                            if(err){
-                                console.log(err);
-                            }
-                        })
-                        fs.unlink(imagepath , function(err){
-                            if(err){
-                                console.log(err);
-                            }
-                        })
-                    }
-                    console.log("deleted complete")
-                })
-            
-            res.redirect('/My_post');
+            res.redirect('/My_resume');
         }
     });
 })
@@ -373,9 +377,20 @@ app.delete("/joblist/:id/removefavourite", middleware.isloggedIn ,function(req, 
 
 app.get("/job_like",middleware.isloggedIn,async function(req,res)
 {
-  const savedpost = User.findById(req.user._id).populate({path:'favourite',model: 'Post'});
-  console.log(savedpost.favourite.length);
-  res.render("findjob/favouritejob",{ moment: moment, favouritePosts : savedpost});
+    User.findById(req.user._id , function(err, user){
+        if(err){
+            console.log(err);
+        } else {
+          joblike = user.populate({path:'favourite',model: 'Post'});
+          console.log(joblike.favourite)
+          res.render("findjob/favouritejob",{favouritejob : joblike});
+          
+        }
+    })
+
+    // const savedpost = User.findById(req.user._id).populate({path : 'favourite', model : 'Jobdetail'});
+    // console.log(savedpost.favourite.length);
+    // res.render("findjob/favouritejob",{favouritejob : savedpost});
 })
 
 app.get("/joblist",middleware.isloggedIn,function(req, res){
@@ -641,30 +656,35 @@ app.get("/My_post/:id/edit",middleware.isloggedIn,function(req, res){
 
 app.delete("/My_post/:id/edit",middleware.isloggedIn, function(req,res){
 
+    Jobdetail.findById(req.params.id, function(err, foundjob){
+        if(err){
+            console.log(err)
+        } else {
+            const jobfilepath  = './public/jobapplication/' + foundjob.file;
+            fs.unlink(jobfilepath , function(err){
+                if(err){
+                    console.log(err);
+                }
+            })
+            const jobimagepath  = './public/jobimage/' + foundjob.image;
+            fs.unlink(jobimagepath , function(err){
+                if(err){
+                    console.log(err);
+                }
+            })
+            User.findById(req.user._id, function(err, founduser){
+                founduser.job.pull(foundjob);
+                founduser.save();
+                console.log("remove job id from user")
+            })
+        }
+        console.log("deleted complete")
+    })
+
     Jobdetail.findByIdAndRemove(req.params.id, function(err){
         if(err){
             console.log(err);
         } else {
-                Jobdetail.findById(req.params.id, function(err, foundjob){
-                    if(err){
-                        console.log(err)
-                    } else {
-                        const jobfilepath  = './public/jobapplication/' + foundjob.file;
-                        fs.unlink(jobfilepath , function(err){
-                            if(err){
-                                console.log(err);
-                            }
-                        })
-                        const jobimagepath  = './public/jobimage/' + foundjob.image;
-                        fs.unlink(jobimagepath , function(err){
-                            if(err){
-                                console.log(err);
-                            }
-                        })
-                    }
-                    console.log("deleted complete")
-                })
-            
             res.redirect('/My_post');
         }
     });

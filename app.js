@@ -14,6 +14,7 @@ const express = require("express"),
       middleware = require('./middleware'),
       multer = require('multer')
       ;
+const { exec } = require("child_process");
 let app = express();
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -377,20 +378,14 @@ app.delete("/joblist/:id/removefavourite", middleware.isloggedIn ,function(req, 
 
 app.get("/job_like",middleware.isloggedIn,async function(req,res)
 {
-    User.findById(req.user._id , function(err, user){
+    User.findById(req.user._id).populate('favourite').exec(function(err, idjob){
         if(err){
             console.log(err);
         } else {
-          joblike = user.populate({path:'favourite',model: 'Post'});
-          console.log(joblike.favourite)
-          res.render("findjob/favouritejob",{favouritejob : joblike});
-          
-        }
+            console.log(idjob.favourite)
+            res.render("findjob/favouritejob",{favouritejob : idjob});      
+            }
     })
-
-    // const savedpost = User.findById(req.user._id).populate({path : 'favourite', model : 'Jobdetail'});
-    // console.log(savedpost.favourite.length);
-    // res.render("findjob/favouritejob",{favouritejob : savedpost});
 })
 
 app.get("/joblist",middleware.isloggedIn,function(req, res){

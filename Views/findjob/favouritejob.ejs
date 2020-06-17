@@ -43,7 +43,7 @@
     </h1>
         <% favouritejob.favourite.forEach(function(jobliked){ %>
         <!-- Project One -->
-        <% console.log(jobliked) %>
+        
         <div class="row">
           <div class="col-md-7">
             <a href="#">
@@ -51,10 +51,12 @@
             </a>
           </div>
           <div class="col-md-5">
+            <% console.log(jobliked.companyname)%>
             <h3><%= jobliked.companyname %></h3>
             <p><%= jobliked.qualti %></p>
             <p><%= jobliked.employmenttype %></p>
             <p><%= jobliked.salary %></p>
+            <p><%= jobliked._id %></p>
             <br>
             <a action="GET" class="btn btn-primary" href="/joblist/<%= jobliked._id %>">View Project</a>
           </div>

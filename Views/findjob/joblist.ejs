@@ -8,7 +8,7 @@
 <div class="container">
     <br>
     <br>
-    <form class="form-row" style="text-align: left;" action="/joblist" method="POST">
+    <form class="form-row" style="text-align: left;" action="/findjob/joblist" method="POST">
       <div class="col-md-3 mb-4">
           <label for="inputcompanyname">บริษัท</label><br>
           <input type="text" id="companyname" name="searchcompanyname" >
@@ -50,7 +50,7 @@
             <p><%= job.qualti %></p>
             <p><%= job.employmenttype %></p>
             <p><%= job.salary %></p>
-            <a action="GET" class="btn btn-primary" href="/joblist/<%= job._id %>">View Project</a>
+            <a action="GET" class="btn btn-primary" href="/findjob/joblist/<%= job._id %>">View Project</a>
           </div>
             
         </div>

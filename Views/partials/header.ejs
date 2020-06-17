@@ -37,31 +37,31 @@
         <% } else if (currentUser.type === 'operator') { %>
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="/workerlist">LIST</a>
+              <a class="nav-link" href="/findworker/workerlist">LIST</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/postjob">Post Job</a>
+              <a class="nav-link" href="/findworker/postjob">Post Job</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/worker_like">Liked</a>
+              <a class="nav-link" href="/findworker/worker_like">Liked</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/My_post">My post</a>
+              <a class="nav-link" href="/findworker/My_post">My post</a>
             </li>
           </ul>
           <% } else if (currentUser.type === 'worker') { %>
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
               <li class="nav-item">
-                <a class="nav-link" href="/joblist">LIST</a>
+                <a class="nav-link" href="/findjob/joblist">LIST</a>
               </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/resume">RESUME</a>
+                  <a class="nav-link" href="/findjob/resume">RESUME</a>
                 </li>
               <li class="nav-item">
-                <a class="nav-link" href="/job_like">Liked</a>
+                <a class="nav-link" href="/findjob/job_like">Liked</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/My_resume">My resume</a>
+                <a class="nav-link" href="/findjob/My_resume">My resume</a>
               </li>
             </ul>
           <% } %>
@@ -82,7 +82,7 @@
                 <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= currentUser.username %></button>
                 <!-- <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= currentUser.username %></button> -->
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" href="/profile">Profile</a>
+                  <a class="dropdown-item" href="/findjob/profile/<%= currentUser.id %>>">Profile</a>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="/logout">Logout</a>
                 </div>

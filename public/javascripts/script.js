@@ -9,14 +9,13 @@ $(document).ready(function addfavourite()
         console.log(postid);
 
         $.ajax({
-            url : "/joblist/"+postid+"/addfavourite",
+            url : "/findjob/joblist/"+postid+"/addfavourite",
             method : "POST",
             success : function(){
                 $('.favourite').removeClass('favourite').addClass('favourited');
                 $('.far fa-heart').removeClass('fas fa-heart').addClass('far fa-heart');
-                // $('#text-addfavourite').text("บันทึกแล้ว");
+                location.reload();
             }
-
         })
     })
 })
@@ -28,13 +27,12 @@ $(document).ready(function removefavourite()
             console.log(postid);
     
             $.ajax({
-                url : "/joblist/"+postid+"/removefavourite",
+                url : "/findjob/joblist/"+postid+"/removefavourite",
                 method : "delete",
                 success : function(){
                     $('.favourited').removeClass('favourited').addClass('favourite');
-                    
                     $('.fas fa-heart').removeClass('far fa-heart').addClass('fas fa-heart');
-                    // $('#text-addfavourite').text("เพิ่มในรายการโปรด");
+                    location.reload()
                 }
             })
         })

@@ -63,12 +63,11 @@
                 Add
             </div>
         <% } %>
-        
-           
+
         <br>
         <input type="hidden" id="lon" value="<%= job.lon %>">
         <input type="hidden" id="lat" value="<%= job.lat %>">
-        <a href="/application_documents/<%= job.file %>" download>ดาวโหลดเอกสาร</a>
+        <a href="/jobapplication/<%= job.file %>" download>ดาวโหลดเอกสาร</a>
     </div>
 </div>
 <%- include("../partials/footer")%>

@@ -10,7 +10,7 @@
             <div class="col-md-5 col-sm-12" style="margin-top: 10%; " align="center">
                 <div class="jumbotron"  >
                     <h1 style="text-align: center;">Profile</h1>
-                        <form action="/profile/<%= currentUser._id %>/edit?_method=PUT" method="POST" enctype="multipart/form-data">
+                        <form action="/findjob/profile/<%= currentUser._id %>/edit?_method=PUT" method="POST" enctype="multipart/form-data">
                             <input type="hidden" name="id" value="<%= currentUser._id %>" ></input>
                             <div style="text-align: left;" class="form-group">
                                 <label for="name">First name</label>
@@ -37,7 +37,7 @@
                             </div>
                             <br>
                             <div align="left">
-                                <a  href="/profile" type="reset" class="btn btn-primary">cancel</a> 
+                                <a  href="/findjob/profile/<%= currentUser.id %>" type="reset" class="btn btn-primary">cancel</a> 
                             </div>
                         </form>
                 </div>

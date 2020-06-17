@@ -125,7 +125,7 @@
     <div class="form">
         <h1 style="text-align: center;"> job appiction form</h1>
         <div>
-            <form style="text-align: left;" action="/My_post/<%= job._id %>/edit?_method=PUT" method="POST" enctype="multipart/form-data">
+            <form style="text-align: left;" action="/findworker/My_post/<%= job._id %>/edit?_method=PUT" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="username" value="<%= currentUser.username %>">
                 <input type="hidden" name="oldfile" value="<%= job.file %>">
                 <input type="hidden" name="oldimage" value="<%= job.image %>">
@@ -221,7 +221,7 @@
                     </div>  
                     <div class="button">
                         <button type="submit" class="btn btn-primary mb-2">SUBMIT</button>
-                        <a  href="/My_post/<%= job._id%>" type="reset" class="btn btn-danger"> Cancel </a>  
+                        <a  href="/findworker/My_post/<%= job._id%>" type="reset" class="btn btn-danger"> Cancel </a>  
                     </div>
                     
             </form>

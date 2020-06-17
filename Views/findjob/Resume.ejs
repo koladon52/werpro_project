@@ -6,12 +6,13 @@
     <!-- <div class="roof">
       <img src="../images/roof1.png" alt="roof-form" width="900" height="190"/>  
     </div> -->
+</head>
 <body>
 
 <div class="container col-xs-6 col-lg-7">
-    <div class="findjob-form" >
+    <div class="findjob-form">
         <div class="text-center pt-5">
-            <img src="../images/logo.png" alt="network-logo" width="230" height="70" />
+            <img src="../../images/logo.png" alt="network-logo" width="230" height="70" />
             <p>
               find your part-time jobs form
             </p>
@@ -20,8 +21,7 @@
             <form  style="text-align: left;" action="/resume" method="POST" enctype="multipart/form-data">
                     <div class="topic">
                         <p><i class="fas fa-user"></i>ส่วนที่ 1 : ข้อมูลส่วนตัว </p>
-                    <div class="line"></div>
-                    
+                        <div class="line"></div>
                     </div>
                     <input type="hidden" name="username" value="<%= currentUser.username %>">
                     <div class="form-row">
@@ -29,18 +29,18 @@
                             <label for="uploadimage">อัพโหลดรูป</label>
                             <input type="file" class="form-control-file"  name="image">
                         </div>
-                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
+                        <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4">
                             <label for="inputFirstname">ชื่อจริง</label>
                             <input type="text" class="form-control"  name="firstname" value="<%= currentUser.firstname %>" required>
                         </div>
-                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
+                        <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4">
                             <label for="inputLastname">นามสกุล</label>
                             <input type="text" class="form-control"  name="lastname"value="<%= currentUser.lastname %>"required>
                         </div>
                     </div>
                     <div class="topic">
                         <p><i class="fas fa-address-card"></i>ส่วนที่ 2 : ข้อมูลการสมัครงาน</p>
-                    <div class="line"></div> 
+                        <div class="line"></div> 
                     </div>
                     <div class="form-select">
                         <label for="selectTypejob">ประเภทงานที่ต้องการสมัคร</label>
@@ -70,7 +70,7 @@
                                 <label for="inputTime">เวลาที่สามารถทำงานได้</label>
                                 <input type="time" class="form-control" id="inputTime" name="time" required/>
                             </div>
-                    </div>
+                    </div><br>
                     <div class="form-group">
                         <label for="inputAbout">ข้อมูลเพิ่มเติมเกี่ยวกับผู้สมัครงาน</label>
                         <textarea class="form-control" id="Textarea" rows="4" name="desc" placeholder="พูดได้กี่ภาษา, พิมพ์ได้กี่คำต่อนาที เป็นต้น"></textarea>
@@ -106,7 +106,7 @@
                         </div>
                       </div>
                     <div class="submit-button" align ="center" >
-                        <button type="submit" class="btn btn-success col-xs-1 col-sm-4 col-lg-6">SUBMIT</button>
+                        <button type="submit" class="btn btn-success col-xs-4 col-sm-4 col-lg-6">SUBMIT</button>
                     </div>   
             </form>
         </div>

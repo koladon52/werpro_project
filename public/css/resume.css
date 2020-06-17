@@ -80,6 +80,10 @@
     margin-bottom: 5%; 
 }
 
+.submit-again {
+    margin-bottom: 5%;  
+}
+
 .topic{
     margin-top: 5%;
     margin-bottom: 5%;
@@ -90,14 +94,15 @@ p i{
     color: #f57e3a;
 }
 .topic .line{
-    border: 0;
-    height: 3px;
+    border: 10;
+    height: 4px;
     background-color: #f57e3a;
     width: 250px;
 }
 
 .topic p{
     font-size: large;
+    font-weight: bold;
 }
 
 .form-check {
@@ -108,9 +113,6 @@ p i{
     margin-top: 1%;
 }
 
-#uploadResume{
-    color: #f57e3a;
-}
 
 /* .roof{
     margin-top: 2%;
@@ -125,8 +127,8 @@ p i{
     color: #FFF;
     text-align: center;
     overflow: hidden;
-    z-index: 100;
-    position: relative;
+    z-index : 100;
+    position : relative;
 }
 
 @keyframes animateWave {

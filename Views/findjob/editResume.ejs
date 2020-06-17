@@ -1,30 +1,53 @@
 <%- include("../partials/header")%>
-<div class="container">
-    <div class="jumbotron" style="margin-top: 5%;margin-bottom: 5%">
-    <div style="margin-left :10% ;margin-right: 10%">
-    <div class="form" >
-        <h1 style="text-align: center;">Edit Your Resume</h1>
-        <div>
-            <form style="text-align: left;" action="/My_resume/<%= resume._id %>/edit?_method=PUT" method="POST" enctype="multipart/form-data">
+<head>
+    <link rel="stylesheet" href="/css/resume.css">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <!-- <div class="roof">
+      <img src="../images/roof1.png" alt="roof-form" width="900" height="190"/>  
+    </div> -->
+</head>
+<body>
+    
+
+<div class="container col-xs-6 col-lg-7">
+    <div class="findjob-form">
+        <div class="text-center pt-5">
+            <img src="../../images/logo.png" alt="network-logo" width="230" height="70" />
+            <!-- <p>
+              find your part-time jobs form
+            </p> -->
+            <p>Edit Your part-time jobs form</p>
+        </div>    
+        <div class="text-form" >
+            <form style="text-align: left;"  action="/My_resume/<%= resume._id %>/edit?_method=PUT" method="POST" enctype="multipart/form-data">
+                <div class="topic">
+                    <p><i class="fas fa-user"></i>ส่วนที่ 1 : ข้อมูลส่วนตัว </p>
+                    <div class="line"></div>
+                </div>
                     <input type="hidden" name="username" value="<%= currentUser.username %>">
                     <input type="hidden" name="oldfile" value="<%= resume.file %>">
                     <input type="hidden" name="oldimage" value="<%= resume.image %>">
                     <div class="form-row" >
-                        <div class="col">
+                        <div class="form-group col-xs-8 col-sm- col-md-8 col-lg-4">
+                            <label for="uploadimage">อัพโหลดรูป</label>
+                            <input type="file" class="form-control-file"  name="image">
+                        </div>
+                        <div class="col-xs-8 col-sm-12 col-md-6 col-lg-4">
                             <label for="inputFirstname">ชื่อจริง</label>
                             <input type="text" class="form-control" name="firstname" value="<%= resume.firstname %>" required>
                         </div>
-                        <div lass="col">
+                        <div class="col-xs-8 col-sm-12 col-md-6 col-lg-4">
                             <label for="inputLastname">นามสกุล</label>
                             <input type="text" class="form-control" name="lastname"value="<%= resume.lastname %>"required>
                         </div>
-                    </div><br>
-                    <div class="form-group">
-                        <label for="uploadimage">อัพโหลดรูป</label>
-                        <input type="file" class="form-control-file"  name="image">
-                    </div>  <br>
+                    </div>
+                    <div class="topic">
+                        <p><i class="fas fa-address-card"></i>ส่วนที่ 2 : ข้อมูลการสมัครงาน</p>
+                        <div class="line"></div> 
+                    </div>
                     <div class="form-select">
-                    <label for="selectTypejob">ประเภทงานที่ต้องการสมัคร</label>
+                        <label for="selectTypejob">ประเภทงานที่ต้องการสมัคร</label>
                         <select class="form-control" name="jobtype"  required>
                             <option value="<%= resume.jobtype %>"><%= resume.jobtype %></option>
                                 <option value="1">1</option>
@@ -42,34 +65,56 @@
                         </select>
                     </div><br>
                     <div class="form-row">
-                        <div class="col-md-6 mb-5">
-                            <label for="inputDate">วันที่สามารถเริ่มงานได้</label><br>
-                            <input type="date" id="date" name="date" value="<%= resume.date %>" required>
-                        </div>
-                        <div class="col-md-6 mb-5">
-                            <label for="inputTime">เวลาที่สามารถทำงานได้</label><br>
-                            <input type="time" id="time" name="worktime" value="<%= resume.worktime %>" required>
-                        </div>
-                    </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputDate">วันที่สามารถเริ่มงานได้</label><br>
+                                <input type="date" class="form-control" id="date" name="date" value="<%= resume.date %>" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputTime">เวลาที่สามารถทำงานได้</label><br>
+                                <input type="time" class="form-control" id="time" name="worktime" value="<%= resume.worktime %>" required>
+                            </div>
+                    </div><br>
                     <div class="form-group">
                         <label for="inputAbout">ข้อมูลเพิ่มเติมเกี่ยวกับผู้สมัครงาน</label>
-                        <input type="text" class="form-control" name="description" value="<%= resume.description %>">
+                        <textarea input type="text" class="form-control" rows="4" name="description" ><%=resume.description%></textarea>
+                        <!-- <input type="text" class="form-control" name="description" value="<%= resume.description %>"> -->
                     </div>
                     <div class="form-group">
                         <label for="udloadRerume">อัพโหลดเรซูเม่</label>
                         <input type="file" class="form-control-file" id="file" value="" name="file">
-                    </div>  
-                    <div id="button" align="right">
-                        <button type="submit" class="btn btn-primary mb-2"> Confirm </button> 
-                        <a  href="/My_resume/<%= resume._id%>" type="reset" class="btn btn-danger"> Cancel </a>  
-                    </div>     
+                    </div>
+                    <div class="topic">
+                        <p><i class="fas fa-phone-alt"></i>ส่วนที่ 3 : ข้อมูลการติดต่อ</p>
+                        <div class="line"></div>
+                    </div>
+                    <div class="form-group ">
+                        <label for="inputContact">ช่องทางการติดต่อ</label>
+                        <textarea class="form-control" id="Textarea" rows="4" name=""><%=resume.description%></textarea>
+                    </div>
+                    <div class="topic">
+                        <p><i class="fas fa-tasks"></i>ส่วนที่ 4 : </p>
+                        <div class="line"></div>
+                    </div>
+                    <div class="form-check">
+                        <div class="check1">
+                            <input type="checkbox" class="form-check-input" required>
+                            <label class="form-check-label" for="Check">ฉันขอยืนยัน นอนยัน นั่งยันว่าข้อมูลทั้งหมดเป็นความจริงและยินยอมให้เปิดเผยข้อมูลนี้</label> 
+                        </div>
+                        <div class="check2">
+                            <input type="checkbox" class="form-check-input" required>
+                            <label class="form-check-label" for="Check2">ฉันได้อ่านและยอมรับ <a href="">เงื่อนไขและข้อตกลงในการใช้บริการเว็ปไซต์</a></label>
+                        </div>
+                      </div><br>  
+                    <div class="submit-button " id="button" align="center">
+                        <!-- <a  href="/My_resume/<%= resume._id%>" type="reset" class="btn btn-danger col-xs-1 col-sm-4 col-lg-4"> Cancel </a> -->
+                        <button type="submit" class="btn btn-success col-xs-1 col-sm-4 col-lg-4"> ยืนยัน </button>   
+                        <button type="submit" class="btn btn-danger col-xs-1 col-sm-4 col-lg-4 ">ยกเลิก </button>   
+                    </div>    
             </form>
         </div>
     </div>
-    </div>
-    </div>
 </div>
+</body>
 <%- include("../partials/footer")%>
 
-<style>
 

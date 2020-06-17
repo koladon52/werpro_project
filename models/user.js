@@ -24,6 +24,13 @@ let UserSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: "Jobdetail"
         }
+    ],
+    favourite:
+    [   
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Jobdetail'
+        }   
     ]
 });
 

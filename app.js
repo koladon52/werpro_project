@@ -123,7 +123,8 @@ app.post("/resume", uploadtest.any() , middleware.isloggedIn,function(req, res){
         let jobtype        = req.body.jobtype;
         let workdate       = req.body.date;
         let worktime       = req.body.time;
-        let resume = {user : user,firstname : firstname,lastname : lastname,jobtype:jobtype,employmenttype:employmenttype,worktime:worktime,description:description,file:file,date:workdate,editdate : dateTime , image : image};
+        let contact        = req.body.contact;
+        let resume = {user : user,firstname : firstname,lastname : lastname,jobtype:jobtype,employmenttype:employmenttype,worktime:worktime,description:description, contact : contact, file:file,date:workdate,editdate : dateTime , image : image};
 
         Resume.create(resume, function(err,newResume){
         if(err){
@@ -295,8 +296,86 @@ app.delete("/My_resume/:id/edit",middleware.isloggedIn, function(req,res){
     });
 })
 
-app.get("/Liked", middleware.isloggedIn, function(req, res){
-    res.render("Liked");
+// app.get("/like_job", middleware.isloggedIn, function(req, res){
+//     Jobdetail.find({},function(error, allJob){
+//         if(error){
+//             console.log(error);
+//         } else
+//         {
+//             res.render("findjob/favioritejob",{Job:allJob});
+//         }
+//     })
+// })
+
+
+app.post("/joblist/:id/addfavourite", middleware.isloggedIn ,function(req, res) {
+    let id = req.user._id;
+    let job = req.params.id;
+    let thisfav = false;
+    User.findById(id, function(err , user){
+        if(err){
+            console.log(err);
+        } else {
+            for(let i = 0 ; i < user.favourite.length ; i++){
+                if(user.favourite[i].equals(job)){
+                    console.log('User have favourited this job')
+                    thisfav = true;
+                    break;
+                }
+                else{
+                    continue;
+                }
+            }
+            if(thisfav == false){
+                user.favourite.push(job);
+                user.save();
+                console.log('add success');
+            }
+        }
+    })
+    // User.findByIdAndUpdate({ _id : id},{ $push : { favorite : job} },function(err, result) {
+    //     if (err) {
+    //         console.log(err)
+    //     } else {
+    //         res.redirect('/joblist/'+job);
+    //     }}
+    // )
+});
+
+app.delete("/joblist/:id/removefavourite", middleware.isloggedIn ,function(req, res) {
+    let id = req.user._id;
+    let job = req.params.id;
+    Jobdetail.findById(job,function(err,post){
+    let thisfav = false;
+    if(err)
+    {
+      return res.send(err);
+    }
+    else
+    {
+      User.findById(id,function(err,user)
+      {
+        if(err)
+        {
+          return res.send(err);
+        }
+        else
+        {
+            user.favourite.pull(job);
+            user.save()      
+            console.log('delete success');
+        }
+      })
+    }
+  })
+});
+
+
+app.get("/job_like",middleware.isloggedIn,async function(req,res)
+{
+  const savedpost = User.findById(req.user._id).populate({path:'favourite',model: 'Post'});
+  console.log(savedpost.favourite.length);
+  res.render("findjob/favouritejob",{ moment: moment, favouritePosts : savedpost});
 })
 
 app.get("/joblist",middleware.isloggedIn,function(req, res){
@@ -311,11 +390,21 @@ app.get("/joblist",middleware.isloggedIn,function(req, res){
 });
 
 app.get("/joblist/:id",middleware.isloggedIn,function(req, res){
+    let favouriteThisJob = false;
     Jobdetail.findById(req.params.id, function(error, idJob){
         if(error){
             console.log(error);
         } else {
-            res.render("findjob/jobdetail",{job:idJob});
+            for(let i = 0 ; i < req.user.favourite.length ; i++){
+                if(req.user.favourite[i].equals(req.params.id)){
+                    favouriteThisJob = true;
+                    break;
+                } else {
+                    continue;
+                }
+            }
+            console.log(favouriteThisJob)
+            res.render("findjob/jobdetail",{job:idJob,favouriteThisJob : favouriteThisJob});
         }
     });
 })

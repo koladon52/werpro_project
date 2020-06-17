@@ -27,11 +27,15 @@
         
      </script>
 
+     <script>
+         
+     </script>
+
 </head> 
 
 <div class="container" style="margin-top: 10%; margin-bottom: 10%;">
     <div class="jumbotron">
-        <img src='/images/<%= job.user.img %>' class="img-fluid">
+        <img src="/jobimage/<%= job.image %>" class="img-fluid">
         <h1>ชื่อ : <%= job.companyname %><h1>
         <p>รายละเอียด : <%= job.qualti %></p>
         <P>ประเภทสัญญาจ้าง  : <%= job.employmenttype %></P>
@@ -50,6 +54,18 @@
             <label id="locate"> </locate>
                 <a id="test"></a>
         </div>
+        <% if(favouriteThisJob == false){ %>
+            <div class="favourite far fa-heart" id="favourite" data="<%= job._id %>" >
+                Added
+            </div>
+        <% } else if(favouriteThisJob == true) {%>
+            <div class="favourited fas fa-heart" id="favourited" data="<%= job._id %>" >
+                Add
+            </div>
+        <% } %>
+        
+           
+        <br>
         <input type="hidden" id="lon" value="<%= job.lon %>">
         <input type="hidden" id="lat" value="<%= job.lat %>">
         <a href="/application_documents/<%= job.file %>" download>ดาวโหลดเอกสาร</a>

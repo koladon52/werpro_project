@@ -8,17 +8,6 @@ const express = require('express'),
       multer = require('multer')
       ;
 
-// pplicationfile = multer.diskStorage({
-//     destination : function(req,gile,cb){
-//         cb(null,'./public/application_documents/');
-//     },
-//     filename : function(req,gile,cb){
-//         cb(null,Date.now()+".pdf");
-//     },
-// })
-
-// uploadapplication = multer({ storage : applicationfile})
-
 var jobtest = multer.diskStorage({
     destination: function (req, file, cb) {
       if (file.mimetype === 'application/pdf') {
@@ -50,8 +39,8 @@ var jobtest = multer.diskStorage({
 uploadjob = multer({ storage : jobtest})
 
 
-router.get("/findworker", middleware.isloggedIn, function(req, res){
-    res.redirect("/login");
+router.get("/", middleware.isloggedIn, function(req, res){
+    res.redirect("/");
 })
 
 router.get("/My_post",middleware.isloggedIn,function(req, res){

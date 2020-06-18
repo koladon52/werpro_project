@@ -9,8 +9,8 @@ const express = require('express'),
       ;
 
 
-router.get("/", middleware.isloggedIn, function(req, res){
-    res.redirect("/login");
+router.get("/",middleware.isloggedIn, function(req, res){
+    res.redirect("/");
 })
 
 router.get("/resume", middleware.isloggedIn,function(req, res){
@@ -429,11 +429,11 @@ var storage = multer.diskStorage({
 upload = multer({ storage : storage})
 
 router.get("/profile/:id",middleware.isloggedIn,function(req, res){
-    res.render("Autherization/profile");
+    res.render("findjob/workerprofile");
 })
 
 router.get("/profile/:id/edit",middleware.isloggedIn,function(req, res){
-    res.render("Autherization/editprofile");
+    res.render("findjob/editworkerprofile");
 })
 
 router.put("/profile/:id/edit" ,upload.single("img") ,middleware.isloggedIn, function(req,res){

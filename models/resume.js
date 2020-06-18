@@ -14,6 +14,7 @@ let ResumeSchema = new mongoose.Schema({
     contact        : String,
     file           : String,
     editdate       : String,
+    salary         : String,
     user : {
         id:{
             type: mongoose.Schema.Types.ObjectId,

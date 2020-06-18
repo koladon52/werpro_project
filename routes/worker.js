@@ -72,7 +72,8 @@ router.post("/resume", uploadtest.any() , middleware.isloggedIn,function(req, re
         let workdate       = req.body.date;
         let worktime       = req.body.time;
         let contact        = req.body.contact;
-        let resume = {user : user,firstname : firstname,lastname : lastname,jobtype:jobtype,employmenttype:employmenttype,worktime:worktime,description:description, contact : contact, file:file,date:workdate,editdate : dateTime , image : image};
+        let salary         = req.body.salary;
+        let resume = {user : user,firstname : firstname,lastname : lastname,jobtype:jobtype,employmenttype:employmenttype,worktime:worktime,description:description, contact : contact, file:file,date:workdate,editdate : dateTime , image : image , salary : salary};
 
         Resume.create(resume, function(err,newResume){
         if(err){

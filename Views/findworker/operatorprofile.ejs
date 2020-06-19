@@ -1,0 +1,53 @@
+<%- include("../partials/header")%>
+
+<div style="margin-left :10% ;margin-right: 10% ;margin-bottom:10%">
+    <div class="row justify-content-between" >
+        <div class="col-md-5 col-sm-12" style=" margin-top: 10%;" align="center">
+            <div class="jumbotron">
+                <img src='/images/<%=currentUser.img%>'' class="img-fluid"> 
+            </div>
+        </div>   
+        <div class="col-md-2 col-sm-0" style=" margin-top: 10%;" align="center">
+        </div> 
+        <div class="col-md-5 col-sm-12" style="margin-top: 10%; " align="center">
+            <div class="jumbotron"  >
+                <h1 style="text-align: center;">Profile</h1><br>
+                     <form action="/findworker/profile/<%= currentUser._id %>/edit" method="GET">
+                        <div style="text-align: left;" class="form-group">
+                            <label for="name">Username </label>
+                            <label for="name">: <%= currentUser.username %></label>
+                        </div>
+                        <div style="text-align: left;" class="form-group">
+                            <label for="name">Email </label>
+                            <label for="name">: <%= currentUser.email %></label>
+                        </div>
+                        <div style="text-align: left;" class="form-group">
+                            <label for="name">Type of user </label>
+                            <label for="name">: <%= currentUser.type %></label>
+                        </div>
+                        <div style="text-align: left;" class="form-group">
+                            <label for="name">Firstname </label>
+                            <label for="name">: <%= currentUser.firstname %></label>
+                        </div>
+                        <div style="text-align: left;" class="form-group">
+                            <label for="name">Lastname </label>
+                            <label for="name">: <%= currentUser.lastname %></label>
+                        </div>
+                        <div style="text-align: left;" class="form-group">
+                            <label for="name">Tel.No </label>
+                            <label for="name">: <%= currentUser.phone %></label>
+                        </div>
+                        <div style="text-align: left;" class="form-group">
+                            <label for="name">Address </label>
+                            <label for="name">: <%= currentUser.address %></label>
+                        </div>
+                        <div align="right">
+                            <button type="submit"  class="btn btn-primary">Edit profile</button> 
+                        </div>
+                     </form> 
+            </div>
+        </div>     
+    </div>    
+</div>
+
+<%- include("../partials/footer")%>

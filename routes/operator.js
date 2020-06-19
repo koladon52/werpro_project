@@ -312,12 +312,12 @@ var storage = multer.diskStorage({
 
 upload = multer({ storage : storage})
 
-router.get("/profile",middleware.isloggedIn,function(req, res){
-    res.render("Autherization/profile");
+router.get("/profile/:id",middleware.isloggedIn,function(req, res){
+    res.render("findworker/operatorprofile");
 })
 
-router.get("/profile/edit",middleware.isloggedIn,function(req, res){
-    res.render("Autherization/editprofile");
+router.get("/profile/:id/edit",middleware.isloggedIn,function(req, res){
+    res.render("findworker/editoperatorprofile");
 })
 
 router.put("/profile/:id/edit" ,upload.single("img") ,middleware.isloggedIn, function(req,res){
@@ -350,7 +350,7 @@ router.put("/profile/:id/edit" ,upload.single("img") ,middleware.isloggedIn, fun
         if(error){
             console.log("error"); 
         } else {
-            res.redirect("/findworker/profile");
+            res.redirect("/findworker/profile/"+req.params.id);
         }
     });
 });

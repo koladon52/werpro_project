@@ -13,7 +13,11 @@
 <div class="container col-xs-6 col-lg-7">
     <div class="findjob-form">
         <div class="text-center pt-5">
+<<<<<<< HEAD
             <img src="/images/logo.png" alt="network-logo" width="230" height="70"/>
+=======
+            <img src="/images/logo.png" alt="network-logo" width="230" height="70" />
+>>>>>>> eb224d7bd904b3bb0c5ff8679b80a8b276e57ae0
             <!-- <p>
               find your part-time jobs form
             </p> -->
@@ -74,6 +78,18 @@
                                 <input type="time" class="form-control" id="time" name="worktime" value="<%= resume.worktime %>" required>
                             </div>
                     </div><br>
+                    <div class="form-select">
+                        <label for="selectTypejob">รายได้ที่คาดว่าจะได้รับ</label>
+                            <select class="form-control" name="salary" value="<%= resume.salary %>"required>
+                                <option value=""> รายได้ที่คาดว่าจะได้รับ </option>
+                                <option value="น้อยกว่า 10000 บาท"> น้อยกว่า 10000 บาท</option>
+                                <option value="10000-20000 บาท"> 10000-20000 บาท</option>
+                                <option value="20000-30000 บาท"> 20000-30000 บาท</option>
+                                <option value="30000-40000 บาท"> 30000-40000 บาท</option>
+                                <option value="40000-50000 บาท"> 40000-50000 บาท</option>
+                                <option value="50000 บาทขึ้นไป"> 50000 บาทขึ้นไป </option>
+                            </select>
+                    </div><br>
                     <div class="form-group">
                         <label for="inputAbout">ข้อมูลเพิ่มเติมเกี่ยวกับผู้สมัครงาน</label>
                         <textarea input type="text" class="form-control" rows="4" name="description" ><%=resume.description%></textarea>
@@ -90,8 +106,8 @@
                     <div class="form-group ">
                         <label for="inputContact">ช่องทางการติดต่อ</label>
                         <textarea class="form-control" id="Textarea" rows="4" name="contact"><%=resume.contact%></textarea>
-                    </div>
-                    <div class="topic">
+                    </div><br>
+                    <!-- <div class="topic">
                         <p><i class="fas fa-tasks"></i>ส่วนที่ 4 : </p>
                         <div class="line"></div>
                     </div>
@@ -104,12 +120,14 @@
                             <input type="checkbox" class="form-check-input" required>
                             <label class="form-check-label" for="Check2">ฉันได้อ่านและยอมรับ <a href="">เงื่อนไขและข้อตกลงในการใช้บริการเว็ปไซต์</a></label>
                         </div>
-                      </div><br>  
-                    <div class="submit-button " id="button" align="center">
+                      </div><br>   -->
+                      
+                    <div  align="center">
                         <!-- <a  href="/My_resume/<%= resume._id%>" type="reset" class="btn btn-danger col-xs-1 col-sm-4 col-lg-4"> Cancel </a> -->
                         <button type="submit" class="btn btn-success col-xs-1 col-sm-4 col-lg-4"> ยืนยัน </button>   
-                        <button type="submit" class="btn btn-danger col-xs-1 col-sm-4 col-lg-4 ">ยกเลิก </button>   
+                        <a type="reset" href="/findjob/My_resume/<%= resume.id %>" class="btn btn-danger col-xs-1 col-sm-4 col-lg-4 "> ยกเลิก </a>   
                     </div>    
+                    <br>
             </form>
         </div>
     </div>

@@ -28,11 +28,7 @@
                 document.getElementById('result')
             );
             //When user press an Enter button #search
-            search.onkeyup = function(event) {
-              if((event || window.event).keyCode != 13)
-                return;
-                doSearch();
-            }
+            
             search.oninput = function() {
                 if (search.value.length < 3) {
                     suggest.style.display = 'none';
@@ -152,8 +148,16 @@
                             <input type="text" class="form-control" name="jobpos" placeholder="">
                         </div>
                         <div class="col-md-6 mb-5">
-                            <label for="inputSalary">เงินเดือน</label><br>
-                            <input type="number" id="salary" name="salary" required>
+                            <label for="selectTypejob">รายได้ที่คาดว่าจะได้รับ</label>
+                            <select class="form-control" name="salary" required>
+                                <option></option>
+                                <option value="น้อยกว่า 10000 บาท"> น้อยกว่า 10000 บาท</option>
+                                <option value="10000-20000 บาท"> 10000-20000 บาท</option>
+                                <option value="20000-30000 บาท"> 20000-30000 บาท</option>
+                                <option value="30000-40000 บาท"> 30000-40000 บาท</option>
+                                <option value="40000-50000 บาท"> 40000-50000 บาท</option>
+                                <option value="50000 บาทขึ้นไป"> 50000 บาทขึ้นไป</option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-row">

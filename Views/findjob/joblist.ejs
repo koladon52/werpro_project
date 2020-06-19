@@ -3,8 +3,6 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 </head>
 
-
-
 <div class="container">
     <br>
     <br>
@@ -14,8 +12,16 @@
           <input type="text" id="companyname" name="searchcompanyname" >
       </div>
       <div class="col-md-3 mb-4">
-          <label for="inputsalary">เงินเดือน</label><br>
-          <input type="text" id="salary" name="searchsalary">
+          <label for="selectTypejob">รายได้ที่คาดว่าจะได้รับ</label>
+              <select class="form-control" id="salary" name="searchsalary" >
+                <option value=""> รายได้ที่คาดว่าจะได้รับ </option>
+                <option value="น้อยกว่า 10000 บาท"> น้อยกว่า 10000 บาท</option>
+                <option value="10000-20000 บาท"> 10000-20000 บาท</option>
+                <option value="20000-30000 บาท"> 20000-30000 บาท</option>
+                <option value="30000-40000 บาท"> 30000-40000 บาท</option>
+                <option value="40000-50000 บาท"> 40000-50000 บาท</option>
+                <option value="50000 บาทขึ้นไป"> 50000 บาทขึ้นไป </option>
+              </select>
       </div>
       <br>
       <select class="form-control col-md-3 mb-4" name="searchemploymenttype" > 

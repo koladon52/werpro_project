@@ -72,7 +72,8 @@ router.post("/resume", uploadtest.any() , middleware.isloggedIn,function(req, re
         let workdate       = req.body.date;
         let worktime       = req.body.time;
         let contact        = req.body.contact;
-        let resume = {user : user,firstname : firstname,lastname : lastname,jobtype:jobtype,employmenttype:employmenttype,worktime:worktime,description:description, contact : contact, file:file,date:workdate,editdate : dateTime , image : image};
+        let salary         = req.body.salary;
+        let resume = {user : user,firstname : firstname,lastname : lastname,jobtype:jobtype,employmenttype:employmenttype,worktime:worktime,description:description, contact : contact, file:file,date:workdate,editdate : dateTime , image : image , salary : salary};
 
         Resume.create(resume, function(err,newResume){
         if(err){
@@ -371,11 +372,11 @@ router.post('/joblist',middleware.isloggedIn, function(req , res , next){
     
     const filtercompanyname = new RegExp(escapeRegex(fuzzyfiltercompanyname), 'gi');
 
-    // if(filtercompanyname != " " && filtersalary != " " && filteremploymenttype != " "){
-    //     var filterParemater = { $and:[{ companyname:filtercompanyname},{$and:[{salary : filtersalary},{employmenttype : filteremploymenttype}]}]}
-    // } else if (filtercompanyname != " " && filtersalary == " " && filteremploymenttype != " "){
+    // if(filtercompanyname !== " " && filtersalary !== " " && filteremploymenttype !== " "){
+    //     var filterParemater = { $and:[{ companyname:filtercompanyname},{salary : filtersalary},{employmenttype : filteremploymenttype}]}
+    // } else if (filtercompanyname !== " " && filtersalary === " " && filteremploymenttype !== ""){
     //     var filterParemater = { $and:[{ companyname : filtercompanyname},{employmenttype : filteremploymenttype}]}
-    // } else if (filtercompanyname == " " && filtersalary != " " && filteremploymenttype != " "){
+    // } else if (filtercompanyname === " " && filtersalary !== " " && filteremploymenttype !== " "){
     //     var filterParemater = { $and:[{ salary : filtersalary},{employmenttype : filteremploymenttype}]}
     // } else {
     //     var filterParemater = {};
@@ -387,7 +388,7 @@ router.post('/joblist',middleware.isloggedIn, function(req , res , next){
         var filterParemater={ $and :[{salary : filtersalary},{employmenttype : filteremploymenttype}]};
     } else if(filtercompanyname !== '' && filtersalary === '' && filteremploymenttype !== ''){
         var filterParemater={ $and :[{ companyname : filtercompanyname},{employmenttype : filteremploymenttype}]};
-    } else if(filtercompanyname !== '' && filtersalary !== '' && filtyeremploymenttype === ''){
+    } else if(filtercompanyname !== '' && filtersalary !== '' && filteremploymenttype === ''){
         var filterParemater={ $and :[{ companyname : filtercompanyname},{salary : filtersalary}]};
     } else if(filtercompanyname !== '' && filtersalary === '' && filteremploymenttype === ''){
         var filterParemater={ $and :[{ companyname : filtercompanyname}]};
@@ -415,7 +416,6 @@ router.post('/joblist',middleware.isloggedIn, function(req , res , next){
 function escapeRegex(text) {
     return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 };
-
 
 var storage = multer.diskStorage({
     destination : function(req,gile,cb){

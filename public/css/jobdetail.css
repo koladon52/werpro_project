@@ -1,0 +1,115 @@
+.container{
+    font-family: 'Prompt', sans-serif;
+    font-size: 16px;
+    box-shadow: 0 1rem 4rem 0 rgba(0, 0, 0, 0.1);
+    margin-top: 5%;
+    margin-bottom: 5%;
+    /* background-image: url(../images/awning2.jpg); */
+    background-repeat: no-repeat;
+    background-size: 100% 25%;
+
+}
+.row {
+    margin-bottom: 2%;
+}
+
+.row #subject{
+    width: 25%;
+    margin-right: 3%;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: left;
+}
+
+/* .row p{
+    width: 40%;
+} */
+
+.mapbody {
+    margin-top: 5%;
+    margin-bottom: 5%;
+    display: flex;
+    flex-direction: row;
+    
+}
+#map {
+  height: 400px;
+  flex: 4;
+}
+
+.like .fas{
+    color: red;
+    size: 9x;
+}
+
+.like .far{
+    color: red;
+    size: 9x;
+}
+
+.download_like{
+    width: 100%;
+}
+
+.download_like .download{
+    width: 50%;
+}
+
+.download_like .like{
+    width: 50%;
+    text-align: right;
+}
+
+.row img{
+    width: 30px;
+    height: 30px;
+    margin-right: 2%;
+}
+
+h1{
+    font-weight: bold;
+}
+
+.block{
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 5%;
+}
+
+
+/* iPhone 2G-4S (portrait and landscape) ----------- */
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 480px) {
+.container{
+    font-size: 16px;
+    }
+}
+
+/* iPhone 5 (portrait) ----------- */
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 568px) 
+and (orientation : portrait) {
+    .container{
+        font-size: 16px;
+    }
+}
+/* iPads (portrait) ----------- */
+
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : portrait) {
+    .container{
+        font-size: 16px;
+    }
+}
+
+/* Desktops and laptops ----------- */
+/* @media only screen 
+and (min-width : 1224px) {
+    .container{
+        font-size: 16px;
+    }
+} */

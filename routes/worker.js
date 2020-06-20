@@ -114,7 +114,7 @@ router.get("/My_resume",middleware.isloggedIn,function(req, res){
 router.get("/My_resume/:id",middleware.isloggedIn,function(req, res){
     Resume.findById(req.params.id, function(error, idResume){
         if(error){
-            console.log("Error");
+            console.log(error);
         } else {
             res.render("findjob/My_resumedetail",{resume:idResume});
         }
@@ -209,7 +209,7 @@ router.put("/My_resume/:id/edit",uploadtest.any(),middleware.isloggedIn ,functio
 router.get("/My_resume/:id/edit",middleware.isloggedIn,function(req, res){
     Resume.findById(req.params.id, function(error, idResume){
         if(error){
-            console.log("Error");
+            console.log(error);
         } else {
             res.render("findjob/editResume",{resume:idResume});
         }
@@ -506,7 +506,7 @@ router.put("/profile/:id/edit" ,upload.single("img") ,middleware.isloggedIn, fun
     }
         User.findByIdAndUpdate({_id:id},{$set:{firstname : req.body.firstname,lastname : req.body.lastname,phone : req.body.phone, address : req.body.address, img : profileimage , editdate : dateTime}}, function(error,profile){
         if(error){
-            console.log("error"); 
+            console.log(error); 
         } else {
             res.redirect("/findjob/profile/"+req.params.id);
         }

@@ -39,11 +39,11 @@ var jobtest = multer.diskStorage({
 uploadjob = multer({ storage : jobtest})
 
 
-router.get("/", middleware.isloggedIn, function(req, res){
+router.get("/", middleware.isloggedIn , middleware.stateOperator , function(req, res){
     res.redirect("/");
 })
 
-router.get("/My_post",middleware.isloggedIn,function(req, res){
+router.get("/My_post",middleware.isloggedIn , middleware.stateOperator ,function(req, res){
     Jobdetail.find({} ,function(error, myJob){
         if(error){
             console.log(error);
@@ -55,7 +55,7 @@ router.get("/My_post",middleware.isloggedIn,function(req, res){
 });
 
 
-router.get("/My_post/:id",middleware.isloggedIn,function(req, res){
+router.get("/My_post/:id",middleware.isloggedIn , middleware.stateOperator ,function(req, res){
     Jobdetail.findById(req.params.id, function(error, idjob){
         if(error){
             console.log("Error");
@@ -65,7 +65,7 @@ router.get("/My_post/:id",middleware.isloggedIn,function(req, res){
     });
 });
 
-router.put("/My_post/:id/edit",uploadjob.any(),middleware.isloggedIn ,function(req,res){
+router.put("/My_post/:id/edit",uploadjob.any(),middleware.isloggedIn , middleware.stateOperator ,function(req,res){
 
     var today = new Date();
     var date = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate();
@@ -161,7 +161,7 @@ router.put("/My_post/:id/edit",uploadjob.any(),middleware.isloggedIn ,function(r
     });
 })
 
-router.get("/My_post/:id/edit",middleware.isloggedIn,function(req, res){
+router.get("/My_post/:id/edit",middleware.isloggedIn , middleware.stateOperator ,function(req, res){
     Jobdetail.findById(req.params.id, function(error, idJob){
         if(error){
             console.log("Error");
@@ -171,7 +171,7 @@ router.get("/My_post/:id/edit",middleware.isloggedIn,function(req, res){
     });
 })
 
-router.delete("/My_post/:id/edit",middleware.isloggedIn, function(req,res){
+router.delete("/My_post/:id/edit",middleware.isloggedIn , middleware.stateOperator , function(req,res){
 
     Jobdetail.findById(req.params.id, function(err, foundjob){
         if(err){
@@ -207,7 +207,7 @@ router.delete("/My_post/:id/edit",middleware.isloggedIn, function(req,res){
     });
 })
 
-router.get("/workerlist",middleware.isloggedIn,function(req, res){
+router.get("/workerlist",middleware.isloggedIn , middleware.stateOperator ,function(req, res){
     Resume.find({},function(error, allResume){
         if(error){
             console.log(error);
@@ -218,7 +218,7 @@ router.get("/workerlist",middleware.isloggedIn,function(req, res){
     })
 });
 
-router.get("/workerlist/:id",middleware.isloggedIn,function(req, res){
+router.get("/workerlist/:id",middleware.isloggedIn , middleware.stateOperator ,function(req, res){
     Resume.findById(req.params.id, function(error, idResume){
         if(error){
             console.log(error);
@@ -228,11 +228,11 @@ router.get("/workerlist/:id",middleware.isloggedIn,function(req, res){
     });
 })
 
-router.get("/postjob", middleware.isloggedIn, function(req, res){
+router.get("/postjob", middleware.isloggedIn , middleware.stateOperator , function(req, res){
     res.render("findworker/postjob");
 })
 
-router.post("/postjob",uploadjob.any(), middleware.isloggedIn,function(req, res){
+router.post("/postjob",uploadjob.any(), middleware.isloggedIn , middleware.stateOperator ,function(req, res){
 
     var today = new Date();
     var date = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate();
@@ -296,7 +296,7 @@ router.post("/postjob",uploadjob.any(), middleware.isloggedIn,function(req, res)
 });
 })
 
-router.get("/Liked", middleware.isloggedIn, function(req, res){
+router.get("/Liked", middleware.isloggedIn , middleware.stateOperator , function(req, res){
     res.render("Liked");
 })
 
@@ -312,15 +312,15 @@ var storage = multer.diskStorage({
 
 upload = multer({ storage : storage})
 
-router.get("/profile/:id",middleware.isloggedIn,function(req, res){
+router.get("/profile/:id",middleware.isloggedIn, middleware.stateOperator ,function(req, res){
     res.render("findworker/operatorprofile");
 })
 
-router.get("/profile/:id/edit",middleware.isloggedIn,function(req, res){
+router.get("/profile/:id/edit", middleware.isloggedIn , middleware.stateOperator ,function(req, res){
     res.render("findworker/editoperatorprofile");
 })
 
-router.put("/profile/:id/edit" ,upload.single("img") ,middleware.isloggedIn, function(req,res){
+router.put("/profile/:id/edit" ,upload.single("img") , middleware.stateOperator ,middleware.isloggedIn, function(req,res){
     var today = new Date();
     var date = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate();
     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();

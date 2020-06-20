@@ -4,6 +4,10 @@
     margin-top: 5%;
     margin-bottom: 5%;
     font-family: 'Prompt', sans-serif;
+    background-color: #fffdf4;
+    background-image: url(../images/bg-profile5.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
 }
 
 .personal-img img{
@@ -28,11 +32,12 @@
 h1{
     text-align: left;
     text-transform: uppercase;
-    font-weight: bold; 
+    font-weight: bold;
+    font-size: 27px; 
 }
 
 .left{
-    width: 30%;
+    width: 45%;
     text-align: left;
     margin-right: 5%;
     text-transform: uppercase;
@@ -41,13 +46,16 @@ h1{
 }
 
 .right{
-    width: 60%;
+    width: 45%;
     text-align: left;
     margin-left: 5%;
 }
 
 hr{
-    width: 400px;
+    width: 300px;
+}
+.form-row {
+    margin-bottom: 2%;
 }
 
 .form-row i{
@@ -65,7 +73,53 @@ hr{
     margin-top: 5%;
 }
 
+.btn-right{
+    width: 45%;
+    text-align: right;
+    margin-left: 5%;
+    size: 20px;
+}
+
+.btn-left{
+    width: 45%;
+    text-align: left;
+    margin-left: 5%;
+}
+
 .btn-edit:hover{
     top:2px;
     box-shadow:0 2px 0 #006394;
+}
+
+
+.row .btn-danger{
+    text-align: center; 
+    margin-left: 5%;
+    background: #f4524d;
+    box-shadow: 0 4px 0 #f11f18;
+    transition: all 0.2s ease-in-out 0s;
+    border-radius: 25px;
+}
+
+.row .btn-danger:hover{
+    box-shadow: 0 2px 0 #f11f18;
+}
+.row .btn-success{
+    background: #6ab165;
+    box-shadow: 0 5px 0 #4f934b;
+    position: relative;
+    top:0;
+    transition:all 0.2s ease-in-out 0s;
+}
+
+.row .btn-success:hover{
+    top:3px;
+    box-shadow: 0 2px 0 #4f934b;
+
+}
+
+.input-img input{
+    margin-top: 5%;
+    text-align: center;
+    width: 250px;
 }

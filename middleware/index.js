@@ -32,16 +32,19 @@ middlewareObj.isloggedIn = function(req, res, next){
 
 module.exports = middlewareObj;
 
-function stateOperator(req, res, next){
+middlewareObj.stateOperator = function(req, res, next){
     if(req.user.type === "operator"){
         return next();
+        
     }
-    req.flash('error','You are logged as Worker');
+    req.flash('error','คุณได้เข้าสู่ระบบในฐานะ worker ไม่สามารถเข้าใช้งานหน้า operator ได้');
+    res.redirect('/');
 }
 
-// function stateWorker(req, res, next){
-//     if(req.user.type === "worker"){
-//         return next();
-//     }
-//     req.flash('error','You are logged as Operator'); 
-// }
+middlewareObj.stateWorker = function(req, res, next){
+    if(req.user.type === "worker"){
+        return next();
+    }
+    req.flash('error','คุณได้เข้าสู่ระบบในฐานะ operator ไม่สามารถเข้าใช้งานหน้า worker ได้'); 
+    res.redirect('/');   
+}

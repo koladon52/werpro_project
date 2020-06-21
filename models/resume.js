@@ -21,7 +21,8 @@ let ResumeSchema = new mongoose.Schema({
             ref : 'User'
         },
         username : String,
-    }
+    },
+    expire_at: {type: Date, default: Date.now, expires: 7200} 
 })
 
 // ResumeSchema.plugin(passportlocalMongoose);

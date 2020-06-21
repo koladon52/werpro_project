@@ -218,12 +218,91 @@ router.get("/workerlist",middleware.isloggedIn , middleware.stateOperator ,funct
     })
 });
 
+router.post("/wokerlist/:id/addfavourite", middleware.isloggedIn ,function(req, res) {
+    let id = req.user._id;
+    let worker = req.params.id;
+    let thisfav = false;
+    User.findById(id, function(err , user){
+        if(err){
+            console.log(err);
+        } else {
+            for(let i = 0 ; i < user.favourite.length ; i++){
+                if(user.favourite[i].equals(worker)){
+                    console.log('you have favourited this job')
+                    thisfav = true;
+                    break;
+                }
+                else{
+                    continue;
+                }
+            }
+            if(thisfav == false){
+                user.favourite.push(worker);
+                user.save();
+                console.log('add success');
+                res.end()
+            }
+        }
+    })
+});
+
+router.delete("/workerlist/:id/removefavourite", middleware.isloggedIn ,function(req, res) {
+    let id = req.user._id;
+    let worker = req.params.id;
+    Resume.findById(worker,function(err,post){
+    let thisfav = false;
+    if(err)
+    {
+      return res.send(err);
+    }
+    else
+    {
+      User.findById(id,function(err,user)
+      {
+        if(err)
+        {
+          return res.send(err);
+        }
+        else
+        {
+            user.favourite.pull(worker);
+            user.save()      
+            console.log('delete success');
+            res.end()
+        }
+      })
+    }
+  })
+});
+
+router.get("/worker_like",middleware.isloggedIn,async function(req,res)
+{
+    User.findById(req.user._id).populate('favourite').exec(function(err, idWorker){
+        if(err){
+            console.log(err);
+        } else {
+            console.log(idWorker)
+            res.render("findworker/favouriteworker",{favouriteworker : idWorker});      
+            }
+    })
+})
+
 router.get("/workerlist/:id",middleware.isloggedIn , middleware.stateOperator ,function(req, res){
+    let favouriteThisResume = false;
     Resume.findById(req.params.id, function(error, idResume){
         if(error){
             console.log(error);
         } else {
-            res.render("findworker/workdetail",{resume:idResume});
+            for(let i = 0 ; i < req.user.favourite.length ; i++){
+                if(req.user.favourite[i].equals(req.params.id)){
+                    favouriteThisResume = true;
+                    break;
+                } else {
+                    continue;
+                }
+            }
+            console.log(favouriteThisResume)
+            res.render("findworker/workdetail",{ resume : idResume , favouriteThisResume : favouriteThisResume});
         }
     });
 })
@@ -296,9 +375,6 @@ router.post("/postjob",uploadjob.any(), middleware.isloggedIn , middleware.state
 });
 })
 
-router.get("/Liked", middleware.isloggedIn , middleware.stateOperator , function(req, res){
-    res.render("Liked");
-})
 
 
 var storage = multer.diskStorage({

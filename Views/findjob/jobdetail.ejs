@@ -77,6 +77,17 @@
     <div class="row">
     <div class="col-lg-11 block">
         <h1 class="mt-4"><%= job.companyname %></h1>
+        <div class="like" >
+            <% if(favouriteThisJob == true){ %>
+                <div class="favourited fas fa-heart fa-2x" id="favourite" data="<%= job._id %>" >
+                <!-- Added -->
+                </div>
+            <% } else if(favouriteThisJob == false) {%>
+                <div class="favourite far fa-heart fa-2x" id="favourited" data="<%= job._id %>" >
+                <!-- Add -->
+                </div>
+            <% } %> 
+        </div>
         <span class="lead">
           by
           <a href="#"></a>
@@ -85,20 +96,21 @@
         <hr>
         <img src="../jobimage/<%= job.image %>" class="img-fluid">
         <hr>
-            <div class="name">
+            <!-- <div class="name">
                 <p><%= job.companyname %></p>
-            </div>
-            <div class="row col-xs-6 col-lg-12">
-                <img src="../../images/correspondence.svg" alt="">
-                <p id="subject"> รายละเอียด</p>
-                <p id="detail"> <%= job.qualti %></p>
-            </div>
+            </div> -->
+
             <div class="row col-lg-12">
                 <img src="../../images/deal.svg" alt="">
                 <p id="subject">ประเภทสัญญาจ้าง</p>
                 <p> <%= job.employmenttype %></p>
             </div>
-            
+                        <div class="row col-lg-12">
+                <img src="../../images/signature.svg" alt="">
+                <p id="subject">ประเภทงานที่ต้องการ</p>
+                <p> <%= job.jobtype %></p>
+            </div>
+
             <div class="row col-lg-12">
                 <img src="../../images/briefcase.svg" alt="">
                 <p id="subject">ตำแหน่งงาน</p>
@@ -109,13 +121,9 @@
                 <p id="subject">ผลตอบแทน</p>
                 <p> <%= job.salary%></p>
             </div>
-            <div class="row col-lg-12">
-                <img src="../../images/signature.svg" alt="">
-                <p id="subject">ประเภทงานที่ต้องการ</p>
-                <p> <%= job.jobtype %></p>
-            </div>
 
-            <div class="row col-lg-12">
+
+            <!-- <div class="row col-lg-12">
                 <img src="../../images/calendar.svg" alt="">
                 <p id="subject">วัน</p>
                 <p> <%= job.date %></p>
@@ -125,8 +133,13 @@
                 <img src="../../images/time.svg" alt="">
                 <p id="subject">เวลา</p>
                 <p> <%= job.worktime%></p>
+            </div> -->
+            <div class="row col-xs-6 col-lg-12">
+                <img src="../../images/correspondence.svg" alt="">
+                <p id="subject"> รายละเอียด</p>
+                <p id="detail"> <%= job.qualti %></p>
             </div>
-            
+
             <div class="row col-lg-12">
                 <img src="../../images/telephone.svg" alt="">
                 <p id="subject">ช่องทางการติดต่อ</p>
@@ -150,25 +163,21 @@
         <input type="hidden" id="lat" value="<%= job.lat %>">
         <div class="download_like row col-lg-12">
             <div class="download">
-                <a href="/jobapplication/<%= job.file %>" download align="left"><i class="fas fa-file-download "></i> ดาวโหลดเอกสาร</a>
+                <a href="/jobapplication/<%= job.file %>" download align="left"><i class="fas fa-file-download "></i> ดาวน์โหลดเอกสาร</a>
             </div>
-            <div class="like" >
+            <!-- <div class="like" >
                 <% if(favouriteThisJob == true){ %>
                     <div class="favourited fas fa-heart fa-2x" id="favourite" data="<%= job._id %>" >
-                    <!-- Added -->
                     </div>
                 <% } else if(favouriteThisJob == false) {%>
                     <div class="favourite far fa-heart fa-2x" id="favourited" data="<%= job._id %>" >
-                    <!-- Add -->
                     </div>
                 <% } %> 
-            </div>
+            </div> -->
         </div>
-        
       </div>
     </div>
-
   </div>
-
-
 </div>
+
+<%- include("../partials/footer")%>

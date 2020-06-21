@@ -5,29 +5,17 @@
 <body>
  <div class="container col-xs-6 col-sm-10 col-md-11 col-lg-9">
     <div class="row" >
-<<<<<<< HEAD
-        <div class="col-lg-5 col-md-5 col-sm-12" style=" margin-left: 5%;" align="center">
-=======
         <div class="col-lg-5 col-md-5 col-sm-12" align="center">
->>>>>>> e052bafa0ac56ed81bdc506f47e34123c478d0aa
             <div class="personal-img">
                 <img src="/images/<%=currentUser.img%>" class="img-fluid"> 
             </div>
         </div>   
         
-<<<<<<< HEAD
-        <div class="col-lg-6 col-md-6 col-sm-12" style="margin-top: 5%;">
-            <div class="personal-info form-row">
-                <div class="col-lg-10 col-md-12 col-sm-12">
-                <h1>my account</h1>
-                <div class="line col-xs-"></div>
-=======
         <div class="col-lg-7 col-md-7 col-sm-12" style="margin-top: 5%;">
             <div class="personal-info form-row">
                 <div class="col-lg-10 col-md-12 col-sm-12">
                 <h1>my account</h1>
                 <div class="line"></div>
->>>>>>> e052bafa0ac56ed81bdc506f47e34123c478d0aa
                 
                 <form action="/findjob/profile/<%= currentUser._id %>/edit" method="GET">
                       <div class="col-xs-9 col-sm-9 col-md-12 col-lg-12">
@@ -57,7 +45,7 @@
                       <div class="form-row">
                         <div class="col-xs-9 col-sm-9 col-md-12 col-lg-6">
                             <label for="name">ชื่อ </label>
-                            <label class="form-control"  for="name" readonly ><%= currentUser.firstname %> </label>
+                            <label class="form-control"  for="name" aria-readonly="ture" ><%= currentUser.firstname %> </label>
                         </div>
                         <div class="col-xs-9 col-sm-9 col-md-12 col-lg-6">
                             <label for="inputLastname">นามสกุล</label>

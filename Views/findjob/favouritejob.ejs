@@ -48,7 +48,7 @@
         <div class="row">
           <div class="col-md-7">
             <a href="#">
-              <img class="img-fluid rounded mb-3 mb-md-0" src="/findjob/jobimage/<%= jobliked.image %>" width="700" height="300" alt="">
+              <img class="img-fluid rounded mb-3 mb-md-0" src="/jobimage/<%= jobliked.image %>" width="700" height="300" alt="">
             </a>
           </div>
           <div class="col-md-5">
@@ -57,7 +57,6 @@
             <p><%= jobliked.qualti %></p>
             <p><%= jobliked.employmenttype %></p>
             <p><%= jobliked.salary %></p>
-            <p><%= jobliked._id %></p>
             <br>
             <a action="GET" class="btn btn-primary" href="/findjob/joblist/<%= jobliked._id %>">View Project</a>
           </div>

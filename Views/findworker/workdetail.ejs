@@ -6,14 +6,14 @@
 
 <div class="container" style="margin-top: 10%; margin-bottom: 10%;">
     <div class="jumbotron">
-        <h1><%= resume.name %></h1>
         <img src='/images/<%= resume.image %>' class="img-fluid">
         <p>ชื่อ : <%= resume.firstname %> นามสกุล : <%= resume.lastname %></p>
         <p>รายละเอียด : <%= resume.description %></p>
-        <P>ประเภทสัญญาจ้าง  : <%= resume.jobtype %></P>
-        <p>ประเภทงานที่สนใจ  : <%= resume.employmenttype %></p>
+        <P>ประเภทสัญญาจ้าง  : <%= resume.employmenttype %></p>
+        <p>ประเภทงานที่สนใจ  : <%= resume.jobtype %></P>
         <h5>ราได้ที่คาดว่าจะได้รับ  : <%= resume.salary %></h5>
-        <p>วันเวลา  <%= resume.date %></p>
+        <P>ช่องทางติดต่อ : <%= resume.contact %></P>
+        <p>วันเวลาที่แก้ไขล่าสุด : <%= resume.editdate %></p>
         <a href="/resume/<%= resume.file %>" download>Download Resume</a>
     </div>
 </div>

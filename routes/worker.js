@@ -368,12 +368,12 @@ router.post('/joblist',middleware.isloggedIn, function(req , res , next){
     var fuzzyfiltercompanyname   = req.body.searchcompanyname;
     var filtersalary             = req.body.searchsalary;
     var filteremploymenttype     = req.body.searchemploymenttype;
-    var filterprovince         =  req.body.searchprovince;
-    var filterprovince         =  "";
+    var filterjobtype        =  req.body.searchjobtype;
+    
     console.log(fuzzyfiltercompanyname);
     console.log(filtersalary);
     console.log(filteremploymenttype);
-    console.log(filterprovince);
+    console.log(filterjobtype);
     const filtercompanyname = new RegExp(escapeRegex(fuzzyfiltercompanyname), 'gi');
 
     // if(fuzzyfiltercompanyname != '' && filtersalary != '' && filteremploymenttype != ''){
@@ -408,35 +408,35 @@ router.post('/joblist',middleware.isloggedIn, function(req , res , next){
     //     var filterParemater = {};
     // }
 
-    if(filtercompanyname !== '' && filtersalary !== '' && filteremploymenttype !== '' && filterprovince !== ''){ 1111
-        var filterParemater={ $and :[{ companyname : filtercompanyname},{salary : filtersalary},{employmenttype : filteremploymenttype},{province : filterprovince}]};
-    } else if(filtercompanyname === '' && filtersalary !== '' && filteremploymenttype !== '' && filterprovince !== ''){ 0111
-        var filterParemater={ $and :[{salary : filtersalary},{employmenttype : filteremploymenttype},{province : filterprovince}]};
-    } else if(filtercompanyname !== '' && filtersalary === '' && filteremploymenttype !== '' && filterprovince !== ''){1011
-        var filterParemater={ $and :[{ companyname : filtercompanyname},{employmenttype : filteremploymenttype},{province : filterprovince}]};
-    } else if(filtercompanyname !== '' && filtersalary !== '' && filteremploymenttype === '' && filterprovince !== ''){1101
-        var filterParemater={ $and :[{ companyname : filtercompanyname},{salary : filtersalary},{province : filterprovince}]};
-    } else if(filtercompanyname !== '' && filtersalary !== '' && filteremploymenttype !== '' && filterprovince === ''){1110
+    if(filtercompanyname !== '' && filtersalary !== '' && filteremploymenttype !== '' && filterjobtype !== ''){ 1111
+        var filterParemater={ $and :[{ companyname : filtercompanyname},{salary : filtersalary},{employmenttype : filteremploymenttype},{jobtype : filterjobtype}]};
+    } else if(filtercompanyname === '' && filtersalary !== '' && filteremploymenttype !== '' && filterjobtype !== ''){ 0111
+        var filterParemater={ $and :[{salary : filtersalary},{employmenttype : filteremploymenttype},{jobtype : filterjobtype}]};
+    } else if(filtercompanyname !== '' && filtersalary === '' && filteremploymenttype !== '' && filterjobtype !== ''){1011
+        var filterParemater={ $and :[{ companyname : filtercompanyname},{employmenttype : filteremploymenttype},{jobtype : filterjobtype}]};
+    } else if(filtercompanyname !== '' && filtersalary !== '' && filteremploymenttype === '' && filterjobtype !== ''){1101
+        var filterParemater={ $and :[{ companyname : filtercompanyname},{salary : filtersalary},{jobtype : filterjobtype}]};
+    } else if(filtercompanyname !== '' && filtersalary !== '' && filteremploymenttype !== '' && filterjobtype === ''){1110
         var filterParemater={ $and :[{ companyname : filtercompanyname},{salary : filtersalary},{employmenttype : filteremploymenttype}]};
-    } else if(filtercompanyname === '' && filtersalary === '' && filteremploymenttype !== '' && filterprovince !== ''){0011
-        var filterParemater={ $and :[{employmenttype : filteremploymenttype},{province : filterprovince}]};
-    } else if(filtercompanyname !== '' && filtersalary === '' && filteremploymenttype === '' && filterprovince !== ''){1001
-        var filterParemater={ $and :[{ companyname : filtercompanyname},{province : filterprovince}]};
-    } else if(filtercompanyname !== '' && filtersalary !== '' && filteremploymenttype === '' && filterprovince === ''){1100
+    } else if(filtercompanyname === '' && filtersalary === '' && filteremploymenttype !== '' && filterjobtype !== ''){0011
+        var filterParemater={ $and :[{employmenttype : filteremploymenttype},{jobtype : filterjobtype}]};
+    } else if(filtercompanyname !== '' && filtersalary === '' && filteremploymenttype === '' && filterjobtype !== ''){1001
+        var filterParemater={ $and :[{ companyname : filtercompanyname},{jobtype : filterjobtype}]};
+    } else if(filtercompanyname !== '' && filtersalary !== '' && filteremploymenttype === '' && filterjobtype === ''){1100
         var filterParemater={ $and :[{ companyname : filtercompanyname},{salary : filtersalary}]};
-    } else if(filtercompanyname === '' && filtersalary !== '' && filteremploymenttype !== '' && filterprovince === ''){0110
+    } else if(filtercompanyname === '' && filtersalary !== '' && filteremploymenttype !== '' && filterjobtype === ''){0110
         var filterParemater={ $and :[{salary : filtersalary},{employmenttype : filteremploymenttype}]};
-    } else if(filtercompanyname === '' && filtersalary !== '' && filteremploymenttype === '' && filterprovince !== ''){0101
-        var filterParemater={ $and :[{salary : filtersalary},{province : filterprovince}]};
-    } else if(filtercompanyname !== '' && filtersalary === '' && filteremploymenttype !== '' && filterprovince === ''){1010
+    } else if(filtercompanyname === '' && filtersalary !== '' && filteremploymenttype === '' && filterjobtype !== ''){0101
+        var filterParemater={ $and :[{salary : filtersalary},{jobtype : filterjobtype}]};
+    } else if(filtercompanyname !== '' && filtersalary === '' && filteremploymenttype !== '' && filterjobtype === ''){1010
         var filterParemater={ $and :[{companyname : filtercompanyname},{employmenttype : filteremploymenttype}]};
-    } else if(filtercompanyname === '' && filtersalary === '' && filteremploymenttype === '' && filterprovince !== ''){0001
-        var filterParemater={ $and :[{province : filterprovince}]};
-    } else if(filtercompanyname !== '' && filtersalary === '' && filteremploymenttype === '' && filterprovince === ''){1000
+    } else if(filtercompanyname === '' && filtersalary === '' && filteremploymenttype === '' && filterjobtype !== ''){0001
+        var filterParemater={ $and :[{jobtype : filterjobtype}]};
+    } else if(filtercompanyname !== '' && filtersalary === '' && filteremploymenttype === '' && filterjobtype === ''){1000
         var filterParemater={ $and :[{ companyname : filtercompanyname}]};
-    } else if(filtercompanyname === '' && filtersalary !== '' && filteremploymenttype === '' && filterprovince === ''){0100
+    } else if(filtercompanyname === '' && filtersalary !== '' && filteremploymenttype === '' && filterjobtype === ''){0100
         var filterParemater={ $and :[{salary : filtersalary}]};
-    } else if(filtercompanyname === '' && filtersalary === '' && filteremploymenttype !== '' && filterprovince === ''){0010
+    } else if(filtercompanyname === '' && filtersalary === '' && filteremploymenttype !== '' && filterjobtype === ''){0010
         var filterParemater={ $and :[{employmenttype : filteremploymenttype}]};
     }  else {
         var filterParemater = {};

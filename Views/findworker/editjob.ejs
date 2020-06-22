@@ -200,16 +200,20 @@
                         <label for="inputContact">ช่องทางการติดต่อบริษัท/ห้างร้าน</label>
                         <input type="text" class="form-control" name="contact" value="<%= job.contact %>"placeholder="Facebook,Email,line,เบอร์โทรศัพท์" style="height:100px">
                     </div>   
-                    <div class="form-row"> 
-                        <div class="form-group">
-                            <label for="inputContact">วันที่เริ่มทำงาน</label>
-                            <input type="date" class="form-control" name="date"  value="<%= job.date %>" >
-                        </div> 
-                        <div class="form-group" style="margin-left: 5%;">
-                            <label for="inputContact">ระยะเวลาการทำงาน</label>
-                            <input type="time" class="form-control" name="worktime" value="<%= job.worktime %>"  >
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <br>
+                            <label for="inputDate">เวลาทำงาน</label>
+                          </div>
+                        <div class="form-group col-md-4">
+                            <label for="inputTime">ตั้งแต่</label>
+                            <input type="time" class="form-control" id="inputTime" name="starttime" value="<%= job.starttime %>" required/>
                         </div>
-                    </div>
+                        <div class="form-group col-md-4">
+                            <label for="inputTime">ถึง</label>
+                            <input type="time" class="form-control" id="inputTime" name="finishtime" value="<%= job.finishtime %>" required/>
+                        </div>
+                </div>
                     <div class="form-group">
                         <label for="inputContact">ที่ตั้งบริษัท/ร้านค้า</label>
                         <input type="text" class="form-control" name="location" value="<%= job.location %>" style="height:100px" required>

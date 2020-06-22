@@ -70,20 +70,24 @@
                             </select><br>
                         <label for="selectEmployment">ลักษณะการว่าจ้าง</label>
                             <select class="form-control" name="employmenttype" required>
-                                <!-- <option>ลักษณะการว่าจ้าง</option> -->
                                 <option></option>
                                 <option value="Part time">Part time</option>
                                 <option value="Event">Event</option>
+                                <option value="ฝึกงาน">ฝึกงาน</option>
                             </select>
                         </div><br>
                     <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="inputDate">วันที่สามารถเริ่มงานได้</label>
-                                <input type="date" class="form-control" id="inputDate" name="date" required/>
+                            <div class="form-group col-md-4">
+                                <br>
+                                <label for="inputDate">ช่วงเวลาที่สะดวกทำงาน</label>
                               </div>
-                            <div class="form-group col-md-6">
-                                <label for="inputTime">เวลาที่สามารถทำงานได้</label>
-                                <input type="time" class="form-control" id="inputTime" name="time" required/>
+                            <div class="form-group col-md-4">
+                                <label for="inputTime">ตั้งแต่</label>
+                                <input type="time" class="form-control" id="inputTime" name="starttime" required/>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputTime">ถึง</label>
+                                <input type="time" class="form-control" id="inputTime" name="finishtime" required/>
                             </div>
                     </div>
                     <div class="form-select">

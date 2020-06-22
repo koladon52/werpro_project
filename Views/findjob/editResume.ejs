@@ -81,15 +81,19 @@
                         </select>
                     </div><br>
                     <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="inputDate">วันที่สามารถเริ่มงานได้</label><br>
-                                <input type="date" class="form-control" id="date" name="date" value="<%= resume.date %>" required>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="inputTime">เวลาที่สามารถทำงานได้</label><br>
-                                <input type="time" class="form-control" id="time" name="worktime" value="<%= resume.worktime %>" required>
-                            </div>
-                    </div><br>
+                        <div class="form-group col-md-4">
+                            <br>
+                            <label for="inputDate">ช่วงเวลาที่สะดวกทำงาน</label>
+                          </div>
+                        <div class="form-group col-md-4">
+                            <label for="inputTime">ตั้งแต่</label>
+                            <input type="time" class="form-control" id="inputTime" name="starttime" value="<%= resume.starttime %>"required/>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="inputTime">ถึง</label>
+                            <input type="time" class="form-control" id="inputTime" name="finishtime" value="<%= resume.finishtime %>"required/>
+                        </div>
+                </div>
                     <div class="form-select">
                         <label for="selectTypejob">รายได้ที่คาดว่าจะได้รับ</label>
                             <select class="form-control" name="salary" value="<%= resume.salary %>"required>

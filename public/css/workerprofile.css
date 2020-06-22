@@ -123,3 +123,11 @@ hr{
     text-align: center;
     width: 250px;
 }
+
+.upload-img p{
+    letter-spacing: 2px;
+    color: gray;
+    font-size: smaller;
+    text-align: center;
+    margin-top: 3%;
+}

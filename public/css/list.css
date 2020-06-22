@@ -81,6 +81,7 @@
 .container {
   font-family: 'Prompt', sans-serif;
   font-size: larger;
+;
    /* background-image: url(../images/bg-list2.png);
   background-repeat: no-repeat;
   background-size: 100%;
@@ -89,6 +90,12 @@
 
 .container form{
   margin-top: 5%;
+  /* background-color: #F5F5F5	; */
+  margin-bottom: 2%;
+  background-image: url(../images/bg-list2.svg);
+  background-repeat: no-repeat;
+  background-size: 40%;
+  background-position: right;  
 }
 
 /* .block{
@@ -107,6 +114,8 @@
   top:0;
   transition:all 0.2s ease-in-out 0s;
   border-radius: 25px;
+  margin-top: 3%;
+  
 }
 
 .btn-search:hover{
@@ -128,7 +137,7 @@
 }
 
 .list{
-  margin-top: 5%;
+  background-color: #F5F5F5	;
 }
 
 .row #icon-list{
@@ -147,4 +156,22 @@
 .btn-readmore:hover{
   top:2px;
   box-shadow:0 2px 0 #006394;
+}
+
+
+.img-fluid{
+  margin-top: 4%;
+}
+
+.card{
+  margin: 1%;
+}
+
+form p{
+  letter-spacing: 4px;
+  color: gray;
+  font-style: italic;
+  font-size: smaller;
+  margin-bottom: 4%;
+  text-align: center;
 }

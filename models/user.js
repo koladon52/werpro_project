@@ -25,15 +25,28 @@ let UserSchema = new mongoose.Schema({
             ref: "Jobdetail"
         }
     ],
-    favourite:
+    // favourite:
+    // [   
+    //     {
+    //         type: mongoose.Schema.Types.ObjectId,
+    //         ref: 'Jobdetail',
+    //         ref: "Resume"
+    //     }   
+    // ],
+    favouritejob:
     [   
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Jobdetail',
-            ref: 'Resume'
         }   
     ],
-
+    favouriteresume:
+    [   
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Resume"
+        }   
+    ],
 
 });
 

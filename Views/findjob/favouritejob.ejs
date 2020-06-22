@@ -12,37 +12,12 @@
 
 
 <div class="container">
-    <br>
-    <br>
-    <form class="form-row" style="text-align: left;" action="/joblist" method="POST">
-      <div class="col-md-3 mb-4">
-          <label for="inputcompanyname">บริษัท</label><br>
-          <input type="text" id="companyname" name="searchcompanyname" >
-      </div>
-      <div class="col-md-3 mb-4">
-          <label for="inputsalary">เงินเดือน</label><br>
-          <input type="text" id="salary" name="searchsalary">
-      </div>
-      <br>
-      <select class="form-control col-md-3 mb-4" name="searchemploymenttype" > 
-        <option value="">ลักษณะการว่าจ้าง</option>
-          <option value="Part time">Part time</option>
-          <option value="Full time">Full time</option>
-          <option value="Event">Event</option>
-      </select>
-     
-      <br>
-      <div align="right">
-        <button type="submit" class="btn btn-primary mb-2">Search</button> 
-      </div>  
-
-    </form>
-
+    
 
   <h1 class="my-4">LIKED
     <!-- <small>find your job</small> -->
     </h1>
-        <% favouritejob.favourite.forEach(function(jobliked){ %>
+        <% favouritejob.favouritejob.forEach(function(jobliked){ %>
         <!-- Project One -->
         
         <div class="row">

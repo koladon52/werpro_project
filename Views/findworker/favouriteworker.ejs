@@ -1,9 +1,13 @@
 <%- include("../partials/header")%>
 <div class="container">
-<% favouriteworker.favourite.forEach(function(resume){ %>
+  <h1 class="my-4">LIKED
+    <!-- <small>find your job</small> -->
+    </h1>
+<% favouriteworker.favouriteresume.forEach(function(resume){ %>
   
 <div class="row">
     
+  
     <div class="col-md-7">
       <a href="#">
         <img class="img-fluid rounded mb-3 mb-md-0" src="/resumeimage/<%= resume.image %>" width="300" height="300"  alt="">

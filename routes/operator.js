@@ -50,6 +50,7 @@ router.get("/My_post",middleware.isloggedIn , middleware.stateOperator ,function
             res.render("findworker/My_post",{Job:myJob});
         }
     })
+    
 });
 
 
@@ -214,7 +215,7 @@ router.get("/workerlist",middleware.isloggedIn , middleware.stateOperator ,funct
     })
 });
 
-router.post("/wokerlist/:id/addfavourite", middleware.isloggedIn ,function(req, res) {
+router.post("/workerlist/:id/addfavourite", middleware.isloggedIn ,function(req, res) {
     let id = req.user._id;
     let worker = req.params.id;
     let thisfav = false;
@@ -222,8 +223,8 @@ router.post("/wokerlist/:id/addfavourite", middleware.isloggedIn ,function(req, 
         if(err){
             console.log(err);
         } else {
-            for(let i = 0 ; i < user.favourite.length ; i++){
-                if(user.favourite[i].equals(worker)){
+            for(let i = 0 ; i < user.favouriteresume.length ; i++){
+                if(user.favouriteresume[i].equals(worker)){
                     console.log('you have favourited this job')
                     thisfav = true;
                     break;
@@ -233,7 +234,7 @@ router.post("/wokerlist/:id/addfavourite", middleware.isloggedIn ,function(req, 
                 }
             }
             if(thisfav == false){
-                user.favourite.push(worker);
+                user.favouriteresume.push(worker);
                 user.save();
                 console.log('add success');
                 res.end()
@@ -261,7 +262,7 @@ router.delete("/workerlist/:id/removefavourite", middleware.isloggedIn ,function
         }
         else
         {
-            user.favourite.pull(worker);
+            user.favouriteresume.pull(worker);
             user.save()      
             console.log('delete success');
             res.end()
@@ -273,7 +274,7 @@ router.delete("/workerlist/:id/removefavourite", middleware.isloggedIn ,function
 
 router.get("/worker_like",middleware.isloggedIn,async function(req,res)
 {
-    User.findById(req.user._id).populate('favourite').exec(function(err, idWorker){
+    User.findById(req.user._id).populate('favouriteresume').exec(function(err, idWorker){
         if(err){
             console.log(err);
         } else {
@@ -289,8 +290,8 @@ router.get("/workerlist/:id",middleware.isloggedIn , middleware.stateOperator ,f
         if(error){
             console.log(error);
         } else {
-            for(let i = 0 ; i < req.user.favourite.length ; i++){
-                if(req.user.favourite[i].equals(req.params.id)){
+            for(let i = 0 ; i < req.user.favouriteresume.length ; i++){
+                if(req.user.favouriteresume[i].equals(req.params.id)){
                     favouriteThisResume = true;
                     break;
                 } else {

@@ -276,8 +276,8 @@ router.post("/joblist/:id/addfavourite", middleware.isloggedIn ,function(req, re
         if(err){
             console.log(err);
         } else {
-            for(let i = 0 ; i < user.favourite.length ; i++){
-                if(user.favourite[i].equals(job)){
+            for(let i = 0 ; i < user.favouritejob.length ; i++){
+                if(user.favouritejob[i].equals(job)){
                     console.log('User have favourited this job')
                     thisfav = true;
                     break;
@@ -287,7 +287,7 @@ router.post("/joblist/:id/addfavourite", middleware.isloggedIn ,function(req, re
                 }
             }
             if(thisfav == false){
-                user.favourite.push(job);
+                user.favouritejob.push(job);
                 user.save();
                 console.log('add success');
                 res.end()
@@ -315,7 +315,7 @@ router.delete("/joblist/:id/removefavourite", middleware.isloggedIn ,function(re
         }
         else
         {
-            user.favourite.pull(job);
+            user.favouritejob.pull(job);
             user.save()      
             console.log('delete success');
             res.end()
@@ -328,11 +328,11 @@ router.delete("/joblist/:id/removefavourite", middleware.isloggedIn ,function(re
 
 router.get("/job_like",middleware.isloggedIn,async function(req,res)
 {
-    User.findById(req.user._id).populate('favourite').exec(function(err, idjob){
+    User.findById(req.user._id).populate('favouritejob').exec(function(err, idjob){
         if(err){
             console.log(err);
         } else {
-            console.log(idjob.favourite)
+            console.log(idjob)
             res.render("findjob/favouritejob",{favouritejob : idjob});      
             }
     })
@@ -355,8 +355,8 @@ router.get("/joblist/:id",middleware.isloggedIn,function(req, res){
         if(error){
             console.log(error);
         } else {
-            for(let i = 0 ; i < req.user.favourite.length ; i++){
-                if(req.user.favourite[i].equals(req.params.id)){
+            for(let i = 0 ; i < req.user.favouritejob.length ; i++){
+                if(req.user.favouritejob[i].equals(req.params.id)){
                     favouriteThisJob = true;
                     break;
                 } else {

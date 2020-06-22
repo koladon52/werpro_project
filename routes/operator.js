@@ -35,9 +35,7 @@ var jobtest = multer.diskStorage({
     },
   })
 
-
 uploadjob = multer({ storage : jobtest})
-
 
 router.get("/", middleware.isloggedIn , middleware.stateOperator , function(req, res){
     res.redirect("/");
@@ -67,10 +65,7 @@ router.get("/My_post/:id",middleware.isloggedIn , middleware.stateOperator ,func
 
 router.put("/My_post/:id/edit",uploadjob.any(),middleware.isloggedIn , middleware.stateOperator ,function(req,res){
 
-    var today = new Date();
-    var date = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate();
-    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    var dateTime = time+' '+date;
+    var dateTime = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '')
     
     let id                = req.params.id;
     let file              = req.body.oldfile;
@@ -307,16 +302,105 @@ router.get("/workerlist/:id",middleware.isloggedIn , middleware.stateOperator ,f
     });
 })
 
+
+// router.post('/joblist',middleware.isloggedIn, function(req , res , next){
+//     var fuzzyfiltercompanyname   = req.body.searchcompanyname;
+//     var filtersalary             = req.body.searchsalary;
+//     var filteremploymenttype     = req.body.searchemploymenttype;
+//     var filterjobtype        =  req.body.searchjobtype;
+    
+//     console.log(fuzzyfiltercompanyname);
+//     console.log(filtersalary);
+//     console.log(filteremploymenttype);
+//     console.log(filterjobtype);
+//     const filtercompanyname = new RegExp(escapeRegex(fuzzyfiltercompanyname), 'gi');
+
+//     // if(fuzzyfiltercompanyname != '' && filtersalary != '' && filteremploymenttype != ''){
+//     //     console.log('1');
+//     //     var filterParemater = { $and : [{ companyname : fuzzyfiltercompanyname } , { $and : [{salary : filtersalary},{employmenttype : filteremploymenttype}]}] }
+//     // } else if (fuzzyfiltercompanyname != '' && filtersalary == '' && filteremploymenttype != ''){
+//     //     console.log('2');
+//     //     var filterParemater = { $and:[{ companyname : fuzzyfiltercompanyname},{employmenttype : filteremploymenttype}]}
+//     // } else if (fuzzyfiltercompanyname == '' && filtersalary != '' && filteremploymenttype !=''){
+//     //     console.log('3');
+//     //     var filterParemater = { $and:[{ salary : filtersalary},{employmenttype : filteremploymenttype}]}
+//     // } else {
+//     //     console.log('4');
+//     //     var filterParemater = {};
+//     // }
+
+//     // if(filtercompanyname !== '' && filtersalary !== '' && filteremploymenttype !== ''){
+//     //     var filterParemater={ $and :[{ companyname : filtercompanyname},{salary : filtersalary},{employmenttype : filteremploymenttype}]};
+//     // } else if(filtercompanyname === '' && filtersalary !== '' && filteremploymenttype !== ''){
+//     //     var filterParemater={ $and :[{salary : filtersalary},{employmenttype : filteremploymenttype}]};
+//     // } else if(filtercompanyname !== '' && filtersalary === '' && filteremploymenttype !== ''){
+//     //     var filterParemater={ $and :[{ companyname : filtercompanyname},{employmenttype : filteremploymenttype}]};
+//     // } else if(filtercompanyname !== '' && filtersalary !== '' && filteremploymenttype === ''){
+//     //     var filterParemater={ $and :[{ companyname : filtercompanyname},{salary : filtersalary}]};
+//     // } else if(filtercompanyname !== '' && filtersalary === '' && filteremploymenttype === ''){
+//     //     var filterParemater={ $and :[{ companyname : filtercompanyname}]};
+//     // } else if(filtercompanyname === '' && filtersalary !== '' && filteremploymenttype === ''){
+//     //     var filterParemater={ $and :[{ salary : filtersalary}]};
+//     // } else if(filtercompanyname === '' && filtersalary === '' && filteremploymenttype !== ''){
+//     //     var filterParemater={ $and :[{ employmenttype : filteremploymenttype}]};
+//     // } else {
+//     //     var filterParemater = {};
+//     // }
+
+//     if(filtercompanyname !== '' && filtersalary !== '' && filteremploymenttype !== '' && filterjobtype !== ''){ 1111
+//         var filterParemater={ $and :[{ companyname : filtercompanyname},{salary : filtersalary},{employmenttype : filteremploymenttype},{jobtype : filterjobtype}]};
+//     } else if(filtercompanyname === '' && filtersalary !== '' && filteremploymenttype !== '' && filterjobtype !== ''){ 0111
+//         var filterParemater={ $and :[{salary : filtersalary},{employmenttype : filteremploymenttype},{jobtype : filterjobtype}]};
+//     } else if(filtercompanyname !== '' && filtersalary === '' && filteremploymenttype !== '' && filterjobtype !== ''){1011
+//         var filterParemater={ $and :[{ companyname : filtercompanyname},{employmenttype : filteremploymenttype},{jobtype : filterjobtype}]};
+//     } else if(filtercompanyname !== '' && filtersalary !== '' && filteremploymenttype === '' && filterjobtype !== ''){1101
+//         var filterParemater={ $and :[{ companyname : filtercompanyname},{salary : filtersalary},{jobtype : filterjobtype}]};
+//     } else if(filtercompanyname !== '' && filtersalary !== '' && filteremploymenttype !== '' && filterjobtype === ''){1110
+//         var filterParemater={ $and :[{ companyname : filtercompanyname},{salary : filtersalary},{employmenttype : filteremploymenttype}]};
+//     } else if(filtercompanyname === '' && filtersalary === '' && filteremploymenttype !== '' && filterjobtype !== ''){0011
+//         var filterParemater={ $and :[{employmenttype : filteremploymenttype},{jobtype : filterjobtype}]};
+//     } else if(filtercompanyname !== '' && filtersalary === '' && filteremploymenttype === '' && filterjobtype !== ''){1001
+//         var filterParemater={ $and :[{ companyname : filtercompanyname},{jobtype : filterjobtype}]};
+//     } else if(filtercompanyname !== '' && filtersalary !== '' && filteremploymenttype === '' && filterjobtype === ''){1100
+//         var filterParemater={ $and :[{ companyname : filtercompanyname},{salary : filtersalary}]};
+//     } else if(filtercompanyname === '' && filtersalary !== '' && filteremploymenttype !== '' && filterjobtype === ''){0110
+//         var filterParemater={ $and :[{salary : filtersalary},{employmenttype : filteremploymenttype}]};
+//     } else if(filtercompanyname === '' && filtersalary !== '' && filteremploymenttype === '' && filterjobtype !== ''){0101
+//         var filterParemater={ $and :[{salary : filtersalary},{jobtype : filterjobtype}]};
+//     } else if(filtercompanyname !== '' && filtersalary === '' && filteremploymenttype !== '' && filterjobtype === ''){1010
+//         var filterParemater={ $and :[{companyname : filtercompanyname},{employmenttype : filteremploymenttype}]};
+//     } else if(filtercompanyname === '' && filtersalary === '' && filteremploymenttype === '' && filterjobtype !== ''){0001
+//         var filterParemater={ $and :[{jobtype : filterjobtype}]};
+//     } else if(filtercompanyname !== '' && filtersalary === '' && filteremploymenttype === '' && filterjobtype === ''){1000
+//         var filterParemater={ $and :[{ companyname : filtercompanyname}]};
+//     } else if(filtercompanyname === '' && filtersalary !== '' && filteremploymenttype === '' && filterjobtype === ''){0100
+//         var filterParemater={ $and :[{salary : filtersalary}]};
+//     } else if(filtercompanyname === '' && filtersalary === '' && filteremploymenttype !== '' && filterjobtype === ''){0010
+//         var filterParemater={ $and :[{employmenttype : filteremploymenttype}]};
+//     }  else {
+//         var filterParemater = {};
+//     }
+
+//     console.log(filterParemater);
+
+//     var jobfilter = Jobdetail.find(filterParemater);
+//     jobfilter.exec(function(err,data){
+//         if(err){
+//             console.log(err);
+//         } else {
+//             console.log(data);
+//             res.render("findjob/joblist",{Job:data});
+//         }
+//     })
+// });
+
 router.get("/postjob", middleware.isloggedIn , middleware.stateOperator , function(req, res){
     res.render("findworker/postjob");
 })
 
 router.post("/postjob",uploadjob.any(), middleware.isloggedIn , middleware.stateOperator ,function(req, res){
 
-    var today = new Date();
-    var date = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate();
-    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    var dateTime = time+' '+date;
+    var dateTime = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '')
 
     let user           = {
         id : req.user._id,
@@ -397,10 +481,8 @@ router.get("/profile/:id/edit", middleware.isloggedIn , middleware.stateOperator
 })
 
 router.put("/profile/:id/edit" ,upload.single("img") , middleware.stateOperator ,middleware.isloggedIn, function(req,res){
-    var today = new Date();
-    var date = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate();
-    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    var dateTime = time+' '+date;
+
+    var dateTime = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '')
 
     let id = req.body.id;
     let img = req.body.oldimg;

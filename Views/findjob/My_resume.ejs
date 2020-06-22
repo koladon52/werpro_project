@@ -8,8 +8,7 @@
   <h1 class="my-4">My Resume
     <!-- <small>find your job</small> -->
   </h1>
-  <% Resume.forEach(function(resume){ %>
-    <% if(resume.user.username === currentUser.username){%>
+  <% MyResume.resumes.forEach(function(resume){ %>
     <!-- Project One -->
     <div class="row">
       <div class="col-md-7">
@@ -27,11 +26,7 @@
     </div>
     <!-- /.row -->
     <hr>
-    <% count++ } %>
   <% })  %>
-      <% if(count === 0){ %>
-        <h1><center>ไม่พบข้อมูล</center></h1>
-        <% } %>
       </ul>
     </div>
 <%- include("../partials/footer")%>

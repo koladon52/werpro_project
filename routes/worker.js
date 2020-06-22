@@ -49,10 +49,8 @@ uploadtest = multer({ storage : test})
 
 router.post("/resume", uploadtest.any() , middleware.isloggedIn,function(req, res){
         
-    var today = new Date();
-    var date = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate();
-    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    var dateTime = time+' '+date;
+    
+    var dateTime = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '')
 
         let user           = {
             id : req.user._id,
@@ -73,7 +71,7 @@ router.post("/resume", uploadtest.any() , middleware.isloggedIn,function(req, re
         let worktime       = req.body.time;
         let contact        = req.body.contact;
         let salary         = req.body.salary;
-        let resume = {user : user,firstname : firstname,lastname : lastname,jobtype:jobtype,employmenttype:employmenttype,worktime:worktime,description:description, contact : contact, file:file,date:workdate,editdate : dateTime , image : image , salary : salary};
+        let resume = {user : user,firstname : firstname,lastname : lastname,jobtype:jobtype,employmenttype:employmenttype,worktime:worktime,description:description, contact : contact, file:file,date:workdate,editdate : dateTime ,postdate : dateTime,postdate : dateTime, image : image , salary : salary};
 
         Resume.create(resume, function(err,newResume){
         if(err){
@@ -100,14 +98,22 @@ router.post("/resume", uploadtest.any() , middleware.isloggedIn,function(req, re
 })
 
 router.get("/My_resume",middleware.isloggedIn,function(req, res){
-    Resume.find({} ,function(error, myResume){
-        if(error){
-            console.log(error);
-        } else
-        {
-            res.render("findjob/My_resume",{Resume:myResume});
-        }
+    User.findById(req.user._id).populate('resumes').exec(function(err, MyResume){
+        if(err){
+            console.log(err);
+        } else {
+            console.log(MyResume)
+            res.render("findjob/My_resume",{MyResume : MyResume});      
+            }
     })
+    // Resume.find({} ,function(error, myResume){
+    //     if(error){
+    //         console.log(error);
+    //     } else
+    //     {
+    //         res.render("findjob/My_resume",{Resume:myResume});
+    //     }
+    // })
 });
 
 
@@ -126,10 +132,7 @@ router.put("/My_resume/:id/edit",uploadtest.any(),middleware.isloggedIn ,functio
     let file = req.body.oldfile;
     let image = req.body.oldimage;
     
-    var today = new Date();
-    var date = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate();
-    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    var dateTime = time+' '+date;
+    var dateTime = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '')
 
     let resumeimage    = image;
     let resumefile     = file;
@@ -246,7 +249,7 @@ router.delete("/My_resume/:id/edit",middleware.isloggedIn, function(req,res){
         if(err){
             console.log(err);
         } else {
-            res.redirect('/findjob/My_resume');
+            res.redirect('/findjob/');
         }
     });
 })
@@ -479,10 +482,8 @@ router.get("/profile/:id/edit",middleware.isloggedIn,function(req, res){
 })
 
 router.put("/profile/:id/edit" ,upload.single("img") ,middleware.isloggedIn, function(req,res){
-    var today = new Date();
-    var date = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate();
-    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    var dateTime = time+' '+date;
+    
+    var dateTime = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '')
 
     let id = req.body.id;
     let img = req.body.oldimg;

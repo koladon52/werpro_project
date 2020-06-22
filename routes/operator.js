@@ -56,7 +56,7 @@ router.get("/My_post",middleware.isloggedIn , middleware.stateOperator ,function
 router.get("/My_post/:id",middleware.isloggedIn , middleware.stateOperator ,function(req, res){
     Jobdetail.findById(req.params.id, function(error, idjob){
         if(error){
-            console.log("Error");
+            console.log(error);
         } else {
             res.render("findworker/My_postdetail",{job:idjob});
         }
@@ -80,7 +80,8 @@ router.put("/My_post/:id/edit",uploadjob.any(),middleware.isloggedIn , middlewar
     let jobtype           = req.body.jobtype;
     let jobpos            = req.body.jobpos;
     let workdate          = req.body.date;
-    let worktime          = req.body.time;
+    let starttime         = req.body.starttime;
+    let finishtime         = req.body.finishtime;
     let contact           = req.body.contact;
     let lon               = req.body.lon; 
     let lat               = req.body.lat;
@@ -147,7 +148,7 @@ router.put("/My_post/:id/edit",uploadjob.any(),middleware.isloggedIn , middlewar
         })
     } 
 
-    Jobdetail.findByIdAndUpdate({_id:id},{$set:{companyname : companyname,salary : salary,qualti : qualti, employmenttype : employmenttype, jobtype : jobtype , jobpos : jobpos, date : workdate , time : worktime , contact : contact , file : jobfile , image : jobimage , editdate : dateTime ,lon : lon, lat : lat , location : location , district : district , subdistrint : subdistrict , postcode : postcode , province : province , aoi : aoi , country : country}}, function(error,profile){
+    Jobdetail.findByIdAndUpdate({_id:id},{$set:{companyname : companyname,salary : salary,qualti : qualti, employmenttype : employmenttype, jobtype : jobtype , jobpos : jobpos, date : workdate , finishtime : finishtime ,starttime : starttime , contact : contact , file : jobfile , image : jobimage , editdate : dateTime ,lon : lon, lat : lat , location : location , district : district , subdistrint : subdistrict , postcode : postcode , province : province , aoi : aoi , country : country}}, function(error,profile){
         if(error){
             console.log("error"); 
         } else {
@@ -418,7 +419,8 @@ router.post("/postjob",uploadjob.any(), middleware.isloggedIn , middleware.state
     let jobtype           = req.body.jobtype;
     let jobpos            = req.body.jobpos;
     let workdate          = req.body.date;
-    let worktime          = req.body.time;
+    let starttime         = req.body.starttime;
+    let finishtime        = req.body.finishtime;
     let contact           = req.body.contact;
     let location          = req.body.location;
     let lon               = req.body.lon; 
@@ -430,7 +432,7 @@ router.post("/postjob",uploadjob.any(), middleware.isloggedIn , middleware.state
     let subdistrict       = req.body.subdistrict;
     let aoi               = req.body.aoi;
     console.log(country);
-    let job = {user : user, companyname : companyname,salary : salary , jobtype:jobtype , employmenttype:employmenttype , worktime : worktime , qualti:qualti , file : jobfile , image : jobimage , date : workdate ,contact : contact, jobpos : jobpos , editdate : dateTime,
+    let job = {user : user, companyname : companyname,salary : salary , jobtype:jobtype , employmenttype:employmenttype , finishtime : finishtime , starttime : starttime , qualti:qualti , file : jobfile , image : jobimage , date : workdate ,contact : contact, jobpos : jobpos , editdate : dateTime,
     lon : lon, lat : lat , location : location , district : district , subdistrint : subdistrict , postcode : postcode , province : province , aoi : aoi , country : country};
     
     console.log(job);

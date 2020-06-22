@@ -17,12 +17,13 @@
                 </div>
             <% } %> 
         </div>
-        <img src='/images/<%= resume.image %>' class="img-fluid">
+        <img src='/resumeimage/<%= resume.image %>' class="img-fluid">
         <p>ชื่อ : <%= resume.firstname %> นามสกุล : <%= resume.lastname %></p>
         <p>รายละเอียด : <%= resume.description %></p>
         <P>ประเภทสัญญาจ้าง  : <%= resume.employmenttype %></p>
         <p>ประเภทงานที่สนใจ  : <%= resume.jobtype %></P>
-        <h5>ราได้ที่คาดว่าจะได้รับ  : <%= resume.salary %></h5>
+        <h5>รายได้ที่คาดว่าจะได้รับ  : <%= resume.salary %></h5>
+        <p>ช่วงเวลาที่สะดวกทำงาน  : <%= resume.starttime %> - <%= resume.finishtime %> น. </p>
         <P>ช่องทางติดต่อ : <%= resume.contact %></P>
         <p>วันเวลาที่แก้ไขล่าสุด : <%= resume.editdate %></p>
         <p>วันที่โพสต์ : <%= resume.postdate%></p>

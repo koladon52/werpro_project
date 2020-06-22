@@ -8,7 +8,7 @@
         <p>รายละเอียด : <%= resume.description %></p>
         <P>ประเภทสัญญาจ้าง  : <%= resume.jobtype %></P>
         <p>ประเภทงานที่สนใจ  : <%= resume.employmenttype %></p>
-        <p>วันเวลา  <%= resume.date %></p>
+        <p>เวลาที่สะดวกทำงาน  <%= resume.starttime %> - <%= resume.finishtime %> น.</p>
         <P>รายได้ที่คาดว่าจะได้รับ : <%= resume.salary %></P>
         <a href="/resume/<%= resume.file %>" download>Download Resume</a>
         <div align="right">

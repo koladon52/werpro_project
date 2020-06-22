@@ -68,10 +68,11 @@ router.post("/resume", uploadtest.any() , middleware.isloggedIn,function(req, re
         let employmenttype = req.body.employmenttype;
         let jobtype        = req.body.jobtype;
         let workdate       = req.body.date;
-        let worktime       = req.body.time;
+        let starttime       = req.body.starttime;
+        let finishtime      = req.body.finishtime;
         let contact        = req.body.contact;
         let salary         = req.body.salary;
-        let resume = {user : user,firstname : firstname,lastname : lastname,jobtype:jobtype,employmenttype:employmenttype,worktime:worktime,description:description, contact : contact, file:file,date:workdate,editdate : dateTime ,postdate : dateTime,postdate : dateTime, image : image , salary : salary};
+        let resume = {user : user,firstname : firstname,lastname : lastname,jobtype:jobtype,employmenttype:employmenttype, starttime : starttime , finishtime : finishtime ,description:description, contact : contact, file:file,date:workdate,editdate : dateTime ,postdate : dateTime,postdate : dateTime, image : image , salary : salary};
 
         Resume.create(resume, function(err,newResume){
         if(err){
@@ -143,7 +144,8 @@ router.put("/My_resume/:id/edit",uploadtest.any(),middleware.isloggedIn ,functio
     let employmenttype = req.body.employmenttype;
     let jobtype        = req.body.jobtype;
     let workdate       = req.body.date;
-    let worktime       = req.body.worktime;
+    let starttime       = req.body.starttime;
+    let finishtime       = req.body.finishtime;
     console.log(req.files)
     if(req.files[0] && req.files[1]){
         resumeimage = req.files[0].filename;
@@ -200,7 +202,7 @@ router.put("/My_resume/:id/edit",uploadtest.any(),middleware.isloggedIn ,functio
         })
     } 
 
-    Resume.findByIdAndUpdate({_id:id},{$set:{firstname : firstname,lastname : lastname,jobtype:jobtype,employmenttype:employmenttype,worktime:worktime,description:description, file : resumefile , image : resumeimage ,date:workdate,editdate : dateTime , contact : contact}},function(err, updated){
+    Resume.findByIdAndUpdate({_id:id},{$set:{firstname : firstname, starttime : starttime , finishtime : finishtime , lastname : lastname,jobtype:jobtype,employmenttype:employmenttype,description:description, file : resumefile , image : resumeimage ,date:workdate,editdate : dateTime , contact : contact}},function(err, updated){
         if(err){
             res.redirect('/');
         } else {

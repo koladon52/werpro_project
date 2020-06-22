@@ -17,10 +17,9 @@
           <h3 class="mt-0 mb-1">ชื่อบริษัท/ห้างร้าน<%= job.companyname %></h3><br>
           <h4> ประเภทงาน : <%= job.jobtype %> </h4>
           <h4> ประเถทสัญญาจ้าง : <%= job.employmenttype %> </h4>
-          <h5> ระยะเวลาการทำงาน : <%= job.worktime %> </h5>
+          <h5> เวลาทำงาน : <%= job.starttime %> - <%= job.finishtime %> น.</h5>
           <h5> วันที่สะดวกเริ่มทำงาน : <%= job.date %> </h5>
           <h5> เงินเดือน : <%= job.salary %> </h5>
-
           <a action="GET" class="btn btn-primary" href="/findworker/My_post/<%= job._id %>">see more detail</a>
         </div>
       </div>

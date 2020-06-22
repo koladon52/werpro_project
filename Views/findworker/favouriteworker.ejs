@@ -1,6 +1,9 @@
 <%- include("../partials/header")%>
+<div class="container">
 <% favouriteworker.favourite.forEach(function(resume){ %>
+  
 <div class="row">
+    
     <div class="col-md-7">
       <a href="#">
         <img class="img-fluid rounded mb-3 mb-md-0" src="/resumeimage/<%= resume.image %>" width="300" height="300"  alt="">
@@ -10,12 +13,14 @@
           <h4>ชื่อ-สกุล           :  <%= resume.firstname %> <%= resume.lastname%> </h4>
           <h5>ประเภทการจ้างงาน   : <%= resume.employmenttype %></h5>
           <h5>ประเภทงาน        : <%= resume.jobtype %> </h5>
+          <h5>ช่วงเวลาที่สะดวกทำงาน : <%= resume.starttime%> - <%= resume.finishtime %> น.</h5>
           <h5>วันทีี่แก้ไขล่าสุด      : <%= resume.editdate%></h5>
-      <a action="GET" class="btn btn-primary" href="/findjob/My_resume/<%= resume._id %>">see more detail</a>
+      <a action="GET" class="btn btn-primary" href="/findworker/workerlist/<%= resume._id %>">see more detail</a>
     </div>
   </div>
   <!-- /.row -->
   <hr>
   <% })  %>
+</div>
 <%- include("../partials/footer")%>
 

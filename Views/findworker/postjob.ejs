@@ -176,16 +176,22 @@
                             </select>
                         </div>
                     </div>
-                    <div class="form-row">
-                        <div class="col-md-6 mb-5">
-                            <label for="inputDate">วันที่สามารถเริ่มงานได้</label><br>
-                            <input type="date" id="date" name="date" required>
-                        </div>
-                        <div class="col-md-6 mb-5">
-                            <label for="inputTime">เวลาที่สามารถทำงานได้</label><br>
-                            <input type="time" id="time" name="time" required>
-                        </div>
+                    
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <br>
+                                <label for="inputDate">ช่วงเวลาที่สะดวกทำงาน</label>
+                              </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputTime">ตั้งแต่</label>
+                                <input type="time" class="form-control" id="inputTime" name="starttime" required/>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputTime">ถึง</label>
+                                <input type="time" class="form-control" id="inputTime" name="finishtime" required/>
+                            </div>
                     </div>
+                    
                     <div class="form-group">
                         <label for="inputQualifications">คุณสมบัติของผู้สมัครงาน</label>
                         <input type="text" class="form-control" name="qualti"  style="height:100px" required>

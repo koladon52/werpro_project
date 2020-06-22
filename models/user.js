@@ -29,9 +29,18 @@ let UserSchema = new mongoose.Schema({
     [   
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Jobdetail'
+            ref: 'Jobdetail',
+            ref: 'Resume'
         }   
-    ]
+    ],
+    // favouriteResume:
+    // [   
+    //     {
+    //         type: mongoose.Schema.Types.ObjectId,
+    //         ref: 'Resume'
+    //     }   
+    // ]
+
 });
 
 UserSchema.plugin(passportlocalMongoose);

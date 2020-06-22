@@ -1,33 +1,53 @@
 <%- include("../partials/header")%>
 <% var count = 0%>
 <head>
-  <link rel="stylesheet" href="/css/list.css">
-
+  <link rel="stylesheet" href="/css/My_resume.css">
 </head>
-<div class="container">
-  <h1 class="my-4">My Resume
-    <!-- <small>find your job</small> -->
-  </h1>
+
+<div class="container col-lg-6">
+    <!-- <div class="col-lg-12 row">
+      <div class="left col-lg-6">
+      </div>
+        <div class="right col-lg-6">
+          <img clss="" src="../../images/bg-resume5.svg" alt=""width="350" height="350">
+        </div>
+    </div> -->
   <% MyResume.resumes.forEach(function(resume){ %>
-    <!-- Project One -->
-    <div class="row">
-      <div class="col-md-7">
-        <a href="#">
-          <img class="img-fluid rounded mb-3 mb-md-0" src="/resumeimage/<%= resume.image %>" width="300" height="300"  alt="">
-        </a>
-      </div>
-      <div class="col-md-5">
-            <h4>ชื่อ-สกุล           :  <%= resume.firstname %> <%= resume.lastname%> </h4>
-            <h5>ประเภทการจ้างงาน   : <%= resume.employmenttype %></h5>
-            <h5>ประเเภทงาน        : <%= resume.jobtype %> </h5>
-            <h5>เวลาที่สะดวกทำงาน  <%= resume.starttime %> - <%= resume.finishtime %> น.</h5>
-            <h5>วันทีี่แก้ไขล่าสุด      : <%= resume.editdate%></h5>
-        <a action="GET" class="btn btn-primary" href="/findjob/My_resume/<%= resume._id %>">see more detail</a>
-      </div>
-    </div>
-    <!-- /.row -->
+    <h1 class="my-4 row"> <i class="far fa-file"></i> ใบสมัครงานของฉัน</h1>
     <hr>
-  <% })  %>
-      </ul>
+    <div class="row inner">
+      <div class="col-md-4 ">
+        <a href="#">
+          <img style="width: 300px; height: 300px; object-fit: cover;" class="img-thumbnail rounded mb-4 mb-md-0" src="/resumeimage/<%= resume.image %>"> 
+        </a>  
+      </div>
+      <div class="col-md-7 info">
+        <div class="row">
+          <h5>ชื่อ-สกุล</h5>
+          <p><%= resume.firstname %> <%= resume.lastname%></p>
+        </div>
+          <div class="row">
+             <h5>ประเภทการจ้างงาน</h5>
+             <p><%= resume.employmenttype %></p>
+          </div>
+           <div class="row">
+             <h5>ประเภทสัญญาจ้าง</h5>
+             <p><%= resume.jobtype %></p>
+           </div>
+            <div class="row">
+              <h5>เวลาที่สะดวกทำงาน  </h5>
+              <p><%= resume.starttime %> - <%= resume.finishtime %> น.</p>
+            </div>
+            <div class="row">
+              <h5>วันที่แก้ไขล่าสุด</h5>
+              <p><%= resume.editdate%></p>
+            </div>
+            <div class="" align="right">
+              <a  action="GET" class="btn btn-primary btn-seemore" href="/findjob/My_resume/<%= resume._id %>">อ่านเพิ่มเติม</a>
+              <br>
+            </div>
+      </div>
     </div>
+  <% })  %>
+</div>
 <%- include("../partials/footer")%>

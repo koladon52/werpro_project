@@ -1,0 +1,68 @@
+.container{
+    font-family: 'Prompt', sans-serif;
+    background-image: url(../images/bg-resume5.png);
+    background-repeat: no-repeat;
+    background-size: 40%;
+    background-position: top right;
+    margin-bottom: 5%;
+    margin-top: 5%;
+}
+
+/* .left{
+    font-weight: bold;
+    text-align: right;
+    margin-top: 10%;
+} */
+
+.container i{
+    margin-right: 2%;
+}
+
+.btn-seemore{
+    border-radius:25px;
+    background: #0088cc;
+    box-shadow:0 4px 0 #006394;
+    transition:all 0.2s ease-in-out 0s;
+    position: relative;
+    margin-top: 5%;
+}
+
+.btn-seemore:hover{
+    top:2px;
+    box-shadow:0 2px 0 #006394;
+    text-align: right;
+}
+
+.row{
+    width: 100%;
+}
+.row h5{
+    width: 60%;
+    text-align: left;
+}
+
+.row p{
+    width: 40%;
+    text-align: left;
+}
+
+h5{
+    font-size: larger;
+}
+
+p{
+    font-size: larger;
+}
+
+.info{
+    margin-left: 5%;
+    margin-top: 3%;
+}
+
+.inner{
+    background-color: #F5F5F5;
+}
+
+img{
+    margin-top: 5%;
+}

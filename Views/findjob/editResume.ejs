@@ -20,7 +20,7 @@
             <p>Edit Your part-time jobs form</p>
         </div>    
         <div class="text-form" >
-            <form style="text-align: left;"  action="/findjob/My_resume/<%= resume._id %>/edit?_method=PUT" method="POST" enctype="multipart/form-data">
+            <form style="text-align: left;" action="/findjob/My_resume/<%= resume._id %>/edit?_method=PUT" method="POST" enctype="multipart/form-data">
                 <div class="topic">
                     <p><i class="fas fa-user"></i>ส่วนที่ 1 : ข้อมูลส่วนตัว </p>
                     <div class="line"></div>
@@ -34,11 +34,11 @@
                             <input type="file" class="form-control-file"  name="image">
                         </div>
                         <div class="col-xs-8 col-sm-12 col-md-6 col-lg-4">
-                            <label for="inputFirstname">ชื่อจริง</label>
+                            <label for="inputFirstname">ชื่อจริง *</label>
                             <input type="text" class="form-control" name="firstname" value="<%= resume.firstname %>" required>
                         </div>
                         <div class="col-xs-8 col-sm-12 col-md-6 col-lg-4">
-                            <label for="inputLastname">นามสกุล</label>
+                            <label for="inputLastname">นามสกุล *</label>
                             <input type="text" class="form-control" name="lastname"value="<%= resume.lastname %>"required>
                         </div>
                     </div>
@@ -80,20 +80,21 @@
                                 <option value="Event">Event</option>
                         </select>
                     </div><br>
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <br>
-                            <label for="inputDate">ช่วงเวลาที่สะดวกทำงาน</label>
-                          </div>
-                        <div class="form-group col-md-4">
+                    <div class="form-group">
+                        <label id="inputdate" for="inputDate">ช่วงเวลาที่สะดวกทำงาน</label>
+                        <div class="form-group">
+                            <div class="form-row">
+                            <div class="form-row col-lg-6">
                             <label for="inputTime">ตั้งแต่</label>
                             <input type="time" class="form-control" id="inputTime" name="starttime" value="<%= resume.starttime %>"required/>
                         </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-row col-lg-6">
                             <label for="inputTime">ถึง</label>
                             <input type="time" class="form-control" id="inputTime" name="finishtime" value="<%= resume.finishtime %>"required/>
                         </div>
-                </div>
+                        </div>
+                        </div>
+                    </div>
                     <div class="form-select">
                         <label for="selectTypejob">รายได้ที่คาดว่าจะได้รับ</label>
                             <select class="form-control" name="salary" value="<%= resume.salary %>"required>
@@ -119,7 +120,7 @@
                         <p><i class="fas fa-phone-alt"></i>ส่วนที่ 3 : ข้อมูลการติดต่อ</p>
                         <div class="line"></div>
                     </div>
-                    <div class="form-group ">
+                    <div class="form-group">
                         <label for="inputContact">ช่องทางการติดต่อ</label>
                         <textarea class="form-control" id="Textarea" rows="4" name="contact"><%=resume.contact%></textarea>
                     </div><br>

@@ -45,7 +45,7 @@
                       <div class="form-row">
                         <div class="col-xs-9 col-sm-9 col-md-12 col-lg-6">
                             <label for="name">ชื่อ </label>
-                            <label class="form-control"  for="name" aria-readonly="ture" ><%= currentUser.firstname %> </label>
+                            <label class="form-control"  for="name" readonly ><%= currentUser.firstname %> </label>
                         </div>
                         <div class="col-xs-9 col-sm-9 col-md-12 col-lg-6">
                             <label for="inputLastname">นามสกุล</label>
@@ -55,7 +55,7 @@
                     <div class="form-row">
                        <div class="col-xs-9 col-sm-9 col-md-12 col-lg-12">
                           <label for="name">หมายเลขโทรศัพท์ </label>
-                          <label class="form-control" for="name" aria-readonly="ture"> <%= currentUser.phone %></label>
+                          <label class="form-control" for="name" readonly> <%= currentUser.phone %></label>
                       </div>
                     </div>
                     <div class="form-row">

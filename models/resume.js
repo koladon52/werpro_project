@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-    //   passportlocalMongoose = require('passport-local-mongoose')
       ;
 
 let ResumeSchema = new mongoose.Schema({
@@ -14,6 +13,7 @@ let ResumeSchema = new mongoose.Schema({
     contact        : String,
     file           : String,
     editdate       : String,
+    postdate       : String,
     salary         : String,
     user : {
         id:{
@@ -25,6 +25,5 @@ let ResumeSchema = new mongoose.Schema({
     expire_at: {type: Date, default: Date.now, expires: 7200} 
 })
 
-// ResumeSchema.plugin(passportlocalMongoose);
 
 module.exports = mongoose.model('Resume', ResumeSchema);

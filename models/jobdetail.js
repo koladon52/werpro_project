@@ -15,6 +15,7 @@ let jobSchema = new mongoose.Schema({
     contact          : String,
     file             : String,
     editdate         : String,
+    postdate         : String,
     lon              : String,
     lat              : String,
     location         : String,

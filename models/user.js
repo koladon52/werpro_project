@@ -33,13 +33,7 @@ let UserSchema = new mongoose.Schema({
             ref: 'Resume'
         }   
     ],
-    // favouriteResume:
-    // [   
-    //     {
-    //         type: mongoose.Schema.Types.ObjectId,
-    //         ref: 'Resume'
-    //     }   
-    // ]
+
 
 });
 

@@ -59,15 +59,19 @@
               <li class="nav-item">
                 <a class="nav-link" href="/findjob/joblist">LIST</a>
               </li>
+              <% if (currentUser.resumes == "") {%>
                 <li class="nav-item">
                   <a class="nav-link" href="/findjob/resume">RESUME</a>
                 </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/findjob/job_like">Liked</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/findjob/My_resume">My resume</a>
-              </li>
+                <% } else if (currentUser.resumes != "") {%>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/findjob/My_resume">My resume</a>
+                  </li>
+            <% } %>
+            <li class="nav-item">
+              <a class="nav-link" href="/findjob/job_like">Liked</a>
+            </li>
+              
             </ul>
           <% } %>
           <div>

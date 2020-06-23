@@ -64,10 +64,10 @@
                             <p><i class="fas fa-address-card"></i>ส่วนที่ 2 : ข้อมูลการสมัครงาน</p>
                             <div class="line"></div> 
                         </div>
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                               <label id="head" >รายละเอียด</label>  
-                                <p id="detail"><%= resume.description %></p>
-                        </div>
+                                <textarea id="detail Textarea"><%= resume.description %><%= resume.description %><%= resume.description %><%= resume.description %><%= resume.description %></textarea>
+                        </div> -->
                         <div class="form-row">
                             <div class="group col-lg-4">
                                 <label id="head">ประเภทสัญญาจ้าง</lable>
@@ -139,8 +139,10 @@
                         </div>
                         <div class="form-group">
                             <label id="head" for="inputAbout">ข้อมูลเพิ่มเติมเกี่ยวกับผู้สมัครงาน</label>
-                            <!-- <textarea class="form-control" id="Textarea" rows="4" name="desc" placeholder="พูดได้กี่ภาษา, พิมพ์ได้กี่คำต่อนาที เป็นต้น"></textarea> -->
-                            <p id="detail"></p>
+                            <div>
+                                <textarea rows="6" style="width: 100%; border: none;" readonly><%= resume.description %></textarea>
+                            </div>
+                            
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-4">
@@ -158,9 +160,12 @@
                             <label for="inputContact"></label>
                             <textarea class="form-control" id="Textarea" rows="4" name="desc" placeholder="หมายเลขโทรศัพท์, อีเมล หรืออื่นๆที่สามารถใช้ติดต่อสื่อสารกับผู้สมัครงานได้โดยตรง"></textarea>
                         </div>  -->
-                        <div class="form-group ">
+                        <div class="form-group">
                             <label id="head" for="inputContact">ช่องทางการติดต่อ</label>
-                            <p id="detail"></p>
+                            <div>
+                                <textarea rows="6" style="width: 70%; border: none; " readonly><%= resume.contact %></textarea>
+                            </div>
+                            
                             <!-- <textarea class="form-control" id="Textarea" rows="4" name="contact" placeholder="หมายเลขโทรศัพท์, อีเมล หรืออื่นๆที่สามารถใช้ติดต่อสื่อสารกับผู้สมัครงานได้โดยตรง"></textarea> -->
                         </div>
                         <div class="topic">

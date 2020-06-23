@@ -80,7 +80,7 @@
 
 .container {
   font-family: 'Prompt', sans-serif;
-  font-size: large;
+  font-size: medium;
 ;
    /* background-image: url(../images/bg-list2.png);
   background-repeat: no-repeat;
@@ -172,4 +172,6 @@ form p{
   text-align: center;
 }
 
-
+.back{
+  background-color: #F5F5F5;
+}

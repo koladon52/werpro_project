@@ -43,17 +43,17 @@
                         </div>
                         <input type="hidden" name="username" value="<%= currentUser.username %>">
                         <div class="form-row">
-                            <div class="form-group col-xs-8 col-sm-8 col-md-8 col-lg-4">
+                            <div class="form-group col-xs-8 col-sm-8 col-md-8 col-lg-4 ">
                                 <label for="uploadimage">อัพโหลดรูป</label>
-                                <input type="file" class="form-control-file"  name="image">
+                                <input type="file" class="form-control-file" name="image">
                             </div>
-                            <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4">
+                            <div class="col-xs-6 col-sm-12 col-md-6 col-lg-3 border-bottom mr-4">
                                 <!-- <label for="inputFirstname">ชื่อจริง</label>
                                 <input type="text" class="form-control"  name="firstname" value="<%= currentUser.firstname %>" required> -->
                                 <p id="head">ชื่อจริง</p>
-                                <p id="detail"><%= resume.firstname %></p>
+                                <p><%= resume.firstname %></p>
                             </div>
-                            <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4">
+                            <div class="col-xs-6 col-sm-12 col-md-6 col-lg-3 border-bottom">
                                 <p id="head">นามสกุล</p>
                                 <p id="detail"><%= resume.lastname %></p></p>
                                 <!-- <label for="inputLastname">นามสกุล</label>
@@ -64,18 +64,17 @@
                             <p><i class="fas fa-address-card"></i>ส่วนที่ 2 : ข้อมูลการสมัครงาน</p>
                             <div class="line"></div> 
                         </div>
-                        <div class="form-group">
+                        <!-- <div class="form-group border-bottom">
                               <label id="head" >รายละเอียด</label>  
-                                <p id="detail"><%= resume.description %></p>
-                        </div>
+                            <p id="detail"><%= resume.description %></p>
+                        </div> -->
                         <div class="form-row">
                             <div class="group col-lg-4">
-                                <label id="head">ประเภทสัญญาจ้าง</lable>
+                                <label id="head">ประเภทงานที่ต้องการสมัคร</lable>
                             </div>
-                            <div class="form-group col-lg-4">
+                            <div class="form-group col-lg-4  border-bottom">
                                 <p id="detail"><%= resume.jobtype %></p>
                             </div>
-                            
                         </div>
                         <!-- <div class="form-select">
                             <label for="selectTypejob">ประเภทงานที่ต้องการสมัคร</label>
@@ -112,19 +111,27 @@
                                 </select>
                             </div><br> -->
                             <div class="form-row">
+                                <div class="form-group col-lg-4">
+                                    <label id="head">ลักษณะการว่าจ้าง</lable>
+                                </div>
+                                <div class="form-row col-lg-4  border-bottom">
+                                    <p><%= resume.employmenttype %></p>
+                                </div>
+                            </div>
+                            <div class="form-row mt-3">
                                 <div class="form-group col-md-4">
                                     <label id="head" for="inputDate">ช่วงเวลาที่สะดวกทำงาน</label>
                                   </div>
                                   <div class="form-group col-md-1">
                                     <p id="head">ตั้งแต่</p> 
                                   </div>
-                                <div class="form-group col-md-3">
+                                <div class="form-group col-md-3  border-bottom" >
                                     <p id="detail"><%= resume.starttime %></p>
                                 </div>
                                 <div class="form-group col-md-1">
                                     <p id="head">จนถึง</p>
                                 </div>
-                                <div class="form-group col-md-3">
+                                <div class="form-group col-md-3  border-bottom">
                                     <p id="detail"> <%= resume.finishtime %> </p>
                                 </div>
                         </div>
@@ -132,7 +139,7 @@
                             <div class="group col-md-4">
                                 <label id="head" for="selectTypejob">รายได้ที่คาดว่าจะได้รับ</label>
                             </div>
-                            <div class="group col-md-4">
+                            <div class="form-group col-md-4  border-bottom">
                                 <p id="detail"><%= resume.salary %></p>
                             </div>
                             
@@ -140,14 +147,17 @@
                         <div class="form-group">
                             <label id="head" for="inputAbout">ข้อมูลเพิ่มเติมเกี่ยวกับผู้สมัครงาน</label>
                             <!-- <textarea class="form-control" id="Textarea" rows="4" name="desc" placeholder="พูดได้กี่ภาษา, พิมพ์ได้กี่คำต่อนาที เป็นต้น"></textarea> -->
-                            <p id="detail"></p>
+                            <div class="form-group text-break">
+                                <p class="border-bottom" ><%=resume.description%></p>
+                            </div>
+                            
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-4">
                                 <label id="head" for="udloadResume">อัพโหลดเรซูเม่</label>
                             </div>
-                            <div class="form-group col-md-4">
-                                <a id="detail" href="/resume/<%= resume.file %>" download>ดาวน์โหลด เรซูเม่</a>
+                            <div class="form-group col-md-4 border-bottom">
+                                <a id="detail" href="/resume/<%= resume.file %>" download>ดาวน์โหลดเรซูเม่ คลิกที่นี่</a>
                             </div>
                         </div>
                         <div class="topic">

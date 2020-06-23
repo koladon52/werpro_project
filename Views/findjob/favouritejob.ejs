@@ -18,7 +18,7 @@
     <% } else { %>
       <h1>LIKED <%= favouritejob.favouritejob.length %> งาน</h1>
     <%}%>
-
+<!-- 
   
         <% favouritejob.favouritejob.forEach(function(jobliked){ %>
         
@@ -44,11 +44,11 @@
       <% }); %>
       
       </ul>
-</div> -->
+</div>  -->
 
-<div class="container col-lg-6">
+<div class="container col-lg-11 ">
   <% favouritejob.favouritejob.forEach(function(jobliked){ %>
-    <div class="card mb-">
+    <div class="card mb-3">
         <div class="card-body">
             <div class="border-block">
               <div class="row">
@@ -82,11 +82,7 @@
             </div>
         </div>
   </div>
-        <% count++  %>
       <% }); %>
-      <% if(count === 0){ %>
-        <h1><center>ไม่พบข้อมูล</center></h1>
-        <% } %> 
 </div>
-
+</div>
 <%- include("../partials/footer")%>

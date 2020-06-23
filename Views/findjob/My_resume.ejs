@@ -4,7 +4,7 @@
   <link rel="stylesheet" href="/css/My_resume.css">
 </head>
 
-<div class="container col-lg-6">
+<div class="container col-lg-8 col-md-10 col-sm-10 col-xs-12 " align="center">
     <!-- <div class="col-lg-12 row">
       <div class="left col-lg-6">
       </div>
@@ -13,10 +13,10 @@
         </div>
     </div> -->
   <% MyResume.resumes.forEach(function(resume){ %>
-    <h1 class="my-4 row"> <i class="far fa-file"></i> ใบสมัครงานของฉัน</h1>
+    <h1 class="row "> <i class="far fa-file"></i> ใบสมัครงานของฉัน</h1>
     <hr>
     <div class="row inner">
-      <div class="col-md-4 ">
+      <div class="col-md-4 md-" align="center" >
         <a href="#">
           <img style="width: 300px; height: 300px; object-fit: cover;" class="img-thumbnail rounded mb-4 mb-md-0" src="/resumeimage/<%= resume.image %>"> 
         </a>  
@@ -42,7 +42,7 @@
               <h5>วันที่แก้ไขล่าสุด</h5>
               <p><%= resume.editdate%></p>
             </div>
-            <div class="" align="right">
+            <div class="mb-3" align="right">
               <a  action="GET" class="btn btn-primary btn-seemore" href="/findjob/My_resume/<%= resume._id %>">อ่านเพิ่มเติม</a>
               <br>
             </div>

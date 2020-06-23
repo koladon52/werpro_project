@@ -50,7 +50,7 @@
         <label for="inputemploymenttype"><i class="far fa-handshake"></i> ประเภทการจ้าง</label> 
         <select class="form-control inner-search col-lg-12" name="searchemploymenttype">
           <option value=""> </option>
-          <option value=" Part time"> Part time</option>
+          <option value="Part time"> Part time</option>
           <option value="Full time">Full time</option>
           <option value="Event">Event</option>
         </select>
@@ -76,6 +76,11 @@
   </form>
 
   <div class="list col-lg-12">
+    <% if(Job.length == "0"){ %>
+      <h1><center>ไม่พบงานที่ตรงกัน</center></h1>
+      <% } else { %>
+        <h1><center>พบงานที่ตรงกัน <%= Job.length %></center></h1>
+      <%}%>
         <% Job.forEach(function(job){ %>
           <div class="card mb-">
               <div class="card-body">
@@ -116,6 +121,7 @@
               </div>
         </div>
         <% }); %> 
+        
   </div>
 </div>
 </div>

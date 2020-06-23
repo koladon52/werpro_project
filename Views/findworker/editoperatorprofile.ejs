@@ -28,6 +28,14 @@
                                 <label for="name">Tel number</label>
                                 <input type="text" class="form-control" name="phone" value="<%= currentUser.phone %>">
                             </div> 
+                            <div style="text-align: left;" class="form-group">
+                                <label for="name"> ประเภทธุรกิจ </label>
+                                <input type="text" class="form-control"  name="jobtype" value="<%= currentUser.jobtype %>">
+                            </div>
+                            <div style="text-align: left;" class="form-group">
+                                <label for="name"> รายละเอียดบริษัท </label>
+                                <input type="text" class="form-control" name="aboutcompany" value="<%= currentUser.aboutcompany%>">
+                            </div>
                               <br>
                             <input type="file" name="img" accept="image/*" value="<%= currentUser.img %>">  
                             <input type="hidden" name="oldimg" value="<%= currentUser.img %>">  

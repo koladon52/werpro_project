@@ -38,7 +38,7 @@ var jobtest = multer.diskStorage({
 uploadjob = multer({ storage : jobtest})
 
 router.get("/", middleware.isloggedIn , middleware.stateOperator , function(req, res){
-    res.redirect("/");
+    res.redirect("/findworker/profile/"+req.user._id);
 })
 
 router.get("/My_post",middleware.isloggedIn , middleware.stateOperator ,function(req, res){
@@ -204,7 +204,7 @@ router.delete("/My_post/:id/edit",middleware.isloggedIn , middleware.stateOperat
     });
 })
 
-router.get("/workerlist",middleware.isloggedIn , middleware.stateOperator ,function(req, res){
+router.get("/workerlist",middleware.isloggedIn , middleware.stateOperator , middleware.checkdataoperator  ,function(req, res){
     Resume.find({},function(error, allResume){
         if(error){
             console.log(error);
@@ -272,7 +272,7 @@ router.delete("/workerlist/:id/removefavourite", middleware.isloggedIn ,function
   })
 });
 
-router.get("/worker_like",middleware.isloggedIn,async function(req,res)
+router.get("/worker_like" , middleware.isloggedIn , async function(req,res)
 {
     User.findById(req.user._id).populate('favouriteresume').exec(function(err, idWorker){
         if(err){
@@ -396,11 +396,11 @@ router.get("/workerlist/:id",middleware.isloggedIn , middleware.stateOperator ,f
 //     })
 // });
 
-router.get("/postjob", middleware.isloggedIn , middleware.stateOperator , function(req, res){
+router.get("/postjob", middleware.isloggedIn , middleware.stateOperator , middleware.checkdataoperator  , function(req, res){
     res.render("findworker/postjob");
 })
 
-router.post("/postjob",uploadjob.any(), middleware.isloggedIn , middleware.stateOperator ,function(req, res){
+router.post("/postjob",uploadjob.any(), middleware.isloggedIn , middleware.stateOperator , middleware.checkdataoperator  ,function(req, res){
 
     var dateTime = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '')
 
@@ -507,7 +507,7 @@ router.put("/profile/:id/edit" ,upload.single("img") , middleware.stateOperator 
     } else {
         var profileimage = img;
     }
-        User.findByIdAndUpdate({_id:id},{$set:{firstname : req.body.firstname,lastname : req.body.lastname,phone : req.body.phone, address : req.body.address, img : profileimage , editdate : dateTime}}, function(error,profile){
+        User.findByIdAndUpdate({_id:id},{$set:{firstname : req.body.firstname,lastname : req.body.lastname,phone : req.body.phone, address : req.body.address, img : profileimage , editdate : dateTime , aboutcompany : req.body.aboutcompany , jobtype : req.body.jobtype}}, function(error,profile){
         if(error){
             console.log("error"); 
         } else {

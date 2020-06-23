@@ -1,12 +1,12 @@
 .container{
     font-family: 'Prompt', sans-serif;
-    font-size: 24px;
     box-shadow: 0 1rem 4rem 0 rgba(0, 0, 0, 0.1);
     margin-top: 5%;
     margin-bottom: 5%;
     /* background-image: url(../images/bg-list.png); */
     background-repeat: no-repeat;
     background-size: 100% ;
+    font-size: large;
 
 }
 .row {
@@ -14,8 +14,15 @@
 }
 
 .row #subject{
-    width: 30%;
+    width: 25%;
     margin-right: 3%;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: left;
+}
+
+.row #subject2{
+    width: 70%;
     text-transform: uppercase;
     font-weight: bold;
     text-align: left;
@@ -37,6 +44,9 @@
   flex: 4;
 }
 
+.like{
+    margin-right: 5%;
+}
 .like .fas{
     color: red;
     size: 9x;
@@ -70,11 +80,7 @@ h1{
     font-weight: bold;
 }
 
-.block{
-    margin-left: 5%;
-    margin-right: 5%;
-    margin-top: 5%;
-}
+
 
 
 /* iPhone 2G-4S (portrait and landscape) ----------- */

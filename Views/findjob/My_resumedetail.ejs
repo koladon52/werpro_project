@@ -26,7 +26,6 @@
     <link rel="stylesheet" href="/css/resume.css">
 </head>
 <body>
-
     <div class="container col-xs-6 col-lg-7">
         <div class="findjob-form">
             <div class="text-center pt-5">
@@ -43,7 +42,7 @@
                         </div>
                         <input type="hidden" name="username" value="<%= currentUser.username %>">
                         <div class="form-row">
-                            <div class="form-group col-xs-8 col-sm-8 col-md-8 col-lg-4 ">
+                            <div class="form-group col-xs-8 col-sm-8 col-md-8 col-lg-4">
                                 <label for="uploadimage">อัพโหลดรูป</label>
                                 <input type="file" class="form-control-file" name="image">
                             </div>
@@ -134,7 +133,7 @@
                                 <div class="form-group col-md-3  border-bottom">
                                     <p id="detail"> <%= resume.finishtime %> </p>
                                 </div>
-                        </div>
+                            </div>
                         <div class="form-row">
                             <div class="group col-md-4">
                                 <label id="head" for="selectTypejob">รายได้ที่คาดว่าจะได้รับ</label>
@@ -147,16 +146,16 @@
                         <div class="form-group">
                             <label id="head" for="inputAbout">ข้อมูลเพิ่มเติมเกี่ยวกับผู้สมัครงาน</label>
                             <div>
-                                <textarea rows="6" style="width: 100%; border: none;" readonly><%= resume.description %></textarea>
+                                <textarea class="border-bottom" rows="6" style="width: 100%; border: none;" readonly><%= resume.description %></textarea>
                             </div>
                             
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-4">
-                                <label id="head" for="udloadResume">อัพโหลดเรซูเม่</label>
+                                <label id="head" for="udloadResume">ดาวน์โหลดเรซูเม่</label>
                             </div>
                             <div class="form-group col-md-4 border-bottom">
-                                <a id="detail" href="/resume/<%= resume.file %>" download>ดาวน์โหลดเรซูเม่ คลิกที่นี่</a>
+                                <a id="detail" href="/resume/<%= resume.file %>" download> คลิกที่นี่</a>
                             </div>
                         </div>
                         <div class="topic">
@@ -170,12 +169,12 @@
                         <div class="form-group">
                             <label id="head" for="inputContact">ช่องทางการติดต่อ</label>
                             <div>
-                                <textarea rows="6" style="width: 70%; border: none; " readonly><%= resume.contact %></textarea>
+                                <textarea class="border-bottom" rows="6" style="width: 70%; border: none; " readonly><%= resume.contact %></textarea>
                             </div>
                             
                             <!-- <textarea class="form-control" id="Textarea" rows="4" name="contact" placeholder="หมายเลขโทรศัพท์, อีเมล หรืออื่นๆที่สามารถใช้ติดต่อสื่อสารกับผู้สมัครงานได้โดยตรง"></textarea> -->
                         </div>
-                        <div class="topic">
+                        <!-- <div class="topic">
                             <p><i class="fas fa-tasks"></i>ส่วนที่ 4 : </p>
                             <div class="line"></div>
                         </div>
@@ -188,13 +187,20 @@
                                 <input type="checkbox" class="form-check-input" disabled>
                                 <label class="form-check-label" for="Check2">ฉันได้อ่านและยอมรับ <a href="">เงื่อนไขและข้อตกลงในการใช้บริการเว็ปไซต์</a></label>
                             </div>
-                          </div>
-                </form>
-                <form  action="/findjob/My_resume/<%= resume._id %>/edit?_method=DELETE" method="POST">
-                    <div class="btn-right col-lg-12" align="right">
-                            <button type="submit" class="btn btn-danger btn-delete"> Delete </button> 
-                    </div>
-                </form>
+                          </div> -->
+                    </form>
+                <div class="form-row ">
+                    <form class="col mb-4" style="text-align: left;" action="/findjob/My_resume/<%= resume._id %>/edit?_method=DELETE" method="POST">
+                        <div>
+                            <button type="submit"class="btn btn-danger btn-delete col-lg-12">ลบทิ้ง</button> 
+                        </div>
+                    </form>
+                    <form class="col" style="text-align: left;" action="/findjob/My_resume/<%= resume._id %>/edit" method="GET">
+                        <div >
+                            <button type="submit" class="btn btn-primary btn-edit col-lg-12"> แก้ไขข้อมูล</button> 
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

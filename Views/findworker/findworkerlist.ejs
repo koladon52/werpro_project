@@ -12,12 +12,8 @@
     <div class="img-fluid col-xs-2 col-lg-4 d-none d-lg-block">
         <img clas="" src="../../images/search4.svg" alt="" width="80%" id="img-search">
     </div>
-  <form  class="col-lg-8 col-md-12 col-sm-12" action="/findjob/joblist" method="POST">
+  <form  class="col-lg-8 col-md-12 col-sm-12" action="/findworker/workerlist" method="POST">
         <p>"ค้นหางานที่ใช่ด้วยการใส่ข้อมูลที่คุณต้องการและกดค้นหาเลยยยยย"</p>
-    <div class="form-row col-lg-12 line1">
-            <label for="inputcompanyname"><i class="far fa-building"></i>ตำแหน่งงาน</label>
-            <input class="form-control inner-search" type="text" id="่searchjobpos" name="searchcompanyname">
-    </div>
     <div class="form-row line2 col-lg-12 ">
       <div class="col-lg-4">
         <label for="inputjobtype"><i class="fas fa-tasks"></i> ประเภทงาน</label> 
@@ -82,7 +78,7 @@
     <% if(Resume.length == "0" && dosearch == true){ %>
       <h1><center>ไม่พบงานที่ตรงกัน</center></h1>
       <% } else if (Resume.length != "0" && dosearch == true){ %>
-        <h1><center>พบงานที่ตรงกัน <%= Job.length %></center></h1>
+        <h1><center>พบงานที่ตรงกัน <%= Resume.length %></center></h1>
       <%} else if ( dosearch == false) {%>
       <% } %>
       <% Resume.forEach(function(resume){ %>

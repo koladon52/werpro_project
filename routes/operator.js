@@ -308,62 +308,44 @@ router.get("/workerlist/:id",middleware.isloggedIn , middleware.stateOperator ,f
 })
 
 
-router.post('/joblist',middleware.isloggedIn, function(req , res , next){
-    var fuzzyfilterjobpos        = req.body.searchjobpos;
+router.post('/workerlist',middleware.isloggedIn, function(req , res , next){
+    
     var filtersalary             = req.body.searchsalary;
     var filteremploymenttype     = req.body.searchemploymenttype;
     var filterjobtype            = req.body.searchjobtype;
     
-    console.log(fuzzyfiltercompanyname);
     console.log(filtersalary);
     console.log(filteremploymenttype);
     console.log(filterjobtype);
-    const filterjobpos = new RegExp(escapeRegex(fuzzyfilterjobpos), 'gi');
 
 
-    if(filtercompanyname !== '' && filtersalary !== '' && filteremploymenttype !== '' && filterjobtype !== ''){ 1111
-        var filterParemater={ $and :[{ companyname : filtercompanyname},{salary : filtersalary},{employmenttype : filteremploymenttype},{jobtype : filterjobtype}]};
-    } else if(filtercompanyname === '' && filtersalary !== '' && filteremploymenttype !== '' && filterjobtype !== ''){ 0111
-        var filterParemater={ $and :[{salary : filtersalary},{employmenttype : filteremploymenttype},{jobtype : filterjobtype}]};
-    } else if(filtercompanyname !== '' && filtersalary === '' && filteremploymenttype !== '' && filterjobtype !== ''){1011
-        var filterParemater={ $and :[{ companyname : filtercompanyname},{employmenttype : filteremploymenttype},{jobtype : filterjobtype}]};
-    } else if(filtercompanyname !== '' && filtersalary !== '' && filteremploymenttype === '' && filterjobtype !== ''){1101
-        var filterParemater={ $and :[{ companyname : filtercompanyname},{salary : filtersalary},{jobtype : filterjobtype}]};
-    } else if(filtercompanyname !== '' && filtersalary !== '' && filteremploymenttype !== '' && filterjobtype === ''){1110
-        var filterParemater={ $and :[{ companyname : filtercompanyname},{salary : filtersalary},{employmenttype : filteremploymenttype}]};
-    } else if(filtercompanyname === '' && filtersalary === '' && filteremploymenttype !== '' && filterjobtype !== ''){0011
-        var filterParemater={ $and :[{employmenttype : filteremploymenttype},{jobtype : filterjobtype}]};
-    } else if(filtercompanyname !== '' && filtersalary === '' && filteremploymenttype === '' && filterjobtype !== ''){1001
-        var filterParemater={ $and :[{ companyname : filtercompanyname},{jobtype : filterjobtype}]};
-    } else if(filtercompanyname !== '' && filtersalary !== '' && filteremploymenttype === '' && filterjobtype === ''){1100
-        var filterParemater={ $and :[{ companyname : filtercompanyname},{salary : filtersalary}]};
-    } else if(filtercompanyname === '' && filtersalary !== '' && filteremploymenttype !== '' && filterjobtype === ''){0110
+    if(filterjobtype !== '' && filtersalary !== '' && filteremploymenttype !== ''){
+        var filterParemater={ $and :[{ jobtype : filterjobtype},{salary : filtersalary},{employmenttype : filteremploymenttype}]};
+    } else if(filterjobtype === '' && filtersalary !== '' && filteremploymenttype !== ''){
         var filterParemater={ $and :[{salary : filtersalary},{employmenttype : filteremploymenttype}]};
-    } else if(filtercompanyname === '' && filtersalary !== '' && filteremploymenttype === '' && filterjobtype !== ''){0101
-        var filterParemater={ $and :[{salary : filtersalary},{jobtype : filterjobtype}]};
-    } else if(filtercompanyname !== '' && filtersalary === '' && filteremploymenttype !== '' && filterjobtype === ''){1010
-        var filterParemater={ $and :[{companyname : filtercompanyname},{employmenttype : filteremploymenttype}]};
-    } else if(filtercompanyname === '' && filtersalary === '' && filteremploymenttype === '' && filterjobtype !== ''){0001
-        var filterParemater={ $and :[{jobtype : filterjobtype}]};
-    } else if(filtercompanyname !== '' && filtersalary === '' && filteremploymenttype === '' && filterjobtype === ''){1000
-        var filterParemater={ $and :[{ companyname : filtercompanyname}]};
-    } else if(filtercompanyname === '' && filtersalary !== '' && filteremploymenttype === '' && filterjobtype === ''){0100
-        var filterParemater={ $and :[{salary : filtersalary}]};
-    } else if(filtercompanyname === '' && filtersalary === '' && filteremploymenttype !== '' && filterjobtype === ''){0010
-        var filterParemater={ $and :[{employmenttype : filteremploymenttype}]};
-    }  else {
+    } else if(filterjobtype !== '' && filtersalary === '' && filteremploymenttype !== ''){
+        var filterParemater={ $and :[{ jobtype : filterjobtype},{employmenttype : filteremploymenttype}]};
+    } else if(filterjobtype !== '' && filtersalary !== '' && filteremploymenttype === ''){
+        var filterParemater={ $and :[{ jobtype : filterjobtype},{salary : filtersalary}]};
+    } else if(filterjobtype !== '' && filtersalary === '' && filteremploymenttype === ''){
+        var filterParemater={ $and :[{ jobtype : filterjobtype}]};
+    } else if(filterjobtype === '' && filtersalary !== '' && filteremploymenttype === ''){
+        var filterParemater={ $and :[{ salary : filtersalary}]};
+    } else if(filterjobtype === '' && filtersalary === '' && filteremploymenttype !== ''){
+        var filterParemater={ $and :[{ employmenttype : filteremploymenttype}]};
+    } else {
         var filterParemater = {};
     }
 
     console.log(filterParemater);
     let dosearch = true;
-    var jobfilter = Jobdetail.find(filterParemater);
-    jobfilter.exec(function(err,data){
+    var resumefilter = Resume.find(filterParemater);
+    resumefilter.exec(function(err,data){
         if(err){
             console.log(err);
         } else {
             console.log(data);
-            res.render("findworker/workerlist",{ Job:data , dosearch : dosearch});
+            res.render("findworker/findworkerlist",{ Resume:data , dosearch : dosearch});
         }
     })
 });

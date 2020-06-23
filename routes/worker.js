@@ -8,7 +8,6 @@ const express = require('express'),
       multer = require('multer')
       ;
 
-
 router.get("/",middleware.isloggedIn, function(req, res){
     res.redirect("/findjob/profile/"+req.user._id);
 })
@@ -338,12 +337,14 @@ router.get("/job_like",middleware.isloggedIn ,middleware.stateWorker , middlewar
 })
 
 router.get("/joblist",middleware.isloggedIn ,middleware.stateWorker , middleware.checkdataworker,function(req, res){
+    let dosearch = false;
     Jobdetail.find({},function(error, allJob){
         if(error){
             console.log(error);
         } else
         {
-            res.render("findjob/joblist",{Job:allJob});
+            console.log(dosearch);
+            res.render("findjob/joblist",{Job:allJob , dosearch : dosearch});
         }
     })
 });
@@ -447,14 +448,15 @@ router.post('/joblist',middleware.isloggedIn ,middleware.stateWorker , middlewar
     }
 
     console.log(filterParemater);
-
+    let dosearch = true;
     var jobfilter = Jobdetail.find(filterParemater);
     jobfilter.exec(function(err,data){
         if(err){
             console.log(err);
         } else {
             console.log(data);
-            res.render("findjob/joblist",{Job:data});
+            console.log(dosearch);
+            res.render("findjob/joblist",{Job:data , dosearch : dosearch});
         }
     })
 });

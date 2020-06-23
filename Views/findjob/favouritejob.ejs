@@ -11,42 +11,12 @@
 
 </head>
 
-
-<div class="container">
+<div class="container col-lg-6">
   <% if(favouritejob.favouritejob.length == "0"){ %>
     <h1><center>ไม่พบงานที่บันทึกไว้</center></h1>
     <% } else { %>
       <h1>LIKED <%= favouritejob.favouritejob.length %> งาน</h1>
     <%}%>
-<!-- 
-  
-        <% favouritejob.favouritejob.forEach(function(jobliked){ %>
-        
-        
-        <div class="row">
-          <div class="col-md-7">
-            <a href="#">
-              <img class="img-fluid rounded mb-3 mb-md-0" src="/jobimage/<%= jobliked.image %>" width="700" height="300" alt="">
-            </a>
-          </div>
-          <div class="col-md-5">
-            <% console.log(jobliked.companyname)%>
-            <h3><%= jobliked.companyname %></h3>
-            <p><%= jobliked.qualti %></p>
-            <p><%= jobliked.employmenttype %></p>
-            <p><%= jobliked.salary %></p>
-            <br>
-            <a action="GET" class="btn btn-primary" href="/findjob/joblist/<%= jobliked._id %>">View Project</a>
-          </div>
-        </div>
-        
-      <hr>
-      <% }); %>
-      
-      </ul>
-</div>  -->
-
-<div class="container col-lg-11 ">
   <% favouritejob.favouritejob.forEach(function(jobliked){ %>
     <div class="card mb-3">
         <div class="card-body">

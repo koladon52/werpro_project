@@ -75,11 +75,12 @@
   </form>
 
   <div class="list col-lg-12">
-    <% if(Job.length == "0"){ %>
+    <% if(Job.length == "0" && dosearch == true){ %>
       <h1><center>ไม่พบงานที่ตรงกัน</center></h1>
-      <% } else { %>
+      <% } else if (Job.length != "0" && dosearch == true){ %>
         <h1><center>พบงานที่ตรงกัน <%= Job.length %></center></h1>
-      <%}%>
+      <%} else if ( dosearch == false) {%>
+      <% } %>
         <% Job.forEach(function(job){ %>
                   <div class="card border-light m-1">
                     <div class="row ">

@@ -205,12 +205,13 @@ router.delete("/My_post/:id/edit",middleware.isloggedIn , middleware.stateOperat
 })
 
 router.get("/workerlist",middleware.isloggedIn , middleware.stateOperator , middleware.checkdataoperator  ,function(req, res){
+    let dosearch = false ;
     Resume.find({},function(error, allResume){
         if(error){
             console.log(error);
         } else
         {
-            res.render("findworker/findworkerlist",{Resume:allResume});
+            res.render("findworker/findworkerlist",{Resume:allResume , dosearch : dosearch});
         }
     })
 });
@@ -272,7 +273,7 @@ router.delete("/workerlist/:id/removefavourite", middleware.isloggedIn ,function
   })
 });
 
-router.get("/worker_like" , middleware.isloggedIn , async function(req,res)
+router.get("/worker_like" , middleware.isloggedIn , middleware.stateOperator, async function(req,res)
 {
     User.findById(req.user._id).populate('favouriteresume').exec(function(err, idWorker){
         if(err){

@@ -160,6 +160,11 @@ p i{
     font-weight: bold;
 }
 
+#detail{
+    border: none;
+    border-bottom: 2px solid grey;
+    word-break: break-all;
+}
 
 #head{
     font-weight: bold;

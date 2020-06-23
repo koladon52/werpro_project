@@ -66,13 +66,9 @@
     </div>
 </div> -->
 
-
 <div class="container col-xs-9 col-lg-9">
     <div class="row">
-    <div class="col-lg-11 block">
-        
-        <h1 class="mt-4"><%= job.companyname %></h1>
-        <div class="like" >
+        <div class="like " >
             <% if(favouriteThisJob == true){ %>
                 <div class="favourited fas fa-heart fa-2x" id="favourite" data="<%= job._id %>" >
                 <!-- Added -->
@@ -83,6 +79,9 @@
                 </div>
             <% } %> 
         </div>
+    <div class="col-lg-11 block">
+        <h1 class="mt-4"><%= job.companyname %></h1>
+        
         <span class="lead">
           by
           <a href="#"></a>

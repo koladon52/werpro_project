@@ -75,9 +75,18 @@
   }
 }
 
-.submit-button button{
+.btn-success{
     margin-right: 10%;
-    margin-bottom: 5%; 
+    margin-bottom: 5%;
+    background: #6ab165;
+    box-shadow: 0 5px 0 #4f934b;
+    position: relative;
+    top:0;
+    transition:all 0.2s ease-in-out 0s; 
+}
+
+.submit-button button{
+    box-shadow: 0 2px 0 #4f934b;
 }
 
 .submit-again {
@@ -149,4 +158,27 @@ p i{
 
 #inputdate {
     font-weight: bold;
+}
+
+#detail{
+    border: none;
+    border-bottom: 2px solid grey;
+}
+
+#head{
+    font-weight: bold;
+}
+
+.btn-delete{
+    text-align: center; 
+    margin-left: 5%;
+    background: #f4524d;
+    box-shadow: 0 4px 0 #f11f18;
+    transition: all 0.2s ease-in-out 0s;
+    border-radius: 25px;
+    margin-bottom: 3%;
+}
+
+.btn-delete:hover{
+    box-shadow: 0 2px 0 #f11f18;
 }

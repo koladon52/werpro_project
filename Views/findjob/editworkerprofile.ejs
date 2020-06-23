@@ -49,33 +49,27 @@
         <link rel="stylesheet" href="/css/workerprofile.css">
 </head>
 <body>
+    <div class="container col-xs-6 col-sm-10 col-md-10 col-lg-9">
         
-    <body>
-     <div class="container col-xs-6 col-sm-10 col-md-11 col-lg-9">
         <form action="/findjob/profile/<%= currentUser._id %>/edit?_method=PUT" method="POST" enctype="multipart/form-data">
         <div class="row" >
-            <div class="upload-img col-lg-5 col-md-5 col-sm-12" style=" margin-left: 5%;" align="center">
+            <div class="upload-img col-lg-4 col-md-12 col-sm-10" style=" margin-left: 5%;" align="center">
                 <div class="personal-img">
                     <img style="width: 300px; height: 300px; object-fit: cover;" src="/images/<%=currentUser.img%>" class="img-thumbnail">
+                    <p>อัพโหลดรูปภาพโปรไฟล์</p>
                 </div>
                 <div class="input-img">
                     <input type="file" name="img" accept="image/*" value="<%= currentUser.img %>">  
                     <input type="hidden" name="oldimg" value="<%= currentUser.img %>">  
                     <input type="hidden" name="id" value="<%= currentUser._id %>" >
                 </div>
-                <p>** รูปเป็นส่วนประกอบสำคัญของใบสมัคร <br>
-                กรุณาเลือกรูปที่เห็นใบหน้าชัดเจน ไม่ใส่แว่น ไม่สวมหมวก **</p>
+                <!-- <p>** รูปเป็นส่วนประกอบสำคัญของใบสมัคร <br>
+                กรุณาเลือกรูปที่เห็นใบหน้าชัดเจน ไม่ใส่แว่น ไม่สวมหมวก **</p> -->
             </div>   
-            
-          <div class="col-lg-6 col-md-6 col-sm-12" style="margin-top: 5%;">
-               <div class="personal-info form-row">
-                <div class="col-lg-10 col-md-12 col-sm-12">
+            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-4 ml-2 mr-2" style="margin-top: 5%;">
                     <h1>edit account <i class="far fa-edit"></i></h1>
-                    <div class="line col-xs-4"></div>
-
-                   
-                        
-                        <div class="col-xs-9 col-sm-9 col-md-12 col-lg-12">
+                    <div class="line col-xs-8"></div>
+                        <div class="col-xs-8 col-sm-12 col-md-12 col-lg-10">
                             <div style="text-align: left;" class="form-row">
                               <label  class="left" for="name"><i class="fas fa-user-astronaut"></i>Username </label>
                                 <label class="right" for="name"> <%= currentUser.username %></label>
@@ -88,28 +82,28 @@
                                 <label class="left" for="name"><i class="fas fa-swatchbook"></i>Type </label>
                                 <label class="right" for="name"> <%= currentUser.type %></label>
                             </div>
-                            
+
                         </div>
-                        <hr class="col-xs-4">
-                            
-                          <div class="form-row">
-                            <div class="col-xs-9 col-sm-9 col-md-12 col-lg-6">
+                        <hr>
+                        <div class="col-xs-10 col-sm-12 col-md-12 col-lg-12">
+                            <div class="form-row">
+                            <div class="col-xs-9 col-sm-12 col-md-12 col-lg-6">
                                 <label for="name">ชื่อ </label>
                                 <input type="text" class="form-control" name="firstname" value="<%= currentUser.firstname %>" >
                             </div>
-                            <div class="col-xs-9 col-sm-9 col-md-12 col-lg-6">
+                            <div class="col-xs-9 col-sm-12 col-md-12 col-lg-6">
                                 <label for="inputLastname">นามสกุล</label>
                                 <input type="text" class="form-control" name="lastname" value="<%= currentUser.lastname %>">
                             </div>
                         </div>
                         <div class="form-row">
-                           <div class="col-xs-9 col-sm-9 col-md-12 col-lg-12">
+                           <div class="col-xs-9 col-sm-12 col-md-12 col-lg-12">
                               <label for="name">หมายเลขโทรศัพท์ </label>
                               <input type="tel" class="form-control" name="phone" value="<%= currentUser.phone %>">
                           </div>
                         </div>
                         <div class="form-row">
-                          <div class="col-xs-9 col-sm-9 col-md-12 col-lg-12">
+                          <div class="col-xs-9 col-sm-12 col-md-12 col-lg-12">
                              <label for="name">ที่อยู่</label>
                              <textarea input type="text" class="form-control" rows="4" name="address" ><%= currentUser.address %></textarea>
                             </div>
@@ -118,17 +112,15 @@
                         <div class="btn-left">
                             <a  href="/findjob/profile/<%= currentUser.id %>" type="reset" class="btn-edit btn btn-danger col-xs-4 col-sm-8 col-md-8 col-lg-10">ยกเลิก</a> 
                         </div>
-                        <div class="btn-right">
+                        <div class="btn-right mb-4">
                             <button  type="submit" class="btn-edit btn btn-success col-xs-4 col-sm-8 col-md-8 col-lg-10">ยืนยัน</button> 
                         </div>
                     </div>
                 </div>
-            </form> 
+                        
             </div>
-            </div>
-                
-        </div>    
+          </div>      
+        </form> 
     </div> 
-    </body>
+</body>
     <%- include("../partials/footer")%>
-    

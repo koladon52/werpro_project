@@ -1,5 +1,5 @@
 <%- include("../partials/header")%>
-<div class="container" style="margin-top: 10%; margin-bottom: 10%;">
+<!-- <div class="container" style="margin-top: 10%; margin-bottom: 10%;">
     <div class="jumbotron">
         <form style="text-align: left;" action="/findjob/My_resume/<%= resume._id %>/edit " method="GET">
         <h1><%= resume.name %></h1>
@@ -21,6 +21,175 @@
         </div>
         </form>
     </div>
-</div>
+</div> -->
+<head>
+    <link rel="stylesheet" href="/css/resume.css">
+</head>
+<body>
 
+    <div class="container col-xs-6 col-lg-7">
+        <div class="findjob-form">
+            <div class="text-center pt-5">
+                <img src="../../images/logo.png" alt="network-logo" width="230" height="70" />
+                <p>
+                  find your part-time jobs form
+                </p>
+            </div>
+            <div class="block-info text-form ">
+                <form style="text-align: left;" action="/findjob/My_resume/<%= resume._id %>/edit " method="GET">
+                    <div class="topic">
+                            <p><i class="fas fa-user"></i>ส่วนที่ 1 : ข้อมูลส่วนตัว </p>
+                            <div class="line"></div>
+                        </div>
+                        <input type="hidden" name="username" value="<%= currentUser.username %>">
+                        <div class="form-row">
+                            <div class="form-group col-xs-8 col-sm-8 col-md-8 col-lg-4">
+                                <label for="uploadimage">อัพโหลดรูป</label>
+                                <input type="file" class="form-control-file"  name="image">
+                            </div>
+                            <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4">
+                                <!-- <label for="inputFirstname">ชื่อจริง</label>
+                                <input type="text" class="form-control"  name="firstname" value="<%= currentUser.firstname %>" required> -->
+                                <p id="head">ชื่อจริง</p>
+                                <p id="detail"><%= resume.firstname %></p>
+                            </div>
+                            <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4">
+                                <p id="head">นามสกุล</p>
+                                <p id="detail"><%= resume.lastname %></p></p>
+                                <!-- <label for="inputLastname">นามสกุล</label>
+                                <input type="text" class="form-control"  name="lastname"value="<%= currentUser.lastname %>"required> -->
+                            </div>
+                        </div>
+                        <div class="topic">
+                            <p><i class="fas fa-address-card"></i>ส่วนที่ 2 : ข้อมูลการสมัครงาน</p>
+                            <div class="line"></div> 
+                        </div>
+                        <div class="form-group">
+                              <label id="head" >รายละเอียด</label>  
+                                <p id="detail"><%= resume.description %></p>
+                        </div>
+                        <div class="form-row">
+                            <div class="group col-lg-4">
+                                <label id="head">ประเภทสัญญาจ้าง</lable>
+                            </div>
+                            <div class="form-group col-lg-4">
+                                <p id="detail"><%= resume.jobtype %></p>
+                            </div>
+                            
+                        </div>
+                        <!-- <div class="form-select">
+                            <label for="selectTypejob">ประเภทงานที่ต้องการสมัคร</label>
+                                <select class="form-control" name="jobtype" required>
+                                    <option value="">เลือกประเภทงาน</option>
+                                    <option value="งานบ้าน">งานบ้าน</option>
+                                    <option value="งานครัว">งานครัว</option>
+                                    <option value="งานช่าง">งานช่าง</option>
+                                    <option value="งานพี่เลี้ยงเด็ก">งานพี่เลี้ยงเด็ก</option>
+                                    <option value="งานสอนหนังสือ">งานสอนหนังสือ</option>
+                                    <option value="งานขาย">งานขาย</option>
+                                    <option value="งานบริการลูกค้า">งานบริการลูกค้า</option>
+                                    <option value="งานคลังสินค้า">งานคลังสินค้า</option>
+                                    <option value="งานธุรการ">งานธุรการ</option>
+                                    <option value="งานแคชเชียร์">งานแคชเชียร์</option>
+                                    <option value="งานส่งสินค้า">งานส่งสินค้า</option>
+                                    <option value="งานขับรถ">งานขับรถ</option>
+                                    <option value="งานบัญชีและการเงิน">งานบัญชีและการเงิน</option>
+                                    <option value="งานจัดซื้อ">งานจัดซื้อ</option>
+                                    <option value="งานก่อสร้าง">งานก่อสร้าง</option>
+                                    <option value="งานทำความสะอาด">งานทำความสะอาด</option>
+                                    <option value="งานตัวแทนจำหน่าย">งานตัวแทนจำหน่าย</option>
+                                    <option value="งานบริการความงาม">งานบริการความงาม</option>
+                                    <option value="งานรักษาความปลอดภัย">งานรักษาความปลอดภัย</option>
+                                    <option value="งานถ่ายภาพ">งานถ่ายภาพ</option>
+                                    <option value="อื่น...">อื่น...</option>
+                                </select><br>
+                            <label for="selectEmployment">ลักษณะการว่าจ้าง</label>
+                                <select class="form-control" name="employmenttype" required>
+                                    <option></option>
+                                    <option value="Part time">Part time</option>
+                                    <option value="Event">Event</option>
+                                    <option value="ฝึกงาน">ฝึกงาน</option>
+                                </select>
+                            </div><br> -->
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label id="head" for="inputDate">ช่วงเวลาที่สะดวกทำงาน</label>
+                                  </div>
+                                  <div class="form-group col-md-1">
+                                    <p id="head">ตั้งแต่</p> 
+                                  </div>
+                                <div class="form-group col-md-3">
+                                    <p id="detail"><%= resume.starttime %></p>
+                                </div>
+                                <div class="form-group col-md-1">
+                                    <p id="head">จนถึง</p>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <p id="detail"> <%= resume.finishtime %> </p>
+                                </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="group col-md-4">
+                                <label id="head" for="selectTypejob">รายได้ที่คาดว่าจะได้รับ</label>
+                            </div>
+                            <div class="group col-md-4">
+                                <p id="detail"><%= resume.salary %></p>
+                            </div>
+                            
+                        </div>
+                        <div class="form-group">
+                            <label id="head" for="inputAbout">ข้อมูลเพิ่มเติมเกี่ยวกับผู้สมัครงาน</label>
+                            <!-- <textarea class="form-control" id="Textarea" rows="4" name="desc" placeholder="พูดได้กี่ภาษา, พิมพ์ได้กี่คำต่อนาที เป็นต้น"></textarea> -->
+                            <p id="detail"></p>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label id="head" for="udloadResume">อัพโหลดเรซูเม่</label>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <a id="detail" href="/resume/<%= resume.file %>" download>ดาวน์โหลด เรซูเม่</a>
+                            </div>
+                        </div>
+                        <div class="topic">
+                            <p><i class="fas fa-phone-alt"></i>ส่วนที่ 3 : ข้อมูลการติดต่อ</p>
+                            <div class="line"></div>
+                        </div>
+                        <!-- <div class="form-group">
+                            <label for="inputContact"></label>
+                            <textarea class="form-control" id="Textarea" rows="4" name="desc" placeholder="หมายเลขโทรศัพท์, อีเมล หรืออื่นๆที่สามารถใช้ติดต่อสื่อสารกับผู้สมัครงานได้โดยตรง"></textarea>
+                        </div>  -->
+                        <div class="form-group ">
+                            <label id="head" for="inputContact">ช่องทางการติดต่อ</label>
+                            <p id="detail"></p>
+                            <!-- <textarea class="form-control" id="Textarea" rows="4" name="contact" placeholder="หมายเลขโทรศัพท์, อีเมล หรืออื่นๆที่สามารถใช้ติดต่อสื่อสารกับผู้สมัครงานได้โดยตรง"></textarea> -->
+                        </div>
+                        <div class="topic">
+                            <p><i class="fas fa-tasks"></i>ส่วนที่ 4 : </p>
+                            <div class="line"></div>
+                        </div>
+                        <div class="form-check">
+                            <div class="check1">
+                                <input type="checkbox" class="form-check-input" disabled>
+                                <label class="form-check-label" for="Check">ฉันขอยืนยัน นอนยัน นั่งยันว่าข้อมูลทั้งหมดเป็นความจริงและยินยอมให้เปิดเผยข้อมูลนี้</label> 
+                            </div>
+                            <div class="check2">
+                                <input type="checkbox" class="form-check-input" disabled>
+                                <label class="form-check-label" for="Check2">ฉันได้อ่านและยอมรับ <a href="">เงื่อนไขและข้อตกลงในการใช้บริการเว็ปไซต์</a></label>
+                            </div>
+                          </div>
+                </form>
+                <form  action="/findjob/My_resume/<%= resume._id %>/edit?_method=DELETE" method="POST">
+                    <div class="btn-right col-lg-12" align="right">
+                            <button type="submit" class="btn btn-danger btn-delete"> Delete </button> 
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="wave-container">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#0099ff" 
+            fill-opacity="1" d="M0,128L48,144C96,160,192,192,288,181.3C384,171,480,117,576,96C672,75,768,85,864,106.7C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+        </svg>
+        </div>
+    </body>
 <%- include("../partials/footer")%>

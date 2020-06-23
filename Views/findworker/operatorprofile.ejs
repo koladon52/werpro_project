@@ -14,32 +14,40 @@
                 <h1 style="text-align: center;">Profile</h1><br>
                      <form action="/findworker/profile/<%= currentUser._id %>/edit" method="GET">
                         <div style="text-align: left;" class="form-group">
-                            <label for="name">Username </label>
+                            <label for="name"> Username </label>
                             <label for="name">: <%= currentUser.username %></label>
                         </div>
                         <div style="text-align: left;" class="form-group">
-                            <label for="name">Email </label>
+                            <label for="name"> Email </label>
                             <label for="name">: <%= currentUser.email %></label>
                         </div>
                         <div style="text-align: left;" class="form-group">
-                            <label for="name">Type of user </label>
+                            <label for="name"> Type of user </label>
                             <label for="name">: <%= currentUser.type %></label>
                         </div>
                         <div style="text-align: left;" class="form-group">
-                            <label for="name">Firstname </label>
+                            <label for="name"> Firstname </label>
                             <label for="name">: <%= currentUser.firstname %></label>
                         </div>
                         <div style="text-align: left;" class="form-group">
-                            <label for="name">Lastname </label>
+                            <label for="name"> Lastname </label>
                             <label for="name">: <%= currentUser.lastname %></label>
                         </div>
                         <div style="text-align: left;" class="form-group">
-                            <label for="name">Tel.No </label>
+                            <label for="name"> เบอร์โทรศัพท์สำหรับติดต่อ </label>
                             <label for="name">: <%= currentUser.phone %></label>
                         </div>
                         <div style="text-align: left;" class="form-group">
-                            <label for="name">Address </label>
+                            <label for="name"> ที่ตั้งบริษัท/สำนักงาน </label>
                             <label for="name">: <%= currentUser.address %></label>
+                        </div>
+                        <div style="text-align: left;" class="form-group">
+                            <label for="name"> ประเภทธุรกิจ </label>
+                            <label for="name">: <%= currentUser.jobtype %></label>
+                        </div>
+                        <div style="text-align: left;" class="form-group">
+                            <label for="name"> รายละเอียดบริษัท </label>
+                            <label for="name">: <%= currentUser.aboutcompany %></label>
                         </div>
                         <div align="right">
                             <button type="submit"  class="btn btn-primary">Edit profile</button> 

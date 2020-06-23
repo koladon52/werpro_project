@@ -13,6 +13,8 @@ let UserSchema = new mongoose.Schema({
     phone    : String,
     img      : String,
     editdate : String,
+    aboutcompany : String,
+    jobtype   : String,
     resumes: [
         {
             type: mongoose.Schema.Types.ObjectId,

@@ -1,5 +1,5 @@
 <%- include("../partials/header")%>
-<% var count = 0%>
+
 <head>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
   <script src="http://ajac.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -12,10 +12,14 @@
 </head>
 
 
+<div class="container">
+  <% if(favouritejob.favouritejob.length == "0"){ %>
+    <h1><center>ไม่พบงานที่บันทึกไว้</center></h1>
+    <% } else { %>
+      <h1>LIKED <%= favouritejob.favouritejob.length %> งาน</h1>
+    <%}%>
 
-<!-- <div class="container ">
-  <h1 class="my-4">LIKED
-    </h1>
+  
         <% favouritejob.favouritejob.forEach(function(jobliked){ %>
         
         
@@ -37,11 +41,8 @@
         </div>
         
       <hr>
-      <% count++  %>
       <% }); %>
-      <% if(count === 0){ %>
-        <h1><center>ไม่พบข้อมูล</center></h1>
-        <% } %>
+      
       </ul>
 </div> -->
 

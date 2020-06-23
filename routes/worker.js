@@ -10,10 +10,10 @@ const express = require('express'),
 
 
 router.get("/",middleware.isloggedIn, function(req, res){
-    res.redirect("/");
+    res.redirect("/findjob/profile/"+req.user._id);
 })
 
-router.get("/resume", middleware.isloggedIn,function(req, res){
+router.get("/resume", middleware.isloggedIn ,middleware.stateWorker, middleware.checkdataworker ,function(req, res){
     res.render("findjob/resume");
 })
 
@@ -47,7 +47,7 @@ router.get("/resume", middleware.isloggedIn,function(req, res){
 
 uploadtest = multer({ storage : test})
 
-router.post("/resume", uploadtest.any() , middleware.isloggedIn,function(req, res){
+router.post("/resume", uploadtest.any() , middleware.isloggedIn ,middleware.stateWorker , middleware.checkdataworker ,function(req, res){
         
     
     var dateTime = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '')
@@ -98,7 +98,7 @@ router.post("/resume", uploadtest.any() , middleware.isloggedIn,function(req, re
     });
 })
 
-router.get("/My_resume",middleware.isloggedIn,function(req, res){
+router.get("/My_resume",middleware.isloggedIn ,middleware.stateWorker , middleware.checkdataworker ,function(req, res){
     User.findById(req.user._id).populate('resumes').exec(function(err, MyResume){
         if(err){
             console.log(err);
@@ -118,7 +118,7 @@ router.get("/My_resume",middleware.isloggedIn,function(req, res){
 });
 
 
-router.get("/My_resume/:id",middleware.isloggedIn,function(req, res){
+router.get("/My_resume/:id",middleware.isloggedIn ,middleware.stateWorker , middleware.checkdataworker , function(req, res){
     Resume.findById(req.params.id, function(error, idResume){
         if(error){
             console.log(error);
@@ -128,7 +128,7 @@ router.get("/My_resume/:id",middleware.isloggedIn,function(req, res){
     });
 });
 
-router.put("/My_resume/:id/edit",uploadtest.any(),middleware.isloggedIn ,function(req,res){
+router.put("/My_resume/:id/edit",uploadtest.any(),middleware.isloggedIn ,middleware.stateWorker , middleware.checkdataworker ,function(req,res){
     let id = req.params.id;
     let file = req.body.oldfile;
     let image = req.body.oldimage;
@@ -211,7 +211,7 @@ router.put("/My_resume/:id/edit",uploadtest.any(),middleware.isloggedIn ,functio
     })
 })
 
-router.get("/My_resume/:id/edit",middleware.isloggedIn,function(req, res){
+router.get("/My_resume/:id/edit",middleware.isloggedIn ,middleware.stateWorker , middleware.checkdataworker ,function(req, res){
     Resume.findById(req.params.id, function(error, idResume){
         if(error){
             console.log(error);
@@ -221,7 +221,7 @@ router.get("/My_resume/:id/edit",middleware.isloggedIn,function(req, res){
     });
 })
 
-router.delete("/My_resume/:id/edit",middleware.isloggedIn, function(req,res){
+router.delete("/My_resume/:id/edit",middleware.isloggedIn ,middleware.stateWorker , middleware.checkdataworker , function(req,res){
     Resume.findById(req.params.id, function(err, foundresume){
         if(err){
             console.log(err)
@@ -267,8 +267,7 @@ router.delete("/My_resume/:id/edit",middleware.isloggedIn, function(req,res){
 //     })
 // })
 
-
-router.post("/joblist/:id/addfavourite", middleware.isloggedIn ,function(req, res) {
+router.post("/joblist/:id/addfavourite", middleware.isloggedIn ,middleware.stateWorker , middleware.checkdataworker,function(req, res) {
     let id = req.user._id;
     let job = req.params.id;
     let thisfav = false;
@@ -296,7 +295,7 @@ router.post("/joblist/:id/addfavourite", middleware.isloggedIn ,function(req, re
     })
 });
 
-router.delete("/joblist/:id/removefavourite", middleware.isloggedIn ,function(req, res) {
+router.delete("/joblist/:id/removefavourite", middleware.isloggedIn ,middleware.stateWorker , middleware.checkdataworker,function(req, res) {
     let id = req.user._id;
     let job = req.params.id;
     Jobdetail.findById(job,function(err,post){
@@ -326,7 +325,7 @@ router.delete("/joblist/:id/removefavourite", middleware.isloggedIn ,function(re
 });
 
 
-router.get("/job_like",middleware.isloggedIn,async function(req,res)
+router.get("/job_like",middleware.isloggedIn ,middleware.stateWorker , middleware.checkdataworker,async function(req,res)
 {
     User.findById(req.user._id).populate('favouritejob').exec(function(err, idjob){
         if(err){
@@ -338,7 +337,7 @@ router.get("/job_like",middleware.isloggedIn,async function(req,res)
     })
 })
 
-router.get("/joblist",middleware.isloggedIn,function(req, res){
+router.get("/joblist",middleware.isloggedIn ,middleware.stateWorker , middleware.checkdataworker,function(req, res){
     Jobdetail.find({},function(error, allJob){
         if(error){
             console.log(error);
@@ -349,7 +348,7 @@ router.get("/joblist",middleware.isloggedIn,function(req, res){
     })
 });
 
-router.get("/joblist/:id",middleware.isloggedIn,function(req, res){
+router.get("/joblist/:id",middleware.isloggedIn ,middleware.stateWorker , middleware.checkdataworker, function(req, res){
     let favouriteThisJob = false;
     Jobdetail.findById(req.params.id, function(error, idJob){
         if(error){
@@ -369,7 +368,7 @@ router.get("/joblist/:id",middleware.isloggedIn,function(req, res){
     });
 })
 
-router.post('/joblist',middleware.isloggedIn, function(req , res , next){
+router.post('/joblist',middleware.isloggedIn ,middleware.stateWorker , middleware.checkdataworker , function(req , res , next){
     var fuzzyfiltercompanyname   = req.body.searchcompanyname;
     var filtersalary             = req.body.searchsalary;
     var filteremploymenttype     = req.body.searchemploymenttype;
@@ -475,15 +474,15 @@ var storage = multer.diskStorage({
 
 upload = multer({ storage : storage})
 
-router.get("/profile/:id",middleware.isloggedIn,function(req, res){
+router.get("/profile/:id",middleware.isloggedIn ,middleware.stateWorker ,function(req, res){
     res.render("findjob/workerprofile");
 })
 
-router.get("/profile/:id/edit",middleware.isloggedIn,function(req, res){
+router.get("/profile/:id/edit",middleware.isloggedIn ,middleware.stateWorker ,function(req, res){
     res.render("findjob/editworkerprofile");
 })
 
-router.put("/profile/:id/edit" ,upload.single("img") ,middleware.isloggedIn, function(req,res){
+router.put("/profile/:id/edit" ,upload.single("img") ,middleware.isloggedIn ,middleware.stateWorker , function(req,res){
     
     var dateTime = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '')
 

@@ -13,9 +13,10 @@ let ResumeSchema = new mongoose.Schema({
     date           : String,
     contact        : String,
     file           : String,
-    editdate       : String,
-    postdate       : String,
+    editdate       : Date,
+    postdate       : Date,
     salary         : String,
+    expiredate     : Date,
     user : {
         id:{
             type: mongoose.Schema.Types.ObjectId,

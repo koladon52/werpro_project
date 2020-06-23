@@ -14,8 +14,8 @@ let jobSchema = new mongoose.Schema({
     date             : String,
     contact          : String,
     file             : String,
-    editdate         : String,
-    postdate         : String,
+    editdate         : Date,
+    postdate         : Date,
     lon              : String,
     lat              : String,
     location         : String,
@@ -25,6 +25,7 @@ let jobSchema = new mongoose.Schema({
     province         : String,
     aoi              : String,
     country          : String,
+    expiredate       : Date,
     user : {
         id:{
             type: mongoose.Schema.Types.ObjectId,

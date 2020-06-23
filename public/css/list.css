@@ -80,7 +80,7 @@
 
 .container {
   font-family: 'Prompt', sans-serif;
-  font-size: medium;
+  font-size: large;
 ;
    /* background-image: url(../images/bg-list2.png);
   background-repeat: no-repeat;
@@ -128,7 +128,6 @@
 } */
 
 
-
 .line1{
   margin-top: 2%;
   margin-bottom: 1%;
@@ -138,10 +137,10 @@
   background-color: #F5F5F5	;
 }
 
-.row #icon-list{
+/* .row #icon-list{
   width: 30px;
   height: 30px;
-}
+} */
 
 .btn-readmore{
   border-radius:25px;
@@ -162,7 +161,6 @@
 }
 
 
-
 form p{
   letter-spacing: 4px;
   color: gray;
@@ -174,4 +172,12 @@ form p{
 
 .back{
   background-color: #F5F5F5;
+}
+
+#detail {
+  display: block;
+  width: 400px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }

@@ -160,11 +160,6 @@ p i{
     font-weight: bold;
 }
 
-#detail{
-    border: none;
-    border-bottom: 2px solid grey;
-    word-break: break-all;
-}
 
 #head{
     font-weight: bold;
@@ -172,14 +167,27 @@ p i{
 
 .btn-delete{
     text-align: center; 
-    margin-left: 5%;
     background: #f4524d;
     box-shadow: 0 4px 0 #f11f18;
     transition: all 0.2s ease-in-out 0s;
     border-radius: 25px;
-    margin-bottom: 3%;
+
 }
 
 .btn-delete:hover{
+    top:2px;
     box-shadow: 0 2px 0 #f11f18;
+}
+
+.btn-edit{
+    border-radius:25px;
+    background: #0088cc;
+    box-shadow:0 4px 0 #006394;
+    transition:all 0.2s ease-in-out 0s;
+    position: relative;
+}
+
+.btn-edit:hover{
+    top:2px;
+    box-shadow:0 2px 0 #006394;
 }

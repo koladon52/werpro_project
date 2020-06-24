@@ -358,7 +358,7 @@ router.get("/postjob", middleware.isloggedIn , middleware.stateOperator , middle
 router.post("/postjob",uploadjob.any(), middleware.isloggedIn , middleware.stateOperator , middleware.checkdataoperator  ,function(req, res){
 
     var dateTime = new Date()
-    var expire = new Date(( dateTime.getTime() + 3600000 ));
+    var expire = new Date(( dateTime.getTime() + 30 * 86400000  ));
 
     let user           = {
         id : req.user._id,

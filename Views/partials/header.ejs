@@ -73,6 +73,21 @@
             </li>
               
             </ul>
+          <% } else if (currentUser.type === 'admin') { %>
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="/admin/workerlist">Worker_LIST</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/admin/joblist">Job_List</a>
+              </li>
+              <!-- <li class="nav-item">
+                <a class="nav-link" href="/admin/worker_like">Liked</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/admin/My_post">My post</a>
+              </li> -->
+            </ul>
           <% } %>
           <!-- <div>
             <form class="form-inline">

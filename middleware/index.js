@@ -154,7 +154,6 @@ middlewareObj.checkexpireresume = function(req, res , next){
     return next();
 }
 
-
 middlewareObj.checkexpirejob = function(req, res , next){
     var dateTime = new Date()
    

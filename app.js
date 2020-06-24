@@ -10,7 +10,8 @@ const express = require("express"),
       indexRoutes = require('./routes/index'),
       userRoutes  = require('./routes/user'),
       workerRoute = require('./routes/worker'),
-      operatorRoute = require('./routes/operator')
+      operatorRoute = require('./routes/operator'),
+      adminRoute    = require('./routes/admin')
       ;
 
 const { exec } = require("child_process");
@@ -58,6 +59,7 @@ app.use(express.static("public"));
 app.use('/',indexRoutes);
 app.use('/findjob',workerRoute);
 app.use('/findworker',operatorRoute);
+app.use('/admin',adminRoute);
 
 app.listen(3000, function(res,req){
     console.log("SERVER STARTED")

@@ -80,7 +80,7 @@
 
 .container {
   font-family: 'Prompt', sans-serif;
-  font-size: large;
+  font-size: larger;
 ;
    /* background-image: url(../images/bg-list2.png);
   background-repeat: no-repeat;
@@ -180,4 +180,24 @@ form p{
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+.company{
+  color: ;
+}
+
+.handshack{
+  color: ;
+}
+
+.tasks{
+  color: ;
+}
+
+.money{
+  color: #6ab165;
+}
+
+.map{
+  color: red;
 }

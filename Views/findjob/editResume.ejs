@@ -137,10 +137,13 @@
                         </div>
                       </div><br>   -->
                       
-                    <div  align="center">
-                        <!-- <a  href="/My_resume/<%= resume._id%>" type="reset" class="btn btn-danger col-xs-1 col-sm-4 col-lg-4"> Cancel </a> -->
-                        <button type="submit" class="btn btn-success col-xs-1 col-sm-4 col-lg-4"> ยืนยัน </button>   
-                        <a type="reset" href="/findjob/My_resume/<%= resume.id %>" class="btn btn-danger col-xs-1 col-sm-4 col-lg-4 "> ยกเลิก </a>   
+                    <div  class="form-row"align="center">
+                        <div class="col">
+                             <a type="reset" href="/findjob/My_resume/<%= resume.id %>" class="btn btn-danger col-lg-12 btn-delete"> ยกเลิก </a>   
+                        </div>
+                        <div class="col">
+                            <button type="submit" class="btn btn-success col-lg-12 submit-button">ยืนยัน</button> 
+                        </div>
                     </div>    
                     <br>
             </form>

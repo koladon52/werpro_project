@@ -5,7 +5,7 @@
   <link rel="stylesheet" href="/css/list.css">
 </head>
 
-<div class="container col-xs-8 col-sm-12 col-md-12 col-lg-10" >
+<div class="container col-xs-12 col-sm-12 col-md-11 col-lg-10" >
   <!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#a2d9ff" fill-opacity="1" d="M0,256L48,229.3C96,203,192,149,288,138.7C384,128,480,160,576,176C672,192,768,192,864,192C960,192,1056,192,1152,181.3C1248,171,1344,149,1392,138.7L1440,128L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path></svg> -->
   <div class="block col-lg-12 form-row">
     <div class="img-fluid col-xs-2 col-lg-4 d-none d-lg-block">
@@ -74,7 +74,7 @@
         </div> 
   </form>
 
-  <div class="list col-lg-12">
+  <div class="list col-lg-12 col-md-12 col-sm-12 align-self-center">
     <% if(Job.length == "0" && dosearch == true){ %>
       <h1><center>ไม่พบงานที่ตรงกัน</center></h1>
       <% } else if (Job.length != "0" && dosearch == true){ %>
@@ -82,14 +82,14 @@
       <%} else if ( dosearch == false) {%>
       <% } %>
         <% Job.forEach(function(job){ %>
-                  <div class="card border-light m-1">
-                    <div class="row ">
-                      <div class="col-lg-5 ">
+                  <div class="card border-light m-2">
+                    <div class="row m-1">
+                      <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
                         <a href="#">
-                          <img style="width: 600px; height: 250px; object-fit: cover;" class="img-fluid rounded mb-3 mb-md-0"  src="/jobimage/<%= job.image %>" alt="">
+                          <img style="width: 700px; height: 250px; object-fit: cover;" class="img-fluid rounded"  src="/jobimage/<%= job.image %>" alt="">
                         </a>
                       </div>
-                      <div class="col-lg-7 col-md-12 col-sm-12 col-xs-12">
+                      <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
                         <div class="row col-lg-12 font-weight-bold h4 mt-4">
                           <!-- <img src="../../images/briefcase.svg" alt="" id="icon-list" class="mr-2"> -->
                           <p class="" id="detail"> <%= job.jobpos%></p>
@@ -103,26 +103,26 @@
                               </div>
                         </div> -->
                           <div class="row col-lg-12">
-                              <img src="../../images/shopper.svg" style="width: 25px; height: 25px; object-fit: cover;" alt="" id="icon-list" class="mr-2 col-xs-1">
-                              <p id="detail" ><%= job.companyname %></p>
+                              <!-- <img src="../../images/shopper.svg" style="width: 25px; height: 25px; object-fit: cover;" alt="" id="icon-list" class="mr-2 col-xs-1"> -->
+                              <p id="detail" ><i class="far fa-building company"></i> <%= job.companyname %></p>
                           </div>
                         <div class="row col-lg-12 justify-content-between">
                           <div class="row col-lg-4">
-                            <img src="../../images/deal.svg" style="width: 25px; height: 25px; object-fit: cover;" alt="" id="icon-list" class="mr-2">
-                              <p id="detail"><%= job.employmenttype %></p>
+                            <!-- <img src="../../images/deal.svg" style="width: 25px; height: 25px; object-fit: cover;" alt="" id="icon-list" class="mr-2"> -->
+                              <p id="detail"><i class="far fa-handshake handshake"></i> <%= job.employmenttype %></p>
                           </div>
                           <div class="row col-lg-8">
-                              <img src="../../images/signature.svg" style="width: 25px; height: 25px; object-fit: cover;" alt="" id="icon-list" class="mr-2">
-                              <p id="detail"><%= job.jobtype %></p>
+                              <!-- <img src="../../images/signature.svg" style="width: 25px; height: 25px; object-fit: cover;" alt="" id="icon-list" class="mr-2"> -->
+                              <p id="detail"><i class="fas fa-tasks tasks"></i> <%= job.jobtype %></p>
                           </div>
                         </div>
                         <div class="row col-lg-12">
-                          <img src="../../images/money.svg" style="width: 25px; height: 25px; object-fit: cover;" alt="" id="icon-list" class="mr-2">
-                          <p id="detail"><%= job.salary %></p>
+                          <!-- <img src="../../images/money.svg" style="width: 25px; height: 25px; object-fit: cover;" alt="" id="icon-list" class="mr-2"> -->
+                          <p id="detail"><i class="far fa-money-bill-alt money"></i> <%= job.salary %></p>
                         </div>
                         <div class="row col-lg-12">
-                          <img src="../../images/map.svg"  style="width: 25px; height: 25px; object-fit: cover;" alt="" id="icon-list" class="mr-2">
-                          <p id="detail"> <%= job.country %> <%= job.district %> <%= job.subdistrict %> <%= job.province%> <%= job.postcode %></p>
+                          <!-- <img src="../../images/map.svg"  style="width: 25px; height: 25px; object-fit: cover;" alt="" id="icon-list" class="mr-2"> -->
+                          <p class="text-break"><i class="fas fa-map-marker-alt map"></i> <%= job.country %> <%= job.district %> <%= job.subdistrict %> <%= job.province%> <%= job.postcode %></p>
                         </div>
                         <div class="col-lg-12 mb-3" align="right">
                           <a action="GET" class="btn btn-primary btn-readmore" href="/findjob/joblist/<%= job._id %>">อ่านเพิ่มเติม</a>

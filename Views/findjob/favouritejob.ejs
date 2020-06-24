@@ -1,5 +1,4 @@
 <%- include("../partials/header")%>
-
 <head>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
   <script src="http://ajac.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -8,10 +7,9 @@
   <Link href="jquery-ui.css" rel="stylesheet">
   <Link href="http://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet" >
   <link rel="stylesheet" href="/css/list.css">
-
 </head>
 
-<div class="container col-lg-6">
+<!-- <div class="container col-lg-6">
   <% if(favouritejob.favouritejob.length == "0"){ %>
     <h1><center>ไม่พบงานที่บันทึกไว้</center></h1>
     <% } else { %>
@@ -54,5 +52,63 @@
   </div>
       <% }); %>
 </div>
+</div> -->
+<div class="container col-xs-12 col-sm-12 col-md-11 col-lg-8">
+  <div class="list col-lg-12 col-md-12 col-sm-12 align-self-center">
+  <% if(favouritejob.favouritejob.length == "0"){ %>
+    <h1 class="m-4"><center>ไม่พบงานที่บันทึกไว้</center></h1>
+    <% } else { %>
+      <h1 class="m-4">LIKED <%= favouritejob.favouritejob.length %> งาน</h1>
+    <%}%>
+  <% favouritejob.favouritejob.forEach(function(jobliked){ %>
+                <div class="card border-light m-2">
+                  <div class="row m-1">
+                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
+                      <a href="#">
+                        <img style="width: 700px; height: 250px; object-fit: cover;" class="img-fluid rounded" src="/jobimage/<%= jobliked.image %>" alt="">
+                      </a>
+                    </div>
+                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
+                      <div class="row col-lg-12 font-weight-bold h4 mt-4">
+                        <!-- <img src="../../images/briefcase.svg" alt="" id="icon-list" class="mr-2"> -->
+                        <p class="" id="detail"> <%= jobliked.jobpos%></p>
+                      </div>
+                      <!-- <div class="row col-lg-12 col-md-10 col-sm-10 col-xs-12  h5">
+                            <div class="row col-">
+                              <img src="../../images/shopper.svg" style="width: 25px; height: 25px; object-fit: cover;" alt="" id="icon-list">
+                            </div>
+                            <div class="companyname"  >
+                            </div>
+                      </div> -->
+                        <div class="row col-lg-12">
+                            <!-- <img src="../../images/shopper.svg" style="width: 25px; height: 25px; object-fit: cover;" alt="" id="icon-list" class="mr-2 col-xs-1"> -->
+                            <p id="detail" ><i class="far fa-building company"></i> <%= jobliked.companyname %></p>
+                        </div>
+                      <div class="row col-lg-12 justify-content-between">
+                        <div class="row col-lg-4">
+                          <!-- <img src="../../images/deal.svg" style="width: 25px; height: 25px; object-fit: cover;" alt="" id="icon-list" class="mr-2"> -->
+                            <p id="detail"><i class="far fa-handshake handshake"></i> <%= jobliked.employmenttype %></p>
+                        </div>
+                        <div class="row col-lg-8">
+                            <!-- <img src="../../images/signature.svg" style="width: 25px; height: 25px; object-fit: cover;" alt="" id="icon-list" class="mr-2"> -->
+                            <p id="detail"><i class="fas fa-tasks tasks"></i> <%= jobliked.jobtype %></p>
+                        </div>
+                      </div>
+                      <div class="row col-lg-12">
+                        <!-- <img src="../../images/money.svg" style="width: 25px; height: 25px; object-fit: cover;" alt="" id="icon-list" class="mr-2"> -->
+                        <p id="detail"><i class="far fa-money-bill-alt money"></i> <%= jobliked.salary %></p>
+                      </div>
+                      <div class="row col-lg-12">
+                        <!-- <img src="../../images/map.svg"  style="width: 25px; height: 25px; object-fit: cover;" alt="" id="icon-list" class="mr-2"> -->
+                      </div>
+                      <div class="col-lg-12 mb-3" align="right">
+                        <a action="GET" class="btn btn-primary btn-readmore" href="/findjob/joblist/<%= jobliked._id %>">อ่านเพิ่มเติม</a>
+                      </div>
+                    </div>
+                  </div>
+              </div>  
+      <% }); %> 
+  </div>    
 </div>
+
 <%- include("../partials/footer")%>

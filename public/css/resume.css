@@ -75,17 +75,15 @@
   }
 }
 
-.btn-success{
-    margin-right: 10%;
-    margin-bottom: 5%;
+.btn-submit{
     background: #6ab165;
     box-shadow: 0 5px 0 #4f934b;
-    position: relative;
-    top:0;
-    transition:all 0.2s ease-in-out 0s; 
+    border-radius: 25px;
+    margin-bottom: 5%;
 }
 
-.submit-button button{
+ .btn-submit:hover{
+    top:3px;
     box-shadow: 0 2px 0 #4f934b;
 }
 

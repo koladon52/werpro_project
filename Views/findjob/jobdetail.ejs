@@ -65,7 +65,7 @@
     </div>
 </div> -->
 
-<div class="container col-xs-12 col-sm-11 col-md-10 col-lg-10">
+<div class="container col-xs-12 col-sm-11 col-md-10 col-lg-8">
     <div class="row md-6"></div>
     <div class="like col-lg-12" align="right">
             <% if(favouriteThisJob == true){ %>
@@ -82,11 +82,7 @@
        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <h1 class="mt-4"><%= job.companyname %></h1>
         
-        <span class="lead">
-          by
-          <a href="#"></a>
-        </span>
-        <span>Posted on <%= job.postdate%>></span>
+        <span>โพสต์เมื่อ<%= job.postdate%></span>
         <hr>
         <center><img src="/jobimage/<%= job.image %>" class="img-thumbnail" style="width: 700px; height: 480px; object-fit: cover;" align="center"></center>
         <hr>
@@ -157,7 +153,7 @@
         <input type="hidden" id="lon" value="<%= job.lon %>">
         <input type="hidden" id="lat" value="<%= job.lat %>">
         <div class="download col-lg-12 mb-">
-            <a href="/jobapplication/<%= job.file %>" download align="left"><i class="fas fa-file-download "></i> ดาวน์โหลดเอกสาร</a>
+            <a href="/jobapplication/<%= job.file %>" download align="left"><i class="fas fa-file-download "></i> ดาวน์โหลดเอกสาร</a><br><br>
         </div>
       </div>
     </div>

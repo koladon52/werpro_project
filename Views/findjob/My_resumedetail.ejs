@@ -41,24 +41,32 @@
                             <div class="line"></div>
                         </div>
                         <input type="hidden" name="username" value="<%= currentUser.username %>">
-                        <div class="form-row">
-                            <div class="form-group col-xs-8 col-sm-8 col-md-8 col-lg-4">
-                                <label for="uploadimage">อัพโหลดรูป</label>
-                                <input type="file" class="form-control-file" name="image">
+                            <div class="form-row col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <div class="personal-img">
+                                        <img style="width: 700px; height: 480px; object-fit: cover;" class="img-thumbnail rounded mb-4 mb-md-0" src="/resumeimage/<%= resume.image %>"> 
+                                    </div>
                             </div>
-                            <div class="col-xs-6 col-sm-12 col-md-6 col-lg-3 border-bottom mr-4">
-                                <!-- <label for="inputFirstname">ชื่อจริง</label>
-                                <input type="text" class="form-control"  name="firstname" value="<%= currentUser.firstname %>" required> -->
-                                <p id="head">ชื่อจริง</p>
-                                <p><%= resume.firstname %></p>
+                            <!-- <div class="form-gi col-lg-12">
+                                <div class="form-group col-lg-6 border-bottom mr-4">
+                                    <p id="head">ชื่อจริง</p>
+                                    <p><%= resume.firstname %></p>
+                                </div>
+                                <div class="form-group col-lg-6 border-bottom ">
+                                    <p id="head">นามสกุล</p>
+                                    <p id="detail"><%= resume.lastname %></p></p>
+                                </div>
+                            </div> -->
+                            <div class="form-row mt-4">
+                                  <div class="form-group col-lg-4">
+                                    <p id="head">ชื่อ-นามสกุล</p> 
+                                  </div>
+                                <div class="form-group col-lg-2  border-bottom" >
+                                    <p><%= resume.firstname %></p>
+                                </div>
+                                <div class="form-group col-lg-6  border-bottom">
+                                    <p id="detail"><%= resume.lastname %></p>
+                                </div>
                             </div>
-                            <div class="col-xs-6 col-sm-12 col-md-6 col-lg-3 border-bottom">
-                                <p id="head">นามสกุล</p>
-                                <p id="detail"><%= resume.lastname %></p></p>
-                                <!-- <label for="inputLastname">นามสกุล</label>
-                                <input type="text" class="form-control"  name="lastname"value="<%= currentUser.lastname %>"required> -->
-                            </div>
-                        </div>
                         <div class="topic">
                             <p><i class="fas fa-address-card"></i>ส่วนที่ 2 : ข้อมูลการสมัครงาน</p>
                             <div class="line"></div> 
@@ -155,12 +163,12 @@
                 <div class="form-row ">
                     <form class="col mb-4" style="text-align: left;" action="/findjob/My_resume/<%= resume._id %>/edit?_method=DELETE" method="POST">
                         <div class="left">
-                            <button type="submit"class="btn btn-danger col-lg-12 button-delete">ลบทิ้ง</button> 
+                            <button type="submit"class="btn btn-danger col-lg-12 btn-delete">ลบข้อมูล</button> 
                         </div>
                     </form>
                     <form class="col" style="text-align: left;" action="/findjob/My_resume/<%= resume._id %>/edit" method="GET">
                         <div class="right">
-                            <button type="submit" class="btn btn-primary button-edit col-lg-12"> แก้ไขข้อมูล</button> 
+                            <button type="submit" class="btn btn-primary btn-edit col-lg-12"> แก้ไขข้อมูล</button> 
                         </div>
                     </form>
                 </div>

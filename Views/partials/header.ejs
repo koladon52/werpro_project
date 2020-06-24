@@ -106,9 +106,10 @@
                 <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= currentUser.username %></button>
                 <!-- <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= currentUser.username %></button> -->
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" href="/findworker/profile/<%= currentUser.id %>>">Profile</a>
+                  <a class="dropdown-item" href="/findworker/profile/<%= currentUser.id %>>"><i class="far fa-building"></i> Profile</a>
+                  <a class="dropdown-item" href=""><i class="far fa-file-alt"></i> เงื่อนไขและข้อตกลง....</a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="/logout">Logout</a>
+                  <a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
                 </div>
               </div>
               <% } else if (currentUser.type === "worker"){ %>
@@ -116,9 +117,10 @@
                 <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= currentUser.username %></button>
                 <!-- <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= currentUser.username %></button> -->
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" href="/findjob/profile/<%= currentUser.id %>>">Profile</a>
+                  <a class="dropdown-item" href="/findjob/profile/<%= currentUser.id %>>"><i class="fas fa-user-astronaut"></i> Profile</a>
+
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="/logout">Logout</a>
+                  <a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
                 </div>
               </div>
             <% } %>

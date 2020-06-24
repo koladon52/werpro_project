@@ -166,3 +166,32 @@ and (min-width : 1224px) {
       font-size: larger;
       font-weight: bold;
   }
+
+.btn-edit{
+    border-radius:25px;
+    background: #0088cc;
+    box-shadow:0 5px 0 #006394;
+    transition:all 0.2s ease-in-out 0s;
+    position: relative;
+    border-radius: 25px;
+
+}
+
+.btn-edit:hover{
+    top:2px;
+    box-shadow:0 2px 0 #006394;
+}
+
+.btn-danger{
+    background: #f4524d;
+    box-shadow: 0 5px 0 #f11f18;
+    border-radius: 25px;
+    position: relative;
+    top:0;
+    transition:all 0.2s ease-in-out 0s;
+}
+
+.btn-danger:hover{
+    top:2px;
+    box-shadow: 0 2px 0 #f11f18;
+}

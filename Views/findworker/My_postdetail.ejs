@@ -59,7 +59,7 @@
 </div> -->
 
 <div class="container col-xs-12 col-sm-11 col-md-10 col-lg-8">
-    <div class="row md-6"></div>
+    <div class="row md-5"></div>
       <div class="col-lg-12 col-md-11 col-sm-11 col-xs-12 block">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">        
         <h1 class="mt-4"><%= job.companyname %></h1>
@@ -123,34 +123,29 @@
 
             <div class="mapbody" align="center">
                 <div id="map"></div>
-            </div>
+            </div> <br>
         
         <input type="hidden" id="lon" value="<%= job.lon %>">
         <input type="hidden" id="lat" value="<%= job.lat %>">
         <div class="download_like row col-lg-12">
-            <div class="download ">
                 <br>
                 <a href="/jobapplication/<%= job.file %>" download align="left"><i class="fas fa-file-download "></i> ดาวน์โหลดเอกสาร</a>
             </div>
-
         </form>
-        
-      </div>
     </div>
-    <div class="form-row ">
+        <div class="form-row col-lg-12">
             <form class="col mb-4" style="text-align: left;" action="/findworker/My_post/<%= job._id %>/edit?_method=DELETE" method="POST">
                 <div>
-                    <button type="submit" class="btn btn-danger btn-delete col-lg-12">ลบทิ้ง</button> 
+                    <button type="submit" class="btn btn-danger btn-delete col-lg-12">ลบข้อมูล</button> 
                 </div>
             </form>
-            <form class="col" style="text-align: left;" action="/findworker/My_post/<%= job._id %>/edit" method="GET">
+            <form class="col " style="text-align: left;" action="/findworker/My_post/<%= job._id %>/edit" method="GET">
                 <div >
                     <button type="submit" class="btn btn-primary btn-edit col-lg-12"> แก้ไขข้อมูล</button> 
                 </div>
             </form>
           </div>
         </div>
-
   </div>
 </div>
 

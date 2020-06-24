@@ -176,7 +176,7 @@ form p{
 
 #detail {
   display: block;
-  width: 400px;
+  width: 150%;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;

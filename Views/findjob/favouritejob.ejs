@@ -58,7 +58,7 @@
                       </div>
                       <div class="row col-lg-12">
                         <!-- <img src="../../images/map.svg"  style="width: 25px; height: 25px; object-fit: cover;" alt="" id="icon-list" class="mr-2"> -->
-                        <p id="detail"><i class="fas fa-map-marker-alt map"> </i> <%= jobliked.location %> </p>
+                        <p id="detail"><i class="fas fa-map-marker-alt map"> </i> <%= jobliked.country %> <%= jobliked.district %> <%= jobliked.subdistrict %> <%= jobliked.province%> <%= jobliked.postcode %> </p>
                       </div>
                       <div class="col-lg-12 mb-3" align="right">
                         <a action="GET" class="btn btn-primary btn-readmore" href="/findjob/joblist/<%= jobliked._id %>">อ่านเพิ่มเติม</a>

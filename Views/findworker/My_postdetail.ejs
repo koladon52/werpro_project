@@ -64,7 +64,7 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">        
         <h1 class="mt-4"><%= job.companyname %></h1>
         <div class="col-lg-12">
-            <p id="postdate">โพสต์เมื่อ </p>
+            <p id="postdate">โพสต์เมื่อ : <%= job.postdate %></p>
         </div>
         <hr>
         <center><img src="/jobimage/<%= job.image %>" class="img-fluid" style="width: 700px; height: 480px; object-fit: cover;" align="center"></center>
@@ -79,7 +79,7 @@
         </div>
         <div class="row col-lg-12 justify-content-between mt-4">
             <div class="col-lg-5">
-                <p id="subject"><i class="fas fa-tasks tasks"></i> ประเภทงานที่ต้องการ</p>
+                <p id="subject"><i class="fas fa-tasks tasks"></i> ประเภทงาน</p>
             </div>
             <div class="col-lg-7">
                 <p> <%= job.jobtype %></p>
@@ -116,20 +116,20 @@
             <div class="col-lg-12">
                 <p> <%= job.contact%></p>
             </div>
-            
-            <div>
-                <label id="subject2">สถานที่ตั้งบริษัท/ร้านตามแผนที่  : <%= job.country %> <%= job.district %> <%= job.subdistrict %> <%= job.province%> <%= job.postcode %></label>
-                <p id="locate"> </p>
-                    <a id="test"></a>
+            <div class="col-lg-12 " >
+                <label id="subject"><i class="fas fa-map-marker-alt map"></i> สถานที่ตั้งบริษัท/ร้านตามแผนที่  : <%= job.country %> <%= job.district %> <%= job.subdistrict %> <%= job.province%> <%= job.postcode %></label>
             </div>
-        <div class="mapbody" align="center">
-            <div id="map"></div>
-        </div>
+            <br>
+
+            <div class="mapbody" align="center">
+                <div id="map"></div>
+            </div>
         
         <input type="hidden" id="lon" value="<%= job.lon %>">
         <input type="hidden" id="lat" value="<%= job.lat %>">
         <div class="download_like row col-lg-12">
             <div class="download ">
+                <br>
                 <a href="/jobapplication/<%= job.file %>" download align="left"><i class="fas fa-file-download "></i> ดาวน์โหลดเอกสาร</a>
             </div>
 
@@ -166,12 +166,11 @@
         .mapbody {
             margin: 0px;
             height: 100%;
-            display: flex;
-            flex-direction: row;
+            width: 100%;
+            
         }
         #map {
           height: 400px;
-          flex: 4;
         }
     
     /* @media screen and (max-width: 1085px) { 	

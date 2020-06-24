@@ -40,44 +40,59 @@
         <hr>
         <center><img src="/jobimage/<%= job.image %>" class="img-fluid" style="width: 700px; height: 480px; object-fit: cover;" align="center"></center>
         <hr>
-            <div class="row col-lg-12">
-                <img src="/images/deal.svg" alt="">
-                <p id="subject">ประเภทสัญญาจ้าง</p>
+        <div class="row col-lg-12 justify-content-between mt-4">
+            <div class="col-lg-5">
+                <p id="subject"><i class="far fa-handshake handshake"></i> ประเภทสัญญาจ้าง</p>
+            </div>
+            <div class="col-lg-7">
                 <p> <%= job.employmenttype %></p>
             </div>
-                        <div class="row col-lg-12">
-                <img src="/images/signature.svg" alt="">
-                <p id="subject">ประเภทงานที่ต้องการ</p>
+        </div>
+        <div class="row col-lg-12 justify-content-between mt-4">
+            <div class="col-lg-5">
+                <p id="subject"><i class="fas fa-tasks tasks"></i> ประเภทงานที่ต้องการ</p>
+            </div>
+            <div class="col-lg-7">
                 <p> <%= job.jobtype %></p>
             </div>
-
-            <div class="row col-lg-12">
-                <img src="/images/briefcase.svg" alt="">
-                <p id="subject">ตำแหน่งงาน</p>
+        </div>
+        <div class="row col-lg-12 justify-content-between mt-4">
+            <div class="col-lg-5">
+                <p id="subject"><i class="fas fa-id-card-alt card"></i> ตำแหน่งงาน</p>
+            </div>
+            <div class="col-lg-7">
                 <p> <%= job.jobpos%></p>
             </div>
-            <div class="row col-lg-12">
-                <img src="/images/money.svg" alt="">
-                <p id="subject">ผลตอบแทน</p>
+        </div>
+        <div class="row col-lg-12 justify-content-between mt-4">
+            <div class="col-lg-5">
+                <p id="subject"><i class="far fa-money-bill-alt money"></i> ผลตอบแทน</p>
+            </div>
+            <div class="col-lg-7">
                 <p> <%= job.salary%></p>
             </div>
-            <div class="row col-xs-6 col-lg-12">
-                <img src="/images/correspondence.svg" alt="">
-                <label id="subject"> รายละเอียด</label>
-                <p class="text-break" id="detail"> <%= job.qualti %></p>
+        </div>
+        <div class="row col-lg-12 justify-content-between mt-4">
+            <div class="col-lg-12">
+                <p id="subject2"><i class="fas fa-file-alt file"></i> รายละเอียด</p>
             </div>
-
-            <div class="row col-lg-12">
-                <img src="/images/telephone.svg" alt="">
-                <label id="subject">ช่องทางการติดต่อ</label>
-                <p class="text-break"> <%= job.contact%></p>
+            <div class="col-lg-12">
+                <p id="detail"> <%= job.qualti %></p>
             </div>
-            <div class="row col-lg-12">
-                <img src="/images/map.svg" alt="">
-                <label id="subject2">สถานที่ตั้งบริษัท/ร้านตามแผนที่  : <%= job.country %> <%= job.district %> <%= job.subdistrict %> <%= job.province%> <%= job.postcode %></label>
-                <p id="locate"> </p>
-                    <a id="test"></a>
+        </div>
+        <div class="row col-lg-12 justify-content-between mt-4">
+            <div class="col-lg-12">
+                <p id="subject2"><i class="fas fa-phone-alt phone"></i> ช่องทางการติดต่อ</p>
             </div>
+            <div class="col-lg-12">
+                <p> <%= job.contact%></p>
+            </div>
+        </div>
+        <div class="row col-lg-12 justify-content-between "> 
+            <div class="col-lg-12">
+                <p id="subject"><i class="fas fa-map-marker-alt map"></i> สถานที่ตั้งบริษัท/ร้านตามแผนที่  : <%= job.country %> <%= job.district %> <%= job.subdistrict %> <%= job.province%> <%= job.postcode %></p>
+            </div>
+        </div>
 
         <div class="mapbody" align="center">
             <div id="map"></div>

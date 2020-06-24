@@ -105,13 +105,15 @@ router.put("/My_post/:id/edit",uploadjob.any(),middleware.isloggedIn , middlewar
                 fs.unlink(jobimagepath, function(err){
                     if(err){
                         console.log(err);
-                    }
+                    } else {console.log('unlink success');}
+                    
+                    
                 })
                 const jobfilepath = './public/jobapplication/' + foundjob.file;
                 fs.unlink(jobfilepath, function(err){
                     if(err){
                         console.log(err);
-                    }
+                    } else {console.log('unlink success');}
                 })
                 
             }
@@ -128,7 +130,7 @@ router.put("/My_post/:id/edit",uploadjob.any(),middleware.isloggedIn , middlewar
                 fs.unlink(jobfilepath, function(err){
                     if(err){
                         console.log(err);
-                    }
+                    } else {console.log('unlink success');}
                 })
             }
         })
@@ -143,7 +145,7 @@ router.put("/My_post/:id/edit",uploadjob.any(),middleware.isloggedIn , middlewar
                 fs.unlink(jobimagepath, function(err){
                     if(err){
                         console.log(err);
-                    }
+                    } else {console.log('unlink success');}
                 })
             }
         })
@@ -151,7 +153,7 @@ router.put("/My_post/:id/edit",uploadjob.any(),middleware.isloggedIn , middlewar
 
     Jobdetail.findByIdAndUpdate({_id:id},{$set:{companyname : companyname,salary : salary,qualti : qualti, employmenttype : employmenttype, jobtype : jobtype , jobpos : jobpos, date : workdate , finishtime : finishtime ,starttime : starttime , contact : contact , file : jobfile , image : jobimage , editdate : dateTime ,lon : lon, lat : lat , location : location , district : district , subdistrint : subdistrict , postcode : postcode , province : province , aoi : aoi , country : country}}, function(error,profile){
         if(error){
-            console.log("error"); 
+            console.log(error); 
         } else {
             res.redirect("/findworker/My_post/" + req.params.id);
         }

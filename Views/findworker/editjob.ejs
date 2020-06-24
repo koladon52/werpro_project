@@ -1,4 +1,5 @@
 <%- include("../partials/header")%>
+    
 <head>
     <% var lon %>
     <% var lat %>
@@ -19,10 +20,12 @@
               placeholder: document.getElementById('map'),
               ui: longdo.UiComponent.Mobile 
             });
-            lonn = document.getElementById('lon').value
-            latt = document.getElementById('lat').value
+            lon = document.getElementById('lon').value
+            lat = document.getElementById('lat').value
             map.zoom(16, true);
-            map.location({ lon: lonn, lat: latt }, true);
+            map.location({ lon: lon, lat: lat }, true);
+            var marker = new longdo.Marker({ lon: lon, lat: lat });
+            map.Overlays.add(marker);
             search = document.getElementById('search');
             suggest = document.getElementById('suggest');
             finalresult = document.getElementById('finalresult');
@@ -30,11 +33,7 @@
                 document.getElementById('result')
             );
             //When user press an Enter button #search
-            search.onkeyup = function(event) {
-              if((event || window.event).keyCode != 13)
-                return;
-                doSearch();
-            }
+            
             search.oninput = function() {
                 if (search.value.length < 3) {
                     suggest.style.display = 'none';
@@ -70,13 +69,6 @@
                 },
                 success: function (results)
                 {
-                    console.log(results);
-                    console.log(results.country);
-                    console.log(results.district);
-                    console.log(results.postcode);
-                    console.log(results.province);
-                    console.log(results.subdistrict);
-                    console.log(results.aoi);
                     country = results.country;
                     district = results.district;
                     postcode =results.postcode; 
@@ -118,31 +110,51 @@
           
         </script>
 
-</head>
-<div class="container">
-    <div class="jumbotron" style="margin-top: 5%;margin-bottom: 5%">
-    <div style="margin-left :10% ;margin-right: 10%">
-    <div class="form">
-        <h1 style="text-align: center;"> job appiction form</h1>
-        <div>
-            <form style="text-align: left;" action="/findworker/My_post/<%= job._id %>/edit?_method=PUT" method="POST" enctype="multipart/form-data">
-                <input type="hidden" name="username" value="<%= currentUser.username %>">
-                <input type="hidden" name="oldfile" value="<%= job.file %>">
-                <input type="hidden" name="oldimage" value="<%= job.image %>">
-                    <div class="form-row">
-                        <div class="col">
-                            <label for="inputname">ชื่อบริษัท/ห้างร้าน</label>
-                            <input type="text" class="form-control" placeholder="Company name" name="companyname" value="<%= job.companyname %>" required>
+    <head>
+        <link rel="stylesheet" href="/css/resume.css">
+        <link href="https://fonts.googleapis.com/css2?family=Prompt&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
+    </head>
+
+    <div class="container col-xs-6 col-lg-7">
+        <form style="text-align: left;" action="/findworker/My_post/<%= job._id %>/edit?_method=PUT" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="oldimage" value="<%= job.image%>">
+        <input type="hidden" name="oldfile" value="<%= job.file%>">
+            <div class="findjob-form">
+            <div class="text-center pt-5">
+                <img src="/images/logo.png" alt="network-logo" width="230" height="70" />
+                <p>
+                  find your part-time jobs form
+                </p>
+                <p>สำหรับบริษัท</p>
+            </div>
+            <div class="block-info text-form ">
+                
+                    <div class="">
+                        <div class="topic">
+                            <p><i class="far fa-building"></i> ส่วนที่ 1 : ข้อมูลบริษัทห้างร้าน </p>
+                            <div class="line"></div>
                         </div>
-                    </div><br>
-                    <div class="form-group">
-                        <label for="uploadimage">อัพโหลดรูป</label>
-                        <input type="file" class="form-control-file"  name="image">
-                    </div>  
-                    <div class="form-select">
-                    <label for="selectTypejob">ประเภทงานที่ต้องการรับสมัคร</label>
-                        <select class="form-control" name="jobtype" required>
-                            <option value="<%= job.jobtype %>"><%= job.jobtype %></option>
+                        <input type="hidden" name="username" value="<%= currentUser.username %>">
+                        <div class="form-row">
+                            <div class="form-group   col-xs-8 col-sm-8 col-md-8 col-lg-5">
+                                <label id="head" for="uploadimage">อัพโหลดรูป</label>
+                                <input type="file" class="form-control-file"  name="image">
+                            </div>
+                            <div class="col-xs-6 col-sm-12 col-md-6 col-lg-7">
+                                <label id="head" for="inputname">ชื่อบริษัท/ห้างร้าน</label>
+                                <input type="text" class="form-control" name="companyname" value="<%= job.companyname%>" required>
+                            </div>
+                        </div>
+                        <div class="topic">
+                            <p><i class="fas fa-address-card"></i>ส่วนที่ 2 : ข้อมูลงาน</p>
+                            <div class="line"></div> 
+                        </div>
+                        <div class="form-select">
+                           <label id="head" for="selectTypejob">ประเภทงานที่ต้องการรับสมัคร</label>
+                           <select class="form-control" name="jobtype" required>
+                            <option value="<%= job.jobtype%> " ><%= job.jobtype%></option>
                             <option value="งานบ้าน">งานบ้าน</option>
                             <option value="งานครัว">งานครัว</option>
                             <option value="งานช่าง">งานช่าง</option>
@@ -165,99 +177,113 @@
                             <option value="งานถ่ายภาพ">งานถ่ายภาพ</option>
                             <option value="อื่น...">อื่น...</option>
                         </select><br>
-                    <label for="selectEmployment">ลักษณะการว่าจ้าง</label>
+                        <label id="head" for="selectEmployment">ลักษณะการว่าจ้าง</label>
                         <select class="form-control" name="employmenttype"required>
-                            <option value="<%= job.employmenttype %>"><%= job.employmenttype %></option>
+                            <option value="<%= job.employmenttype%>" ><%= job.employmenttype%></option>
                                 <option >Part time</option>
                                 <option >Full time</option>
                                 <option >Event</option>
-                                <option >ฝึกงาน</option> 
                         </select>
-                    </div><br>
-                    <div class="form-row">
+                        </div><br>
+                        <div class="form-row">
+                            <div class="form-group col-lg-6">
+                                <label id="head" for="inputposition">ตำแหน่งงาน</label>
+                                <input type="text" class="form-control" name="jobpos" value="<%= job.jobpos %>">
+                            </div>
+                            <div class=" form-group col-lg-6">
+                                <label id="head" for="selectTypejob">ค่าแรง</label>
+                                <select class="form-control" name="salary" required>
+                                    <option value="<%= job.salary %>"><%= job.salary %></option>
+                                    <option value="น้อยกว่า 10000 บาท"> น้อยกว่า 10000 บาท</option>
+                                    <option value="10000-20000 บาท"> 10000-20000 บาท</option>
+                                    <option value="20000-30000 บาท"> 20000-30000 บาท</option>
+                                    <option value="30000-40000 บาท"> 30000-40000 บาท</option>
+                                    <option value="40000-50000 บาท"> 40000-50000 บาท</option>
+                                    <option value="50000 บาทขึ้นไป"> 50000 บาทขึ้นไป</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <br>
+                                <label id="head" for="inputDate">ช่วงเวลาทำงาน</label>
+                              </div>
+                            <div class="form-group col-md-4">
+                                <label id="head" for="inputTime">ตั้งแต่</label>
+                                <input type="time" class="form-control" id="inputTime" name="starttime" value="<%= job.starttime %>" required/>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label id="head" for="inputTime">ถึง</label>
+                                <input type="time" class="form-control" id="inputTime" name="finishtime" value="<%= job.finishtime %>"required/>
+                            </div>
+                        </div>
                         <div class="form-group">
-                            <label for="inputposition">ตำแหน่งงาน</label>
-                            <input type="text" class="form-control" name="jobpos" value="<%= job.jobpos %>" placeholder="">
+                            <label id="head" for="inputQualifications">คุณสมบัติของผู้สมัครงาน</label>
+                            <textarea type="text" class="form-control" id="Textarea" rows="4" name="qualti" placeholder="พูดได้กี่ภาษา, พิมพ์ได้กี่คำต่อนาที เป็นต้น" required><%= job.qualti %></textarea>
                         </div>
-                        <div class="col-md-6 mb-5">
-                            <label for="selectTypejob">รายได้ที่คาดว่าจะได้รับ</label>
-                            <select class="form-control" name="salary" value="<%= job.salary %>"required>
-                                <!-- <option value="<%= job.employmenttype %>"><%= job.salary %></option> -->
-                                <option value="น้อยกว่า 10000 บาท"> น้อยกว่า 10000 บาท</option>
-                                <option value="10000-20000 บาท"> 10000-20000 บาท</option>
-                                <option value="20000-30000 บาท"> 20000-30000 บาท</option>
-                                <option value="30000-40000 บาท"> 30000-40000 บาท</option>
-                                <option value="40000-50000 บาท"> 40000-50000 บาท</option>
-                                <option value="50000 บาทขึ้นไป"> 50000 บาทขึ้นไป </option>
-                            </select>
+                        <div class="form-group">
+                            <label id="head" for="udloadResume">อัพโหลดเอกสารประกอบการสมัคร/เอกสารรายละเอียดเกณฑ์การรับสมัคร</label>
+                            <input type="file" class="form-control-file" id="fileapp" name="file" >
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputQualifications">คุณสมบัติของผู้สมัครงาน</label>
-                        <input type="text" class="form-control" name="qualti" value="<%= job.qualti %>" style="height:100px">
-                    </div>
-                    <div class="form-group">
-                        <label for="inputContact">ช่องทางการติดต่อบริษัท/ห้างร้าน</label>
-                        <input type="text" class="form-control" name="contact" value="<%= job.contact %>"placeholder="Facebook,Email,line,เบอร์โทรศัพท์" style="height:100px">
+                        <div class="topic">
+                            <p><i class="fas fa-phone-alt"></i>ส่วนที่ 3 : ข้อมูลการติดต่อ</p>
+                            <div class="line"></div>
+                        </div>
+                        <div class="form-group ">
+                            <label id="head" for="inputContact">ช่องทางการติดต่อบริษัท/ห้างร้าน</label>
+                            <textarea  type="text"  class="form-control" id="Textarea" rows="4" name="contact" placeholder="Facebook,Email,line,เบอร์โทรศัพท์"><%= job.contact %></textarea>
+                        </div>
+
+                        <div class="mapbody form-control">
+                            <div id="map"></div>
+                            <div id="searchplace">
+                                <label for=""> ค้นหาสถานที่</label>
+                              <input id ="search">
+                              <div id ="suggest"></div>
+                              
+                              <div id="result"></div>
+                            </div>
+                            <a class="btn btn-success btn-search" id="button" onclick="doSearch()">บันทึก</a>
+                        </div><br>
+                        <div>
+                            <label >สถานที่ตั้งบริษัท/ร้านตามแผนที่   : </label>
+                            <label id="locate"> </locate>
+                        </div>
+                                          
+                      
+                        <div>
+                            <input type="hidden"  id="lon" name="lon" value="<%= job.lon %>">
+                            <input type="hidden"  id="lat" name="lat" value="<%= job.lat %>">
+                            <input type="hidden"  id="country" name="country" value="<%= job.country %>">
+                            <input type="hidden"  id="district" name="district" value="<%= job.district %>">
+                            <input type="hidden"  id="subdistrict" name="subdistrict" value="<%= job.subdistrict %>">
+                            <input type="hidden"  id="province" name="province" value="<%= job.province %>">
+                            <input type="hidden"  id="postcode" name="postcode" value="<%= job.postcode %>">
+                            <input type="hidden"  id="aoi" name="aoi" value="<%= job.aoi %>">
+                        </div>   
+
                     </div>   
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <br>
-                            <label for="inputDate">เวลาทำงาน</label>
-                          </div>
-                        <div class="form-group col-md-4">
-                            <label for="inputTime">ตั้งแต่</label>
-                            <input type="time" class="form-control" id="inputTime" name="starttime" value="<%= job.starttime %>" required/>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="inputTime">ถึง</label>
-                            <input type="time" class="form-control" id="inputTime" name="finishtime" value="<%= job.finishtime %>" required/>
-                        </div>
-                </div>
-                    <div class="form-group">
-                        <label for="inputContact">ที่ตั้งบริษัท/ร้านค้า</label>
-                        <input type="text" class="form-control" name="location" value="<%= job.location %>" style="height:100px" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="udloadRerume">อัพโหลดเอกสารประกอบการสมัคร/เอกสารรายละเอียดเกณฑ์การรับสมัคร</label>
-                        <input type="file" class="form-control-file" id="uploadfile" name="file" value="<%= job.file %>">
-                    </div>     
-                    <div class="mapbody">
-                        <div id="map"></div>
-                        <div id="searchplace">
-                          <input id ="search">
-                          <div id ="suggest"></div>
-                          <a class="btn btn-primary mb-2" onclick="doSearch()"></a>
-                          <div id="result"></div>
-                        </div>
-                        </div>
-                    <div>
-                        <label  >สถานที่ตั้งบริษัท/ร้านตามแผนที่   :  </label>
-                        <label id="locate"> <%= job.country %> <%= job.district %> <%= job.subdistrict %> <%= job.province%> <%= job.postcode %> </locate>
-                            <a id="test"></a>
-                    </div>
-                    
-                    <div>
-                        <input type="hidden" id="lon" name = "lon" value="<%= job.lon %>">
-                        <input type="hidden" id="lat" name = "lat" value="<%= job.lat %>">   
-                        <input type="hidden"  id="country" name="country" value="<%= job.country %>">
-                        <input type="hidden"  id="district" name="district" value="<%= job.district %>">
-                        <input type="hidden"  id="subdistrict" name="subdistrict" value="<%= job.subdistrict %>">
-                        <input type="hidden"  id="province" name="province" value="<%= job.province %>">
-                        <input type="hidden"  id="postcode" name="postcode" value="<%= job.postcode %>">
-                        <input type="hidden"  id="aoi" name="aoi" value="<%= job.aoi %>">
-                    </div>  
-                    <div class="button">
-                        <button type="submit" class="btn btn-primary mb-2">SUBMIT</button>
-                        <a  href="/findworker/My_post/<%= job._id%>" type="reset" class="btn btn-danger"> Cancel </a>  
-                    </div>
-                    
-            </form>
+                
+            </div>
         </div>
-    </div>
-    </div>
-    </div>
-</div>
+        <div class="form-row ">
+                <div class="col mb-4">
+                    <button type="reset" class="btn btn-danger btn-delete col-lg-12"> ยกเลิก </button> 
+                </div>
+
+                <div class="col mb-4">
+                    <button type="submit" class="btn btn-primary btn-edit col-lg-12"> ยืนยัน </button> 
+                </div>
+        </div>
+        </form>
+    </div> 
+    <!-- <div class="wave-container">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#0099ff" 
+            fill-opacity="1" d="M0,128L48,144C96,160,192,192,288,181.3C384,171,480,117,576,96C672,75,768,85,864,106.7C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+        </svg>
+        </div> -->
+
+<%- include("../partials/footer")%>
 
 <style>
     html {
@@ -275,10 +301,15 @@
     }
     #map {
       height: 400px;
-      flex: 4;
+      flex: 5;
     }
     #searchplace{
-        flex : 2
+        flex : 4;
+    }
+
+    #button{
+        flex : 1;
+        height: 100%;
     }
 
     #result {
@@ -293,5 +324,4 @@
         padding: 4px;
         flex-direction: column;
     }
-    </style>
-<%- include("../partials/footer")%>
+</style>

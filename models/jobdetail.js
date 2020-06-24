@@ -26,6 +26,8 @@ let jobSchema = new mongoose.Schema({
     aoi              : String,
     country          : String,
     expiredate       : Date,
+    starttime        : String,
+    finishtime       : String,
     user : {
         id:{
             type: mongoose.Schema.Types.ObjectId,

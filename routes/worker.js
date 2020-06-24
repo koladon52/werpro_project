@@ -51,7 +51,7 @@ router.post("/resume", uploadtest.any() , middleware.isloggedIn ,middleware.stat
         
     
     var dateTime = new Date()
-    var expire = new Date(( dateTime.getTime() + 3600000 ));
+    var expire = new Date(( dateTime.getTime() + 30 * 86400000 ));
 
         let user           = {
             id : req.user._id,

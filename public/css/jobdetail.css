@@ -14,8 +14,8 @@
 }
 
 .row #subject{
-    width: 25%;
-    margin-right: 3%;
+    /* width: 25%;
+    margin-right: 3%; */
     text-transform: uppercase;
     font-weight: bold;
     text-align: left;
@@ -120,3 +120,49 @@ and (min-width : 1224px) {
     }
 } */
 
+#postdate, #editdate{
+    letter-spacing: 2px;
+    color: gray;
+    font-size: smaller;
+  }
+
+.company{
+    color: blue;
+  }
+  
+  .handshake{
+    color: black;
+  }
+  
+  .tasks{
+    color: red;
+  }
+  
+  .money{
+    color: #6ab165;
+  }
+  
+  .map{
+    color: red;
+  }
+  
+  .clock{
+    color: #F9A826;
+  }
+
+  .card{
+      color: #F9A826;
+  }
+
+  .file{
+      color: #00ace6;
+  }
+  .phone{
+      color: #996633
+      ;
+  }
+
+  .download{
+      font-size: larger;
+      font-weight: bold;
+  }

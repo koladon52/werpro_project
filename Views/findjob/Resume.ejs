@@ -27,7 +27,7 @@
                     <div class="form-row">
                         <div class="form-group col-xs-8 col-sm-8 col-md-8 col-lg-4">
                             <label for="uploadimage">อัพโหลดรูป</label>
-                            <input type="file" class="form-control-file"  name="image">
+                            <input type="file" class="form-control-file"  name="image" required>
                         </div>
                         <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4">
                             <label for="inputFirstname">ชื่อจริง</label>
@@ -45,7 +45,7 @@
                     <div class="form-select">
                         <label for="selectTypejob">ประเภทงานที่ต้องการสมัคร</label>
                             <select class="form-control" name="jobtype" required>
-                                <option value="">เลือกประเภทงาน</option>
+                                <option value=""></option>
                                 <option value="งานบ้าน">งานบ้าน</option>
                                 <option value="งานครัว">งานครัว</option>
                                 <option value="งานช่าง">งานช่าง</option>
@@ -94,12 +94,11 @@
                         <label for="selectTypejob">รายได้ที่คาดว่าจะได้รับ</label>
                             <select class="form-control" name="salary" required>
                                 <option></option>
-                                <option value="น้อยกว่า 10000 บาท"> น้อยกว่า 10000 บาท </option>
-                                <option value="10000-20000 บาท"> 10000-20000 บาท</option>
-                                <option value="20000-30000 บาท"> 20000-30000 บาท</option>
-                                <option value="30000-40000 บาท"> 30000-40000 บาท</option>
-                                <option value="40000-50000 บาท"> 40000-50000 บาท</option>
-                                <option value="50000 บาทขึ้นไป"> 50000 บาทขึ้นไป</option>
+                                <option value="น้อยกว่า 200 บาท/วัน"> น้อยกว่า 200 บาท/วัน</option>
+                                <option value="200-300 บาท/วัน"> 200-300 บาท/วัน</option>
+                                <option value="300-400 บาท/วัน"> 300-400 บาท/วัน</option>
+                                <option value="400-500 บาท/วัน"> 400-500 บาท/วัน</option>
+                                <option value="มากกว่า 500 บาท/วัน"> มากกว่า 500 บาท/วัน</option>
                             </select>
                     </div><br>
                     <div class="form-group">

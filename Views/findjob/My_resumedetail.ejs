@@ -63,10 +63,7 @@
                             <p><i class="fas fa-address-card"></i>ส่วนที่ 2 : ข้อมูลการสมัครงาน</p>
                             <div class="line"></div> 
                         </div>
-                        <!-- <div class="form-group">
-                              <label id="head" >รายละเอียด</label>  
-                                <textarea id="detail Textarea"><%= resume.description %><%= resume.description %><%= resume.description %><%= resume.description %><%= resume.description %></textarea>
-                        </div> -->
+
                         <div class="form-row">
                             <div class="group col-lg-4">
                                 <label id="head">ประเภทงานที่ต้องการสมัคร</lable>
@@ -75,40 +72,6 @@
                                 <p id="detail"><%= resume.jobtype %></p>
                             </div>
                         </div>
-                        <!-- <div class="form-select">
-                            <label for="selectTypejob">ประเภทงานที่ต้องการสมัคร</label>
-                                <select class="form-control" name="jobtype" required>
-                                    <option value="">เลือกประเภทงาน</option>
-                                    <option value="งานบ้าน">งานบ้าน</option>
-                                    <option value="งานครัว">งานครัว</option>
-                                    <option value="งานช่าง">งานช่าง</option>
-                                    <option value="งานพี่เลี้ยงเด็ก">งานพี่เลี้ยงเด็ก</option>
-                                    <option value="งานสอนหนังสือ">งานสอนหนังสือ</option>
-                                    <option value="งานขาย">งานขาย</option>
-                                    <option value="งานบริการลูกค้า">งานบริการลูกค้า</option>
-                                    <option value="งานคลังสินค้า">งานคลังสินค้า</option>
-                                    <option value="งานธุรการ">งานธุรการ</option>
-                                    <option value="งานแคชเชียร์">งานแคชเชียร์</option>
-                                    <option value="งานส่งสินค้า">งานส่งสินค้า</option>
-                                    <option value="งานขับรถ">งานขับรถ</option>
-                                    <option value="งานบัญชีและการเงิน">งานบัญชีและการเงิน</option>
-                                    <option value="งานจัดซื้อ">งานจัดซื้อ</option>
-                                    <option value="งานก่อสร้าง">งานก่อสร้าง</option>
-                                    <option value="งานทำความสะอาด">งานทำความสะอาด</option>
-                                    <option value="งานตัวแทนจำหน่าย">งานตัวแทนจำหน่าย</option>
-                                    <option value="งานบริการความงาม">งานบริการความงาม</option>
-                                    <option value="งานรักษาความปลอดภัย">งานรักษาความปลอดภัย</option>
-                                    <option value="งานถ่ายภาพ">งานถ่ายภาพ</option>
-                                    <option value="อื่น...">อื่น...</option>
-                                </select><br>
-                            <label for="selectEmployment">ลักษณะการว่าจ้าง</label>
-                                <select class="form-control" name="employmenttype" required>
-                                    <option></option>
-                                    <option value="Part time">Part time</option>
-                                    <option value="Event">Event</option>
-                                    <option value="ฝึกงาน">ฝึกงาน</option>
-                                </select>
-                            </div><br> -->
                             <div class="form-row">
                                 <div class="form-group col-lg-4">
                                     <label id="head">ลักษณะการว่าจ้าง</lable>
@@ -191,13 +154,13 @@
                     </form>
                 <div class="form-row ">
                     <form class="col mb-4" style="text-align: left;" action="/findjob/My_resume/<%= resume._id %>/edit?_method=DELETE" method="POST">
-                        <div>
-                            <button type="submit"class="btn btn-danger btn-delete col-lg-12">ลบทิ้ง</button> 
+                        <div class="left">
+                            <button type="submit"class="btn btn-danger col-lg-12 button-delete">ลบทิ้ง</button> 
                         </div>
                     </form>
                     <form class="col" style="text-align: left;" action="/findjob/My_resume/<%= resume._id %>/edit" method="GET">
-                        <div >
-                            <button type="submit" class="btn btn-primary btn-edit col-lg-12"> แก้ไขข้อมูล</button> 
+                        <div class="right">
+                            <button type="submit" class="btn btn-primary button-edit col-lg-12"> แก้ไขข้อมูล</button> 
                         </div>
                     </form>
                 </div>

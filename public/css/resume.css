@@ -205,3 +205,31 @@ p i{
     box-shadow:0 2px 0 #4ac97d;
     box-shadow: 0 2px 0 #90a18f;
 }
+
+.submit-button{
+    background: #6ab165;
+    box-shadow: 0 5px 0 #4f934b;
+    border-radius: 25px;
+    transition:all 0.2s ease-in-out 0s;
+    position: relative;
+    top:0;
+}
+
+.submit-button:hover{
+    top:3px;
+    box-shadow:0 2px 0 #4ac97d;
+    box-shadow: 0 2px 0 #90a18f;
+}
+
+.left .button-delete{
+    text-align: center; 
+    background: #f4524d;
+    box-shadow: 0 4px 0 #f11f18;
+    transition: all 0.2s ease-in-out 0s;
+    border-radius: 25px;
+}
+
+.left .button-delete:hover{
+    top:2px;
+    box-shadow: 0 2px 0 #f11f18;
+}

@@ -87,6 +87,7 @@
     box-shadow: 0 2px 0 #4f934b;
 }
 
+
 .submit-again {
     margin-bottom: 5%;  
 }
@@ -188,4 +189,19 @@ p i{
 .btn-edit:hover{
     top:2px;
     box-shadow:0 2px 0 #006394;
+}
+
+.btn-search{
+    background: #6ab165;
+    box-shadow: 0 5px 0 #4f934b;
+    border-radius: 25px;
+    transition:all 0.2s ease-in-out 0s;
+    position: relative;
+    top:0;
+}
+
+.btn-search:hover{
+    top:3px;
+    box-shadow:0 2px 0 #4ac97d;
+    box-shadow: 0 2px 0 #4f934b;
 }

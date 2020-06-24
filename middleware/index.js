@@ -1,5 +1,6 @@
  const Resume = require('../models/resume');
  const User   = require('../models/user');
+ const Jobdetail = require('../models/jobdetail')
 
 let middlewareObj = {};
 
@@ -35,7 +36,6 @@ middlewareObj.isloggedIn = function(req, res, next){
 middlewareObj.stateOperator = function(req, res, next){
     if(req.user.type === "operator"){
         return next();
-        
     }
     req.flash('error','คุณได้เข้าสู่ระบบในฐานะ worker ไม่สามารถเข้าใช้งานหน้า operator ได้');
     res.redirect('/');
@@ -46,6 +46,14 @@ middlewareObj.stateWorker = function(req, res, next){
         return next();
     }
     req.flash('error','คุณได้เข้าสู่ระบบในฐานะ operator ไม่สามารถเข้าใช้งานหน้า worker ได้'); 
+    res.redirect('/');   
+}
+
+middlewareObj.stateAdmin = function(req, res, next){
+    if(req.user.type === "admin"){
+        return next();
+    }
+    req.flash('error','นี่เป็น route เฉพาะสำหรับ admin เท่านั้นคุณไม่มีสิทธิ์เข้าใช้งาน'); 
     res.redirect('/');   
 }
 
@@ -227,4 +235,5 @@ middlewareObj.checkexpirejob = function(req, res , next){
     })
     return next();
 }
+
 module.exports = middlewareObj;

@@ -1,0 +1,118 @@
+<%- include("../partials/header")%>
+<head> 	
+    <link rel="stylesheet" type="text/css" href="/css/jobdetail.css"> 	
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> 
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="https://api.longdo.com/map/?key=e655c57b1010fe433aa7d6e1a0aeb9e2"></script>
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script>
+        var map;  
+        var search;
+        var suggest;
+        
+       function init() {
+           map = new longdo.Map({
+           placeholder: document.getElementById('map'),
+           ui: longdo.UiComponent.Mobile 
+         });
+         lon = document.getElementById('lon').value
+         lat = document.getElementById('lat').value
+         map.zoom(16, true);
+         map.location({ lon: lon, lat: lat }, true);
+         var marker = new longdo.Marker({ lon: lon, lat: lat });
+         map.Overlays.add(marker);
+        }
+     </script>
+     
+</head> 
+<div class="container col-xs-12 col-sm-11 col-md-10 col-lg-9">
+    <div class="row md-6"></div>
+    
+    <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12 block">
+        <h1 class="mt-4"><%= job.companyname %></h1>
+        
+        <span class="lead">
+          by
+          <a href="#"></a>
+        </span>
+        <span>Posted on <%= job.postdate%></span>
+        <hr>
+        <center><img src="/jobimage/<%= job.image %>" class="img-fluid" style="width: 700px; height: 480px; object-fit: cover;" align="center"></center>
+        <hr>
+        <div class="row col-lg-12 justify-content-between mt-4">
+            <div class="col-lg-5">
+                <p id="subject"><i class="far fa-handshake handshake"></i> ประเภทสัญญาจ้าง</p>
+            </div>
+            <div class="col-lg-7">
+                <p> <%= job.employmenttype %></p>
+            </div>
+        </div>
+        <div class="row col-lg-12 justify-content-between mt-4">
+            <div class="col-lg-5">
+                <p id="subject"><i class="fas fa-tasks tasks"></i> ประเภทงานที่ต้องการ</p>
+            </div>
+            <div class="col-lg-7">
+                <p> <%= job.jobtype %></p>
+            </div>
+        </div>
+        <div class="row col-lg-12 justify-content-between mt-4">
+            <div class="col-lg-5">
+                <p id="subject"><i class="fas fa-id-card-alt card"></i> ตำแหน่งงาน</p>
+            </div>
+            <div class="col-lg-7">
+                <p> <%= job.jobpos%></p>
+            </div>
+        </div>
+        <div class="row col-lg-12 justify-content-between mt-4">
+            <div class="col-lg-5">
+                <p id="subject"><i class="far fa-money-bill-alt money"></i> ผลตอบแทน</p>
+            </div>
+            <div class="col-lg-7">
+                <p> <%= job.salary%></p>
+            </div>
+        </div>
+        <div class="row col-lg-12 justify-content-between mt-4">
+            <div class="col-lg-12">
+                <p id="subject2"><i class="fas fa-file-alt file"></i> รายละเอียด</p>
+            </div>
+            <div class="col-lg-12">
+                <p id="detail"> <%= job.qualti %></p>
+            </div>
+        </div>
+        <div class="row col-lg-12 justify-content-between mt-4">
+            <div class="col-lg-12">
+                <p id="subject2"><i class="fas fa-phone-alt phone"></i> ช่องทางการติดต่อ</p>
+            </div>
+            <div class="col-lg-12">
+                <p> <%= job.contact%></p>
+            </div>
+        </div>
+        <div class="row col-lg-12 justify-content-between "> 
+            <div class="col-lg-12">
+                <p id="subject"><i class="fas fa-map-marker-alt map"></i> สถานที่ตั้งบริษัท/ร้านตามแผนที่  : <%= job.country %> <%= job.district %> <%= job.subdistrict %> <%= job.province%> <%= job.postcode %></p>
+            </div>
+        </div>
+
+        <div class="mapbody" align="center">
+            <div id="map"></div>
+        </div>
+       
+        <input type="hidden" id="lon" value="<%= job.lon %>">
+        <input type="hidden" id="lat" value="<%= job.lat %>">
+        <div class="download_like row col-lg-12">
+            <div class="download ">
+                <a href="/jobapplication/<%= job.file %>" download align="left"><i class="fas fa-file-download "></i> ดาวน์โหลดเอกสาร</a>
+            </div>
+
+            <form class="col mb-4" style="text-align: left;" action="/admin/projects/checkjob/<%= job._id %>?_method=DELETE" method="POST">
+                <div>
+                    <button type="submit"class="btn btn-danger btn-delete col-lg-12">ลบทิ้ง</button> 
+                </div>
+            </form>
+            
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

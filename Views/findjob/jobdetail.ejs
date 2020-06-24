@@ -24,8 +24,7 @@
          map.Overlays.add(marker);
         }
      </script>
-     <script>         
-     </script>
+     
 </head> 
 
 <!-- <div class="container" style="margin-top: 10%; margin-bottom: 10%;">
@@ -80,7 +79,7 @@
     </div>
     <div class="col-lg-12 col-md-11 col-sm-11 col-xs-12 block">
        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <h1 class="mt-4"><%= job.companyname %></h1>
+        <h1 class=""><%= job.companyname %></h1>
         
         <span>โพสต์เมื่อ<%= job.postdate%></span>
         <hr>
@@ -134,22 +133,16 @@
                     <p> <%= job.contact%></p>
                 </div>
             </div>
-            <div class="row col-lg-12 justify-content-between mt-4">
+            <div class="row col-lg-12 justify-content-between mt-4"> 
                 <div class="col-lg-12">
-                    <p id="subject2"><i class="fas fa-map-marker-alt map"></i> ที่อยู่เพิ่มเติมนอกเหนือจากแผนที่</p>
-                </div>
-                <div class="col-lg-12">
-                    <p > <%= job.location %></p>
+                    <p id="subject"><i class="fas fa-map-marker-alt map"></i> สถานที่ตั้งบริษัท/ร้านตามแผนที่  : <%= job.country %> <%= job.district %> <%= job.subdistrict %> <%= job.province%> <%= job.postcode %></p>
+            
                 </div>
             </div>
         <div class="mapbody" align="center">
             <div id="map"></div>
         </div>
-        <div>
-            <label id="subject">สถานที่ตั้งบริษัท/ร้านตามแผนที่  : <%= job.country %> <%= job.district %> <%= job.subdistrict %> <%= job.province%> <%= job.postcode %></label>
-            <p id="locate"> </p>
-                <a id="test"></a>
-        </div>
+        
         <input type="hidden" id="lon" value="<%= job.lon %>">
         <input type="hidden" id="lat" value="<%= job.lat %>">
         <div class="download col-lg-12 mb-">

@@ -26,15 +26,15 @@
                     <input type="hidden" name="username" value="<%= currentUser.username %>">
                     <div class="form-row">
                         <div class="form-group col-xs-8 col-sm-8 col-md-8 col-lg-4">
-                            <label for="uploadimage">อัพโหลดรูป</label>
+                            <label for="uploadimage">อัพโหลดรูป*</label>
                             <input type="file" class="form-control-file"  name="image" required>
                         </div>
                         <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4">
-                            <label for="inputFirstname">ชื่อจริง</label>
+                            <label for="inputFirstname">ชื่อจริง*</label>
                             <input type="text" class="form-control"  name="firstname" value="<%= currentUser.firstname %>" required>
                         </div>
                         <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4">
-                            <label for="inputLastname">นามสกุล</label>
+                            <label for="inputLastname">นามสกุล*</label>
                             <input type="text" class="form-control"  name="lastname"value="<%= currentUser.lastname %>"required>
                         </div>
                     </div>
@@ -43,7 +43,7 @@
                         <div class="line"></div> 
                     </div>
                     <div class="form-select">
-                        <label for="selectTypejob">ประเภทงานที่ต้องการสมัคร</label>
+                        <label for="selectTypejob">ประเภทงานที่ต้องการสมัคร*</label>
                             <select class="form-control" name="jobtype" required>
                                 <option value=""></option>
                                 <option value="งานบ้าน">งานบ้าน</option>
@@ -68,7 +68,7 @@
                                 <option value="งานถ่ายภาพ">งานถ่ายภาพ</option>
                                 <option value="อื่น...">อื่น...</option>
                             </select><br>
-                        <label for="selectEmployment">ลักษณะการว่าจ้าง</label>
+                        <label for="selectEmployment">ลักษณะการว่าจ้าง*</label>
                             <select class="form-control" name="employmenttype" required>
                                 <option></option>
                                 <option value="Part time">Part time</option>
@@ -82,16 +82,16 @@
                                 <label for="inputDate">ช่วงเวลาที่สะดวกทำงาน</label>
                               </div>
                             <div class="form-group col-md-4">
-                                <label for="inputTime">ตั้งแต่</label>
+                                <label for="inputTime">ตั้งแต่*</label>
                                 <input type="time" class="form-control" id="inputTime" name="starttime" required/>
                             </div>
                             <div class="form-group col-md-4">
-                                <label for="inputTime">ถึง</label>
+                                <label for="inputTime">ถึง*</label>
                                 <input type="time" class="form-control" id="inputTime" name="finishtime" required/>
                             </div>
                     </div>
                     <div class="form-select">
-                        <label for="selectTypejob">รายได้ที่คาดว่าจะได้รับ</label>
+                        <label for="selectTypejob">รายได้ที่คาดว่าจะได้รับ*</label>
                             <select class="form-control" name="salary" required>
                                 <option></option>
                                 <option value="น้อยกว่า 200 บาท/วัน"> น้อยกว่า 200 บาท/วัน</option>
@@ -102,12 +102,12 @@
                             </select>
                     </div><br>
                     <div class="form-group">
-                        <label for="inputAbout">ข้อมูลเพิ่มเติมเกี่ยวกับผู้สมัครงาน</label>
-                        <textarea class="form-control" id="Textarea" rows="4" name="desc" placeholder="พูดได้กี่ภาษา, พิมพ์ได้กี่คำต่อนาที เป็นต้น"></textarea>
+                        <label for="inputAbout">ข้อมูลเพิ่มเติมเกี่ยวกับผู้สมัครงาน*</label>
+                        <textarea class="form-control" id="Textarea" rows="4" name="desc" placeholder="พูดได้กี่ภาษา, พิมพ์ได้กี่คำต่อนาที เป็นต้น" required></textarea >
                     </div>
                     <div class="form-group">
                         <label for="udloadResume">อัพโหลดเรซูเม่</label>
-                        <input type="file" class="form-control-file" id="uploadResume" name="file" required>
+                        <input type="file" class="form-control-file" id="uploadResume" name="file">
                     </div>
                     <div class="topic">
                         <p><i class="fas fa-phone-alt"></i>ส่วนที่ 3 : ข้อมูลการติดต่อ</p>
@@ -118,8 +118,8 @@
                         <textarea class="form-control" id="Textarea" rows="4" name="desc" placeholder="หมายเลขโทรศัพท์, อีเมล หรืออื่นๆที่สามารถใช้ติดต่อสื่อสารกับผู้สมัครงานได้โดยตรง"></textarea>
                     </div>  -->
                     <div class="form-group ">
-                        <label for="inputContact">ช่องทางการติดต่อ</label>
-                        <textarea class="form-control" style="width: 70%;" id="Textarea" rows="4" name="contact" placeholder="หมายเลขโทรศัพท์, อีเมล หรืออื่นๆที่สามารถใช้ติดต่อสื่อสารกับผู้สมัครงานได้โดยตรง"></textarea>
+                        <label for="inputContact">ช่องทางการติดต่อ*</label>
+                        <textarea class="form-control" style="width: 70%;" id="Textarea" rows="4" name="contact" placeholder="หมายเลขโทรศัพท์, อีเมล หรืออื่นๆที่สามารถใช้ติดต่อสื่อสารกับผู้สมัครงานได้โดยตรง" required></textarea>
                     </div>
                     <div class="topic">
                         <p><i class="fas fa-tasks"></i>ส่วนที่ 4 : </p>

@@ -1,4 +1,3 @@
-const user = require('../models/user');
 
 const express = require('express'),
       router = express.Router();
@@ -249,6 +248,23 @@ router.delete("/My_resume/:id/edit",middleware.isloggedIn ,middleware.stateWorke
                 founduser.resumes.pull(foundresume);
                 founduser.save();
                 console.log("remove resume id from user")
+            })
+            User.find({favouriteresume : foundresume._id}, function(err , currentuser){
+                if(err){
+                    console.log(err)
+                } else {
+                console.log(currentuser)
+                for(let j = 0 ; j < currentuser.length ; j++){
+                    for(let k = 0 ; k < currentuser[j].favouriteresume.length ; k++){
+                        if(currentuser[j].favouriteresume[k].equals(foundresume._id)){
+                            currentuser[j].favouriteresume.pull(foundresume._id);
+                            currentuser[j].save();
+                            console.log('removed from your favourite resume');
+                        }
+                    }
+                
+                 }
+                }
             })
         }
         console.log("deleted complete")

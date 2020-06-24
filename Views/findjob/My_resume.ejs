@@ -5,13 +5,6 @@
 </head>
 
 <div class="container col-lg-8 col-md-10 col-sm-10 col-xs-12">
-    <!-- <div class="col-lg-12 row">
-      <div class="left col-lg-6">
-      </div>
-        <div class="right col-lg-6">
-          <img clss="" src="../../images/bg-resume5.svg" alt=""width="350" height="350">
-        </div>
-    </div> -->
   <% MyResume.resumes.forEach(function(resume){ %>
     <div class="">
      <h1> <i class="far fa-file"></i>ใบสมัครงานของฉัน</h1>
@@ -25,23 +18,23 @@
       </div>
       <div class="col-md-7 info">
         <div class="row">
-          <h5>ชื่อ-สกุล</h5>
+          <h5><i class="fas fa-user-circle"></i>ชื่อ-สกุล</h5>
           <p><%= resume.firstname %> <%= resume.lastname%></p>
         </div>
           <div class="row">
-             <h5>ประเภทการจ้างงาน</h5>
+             <h5><i class="far fa-handshake handshake"></i>ประเภทการจ้างงาน</h5>
              <p><%= resume.employmenttype %></p>
           </div>
            <div class="row">
-             <h5>ประเภทสัญญาจ้าง</h5>
+             <h5><i class="fas fa-tasks tasks"></i>ประเภทงาน</h5>
              <p><%= resume.jobtype %></p>
            </div>
             <div class="row">
-              <h5>เวลาที่สะดวกทำงาน  </h5>
+              <h5><i class="fas fa-clock clock"> </i>เวลาที่สะดวกทำงาน  </h5>
               <p><%= resume.starttime %> - <%= resume.finishtime %> น.</p>
             </div>
             <div class="row">
-              <h5>วันที่แก้ไขล่าสุด</h5>
+              <h5><i class="fas fa-hourglass-half "></i>วันที่แก้ไขล่าสุด</h5>
               <p><%= resume.editdate%></p>
             </div>
             <div class="mb-3" align="right">

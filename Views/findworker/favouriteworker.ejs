@@ -10,14 +10,17 @@
 </head>
 
 <div class="container col-xs-12 col-sm-12 col-md-11 col-lg-8">
+  <% if(favouriteworker.favouriteresume.length == "0"){ %>
+    <br><br>
+    <h1><center>ไม่พบงานที่ตรงกัน</center></h1>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <% } else { %>
+      <h1><center>พบงานที่ตรงกัน <%= favouriteworker.favouriteresume.length %></center></h1>
+    <%}%>
   <div class="list col-lg-12 col-md-12 col-sm-12 align-self-center">
   <h1 class="m-4">
     </h1>
-    <% if(favouriteworker.favouriteresume.length == "0"){ %>
-      <h1><center>ไม่พบงานที่ตรงกัน</center></h1>
-      <% } else { %>
-        <h1><center>พบงานที่ตรงกัน <%= favouriteworker.favouriteresume.length %></center></h1>
-      <%}%>
+    
 <% favouriteworker.favouriteresume.forEach(function(resume){ %>
 <!-- <div class="row">
     <div class="col-md-7">

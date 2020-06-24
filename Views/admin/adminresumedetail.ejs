@@ -1,55 +1,20 @@
 <%- include("../partials/header")%>
 <head> 	
     <link rel="stylesheet" type="text/css" href="css/footer.css">
-    <link rel="stylesheet" type="text/css" href="../../css/jobdetail.css"> 	
+    <link rel="stylesheet" type="text/css" href="/css/jobdetail.css"> 	
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> 
 </head>
-
-<!-- <div class="container" style="margin-top: 10%; margin-bottom: 10%;">
-    <div class="jumbotron">
-        <div class="like" >
-            <% if(favouriteThisResume == true){ %>
-                <div class="fdresume fas fa-heart fa-2x" id="fdresume" data="<%= resume._id %>" >
-
-                </div>
-            <% } else if(favouriteThisResume == false) {%>
-                <div class="fresume far fa-heart fa-2x" id="fresume" data="<%= resume._id %>" >
-                </div>
-            <% } %> 
-        </div>
-        <img src='/resumeimage/<%= resume.image %>' class="img-fluid">
-        <p>ชื่อ : <%= resume.firstname %> นามสกุล : <%= resume.lastname %></p>
-        <p>รายละเอียด : <%= resume.description %></p>
-        <P>ประเภทสัญญาจ้าง  : <%= resume.employmenttype %></p>
-        <p>ประเภทงานที่สนใจ  : <%= resume.jobtype %></P>
-        <h5>รายได้ที่คาดว่าจะได้รับ  : <%= resume.salary %></h5>
-        <p>ช่วงเวลาที่สะดวกทำงาน  : <%= resume.starttime %> - <%= resume.finishtime %> น. </p>
-        <P>ช่องทางติดต่อ : <%= resume.contact %></P>
-        <p>วันเวลาที่แก้ไขล่าสุด : <%= resume.editdate %></p>
-        <p>วันที่โพสต์ : <%= resume.postdate%></p>
-        <a href="/resume/<%= resume.file %>" download>Download Resume</a>
-    </div>
-</div> -->
-<div class="container col-xs-12 col-sm-11 col-md-10 col-lg-8">
+<div class="container col-xs-12 col-sm-11 col-md-10 col-lg-10">
     <div class="row md-6"></div>
     <div class="like col-lg-12 col-md-12 col-sm-12 col-xs-12" align="right" >
-        <% if(favouriteThisResume == true){ %>
-            <div class="fdresume fas fa-heart fa-2x" id="fdresume" data="<%= resume._id %>" >
-
-            </div>
-        <% } else if(favouriteThisResume == false) {%>
-            <div class="fresume far fa-heart fa-2x" id="fresume" data="<%= resume._id %>" >
-            </div>
-        <% } %> 
+        
     </div>
     <div class="col-lg-12 col-md-11 col-sm-11 col-xs-12 block">
        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="col-lg-12">
                 <p id="postdate">โพสต์เมื่อ <%= resume.postdate%></p>
             </div>
-            <!-- <div class="col-lg-12">
-                <p id="editdate">แก้ไขเมื่อ <%= resume.editdate %></p>
-            </div> -->
+            
         <hr>
         <center><img src='/resumeimage/<%= resume.image %>' class="img-thumbnail" style="width: 700px; height: 480px; object-fit: cover;" align="center"></center>
         <hr>
@@ -82,9 +47,9 @@
                     <p id="subject"><i class="fas fa-id-card-alt card"></i> ช่วงเวลาที่สะดวกทำงาน</p>
                 </div>
                 <div class="col-lg-7">
-                    <%= resume.starttime %> ถึง <%= resume.finishtime %> น.
+                    <%= resume.starttime %> น.  ถึง  <%= resume.finishtime %> น.
                 </div>
-                
+               
         </div>
         <div class="row col-lg-12 justify-content-between mt-4">
                 <div class="col-lg-5">
@@ -99,7 +64,7 @@
                     <p id="subject2"><i class="fas fa-file-alt file"></i> รายละเอียด</p>
                 </div>
                 <div class="col-lg-12">
-                    <p id="detail"> <%= resume.description %></p>
+                    <p class="detail text-break"> <%= resume.description %></p>
                 </div>
         </div>
         <div class="row col-lg-12 justify-content-between mt-4">
@@ -107,13 +72,22 @@
                     <p id="subject2"><i class="fas fa-phone-alt phone"></i> ช่องทางการติดต่อ</p>
                 </div>
                 <div class="col-lg-12">
-                    <p> <%= resume.contact %></p>
+                    <p class="detail text-break"> <%= resume.contact %></p>
                 </div>
         </div>
-        <div class="download col-lg-12 mb-4" align="left">
-            <a href="/resume/<%= resume.file %>" download ><i class="fas fa-file-download download"></i> ดาวน์โหลดเรซูเม่</a><br><br>
+        <div class="download_like row col-lg-12">
+            <div class="download ">
+                <a href="/resume/<%= resume.file %>" download align="left"><i class="fas fa-file-download "></i> ดาวน์โหลดเอกสาร</a>
+            </div>
+
+            <form class="col mb-4" style="text-align: left;" action="/admin/projects/checkresume/<%= resume._id %>?_method=DELETE" method="POST">
+                <div>
+                    <button type="submit"class="btn btn-danger btn-delete col-lg-12">ลบทิ้ง</button> 
+                </div>
+            </form>
+            
         </div>
+        
       </div>
     </div>
 </div>
-<%- include("../partials/footer")%>

@@ -1,0 +1,43 @@
+<%- include("../partials/header")%>
+<div class="row col-lg-12">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-10" >
+        <center>
+        <h1 align="center"> joblist </h1>
+        
+        <table class="table table-striped table-dark">
+            <thead>
+              <tr>
+                <th scope="col">เลขระบุตัวตน</th>
+                <th scope="col">ชื่อบริษัท</th>
+                <th scope="col">ชนิดการจ้าง</th>
+                <th scope="col">จังหวัด</th>
+                <th scope="col">ประเภทงาน</th>
+                <th scope="col">ตำแน่งงาน</th>
+                <th scope="col">ข้อมูลเพิ่มเติม/จัดการ</th>
+              </tr>
+            </thead>
+            
+            <tbody>
+              <% job.forEach(function(job){ %>
+              <tr>
+                <td> <%= job._id %></td>
+                <td> <%= job.companyname %></td>
+                <td> <%= job.employmenttype %></td>
+                <td> <%= job.province %></td>
+                <td> <%= job.jobtype %></td>
+                <td> <%= job.jobpos %></td>
+                <td>
+                    <a action="GET" class="btn btn-primary btn-readmore" href="/admin/projects/checkjob/<%= job._id %>" > ตรวจสอบเพิ่มเติม </a>
+                </td>
+              </tr>
+              
+              <% }) %>
+            </tbody>
+
+          </table>
+        </center>
+    </div>
+    <div class="col-lg-1"></div>
+
+</div>

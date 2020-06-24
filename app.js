@@ -8,7 +8,6 @@ const express = require("express"),
       methodOverride = require('method-override'),
       User = require('./models/user'),
       indexRoutes = require('./routes/index'),
-      userRoutes  = require('./routes/user'),
       workerRoute = require('./routes/worker'),
       operatorRoute = require('./routes/operator'),
       adminRoute    = require('./routes/admin')

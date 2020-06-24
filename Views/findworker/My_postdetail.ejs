@@ -120,20 +120,16 @@
                 <p id="subject2">ช่องทางการติดต่อ</p>
                 <p> <%= job.contact%></p>
             </div>
-            <div class="row col-lg-12">
-                <img src="../../images/map.svg" alt="">
-                <p id="subject2">ที่อยู่เพิ่มเติมนอกเหนือจากแผนที่</p>
-                <p > <%= job.location %></p>
+            
+            <div>
+                <label id="subject2">สถานที่ตั้งบริษัท/ร้านตามแผนที่  : <%= job.country %> <%= job.district %> <%= job.subdistrict %> <%= job.province%> <%= job.postcode %></label>
+                <p id="locate"> </p>
+                    <a id="test"></a>
             </div>
-
         <div class="mapbody" align="center">
             <div id="map"></div>
         </div>
-        <div>
-            <label id="subject2">สถานที่ตั้งบริษัท/ร้านตามแผนที่  : <%= job.country %> <%= job.district %> <%= job.subdistrict %> <%= job.province%> <%= job.postcode %></label>
-            <p id="locate"> </p>
-                <a id="test"></a>
-        </div>
+        
         <input type="hidden" id="lon" value="<%= job.lon %>">
         <input type="hidden" id="lat" value="<%= job.lat %>">
         <div class="download_like row col-lg-12">

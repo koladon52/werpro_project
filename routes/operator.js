@@ -193,6 +193,23 @@ router.delete("/My_post/:id/edit",middleware.isloggedIn , middleware.stateOperat
                 founduser.save();
                 console.log("remove job id from user")
             })
+            User.find({favouritejob : foundjob}, function(err , currentuser){
+                if(err){
+                    console.log(err)
+                } else {
+                console.log(currentuser)
+                for(let j = 0 ; j < currentuser.length ; j++){
+                    for(let k = 0 ; k < currentuser[j].favouritejob.length ; k++){
+                        if(currentuser[j].favouritejob[k].equals(foundjob)){
+                            currentuser[j].favouritejob.pull(foundjob);
+                            currentuser[j].save();
+                            console.log('removed from your favourite resume');
+                        }
+                    }
+                
+                 }
+                }
+            })
         }
         console.log("deleted complete")
     })

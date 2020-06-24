@@ -1,4 +1,3 @@
-const user = require('../models/user');
 
 const express = require('express'),
       router = express.Router();
@@ -51,7 +50,7 @@ router.post("/resume", uploadtest.any() , middleware.isloggedIn ,middleware.stat
         
     
     var dateTime = new Date()
-    var expire = new Date(( dateTime.getTime() + 3600000 ));
+    var expire = new Date(( dateTime.getTime() + 30 * 86400000  ));
 
         let user           = {
             id : req.user._id,
@@ -249,6 +248,23 @@ router.delete("/My_resume/:id/edit",middleware.isloggedIn ,middleware.stateWorke
                 founduser.resumes.pull(foundresume);
                 founduser.save();
                 console.log("remove resume id from user")
+            })
+            User.find({favouritejob : foundresume}, function(err , currentuser){
+                if(err){
+                    console.log(err)
+                } else {
+                console.log(currentuser)
+                for(let j = 0 ; j < currentuser.length ; j++){
+                    for(let k = 0 ; k < currentuser[j].favouritejob.length ; k++){
+                        if(currentuser[j].favouritejob[k].equals(foundresume)){
+                            currentuser[j].favouritejob.pull(foundresume);
+                            currentuser[j].save();
+                            console.log('removed from your favourite resume');
+                        }
+                    }
+                
+                 }
+                }
             })
         }
         console.log("deleted complete")

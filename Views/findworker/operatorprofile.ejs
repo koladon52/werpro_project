@@ -1,63 +1,5 @@
 <%- include("../partials/header")%>
 
-<!-- <div style="margin-left :10% ;margin-right: 10% ;margin-bottom:10%">
-    <div class="row justify-content-between" >
-        <div class="col-md-5 col-sm-12" style=" margin-top: 10%;" align="center">
-            <div class="jumbotron">
-                <img src='/images/<%=currentUser.img%>' class="img-fluid"> 
-            </div>
-        </div>   
-        <div class="col-md-2 col-sm-0" style=" margin-top: 10%;" align="center">
-        </div> 
-        <div class="col-md-5 col-sm-12" style="margin-top: 10%; " align="center">
-            <div class="jumbotron"  >
-                <h1 style="text-align: center;">Profile</h1><br>
-                     <form action="/findworker/profile/<%= currentUser._id %>/edit" method="GET">
-                        <div style="text-align: left;" class="form-group">
-                            <label for="name"> Username </label>
-                            <label for="name">: <%= currentUser.username %></label>
-                        </div>
-                        <div style="text-align: left;" class="form-group">
-                            <label for="name"> Email </label>
-                            <label for="name">: <%= currentUser.email %></label>
-                        </div>
-                        <div style="text-align: left;" class="form-group">
-                            <label for="name"> Type of user </label>
-                            <label for="name">: <%= currentUser.type %></label>
-                        </div>
-                        <div style="text-align: left;" class="form-group">
-                            <label for="name"> Firstname </label>
-                            <label for="name">: <%= currentUser.firstname %></label>
-                        </div>
-                        <div style="text-align: left;" class="form-group">
-                            <label for="name"> Lastname </label>
-                            <label for="name">: <%= currentUser.lastname %></label>
-                        </div>
-                        <div style="text-align: left;" class="form-group">
-                            <label for="name"> เบอร์โทรศัพท์สำหรับติดต่อ </label>
-                            <label for="name">: <%= currentUser.phone %></label>
-                        </div>
-                        <div style="text-align: left;" class="form-group">
-                            <label for="name"> ที่ตั้งบริษัท/สำนักงาน </label>
-                            <label for="name">: <%= currentUser.address %></label>
-                        </div>
-                        <div style="text-align: left;" class="form-group">
-                            <label for="name"> ประเภทธุรกิจ </label>
-                            <label for="name">: <%= currentUser.jobtype %></label>
-                        </div>
-                        <div style="text-align: left;" class="form-group">
-                            <label for="name"> รายละเอียดบริษัท </label>
-                            <label for="name">: <%= currentUser.aboutcompany %></label>
-                        </div>
-                        <div align="right">
-                            <button type="submit"  class="btn btn-primary">Edit profile</button> 
-                        </div>
-                     </form> 
-            </div>
-        </div>     
-    </div>    
-</div> -->
-
 <head>
     <link rel="stylesheet" href="/css/workerprofile.css">
 </head>
@@ -76,41 +18,49 @@
                     <div class="col-xs-8 col-sm-12 col-md-12 col-lg-10 ">
                         <div style="text-align: left;" class="form-row">
                           <label  class="left" for="name"><i class="fas fa-user-astronaut"></i>Username </label>
-                            <label class="right" for="name"><%= currentUser.username %></label>
+                            <label class="detail" for="name"><%= currentUser.username %></label>
                         </div>
                         <div style="text-align: left;" class="form-row">
                             <label class="left" for="name"><i class="fas fa-envelope"></i>Email </label>
-                            <label class="right" for="name"> <%= currentUser.email %></label>
+                            <label class="detail" for="name"> <%= currentUser.email %></label>
                         </div>
                         <div style="text-align: left;" class="form-row">
                             <label class="left" for="name"><i class="fas fa-swatchbook"></i>Type </label>
-                            <label class="right" for="name"> <%= currentUser.type %></label>
+                            <label class="detail" for="name"> <%= currentUser.type %></label>
                         </div>
                     </div>  
                     <hr class="col-xs-4"> 
                    <div class="col-xs-10 col-sm-12 col-md-12 col-lg-12">
                         <div class="form-row">
-                          <div class="col-xs-9 col-sm-12 col-md-12 col-lg-6">
-                              <label for="name">ชื่อ </label>
-                              <label class="form-control"  for="name" readonly ><%= currentUser.firstname %> </label>
-                          </div>
-                          <div class="col-xs-9 col-sm-12 col-md-12 col-lg-6">
-                              <label for="inputLastname">นามสกุล</label>
-                              <lable class="form-control"  readonly ><%= currentUser.lastname %> </label>
+                          <div class="col-xs-9 col-sm-12 col-md-12 col-lg-12">
+                              <label for="name">ชื่อบริษัท</label>
+                              <label class="form-control detail"  for="name" readonly ><%= currentUser.companyname %> </label>
                           </div>
                       </div>
                     <div class="form-row">
                        <div class="col-xs-9 col-sm-12 col-md-12 col-lg-12">
-                          <label for="name">หมายเลขโทรศัพท์ </label>
-                          <label class="form-control" for="name" readonly> <%= currentUser.phone %></label>
+                          <label for="name">หมายเลขโทรศัพท์</label>
+                          <label class="form-control detail " for="name" readonly> <%= currentUser.phone %></label>
                       </div>
                     </div>
                     <div class="form-row">
                       <div class="col-xs-9 col-sm-12 col-md-12 col-lg-12">
-                         <label for="name">ที่อยู่</label>
-                         <textarea readonly class="form-control" for="name" rows="4"><%= currentUser.address %></textarea>
+                         <label for="name">ที่อยู่บริษัท/ร้านค้า</label>
+                         <textarea readonly class="form-control detail" for="name" rows="4"><%= currentUser.address %></textarea>
                      </div>
                    </div>
+                   <div class="form-row">
+                    <div class="col-xs-9 col-sm-12 col-md-12 col-lg-12">
+                       <label for="name">ประเภทธุรกิจ</label>
+                       <label class="form-control detail" for="name" readonly> <%= currentUser.jobtype %></label>
+                   </div>
+                 </div>
+                 <div class="form-row">
+                    <div class="col-xs-9 col-sm-12 col-md-12 col-lg-12">
+                       <label for="name">รายละเอียดบริษัท</label>
+                       <textarea readonly class="form-control detail" for="name" rows="4"><%= currentUser.aboutcompany %></textarea>
+                   </div>
+                 </div>
                     <div class="row col-xs-9 col-sm-9 col-md-12 col-lg-12 ml-1 mb-4" style="align-content: center;"> 
                             <button type="submit" class="btn-edit btn btn-primary col-lg-12">แก้ไขข้อมูลส่วนตัว</button>
                     </div>

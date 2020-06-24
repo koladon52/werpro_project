@@ -54,10 +54,11 @@ middlewareObj.checkdataoperator = function(req , res , next){
         if(err){
             console.log(err);
         } else {
-            if(founduser.img == "" || founduser.firstname == "" || founduser.lastname == "" || founduser.phone == "" || founduser.address == "" || founduser.jobtype == "" || founduser.aboutcompany == "" ){
+            if(founduser.img == undefined || founduser.companyname == undefined  || founduser.phone == undefined || founduser.address == undefined || founduser.jobtype == undefined || founduser.aboutcompany == undefined ){
                 req.flash('error','please complete your profile');
                 res.redirect( '/findworker/profile/' + req.user._id );
             } else {
+                console.log('pass middleware');
                 return next();
             }
         }
@@ -69,7 +70,7 @@ middlewareObj.checkdataworker = function(req , res , next){
         if(err){
             console.log(err);
         } else {
-            if(founduser.img == "" || founduser.firstname == "" || founduser.lastname == "" || founduser.phone == "" || founduser.address == "" ){
+            if(founduser.img == undefined || founduser.firstname == undefined || founduser.lastname == undefined || founduser.phone == undefined || founduser.address == undefined ){
                 req.flash('error','please complete your profile');
                 res.redirect( '/findjob/profile/' + req.user._id );
             } else {

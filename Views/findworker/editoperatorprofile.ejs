@@ -1,55 +1,88 @@
 <%- include("../partials/header")%>
-    <!-- <div style="margin-left :10% ;margin-right: 10%">
-        <div class="row justify-content-between" >
-            <div class="col-md-5 col-sm-12" style=" margin-top: 10%;" align="center">
-                <div class="jumbotron">
+<head>
+    <link rel="stylesheet" href="/css/workerprofile.css">
+</head>
+<body>
+<div class="container col-xs-6 col-sm-10 col-md-10 col-lg-9">
+    
+    <form action="/findworker/profile/<%= currentUser._id %>/edit?_method=PUT" method="POST" enctype="multipart/form-data">
+    <div class="row" >
+        <div class="upload-img col-lg-4 col-md-12 col-sm-10" style=" margin-left: 5%;" align="center">
+            <div class="personal-img">
+                <img style="width: 300px; height: 300px; object-fit: cover;" src="/images/<%=currentUser.img%>" class="img-thumbnail">
+                <p>อัพโหลดรูปภาพโปรไฟล์</p>
+            </div>
+            <div class="input-img">
+                <input type="file" name="img" accept="image/*" value="<%= currentUser.img %>">  
+                <input type="hidden" name="oldimg" value="<%= currentUser.img %>">  
+                <input type="hidden" name="id" value="<%= currentUser._id %>" >
+            </div>
+            <!-- <p>** รูปเป็นส่วนประกอบสำคัญของใบสมัคร <br>
+            กรุณาเลือกรูปที่เห็นใบหน้าชัดเจน ไม่ใส่แว่น ไม่สวมหมวก **</p> -->
+        </div>   
+        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-4 ml-2 mr-2" style="margin-top: 5%;">
+                <h1>edit account <i class="far fa-edit"></i></h1>
+                <div class="line col-xs-8"></div>
+                    <div class="col-xs-8 col-sm-12 col-md-12 col-lg-10">
+                        <div style="text-align: left;" class="form-row">
+                          <label  class="left" for="name"><i class="fas fa-user-astronaut"></i>Username </label>
+                            <label class="right" for="name"> <%= currentUser.username %></label>
+                        </div>
+                        <div style="text-align: left;" class="form-row">
+                            <label class="left" for="name"><i class="fas fa-envelope"></i>Email </label>
+                            <label class="right" for="name"> <%= currentUser.email %></label>
+                        </div>
+                        <div style="text-align: left;" class="form-row">
+                            <label class="left" for="name"><i class="fas fa-swatchbook"></i>Type </label>
+                            <label class="right" for="name"> <%= currentUser.type %></label>
+                        </div>
+
+                    </div>
+                    <hr>
+                    <div class="col-xs-10 col-sm-12 col-md-12 col-lg-12">
+                        <div class="form-row">
+                        <div class="col-xs-9 col-sm-12 col-md-12 col-lg-12">
+                            <label for="name">ชื่อบริษัท/ร้านค้า </label>
+                            <input type="text" class="form-control" name="companyname" value="<%= currentUser.companyname %>" >
+                        </div>
+                    </div>
+                    <div class="form-row">
+                       <div class="col-xs-9 col-sm-12 col-md-12 col-lg-12">
+                          <label for="name">หมายเลขโทรศัพท์ </label>
+                          <input type="tel" class="form-control" name="phone" value="<%= currentUser.phone %>">
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col-xs-9 col-sm-12 col-md-12 col-lg-12">
+                         <label for="name">ที่อยู่บริษัท/ร้านค้า</label>
+                         <textarea input type="text" class="form-control" rows="4" name="address" ><%= currentUser.address %></textarea>
+                        </div>
+                   </div>
+                   <div class="form-row">
+                    <div class="col-xs-9 col-sm-12 col-md-12 col-lg-12">
+                       <label for="name">ประเภทธุรกิจ</label>
+                       <input class="form-control detail" for="name" name="jobtype" value="<%= currentUser.jobtype %>" > 
+                   </div>
+                 </div>
+                 <div class="form-row">
+                    <div class="col-xs-9 col-sm-12 col-md-12 col-lg-12">
+                       <label for="name">รายละเอียดบริษัท</label>
+                       <textarea  class="form-control detail" for="name" name="aboutcompany" rows="4"><%= currentUser.aboutcompany %></textarea>
+                   </div>
+                 </div>
+                <div class="row col-xs-9 col-sm-9 col-md-12 col-lg-12">    
+                    <div class="btn-left">
+                        <a  href="/findworker/profile/<%= currentUser.id %>" type="reset" class="btn-edit btn btn-danger col-xs-4 col-sm-8 col-md-8 col-lg-10">ยกเลิก</a> 
+                    </div>
+                    <div class="btn-right mb-4">
+                        <button  type="submit" class="btn-edit btn btn-success col-xs-4 col-sm-8 col-md-8 col-lg-10">ยืนยัน</button> 
+                    </div>
                 </div>
-            </div>   
-            <div class="col-md-2 col-sm-0" style=" margin-top: 10%;" align="center">
-            </div> 
-            <div class="col-md-5 col-sm-12" style="margin-top: 10%; " align="center">
-                <div class="jumbotron"  >
-                    <h1 style="text-align: center;">Profile</h1>
-                        <form action="/findworker/profile/<%= currentUser._id %>/edit?_method=PUT" method="POST" enctype="multipart/form-data">
-                            <input type="hidden" name="id" value="<%= currentUser._id %>" ></input>
-                            <div style="text-align: left;" class="form-group">
-                                <label for="name">First name</label>
-                                <input type="text" class="form-control" name="firstname" value="<%= currentUser.firstname %>" >
-                            </div>
-                            <div style="text-align: left;" class="form-group">
-                                <label for="name">Last name</label>
-                                <input type="text" class="form-control" name="lastname" value="<%= currentUser.lastname %>">
-                            </div>
-                            <div style="text-align: left;" class="form-group">
-                                <label for="name">Address</label>
-                                <input type="text" class="form-control" name="address" value="<%= currentUser.address %>">
-                            </div>
-                            <div style="text-align: left;" class="form-group">
-                                <label for="name">Tel number</label>
-                                <input type="text" class="form-control" name="phone" value="<%= currentUser.phone %>">
-                            </div> 
-                            <div style="text-align: left;" class="form-group">
-                                <label for="name"> ประเภทธุรกิจ </label>
-                                <input type="text" class="form-control"  name="jobtype" value="<%= currentUser.jobtype %>">
-                            </div>
-                            <div style="text-align: left;" class="form-group">
-                                <label for="name"> รายละเอียดบริษัท </label>
-                                <input type="text" class="form-control" name="aboutcompany" value="<%= currentUser.aboutcompany%>">
-                            </div>
-                              <br>
-                            <input type="file" name="img" accept="image/*" value="<%= currentUser.img %>">  
-                            <input type="hidden" name="oldimg" value="<%= currentUser.img %>">  
-                                <br>
-                            <div align="left">
-                                <button  type="submit" class="btn btn-primary">confirm</button> 
-                            </div>
-                            <br>
-                            <div align="left">
-                                <a  href="/findworker/profile/<%= currentUser.id %>" type="reset" class="btn btn-primary">cancel</a> 
-                            </div>
-                        </form>
-                </div>
-            </div>     
-        </div>    
-    </div> -->
+            </div>
+                    
+        </div>
+      </div>      
+    </form> 
+</div> 
+</body>
 <%- include("../partials/footer")%>

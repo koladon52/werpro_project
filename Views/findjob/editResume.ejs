@@ -74,9 +74,9 @@
                     <label for="selectEmployment">ลักษณะการว่าจ้าง</label>
                         <select class="form-control" name="employmenttype" required>
                             <option value="<%= resume.employmenttype %>" ><%= resume.employmenttype %></option>
-                                <option value="Part time">Part time</option>
-                                <option value="Full time">Full time</option>
-                                <option value="Event">Event</option>
+                            <option value="Part time">Part time</option>
+                            <option value="Event">Event</option>
+                            <option value="ฝึกงาน">ฝึกงาน</option>
                         </select>
                     </div><br>
                      <div class="form-row">
@@ -97,12 +97,11 @@
                         <label for="selectTypejob">รายได้ที่คาดว่าจะได้รับ</label>
                             <select class="form-control" name="salary" value="<%= resume.salary %>"required>
                                 <option value="<%= resume.salary %>" ><%= resume.salary %></option>
-                                <option value="น้อยกว่า 10000 บาท"> น้อยกว่า 10000 บาท</option>
-                                <option value="10000-20000 บาท"> 10000-20000 บาท</option>
-                                <option value="20000-30000 บาท"> 20000-30000 บาท</option>
-                                <option value="30000-40000 บาท"> 30000-40000 บาท</option>
-                                <option value="40000-50000 บาท"> 40000-50000 บาท</option>
-                                <option value="50000 บาทขึ้นไป"> 50000 บาทขึ้นไป </option>
+                                <option value="น้อยกว่า 200 บาท/วัน"> น้อยกว่า 200 บาท/วัน</option>
+                                <option value="200-300 บาท/วัน"> 200-300 บาท/วัน</option>
+                                <option value="300-400 บาท/วัน"> 300-400 บาท/วัน</option>
+                                <option value="400-500 บาท/วัน"> 400-500 บาท/วัน</option>
+                                <option value="มากกว่า 500 บาท/วัน"> มากกว่า 500 บาท/วัน</option>
                             </select>
                     </div><br>
                     <div class="form-group">

@@ -118,6 +118,7 @@
     </head>
 
     <div class="container col-xs-6 col-lg-7">
+
         <form style="text-align: left;" action="/findworker/My_post/<%= job._id %>/edit?_method=PUT" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="oldimage" value="<%= job.image%>">
         <input type="hidden" name="oldfile" value="<%= job.file%>">
@@ -180,9 +181,9 @@
                         <label id="head" for="selectEmployment">ลักษณะการว่าจ้าง</label>
                         <select class="form-control" name="employmenttype"required>
                             <option value="<%= job.employmenttype%>" ><%= job.employmenttype%></option>
-                                <option >Part time</option>
-                                <option >Full time</option>
-                                <option >Event</option>
+                            <option value="Part time">Part time</option>
+                            <option value="Event">Event</option>
+                            <option value="ฝึกงาน">ฝึกงาน</option>
                         </select>
                         </div><br>
                         <div class="form-row">
@@ -194,12 +195,11 @@
                                 <label id="head" for="selectTypejob">ค่าแรง</label>
                                 <select class="form-control" name="salary" required>
                                     <option value="<%= job.salary %>"><%= job.salary %></option>
-                                    <option value="น้อยกว่า 10000 บาท"> น้อยกว่า 10000 บาท</option>
-                                    <option value="10000-20000 บาท"> 10000-20000 บาท</option>
-                                    <option value="20000-30000 บาท"> 20000-30000 บาท</option>
-                                    <option value="30000-40000 บาท"> 30000-40000 บาท</option>
-                                    <option value="40000-50000 บาท"> 40000-50000 บาท</option>
-                                    <option value="50000 บาทขึ้นไป"> 50000 บาทขึ้นไป</option>
+                                    <option value="น้อยกว่า 200 บาท/วัน"> น้อยกว่า 200 บาท/วัน</option>
+                                    <option value="200-300 บาท/วัน"> 200-300 บาท/วัน</option>
+                                    <option value="300-400 บาท/วัน"> 300-400 บาท/วัน</option>
+                                    <option value="400-500 บาท/วัน"> 400-500 บาท/วัน</option>
+                                    <option value="มากกว่า 500 บาท/วัน"> มากกว่า 500 บาท/วัน</option>
                                 </select>
                             </div>
                         </div>
@@ -276,7 +276,7 @@
                 </div>
         </div>
         </form>
-    </div> 
+</div> 
     <!-- <div class="wave-container">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#0099ff" 
             fill-opacity="1" d="M0,128L48,144C96,160,192,192,288,181.3C384,171,480,117,576,96C672,75,768,85,864,106.7C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>

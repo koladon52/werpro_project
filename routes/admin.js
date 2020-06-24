@@ -14,7 +14,7 @@ router.get('/projects' , function(req, res , next){
     res.render("/");  
 });
 
-router.get('/projects/checkjob' , function(req, res , next){
+router.get('/projects/checkjob', middleware.isloggedIn , middleware.stateAdmin , function(req, res , next){
     Jobdetail.find({},function(err , job){
         if(err){
             console.log(err)
@@ -25,7 +25,7 @@ router.get('/projects/checkjob' , function(req, res , next){
 
 })
 
-router.get('/projects/checkresume' , function(req, res , next){
+router.get('/projects/checkresume', middleware.isloggedIn , middleware.stateAdmin , function(req, res , next){
     Resume.find({},function(err, resume){
         if(err){
             console.log(err);
@@ -35,7 +35,7 @@ router.get('/projects/checkresume' , function(req, res , next){
     })
 })
 
-router.get('/projects/checkjob/:id' , function(req, res , next){
+router.get('/projects/checkjob/:id', middleware.isloggedIn , middleware.stateAdmin , function(req, res , next){
     Jobdetail.findById(req.params.id,function(err , job){
         if(err){
             console.log(err)
@@ -46,7 +46,7 @@ router.get('/projects/checkjob/:id' , function(req, res , next){
 
 })
 
-router.get('/projects/checkresume/:id' , function(req, res , next){
+router.get('/projects/checkresume/:id', middleware.isloggedIn , middleware.stateAdmin , function(req, res , next){
     Resume.findById(req.params.id,function(err, resume){
         if(err){
             console.log(err);
@@ -56,7 +56,7 @@ router.get('/projects/checkresume/:id' , function(req, res , next){
     })
 })
 
-router.delete('/projects/checkjob/:id' , function(req, res , next){
+router.delete('/projects/checkjob/:id' , middleware.isloggedIn, middleware.stateAdmin , function(req, res , next){
     
     Jobdetail.findById(req.params.id, function(err, foundjob){
         if(err){
@@ -75,22 +75,23 @@ router.delete('/projects/checkjob/:id' , function(req, res , next){
                 }
             })
             User.findById(foundjob.user.id, function(err, founduser){
-                console.log(foundjob.user.id)
-                console.log()
                 founduser.jobs.pull(foundjob);
                 founduser.save();
                 console.log("remove job id from user")
             })
-            User.find({favouritejob : foundjob}, function(err , currentuser){
+            console.log(foundjob._id)
+            console.log(foundjob)
+            User.find({favouritejob : foundjob._id}, function(err , userFav){
                 if(err){
                     console.log(err)
                 } else {
-                console.log(currentuser)
-                for(let j = 0 ; j < currentuser.length ; j++){
-                    for(let k = 0 ; k < currentuser[j].favouritejob.length ; k++){
-                        if(currentuser[j].favouritejob[k].equals(foundjob)){
-                            currentuser[j].favouritejob.pull(foundjob);
-                            currentuser[j].save();
+                    // console.log(userFav);
+                for(let j = 0 ; j < userFav.length ; j++){
+                    for(let k = 0 ; k < userFav[j].favouritejob.length ; k++){
+                        if(userFav[j].favouritejob[k].equals(foundjob._id)){
+                            console.log(userFav[j].favouritejob[k])
+                            userFav[j].favouritejob.pull(foundjob._id);
+                            userFav[j].save();
                             console.log('removed from your favourite resume');
                         }
                     }
@@ -99,9 +100,8 @@ router.delete('/projects/checkjob/:id' , function(req, res , next){
                 }
             })
         }
-        console.log("deleted complete")
     })
-    Jobdetail.findByIdAndRemove(req.params.id, function(err){
+    Jobdetail.findByIdAndRemove(req.params.id , function(err){
         if(err){
             console.log(err);
         } else {
@@ -112,7 +112,7 @@ router.delete('/projects/checkjob/:id' , function(req, res , next){
 
 
 
-router.delete('/projects/checkresume/:id' , function(req, res , next){
+router.delete('/projects/checkresume/:id' , middleware.isloggedIn , middleware.stateAdmin , function(req, res , next){
 
     Resume.findById(req.params.id, function(err, foundresume){
         if(err){
@@ -130,20 +130,21 @@ router.delete('/projects/checkresume/:id' , function(req, res , next){
                     console.log(err);
                 }
             })
-            User.findById(foundresume.user._id , function(err, founduser){
+            User.findById(foundresume.user.id , function(err, founduser){
                 founduser.resumes.pull(foundresume);
                 founduser.save();
                 console.log("remove resume id from user")
             })
-            User.find({favouritejob : foundresume}, function(err , currentuser){
+            User.find({favouriteresume : foundresume._id}, function(err , currentuser){
                 if(err){
                     console.log(err)
                 } else {
                 console.log(currentuser)
+
                 for(let j = 0 ; j < currentuser.length ; j++){
-                    for(let k = 0 ; k < currentuser[j].favouritejob.length ; k++){
-                        if(currentuser[j].favouritejob[k].equals(foundresume)){
-                            currentuser[j].favouritejob.pull(foundresume);
+                    for(let k = 0 ; k < currentuser[j].favouriteresume.length ; k++){
+                        if(currentuser[j].favouriteresume[k].equals(foundresume._id)){
+                            currentuser[j].favouriteresume.pull(foundresume._id);
                             currentuser[j].save();
                             console.log('removed from your favourite resume');
                         }
@@ -152,7 +153,6 @@ router.delete('/projects/checkresume/:id' , function(req, res , next){
                  }
                 }
             })
-            console.log("deleted complete")
         }
         
     })
@@ -165,5 +165,11 @@ router.delete('/projects/checkresume/:id' , function(req, res , next){
         }
     });
 })
+
+router.get('/logout',middleware.isloggedIn ,function(req, res){
+    req.logout();
+    req.flash('success','Logout Successfully!');
+    res.redirect('/');
+});
 
 module.exports = router;

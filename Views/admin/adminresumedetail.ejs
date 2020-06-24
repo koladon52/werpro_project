@@ -1,1 +1,93 @@
 <%- include("../partials/header")%>
+<head> 	
+    <link rel="stylesheet" type="text/css" href="css/footer.css">
+    <link rel="stylesheet" type="text/css" href="/css/jobdetail.css"> 	
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> 
+</head>
+<div class="container col-xs-12 col-sm-11 col-md-10 col-lg-10">
+    <div class="row md-6"></div>
+    <div class="like col-lg-12 col-md-12 col-sm-12 col-xs-12" align="right" >
+        
+    </div>
+    <div class="col-lg-12 col-md-11 col-sm-11 col-xs-12 block">
+       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="col-lg-12">
+                <p id="postdate">โพสต์เมื่อ <%= resume.postdate%></p>
+            </div>
+            
+        <hr>
+        <center><img src='/resumeimage/<%= resume.image %>' class="img-thumbnail" style="width: 700px; height: 480px; object-fit: cover;" align="center"></center>
+        <hr>
+        <div class="row col-lg-12 justify-content-between mt-4">
+            <div class="col-lg-5">
+                <p id="subject"><i class="fas fa-user-circle"></i> ชื่อ-นามสกุล</p>
+            </div>
+            <div class="col-lg-7">
+                <p><%= resume.firstname %> <%= resume.lastname %></p>
+            </div>
+        </div>
+        <div class="row col-lg-12 justify-content-between mt-4">
+                <div class="col-lg-5">
+                    <p id="subject"><i class="far fa-handshake handshake"></i> ประเภทงานที่ต้องการสมัคร</p>
+                </div>
+                <div class="col-lg-7">
+                    <p> <%= resume.jobtype %></p>
+                </div>
+        </div>
+        <div class="row col-lg-12 justify-content-between mt-4">
+                <div class="col-lg-5">
+                    <p id="subject"><i class="fas fa-tasks tasks"></i> ลักษณะการว่าจ้าง</p>
+                </div>
+                <div class="col-lg-7">
+                    <p> <%= resume.employmenttype %></p>
+                </div>
+        </div>
+        <div class="row col-lg-12 justify-content-between mt-4">
+                <div class="col-lg-5">
+                    <p id="subject"><i class="fas fa-id-card-alt card"></i> ช่วงเวลาที่สะดวกทำงาน</p>
+                </div>
+                <div class="col-lg-7">
+                    <%= resume.starttime %> น.  ถึง  <%= resume.finishtime %> น.
+                </div>
+               
+        </div>
+        <div class="row col-lg-12 justify-content-between mt-4">
+                <div class="col-lg-5">
+                    <p id="subject"><i class="far fa-money-bill-alt money"></i> รายได้ที่คาดว่าจะได้รับ</p>
+                </div>
+                <div class="col-lg-7">
+                    <p> <%= resume.salary %></p>
+                </div>
+        </div>
+        <div class="row col-lg-12 justify-content-between mt-4">
+                <div class="col-lg-12">
+                    <p id="subject2"><i class="fas fa-file-alt file"></i> รายละเอียด</p>
+                </div>
+                <div class="col-lg-12">
+                    <p class="detail text-break"> <%= resume.description %></p>
+                </div>
+        </div>
+        <div class="row col-lg-12 justify-content-between mt-4">
+                <div class="col-lg-12">
+                    <p id="subject2"><i class="fas fa-phone-alt phone"></i> ช่องทางการติดต่อ</p>
+                </div>
+                <div class="col-lg-12">
+                    <p class="detail text-break"> <%= resume.contact %></p>
+                </div>
+        </div>
+        <div class="download_like row col-lg-12">
+            <div class="download ">
+                <a href="/resume/<%= resume.file %>" download align="left"><i class="fas fa-file-download "></i> ดาวน์โหลดเอกสาร</a>
+            </div>
+
+            <form class="col mb-4" style="text-align: left;" action="/admin/projects/checkresume/<%= resume._id %>?_method=DELETE" method="POST">
+                <div>
+                    <button type="submit"class="btn btn-danger btn-delete col-lg-12">ลบทิ้ง</button> 
+                </div>
+            </form>
+            
+        </div>
+        
+      </div>
+    </div>
+</div>

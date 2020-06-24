@@ -50,11 +50,7 @@ router.post("/resume", uploadtest.any() , middleware.isloggedIn ,middleware.stat
         
     
     var dateTime = new Date()
-<<<<<<< HEAD
-    var expire = new Date(( dateTime.getTime() + 30 * 86400000  ));
-=======
     var expire = new Date(( dateTime.getTime() + 30 * 86400000 ));
->>>>>>> 8bbda23ba805f80257acd4643c86a3c4ae0c0781
 
         let user           = {
             id : req.user._id,
@@ -253,15 +249,15 @@ router.delete("/My_resume/:id/edit",middleware.isloggedIn ,middleware.stateWorke
                 founduser.save();
                 console.log("remove resume id from user")
             })
-            User.find({favouritejob : foundresume}, function(err , currentuser){
+            User.find({favouriteresume : foundresume._id}, function(err , currentuser){
                 if(err){
                     console.log(err)
                 } else {
                 console.log(currentuser)
                 for(let j = 0 ; j < currentuser.length ; j++){
-                    for(let k = 0 ; k < currentuser[j].favouritejob.length ; k++){
-                        if(currentuser[j].favouritejob[k].equals(foundresume)){
-                            currentuser[j].favouritejob.pull(foundresume);
+                    for(let k = 0 ; k < currentuser[j].favouriteresume.length ; k++){
+                        if(currentuser[j].favouriteresume[k].equals(foundresume._id)){
+                            currentuser[j].favouriteresume.pull(foundresume._id);
                             currentuser[j].save();
                             console.log('removed from your favourite resume');
                         }

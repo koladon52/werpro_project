@@ -49,6 +49,14 @@ middlewareObj.stateWorker = function(req, res, next){
     res.redirect('/');   
 }
 
+middlewareObj.stateAdmin = function(req, res, next){
+    if(req.user.type === "admin"){
+        return next();
+    }
+    req.flash('error','นี่เป็น route เฉพาะสำหรับ admin เท่านั้นคุณไม่มีสิทธิ์เข้าใช้งาน'); 
+    res.redirect('/');   
+}
+
 middlewareObj.checkdataoperator = function(req , res , next){
     User.findById(req.user._id , function(err,founduser){
         if(err){

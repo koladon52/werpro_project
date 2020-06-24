@@ -9,53 +9,10 @@
   <link rel="stylesheet" href="/css/list.css">
 </head>
 
-<!-- <div class="container col-lg-6">
-  <% if(favouritejob.favouritejob.length == "0"){ %>
-    <h1><center>ไม่พบงานที่บันทึกไว้</center></h1>
-    <% } else { %>
-      <h1>LIKED <%= favouritejob.favouritejob.length %> งาน</h1>
-    <%}%>
-  <% favouritejob.favouritejob.forEach(function(jobliked){ %>
-    <div class="card mb-3">
-        <div class="card-body">
-            <div class="border-block">
-              <div class="row">
-                <div class="col-lg-4">
-                  <a href="#">
-                    <img style="width: 600px; height: 250px; object-fit: cover;" class="img-fluid rounded mb-3 mb-md-0" src="/jobimage/<%= jobliked.image %>" alt="">
-                  </a>
-                </div>
-                <div class="col-lg-8">
-                  <div class="row">
-                    <img src="../../images/shopper.svg" alt="" id="icon-list" class="col-lg-2">
-                    <p class="col-lg-8"><%= jobliked.companyname %></p>
-                  </div>
-                   <div class="row">
-                    <img src="../../images/deal.svg" alt="" id="icon-list" class="col-lg-2">
-                    <p class="col-lg-8"><%= jobliked.qualti %></p>
-                  </div>
-                  <div class="row">
-                    <img src="../../images/signature.svg" alt="" id="icon-list" class="col-lg-2">
-                    <p class="col-lg-8"><%= jobliked.employmenttype %></p>
-                  </div>
-                  <div class="row">
-                    <img src="../../images/money.svg" alt="" id="icon-list" class="col-lg-2">
-                    <p class="col-lg-8"><%= jobliked.salary %></p>
-                  </div>
-                  <div class="col-lg-12" align="right">
-                    <a action="GET" class="btn btn-primary btn-readmore" href="/findjob/joblist/<%= jobliked._id %>">อ่านเพิ่มเติม</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-        </div>
-  </div>
-      <% }); %>
-</div>
-</div> -->
 <div class="container col-xs-12 col-sm-12 col-md-11 col-lg-8">
   <% if(favouritejob.favouritejob.length == "0"){ %>
     <h1 class="m-4"><center>ไม่พบงานที่บันทึกไว้</center></h1>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
     <% } else { %>
       <h1 class="m-4">LIKED <%= favouritejob.favouritejob.length %> งาน</h1>
     <%}%>

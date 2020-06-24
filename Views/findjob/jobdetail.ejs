@@ -121,29 +121,6 @@
                     <p> <%= job.salary%></p>
                 </div>
             </div>
-<<<<<<< HEAD
-            <div class="row col-lg-12">
-                <img src="../../images/time.svg" alt="">
-                <p id="subject">เวลา</p>
-                <p> <%= job.worktime%></p>
-            </div> -->
-            <div class="row col-xs-6 col-lg-12">
-                <img src="../../images/correspondence.svg" alt="">
-                <p id="subject2"> รายละเอียด</p>
-                <p class="text-break"id="detail"> <%= job.qualti %></p>
-            </div>
-
-            <div class="row col-lg-12">
-                <img src="../../images/telephone.svg" alt="">
-                <p id="subject2">ช่องทางการติดต่อ</p>
-                <p class="text-break"> <%= job.contact%></p>
-            </div>
-            
-            <div>
-                <label id="subject2">สถานที่ตั้งบริษัท/ร้านตามแผนที่  : <%= job.country %> <%= job.district %> <%= job.subdistrict %> <%= job.province%> <%= job.postcode %></label>
-                <p id="locate"> </p>
-                    <a id="test"></a>
-=======
             <div class="row col-lg-12 justify-content-between mt-4">
                 <div class="col-lg-12">
                     <p id="subject2"><i class="fas fa-file-alt file"></i> รายละเอียด</p>
@@ -167,20 +144,15 @@
                 <div class="col-lg-12">
                     <p > <%= job.location %></p>
                 </div>
->>>>>>> 8bbda23ba805f80257acd4643c86a3c4ae0c0781
             </div>
         <div class="mapbody" align="center">
             <div id="map"></div>
         </div>
-<<<<<<< HEAD
-        
-=======
         <div>
             <label id="subject">สถานที่ตั้งบริษัท/ร้านตามแผนที่  : <%= job.country %> <%= job.district %> <%= job.subdistrict %> <%= job.province%> <%= job.postcode %></label>
             <p id="locate"> </p>
                 <a id="test"></a>
         </div>
->>>>>>> 8bbda23ba805f80257acd4643c86a3c4ae0c0781
         <input type="hidden" id="lon" value="<%= job.lon %>">
         <input type="hidden" id="lat" value="<%= job.lat %>">
         <div class="download col-lg-12 mb-">

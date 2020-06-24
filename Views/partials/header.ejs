@@ -76,10 +76,10 @@
           <% } else if (currentUser.type === 'admin') { %>
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
               <li class="nav-item">
-                <a class="nav-link" href="/admin/workerlist">Worker_LIST</a>
+                <a class="nav-link" href="/admin/projects/checkresume">check_worker</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/admin/joblist">Job_List</a>
+                <a class="nav-link" href="/admin/projects/checkjob">check_job</a>
               </li>
               <!-- <li class="nav-item">
                 <a class="nav-link" href="/admin/worker_like">Liked</a>
@@ -121,7 +121,11 @@
                   <a class="dropdown-item" href="/logout">Logout</a>
                 </div>
               </div>
-            <% } %>
+              <% } else if (currentUser.type === "admin"){ %>
+                
+                    <a class="btn btn-primary" href="/logout">Logout</a>
+                  
+              <% }  %>
             
           </form>
         </div>

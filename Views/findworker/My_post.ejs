@@ -6,11 +6,11 @@
   <link rel="stylesheet" href="/css/list.css">
 </head>
 <div class="container col-xs-12 col-sm-12 col-md-11 col-s-9" >
-  <div class="block col-lg-12 form-row">
-    <h1 class="my-4" align="center"> My Post </h1>
+  <div class="block  form-row" >
+    <h1 class="my-4" style="text-align: center;"> My Post </h1>
   <div class="list col-lg-12 col-md-12 col-sm-12 align-self-center">
   
-  
+
     <% Job.forEach(function(job){ %>
       <% if(job.user.username === currentUser.username){%>
         <div class="card border-light m-2">
@@ -63,15 +63,17 @@
       </div> 
       <% count++ } %>
     <% })  %>
-    <% if(count === 0){ %>
-      <h1><center>ไม่พบข้อมูล</center></h1>
-      <% } %>
+    
   
   
   </ul>
 </div>
 </div>
 </div>
+<% if(count === 0){ %>
+  <h1><center>ไม่พบข้อมูล</center></h1>
+  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+  <% } %>
 
 
 <%- include("../partials/footer")%>

@@ -6,8 +6,6 @@ const express = require('express'),
       User = require('../models/user');
       middleware = require('../middleware'),
 
-
-      
 router.get("/", function(req, res){
         res.render("landing");
     })
@@ -49,5 +47,7 @@ router.get('/logout',middleware.isloggedIn ,function(req, res){
     req.flash('success','Logout Successfully!');
     res.redirect('/');
 });
+
+
 
 module.exports = router;

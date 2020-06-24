@@ -183,15 +183,15 @@ form p{
 }
 
 .company{
-  color: ;
+  color: #F9A826;
 }
 
 .handshack{
-  color: ;
+  color: black;
 }
 
 .tasks{
-  color: ;
+  color: red;
 }
 
 .money{
@@ -200,4 +200,8 @@ form p{
 
 .map{
   color: red;
+}
+
+.clock{
+  color: #F9A826;
 }

@@ -1,6 +1,6 @@
 <%- include("../partials/header")%>
 
-<div style="margin-left :10% ;margin-right: 10% ;margin-bottom:10%">
+<!-- <div style="margin-left :10% ;margin-right: 10% ;margin-bottom:10%">
     <div class="row justify-content-between" >
         <div class="col-md-5 col-sm-12" style=" margin-top: 10%;" align="center">
             <div class="jumbotron">
@@ -56,6 +56,69 @@
             </div>
         </div>     
     </div>    
-</div>
+</div> -->
+
+<head>
+    <link rel="stylesheet" href="/css/workerprofile.css">
+</head>
+<body>
+ <div class="container col-xs-6 col-sm-10 col-md-10 col-lg-9">
+    <div class="row" >
+        <div class="col-lg-4 col-md-12 col-sm-10" style=" margin-left: 5%;" align="center">
+            <div class="personal-img">
+                <img style="width: 300px; height: 300px; object-fit: cover;" src='/images/<%=currentUser.img%>' class="img-thumbnaild">
+            </div>
+        </div>         
+        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-4 ml-2 mr-2" style="margin-top: 5%;">
+                <h1>my account</h1>   
+                <div class="line col-xs-4"></div>
+                <form action="/findworker/profile/<%= currentUser._id %>/edit" method="GET">
+                    <div class="col-xs-8 col-sm-12 col-md-12 col-lg-10 ">
+                        <div style="text-align: left;" class="form-row">
+                          <label  class="left" for="name"><i class="fas fa-user-astronaut"></i>Username </label>
+                            <label class="right" for="name"><%= currentUser.username %></label>
+                        </div>
+                        <div style="text-align: left;" class="form-row">
+                            <label class="left" for="name"><i class="fas fa-envelope"></i>Email </label>
+                            <label class="right" for="name"> <%= currentUser.email %></label>
+                        </div>
+                        <div style="text-align: left;" class="form-row">
+                            <label class="left" for="name"><i class="fas fa-swatchbook"></i>Type </label>
+                            <label class="right" for="name"> <%= currentUser.type %></label>
+                        </div>
+                    </div>  
+                    <hr class="col-xs-4"> 
+                   <div class="col-xs-10 col-sm-12 col-md-12 col-lg-12">
+                        <div class="form-row">
+                          <div class="col-xs-9 col-sm-12 col-md-12 col-lg-6">
+                              <label for="name">ชื่อ </label>
+                              <label class="form-control"  for="name" readonly ><%= currentUser.firstname %> </label>
+                          </div>
+                          <div class="col-xs-9 col-sm-12 col-md-12 col-lg-6">
+                              <label for="inputLastname">นามสกุล</label>
+                              <lable class="form-control"  readonly ><%= currentUser.lastname %> </label>
+                          </div>
+                      </div>
+                    <div class="form-row">
+                       <div class="col-xs-9 col-sm-12 col-md-12 col-lg-12">
+                          <label for="name">หมายเลขโทรศัพท์ </label>
+                          <label class="form-control" for="name" readonly> <%= currentUser.phone %></label>
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col-xs-9 col-sm-12 col-md-12 col-lg-12">
+                         <label for="name">ที่อยู่</label>
+                         <textarea readonly class="form-control" for="name" rows="4"><%= currentUser.address %></textarea>
+                     </div>
+                   </div>
+                    <div class="row col-xs-9 col-sm-9 col-md-12 col-lg-12 ml-1 mb-4" style="align-content: center;"> 
+                            <button type="submit" class="btn-edit btn btn-primary col-lg-12">แก้ไขข้อมูลส่วนตัว</button>
+                    </div>
+                  </div> 
+            </div>
+        </form>
+      </div>
+  </div> 
+</body>
 
 <%- include("../partials/footer")%>

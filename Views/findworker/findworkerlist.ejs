@@ -9,11 +9,8 @@
 <div class="container col-xs-6 col-sm-10 col-md-10 col-lg-9" >
   <!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#a2d9ff" fill-opacity="1" d="M0,256L48,229.3C96,203,192,149,288,138.7C384,128,480,160,576,176C672,192,768,192,864,192C960,192,1056,192,1152,181.3C1248,171,1344,149,1392,138.7L1440,128L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path></svg> -->
   <div class="block col-lg-12 form-row">
-    <div class="img-fluid col-xs-2 col-lg-4 d-none d-lg-block">
-        <img clas="" src="../../images/search4.svg" alt="" width="80%" id="img-search">
-    </div>
   <form  class="col-lg-8 col-md-12 col-sm-12" action="/findworker/workerlist" method="POST">
-        <p>"ค้นหางานที่ใช่ด้วยการใส่ข้อมูลที่คุณต้องการและกดค้นหาเลยยยยย"</p>
+        <p>"ถึงจะไม่ใช่เว็บหาคู่แต่ก็หาคน(ทำงาน)ที่YOUถูกใจให้ได้น้าาาาาา</p>
     <div class="form-row line2 col-lg-12 ">
       <div class="col-lg-4">
         <label for="inputjobtype"><i class="fas fa-tasks"></i> ประเภทงาน</label> 
@@ -67,9 +64,13 @@
         </div>
     </div>
         <div class="form-group col-lg-12" align="center">
-          <button type="submit" class="btn btn-success btn-search col-lg-9">ค้นหา</button> 
-        </div> 
+          <button type="submit" class="btn btn-success btn-search col-lg-9">ค้นหา</button><br>
+        </div>
+          <p>ค้นหาคนที่(จะทำงาน)ถูกใจง่ายๆเพียงกรอกข้อมูลและกดค้นหาได้เลยยย</p> 
   </form>
+  <div class="img-fluid col-xs-2 col-lg-4 d-none d-lg-block">
+    <img clas="" src="../../images/bg-operator_search.svg" alt="" width="90%" id="img-search">
+  </div>  
   <h1 class="my-4">WORKER LIST
     <!-- <small>find your job</small> -->
   </h1>
@@ -93,35 +94,28 @@
                       </div>
                       <div class="col-lg-8">
                         <div class="row col-lg-12 font-weight-bold">
-                          <img src="../../images/briefcase.svg" alt="" id="icon-list" class="mr-2">
                           <p> 
                         </div>
-                        <div class="row col-lg-12">
-                          <img src="../../images/shopper.svg" alt="" id="icon-list" class="mr-2">
+                        <div class="row col-lg-12 h4">
                           <p >ชื่อ <%= resume.firstname%> <%= resume.lastname %></p>
                         </div>
                         <div class="row col-lg-12 justify-content-between">
                           <div class="row col-lg-6">
-                            <img src="../../images/deal.svg" alt="" id="icon-list" class="mr-2">
-                            <p><%= resume.employmenttype %></p>
+                            <p><i class="far fa-handshake handshake"></i> <%= resume.employmenttype %></p>
                           </div>
                         <div class="row col-lg-6">
-                            <img src="../../images/signature.svg" alt="" id="icon-list" class="mr-2">
-                            <p><%= resume.jobtype %></p>
+                            <p><i class="fas fa-tasks tasks"></i> <%= resume.jobtype %></p>
                         </div>
                         </div>
                         
                         <div class="row col-lg-12">
-                          <img src="../../images/money.svg" alt="" id="icon-list" class="mr-2">
-                          <p><%= resume.salary %></p>
+                          <p><i class="far fa-money-bill-alt money"></i> <%= resume.salary %></p>
                         </div>
                         <div class="row col-lg-12">
-                          <img src="../../images/map.svg" alt="" id="icon-list" class="mr-2">
-                          <p>ช่วงเวลาที่สะดวกทำงาน : <%= resume.starttime%> - <%= resume.finishtime %> น.</p>
+                          <p><i class="fas fa-clock clock"> </i> ช่วงเวลาที่สะดวกทำงาน : <%= resume.starttime%> - <%= resume.finishtime %> น.</p>
                         </div>
                         <div class="row col-lg-12">
-                          <img src="../../images/map.svg" alt="" id="icon-list" class="mr-2">
-                          <p>วันที่โพสต์ : <%= resume.postdate %> น.</p>
+                          <h6><i class="fas fa-hourglass-half "></i> โพสต์เมื่อ <%= resume.postdate %> น. </h6>
                         </div>
                         <div class="col-lg-12" align="right">
                           <a action="GET" class="btn btn-primary btn-readmore" href="/findworker/workerlist/<%= resume._id %>">อ่านเพิ่มเติม</a>
@@ -132,7 +126,6 @@
               </div>
         </div>
         <% }); %> 
-        
   </div>
 
       

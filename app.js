@@ -60,6 +60,7 @@ app.use('/findjob',workerRoute);
 app.use('/findworker',operatorRoute);
 app.use('/admin',adminRoute);
 
-app.listen(3000, function(res,req){
-    console.log("SERVER STARTED")
+const port = process.env.PORT|| 3000
+app.listen(port, function(res,req){
+    console.log("LINK STARTO")
 })

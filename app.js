@@ -22,7 +22,7 @@ app.use(function(req, res, next) {
   });
 
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'Views')));
+
 
 mongoose.set('useUnifiedTopology',true);
 mongoose.set('useCreateIndex',true);
@@ -31,7 +31,6 @@ mongoose.set('useFindAndModify',false);
 // mongoose.connect('mongodb+srv://koladon52:subpadol52@cluster0-euzvy.mongodb.net/webpro',{ useNewUrlParser: true })
 mongoose.connect('mongodb+srv://koladon52:subpadol52@cluster0-euzvy.mongodb.net/project_web?retryWrites=true&w=majority',{ useNewUrlParser: true })
 app.set('view engine','ejs');
-app.set('views', path.join(__dirname, 'views'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(flash());
 app.use(methodOverride("_method"));

@@ -30,7 +30,9 @@
     "passport-local-mongoose": "^6.0.1",
     "req-flash": "0.0.3",
     "session": "^0.1.0",
-    "startbootstrap-blog-post": "^4.2.1"
+    "startbootstrap-blog-post": "^4.2.1",
+    "babel-cli": "^6.26.0",
+    "babel-present-env": "^1.7.0"
   },
   "devDependencies": {},
   "scripts": {

@@ -50,7 +50,7 @@ router.post("/resume", uploadtest.any() , middleware.isloggedIn ,middleware.stat
         
     
     var dateTime = new Date()
-    var expire = new Date(( dateTime.getTime() + 30 * 86400000 ));
+    var expire = new Date(( dateTime.getTime() + 60000));
 
         let user           = {
             id : req.user._id,
@@ -101,7 +101,7 @@ router.post("/resume", uploadtest.any() , middleware.isloggedIn ,middleware.stat
 router.get("/My_resume",middleware.isloggedIn ,middleware.stateWorker , middleware.checkdataworker ,middleware.checkexpireresume,function(req, res){
     
     var dateTime = new Date()
-    var expire = new Date(dateTime.setTime( dateTime.getTime() + 30 * 86400000 ));
+    
 
 
     User.findById(req.user._id).populate('resumes').exec(function(err, MyResume){
@@ -139,7 +139,7 @@ router.put("/My_resume/:id/edit",uploadtest.any(),middleware.isloggedIn ,middlew
     let image = req.body.oldimage;
     
     var dateTime = new Date()
-    var expire = new Date(dateTime.setTime( dateTime.getTime() + 30 * 86400000 ));
+    
 
     let resumeimage    = image;
     let resumefile     = file;

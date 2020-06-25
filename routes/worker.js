@@ -274,7 +274,7 @@ router.delete("/My_resume/:id/edit",middleware.isloggedIn ,middleware.stateWorke
         if(err){
             console.log(err);
         } else {
-            res.redirect('/findjob/');
+            res.redirect('/findjob/joblist');
         }
     });
 })

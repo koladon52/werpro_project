@@ -22,6 +22,7 @@ app.use(function(req, res, next) {
   });
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'Views')));
 
 mongoose.set('useUnifiedTopology',true);
 mongoose.set('useCreateIndex',true);

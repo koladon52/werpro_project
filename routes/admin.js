@@ -6,8 +6,6 @@ var express  =  require('express'),
     Jobdetail = require('../models/jobdetail'),
     middleware = require('../middleware')
     mongoose = require("mongoose"),
-    
-    
 
 router.get('/projects' , function(req, res , next){
     res.render("/");  

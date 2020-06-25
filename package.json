@@ -1,7 +1,7 @@
 {
   "name": "project_web",
   "version": "1.0.0",
-  "main": "test.js",
+  "main": "app.js",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.13.0",
     "@google/maps": "^1.1.3",

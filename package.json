@@ -11,7 +11,7 @@
     "cors": "^2.8.5",
     "ejs": "^3.0.2",
     "express": "^4.17.1",
-    "express-fileupload": "^1.1.7-alpha.3",
+    "express-fileupload": "^1.1.9",
     "express-message": "^1.2.3",
     "express-messages": "^1.0.1",
     "express-session": "^1.17.1",
